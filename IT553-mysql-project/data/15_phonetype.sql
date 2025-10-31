@@ -5,13 +5,8 @@ CREATE TABLE IF NOT EXISTS PhoneNumberType (
     PRIMARY KEY (PhoneNumberTypeID)
 );
 
-
 INSERT INTO PhoneNumberType
 (PhoneNumberTypeID, Name)
-VALUES(1, N'Cell');
-INSERT INTO PhoneNumberType
-(PhoneNumberTypeID, Name)
-VALUES(2, N'Home');
-INSERT INTO PhoneNumberType
-(PhoneNumberTypeID, Name)
-VALUES(3, N'Work');
+VALUES(1, N'Cell'),
+      (2, N'Home'),
+      (3, N'Work');
