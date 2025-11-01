@@ -75,9 +75,9 @@ ALTER TABLE BusinessEntityAddress
         ON DELETE CASCADE
         ON UPDATE CASCADE;
 
-ALTER TABLE BusinessEntity
+ALTER TABLE BusinessEntityAddress
     ADD CONSTRAINT fk_businessentity_person
     FOREIGN KEY (BusinessEntityID)
-        REFERENCES BusinessEntityAddress(BusinessEntityID)
+        REFERENCES BusinessEntity(BusinessEntityID)
         ON DELETE CASCADE
         ON UPDATE CASCADE;
