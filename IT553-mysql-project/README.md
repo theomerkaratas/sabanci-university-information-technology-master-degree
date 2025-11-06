@@ -25,13 +25,7 @@ It also includes **phpMyAdmin** for easy database exploration and running SQL qu
    - Port: `8080`
    - Provides a web interface for managing MySQL databases.
 
-3. **Web (Apache + PHP)**
-   - Image: `php:8.2-apache`
-   - Port: `8000`
-   - Mounts local `./www` directory to `/var/www/html` inside container.
-   - Useful for running PHP applications connected to MySQL.
-
-4. **CloudBeaver**
+3. **CloudBeaver**
    - Image: `dbeaver/cloudbeaver:latest`
    - Port: `8978`
    - Web-based database manager supporting multiple databases.
@@ -41,27 +35,6 @@ It also includes **phpMyAdmin** for easy database exploration and running SQL qu
      - Database: `person` (optional)
      - Username: `dbeaver`
      - Password: `StrongPass!123`
-
-5. **MongoDB (mongodb)**
-   - Image: `mongo:latest`
-   - Port: `27017`
-   - Root User: `root`
-   - Root Password: `güçlü_bir_sifre`
-   - Stores data in Docker volume `mongodb_data`.
-
-6. **mongo-express**
-   - Image: `mongo-express:latest`
-   - Port: `8081`
-   - Web-based MongoDB admin interface.
-   - Basic Auth:
-     - User: `admin`
-     - Password: `b1r_s1r`
-   - Connects to MongoDB using:
-     - Host: `mongodb`
-     - Port: `27017`
-     - User: `root`
-     - Password: `güçlü_bir_sifre`
-     - Auth DB: `admin`
 
 ## ▶️ How to Run
 
@@ -95,26 +68,6 @@ Access CloudBeaver at:
 🔧 **Driver Properties**:  
 - `allowPublicKeyRetrieval = true`  
 - `useSSL = false`
-
----
-
-## ▶️ Access mongo-express (MongoDB Web UI)
-
-Access mongo-express at:  
-👉 [http://localhost:8081](http://localhost:8081)
-
-- **Basic Auth User**: `admin`  
-- **Basic Auth Password**: `b1r_s1r`
-
-Once logged in, mongo-express will connect to your MongoDB instance with:
-
-- **MongoDB User**: `root`  
-- **MongoDB Password**: `güçlü_bir_sifre`  
-- **Host**: `mongodb`  
-- **Port**: `27017`  
-- **Auth Database**: `admin`
-
-From here, you can create databases, collections, and manage documents directly via the browser.
 
 ---
 

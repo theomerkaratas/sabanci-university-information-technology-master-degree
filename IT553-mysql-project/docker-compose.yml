@@ -33,16 +33,6 @@ services:
     ports:
       - "8080:80"
 
-  web:
-    image: php:8.2-apache
-    container_name: apache-php
-    depends_on:
-      - mysql
-    ports:
-      - "8000:80"
-    volumes:
-      - ./www:/var/www/html
-
   cloudbeaver:
     image: dbeaver/cloudbeaver:latest
     container_name: cloudbeaver
@@ -54,37 +44,5 @@ services:
       CB_SERVER_BIND_HOST: "0.0.0.0"
     restart: unless-stopped
 
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: güçlü_bir_sifre
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
-
-  mongo-express:
-    image: mongo-express:latest
-    container_name: mongo-express
-    depends_on:
-      - mongodb
-    ports:
-      - "8081:8081"
-    environment:
-      ME_CONFIG_MONGODB_URL: "mongodb://root:güçlü_bir_sifre@mongodb:27017/?authSource=admin"
-
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: b1r_s1r
-    restart: unless-stopped
-
 volumes:
   mysql_verileri:
-  mongodb_data:
