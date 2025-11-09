@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SQL Query UI</title>
+<style>
+  :root{
+    --bg:#0b0b0f;--card:#121218;--muted:#9aa0a6;--border:#202124;--text:#e8eaed;--accent:#8ab4f8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+  header,footer{background:#101116;border-bottom:1px solid var(--border)}
+  footer{border-top:1px solid var(--border);border-bottom:0}
+  .container{max-width:1200px;margin:0 auto;padding:16px}
+  h1{margin:0;font-size:20px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:16px}
+  label{display:block;margin:10px 0 6px;color:var(--muted)}
+  textarea,input,select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#0d0e14;color:var(--text)}
+  textarea{min-height:140px;resize:vertical}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  button{padding:10px 14px;border:0;border-radius:10px;cursor:pointer;font-weight:600}
+  .primary{background:var(--accent);color:#0b0b0f}
+  .secondary{background:#2a2f36;color:var(--text)}
+  .ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+  .muted{color:var(--muted)}
+  .status{margin-top:8px}
+  .shortcuts{display:flex;flex-wrap:wrap;gap:8px}
+  .hr{height:1px;background:var(--border);margin:12px 0}
+  .table-wrap{overflow:auto;max-height:65vh;border:1px solid var(--border);border-radius:12px}
+  table{width:100%;border-collapse:collapse}
+  th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+  th{position:sticky;top:0;background:#0f1116;cursor:pointer}
+  th .arrow{opacity:.5;margin-left:6px}
+  pre{background:#0d0e14;border:1px solid var(--border);border-radius:10px;padding:12px;white-space:pre-wrap}
+  @media(max-width:900px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>SQL Query UI</h1>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="shortcuts">
+        <button class="ghost" data-sql="SELECT BusinessEntityID, FirstName, LastName FROM Person ORDER BY LastName LIMIT 20;">👤 People (20)</button>
+        <button class="ghost" data-sql="SELECT p.BusinessEntityID, p.FirstName, p.LastName, e.EmailAddress FROM Person p LEFT JOIN EmailAddress e ON e.BusinessEntityID=p.BusinessEntityID ORDER BY p.LastName LIMIT 30;">👤📧 People + Email</button>
+        <button class="ghost" data-sql="SELECT p.BusinessEntityID, p.FirstName, p.LastName, ph.PhoneNumber FROM Person p LEFT JOIN PersonPhone ph ON ph.BusinessEntityID=p.BusinessEntityID ORDER BY p.LastName LIMIT 30;">👤📞 People + Phone</button>
+        <button class="ghost" data-sql="SELECT a.AddressID, a.AddressLine, a.City, sp.Name AS State, cr.Name AS Country FROM Address a JOIN StateProvince sp ON sp.StateProvinceID=a.StateProvinceID JOIN CountryRegion cr ON cr.CountryRegionCode=sp.CountryRegionCode ORDER BY a.AddressID LIMIT 30;">🏠 Address + State + Country</button>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="row">
+        <div>
+          <label>Sample Queries</label>
+          <select id="sampleSelect">
+            <option value="">— Select —</option>
+            <option value="SELECT BusinessEntityID, FirstName, LastName FROM Person ORDER BY LastName LIMIT 20;">People (20)</option>
+            <option value="SELECT p.BusinessEntityID, p.FirstName, p.LastName, e.EmailAddress FROM Person p LEFT JOIN EmailAddress e ON e.BusinessEntityID=p.BusinessEntityID ORDER BY p.LastName LIMIT 30;">People + Email</option>
+            <option value="SELECT p.BusinessEntityID, p.FirstName, p.LastName, ph.PhoneNumber FROM Person p LEFT JOIN PersonPhone ph ON ph.BusinessEntityID=p.BusinessEntityID ORDER BY p.LastName LIMIT 30;">People + Phone</option>
+            <option value="SELECT PhoneNumberTypeID, Name FROM PhoneNumberType LIMIT 20;">Phone Types</option>
+            <option value="SHOW TABLES;">SHOW TABLES</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Limit</label>
+          <input id="limitBox" type="number" value="30" min="1" step="1" />
+        </div>
+      </div>
+
+      <label>SQL</label>
+      <textarea id="sqlBox">SELECT BusinessEntityID, FirstName, LastName FROM Person ORDER BY LastName LIMIT 20;</textarea>
+
+      <div class="actions">
+        <button class="primary" id="runBtn">Run</button>
+        <button class="secondary" id="csvBtn">Download CSV</button>
+        <button class="secondary" id="jsonBtn">Show JSON</button>
+        <span class="status muted" id="status"></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Result</h3>
+      <div id="tableWrap" class="table-wrap"></div>
+      <details style="margin-top:12px">
+        <summary>Raw JSON</summary>
+        <pre id="raw"></pre>
+      </details>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small class="muted">&copy; <span id="y"></span> • Backend: <code>query.php</code></small>
+    </div>
+  </footer>
+
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+const $ = s => document.querySelector(s);
+
+const sqlBox = $('#sqlBox');
+const sampleSelect = $('#sampleSelect');
+const limitBox = $('#limitBox');
+const runBtn = $('#runBtn');
+const csvBtn = $('#csvBtn');
+const jsonBtn = $('#jsonBtn');
+const statusEl = $('#status');
+const tableWrap = $('#tableWrap');
+const raw = $('#raw');
+
+let lastRows = [];
+let sortState = { key:null, dir:1 };
+
+document.querySelectorAll('.shortcuts button').forEach(btn=>{
+  btn.addEventListener('click', ()=> { sqlBox.value = btn.getAttribute('data-sql'); });
+});
+
+sampleSelect.addEventListener('change', ()=>{
+  if (sampleSelect.value) sqlBox.value = sampleSelect.value;
+});
+
+runBtn.addEventListener('click', runQuery);
+csvBtn.addEventListener('click', ()=> downloadCSV(lastRows));
+jsonBtn.addEventListener('click', ()=> { raw.textContent = JSON.stringify(lastRows, null, 2); });
+
+function trimLimit(sql, limit) {
+  if (!limit || isNaN(+limit)) return sql;
+  const re = /\blimit\s+\d+\s*;?$/i;
+  if (re.test(sql.trim())) return sql.trim().replace(re, `LIMIT ${+limit}`);
+  return sql.trim().replace(/;?$/,'') + ` LIMIT ${+limit}`;
+}
+
+async function runQuery(){
+  const sqlInput = trimLimit(sqlBox.value, limitBox.value);
+
+  tableWrap.innerHTML = '';
+  statusEl.textContent = 'Running...';
+  raw.textContent = '';
+  lastRows = [];
+  sortState = { key:null, dir:1 };
+
+  try{
+    const res = await fetch('query.php', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ sql: sqlInput })
+    });
+    const data = await res.json();
+    if (data && data.error){
+      statusEl.textContent = 'Error: ' + data.error;
+      raw.textContent = JSON.stringify(data, null, 2);
+      return;
+    }
+    lastRows = Array.isArray(data) ? data : (data?.rows||[]);
+    raw.textContent = JSON.stringify(lastRows, null, 2);
+    renderTable(lastRows);
+    statusEl.textContent = `OK • ${lastRows.length} rows`;
+  }catch(err){
+    statusEl.textContent = 'Request error: ' + (err.message||err);
+  }
+}
+
+function renderTable(rows){
+  if (!rows || !rows.length){
+    tableWrap.innerHTML = '<div class="muted">No data.</div>';
+    return;
+  }
+
+  const cols = Array.from(rows.reduce((s, r)=>{ Object.keys(r||{}).forEach(k=>s.add(k)); return s; }, new Set()));
+  const thead = document.createElement('thead');
+  const trh = document.createElement('tr');
+
+  cols.forEach(col=>{
+    const th = document.createElement('th');
+    th.textContent = col;
+    const arrow = document.createElement('span'); arrow.className='arrow'; arrow.textContent='⇅';
+    th.appendChild(arrow);
+    th.addEventListener('click', ()=> sortBy(col));
+    trh.appendChild(th);
+  });
+  thead.appendChild(trh);
+
+  const tbody = document.createElement('tbody');
+  rows.forEach(r=>{
+    const tr = document.createElement('tr');
+    cols.forEach(c=>{
+      const td = document.createElement('td');
+      const v = r[c];
+      td.textContent = v==null ? '' : (typeof v==='object' ? JSON.stringify(v) : String(v));
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+
+  const table = document.createElement('table');
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  tableWrap.innerHTML = '';
+  tableWrap.appendChild(table);
+}
+
+function sortBy(key){
+  if (!lastRows.length) return;
+  sortState.dir = (sortState.key === key ? -sortState.dir : 1);
+  sortState.key = key;
+
+  lastRows = [...lastRows].sort((a,b)=>{
+    const A = a[key] == null ? "" : a[key];
+    const B = b[key] == null ? "" : b[key];
+    return A > B ? sortState.dir : A < B ? -sortState.dir : 0;
+  });
+  renderTable(lastRows);
+}
+
+function downloadCSV(rows){
+  if (!rows.length) return;
+  const cols = Array.from(rows.reduce((s, r)=>{ Object.keys(r||{}).forEach(k=>s.add(k)); return s; }, new Set()));
+  const esc = v => `"${String(v??'').replace(/"/g,'""')}"`;
+  const lines = [cols.join(',')].concat(rows.map(r => cols.map(c => esc(r?.[c])).join(',')));
+  const blob = new Blob([lines.join('\n')], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'query.csv';
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
