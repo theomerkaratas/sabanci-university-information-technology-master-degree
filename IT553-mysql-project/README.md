@@ -71,6 +71,27 @@ Access CloudBeaver at:
 
 ---
 
+### ▶️ Apache + PHP (`apache-php`)
+
+- **Build**: from local `Dockerfile`
+- **Base image**: `php:8.2-apache`
+- **Port**: `8000` (host) → `80` (container)
+- **Volume**:
+  - `./www:/var/www/html`
+- **Features**:
+  - `pdo` and `pdo_mysql` PHP extensions are installed.
+  - `mod_rewrite` is enabled.
+  - `www/` directory contains:
+    - `index.html` → main landing page
+    - `query.php` → example PHP script that can query the MySQL `people` database.
+
+Access the web app in your browser via:
+
+- **http://localhost:8000**
+- Example PHP endpoint: **http://localhost:8000/query.php**
+
+---
+
 
 # 📊 Database Schema
 

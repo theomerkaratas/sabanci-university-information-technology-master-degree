@@ -31,7 +31,7 @@ services:
       #PMA_PASSWORD: güçlü_bir_parola
       #PMA_DATABASE: person 
     ports:
-      - "8080:80"
+      - "8080:82"
 
   cloudbeaver:
     image: dbeaver/cloudbeaver:latest
@@ -43,6 +43,19 @@ services:
     environment:
       CB_SERVER_BIND_HOST: "0.0.0.0"
     restart: unless-stopped
+
+  apache-php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apache-php
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - ./www:/var/www/html
+    depends_on:
+      - mysql
 
 volumes:
   mysql_verileri:
