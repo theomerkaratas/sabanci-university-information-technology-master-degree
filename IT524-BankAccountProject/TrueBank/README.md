@@ -1,11 +1,3 @@
-### Alternatif: src Klasöründe Çalıştırmak
-Eğer doğrudan `src` klasörüne geçtiyseniz, aşağıdaki komutla uygulamayı çalıştırabilirsiniz:
-
-```
-java Main
-```
-
-> Not: Bu yöntemde derlenmiş .class dosyalarının da `src` klasöründe olması gerekir. Tavsiye edilen yöntem üstteki gibi `bin` klasörünü kullanmaktır.
 # TrueBank Java Hesap Uygulaması
 
 ## Proje Hakkında
@@ -15,37 +7,35 @@ Bu proje, Java ile yazılmış temel bir banka hesap yönetim uygulamasıdır. H
 - `src/` : Tüm Java kaynak kodları burada bulunur.
 - `bin/` : Derlenmiş .class dosyaları burada tutulur.
 
-
-
 ## Terminalden Java Kodunu Çalıştırma
-### Alternatif: src Klasöründe 'java Main' ile Çalıştırma
-Eğer doğrudan `src` klasörüne geçtiyseniz, aşağıdaki komutla uygulamayı çalıştırabilirsiniz:
 
-```
-java Main
-```
+### 1. Doğru Dizinlere Dosyaları Yerleştirin
+- Derlenmiş .class dosyaları `bin` klasöründe olmalı (örneğin: `javac -d bin src/*.java` ile derleyin).
+- account.csv dosyasını, uygulamayı başlatacağınız dizine (örneğin `Accounts` klasörüne) kopyalayın. Çünkü program dosya yolunu doğrudan `account.csv` olarak arar.
 
-> Not: Bu yöntemde derlenmiş `.class` dosyalarının da `src` klasöründe olması gerekir. Eğer `javac *.java` ile derlediyseniz, bu şekilde çalıştırabilirsiniz. Tavsiye edilen yöntem ise yukarıdaki gibi `bin` klasörünü kullanmaktır.
-
-### 1. Klasöre Girin
+### 2. Accounts Klasörüne Girin
 Proje ana dizininde aşağıdaki komutla `Accounts` klasörüne girin:
 
 ```
 cd Accounts
 ```
 
-### 2. Java Dosyalarını Derleyin
+### 3. Java Dosyalarını Derleyin (Gerekirse)
 Tüm Java kaynak dosyalarını derlemek için:
 
 ```
 javac -d bin src/*.java
 ```
 
-### 3. Uygulamayı Çalıştırın
-Ana sınıfı (örneğin Main) çalıştırmak için:
 
-```
+### 4. Uygulamayı Çalıştırın
+Ana sınıfı (örneğin Main) çalıştırmak için **aşağıdaki komutu terminale yazın**:
+
+```sh
+########################################
+# Uygulamayı başlatmak için:
 java -cp bin Main
+########################################
 ```
 
 > Eğer farklı bir ana sınıf kullanıyorsanız, örneğin `BankApp`, şu şekilde çalıştırabilirsiniz:
@@ -54,7 +44,8 @@ java -cp bin Main
 > java -cp bin BankApp
 > ```
 
-> Eğer terminalde src klasöründeyseniz, önce bir üst dizine çıkıp yukarıdaki adımları uygulayın.
+> Not: Eğer uygulamayı farklı bir dizinden başlatırsanız, account.csv dosyasının da o dizinde olması gerekir.
+
 
 ## Derleme
 Projeyi derlemek için:
