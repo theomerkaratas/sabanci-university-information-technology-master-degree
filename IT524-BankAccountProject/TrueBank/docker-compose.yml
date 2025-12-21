@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  truebank:
+    build: .
+    container_name: truebank-app
+    stdin_open: true
+    tty: true
+    image: truebank:latest
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=truebank
+      - DB_USER=truebankuser
+      - DB_PASS=truebankpass
+    command: ["tail", "-f", "/dev/null"]
+  db:
+    image: postgres:16
+    container_name: truebank-db
+    restart: always
+    environment:
+      POSTGRES_DB: truebank
+      POSTGRES_USER: truebankuser
+      POSTGRES_PASSWORD: truebankpass
+    ports:
+      - "55432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+volumes:
+  db_data:
