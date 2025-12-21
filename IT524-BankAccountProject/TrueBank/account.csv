@@ -1,0 +1,7 @@
+accountNumber,ownerName,balance,accountType,openDate,status,className
+12,er,1676.0,EUR,2025-12-21,ACTIVE,SavingsAccount
+13,mah,577.0,USD,2025-12-21,ACTIVE,SavingsAccount
+45,mm,345.0,TRY,2025-12-21,ACTIVE,SavingsAccount
+156,ll,3080.0,TRY,2025-12-21,CLOSED,SavingsAccount
+14,ll,456.0,USD,2025-12-21,ACTIVE,CheckingAccount
+99,mehmet,200.0,TRY,2025-12-21,FROZEN,SavingsAccount
