@@ -17,7 +17,7 @@ Bu proje, Java ile yazılmış temel bir banka hesap yönetim uygulamasıdır. H
 Proje ana dizininde aşağıdaki komutla `Accounts` klasörüne girin:
 
 ```
-cd Accounts
+cd ./TrueBank
 ```
 
 ### 3. Java Dosyalarını Derleyin (Gerekirse)
