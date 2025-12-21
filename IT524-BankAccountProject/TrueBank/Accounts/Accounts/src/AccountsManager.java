@@ -5,14 +5,21 @@ public class AccountsManager {
 
     private final ArrayList<BaseAccount> accounts = new ArrayList<>();
     private final ArrayList<Transaction> transactions = new ArrayList<>();
-    private AccountsStorage storage;
+    private Object storage;
 
     public AccountsManager() {}
 
-    public AccountsManager(AccountsStorage storage) {
+    public AccountsManager(Object storage) {
         this.storage = storage;
         try {
-            List<BaseAccount> loaded = storage.load();
+            List<BaseAccount> loaded;
+            if (storage instanceof AccountsStorage) {
+                loaded = ((AccountsStorage) storage).load();
+            } else if (storage instanceof DatabaseAccountsStorage) {
+                loaded = ((DatabaseAccountsStorage) storage).load();
+            } else {
+                throw new IllegalArgumentException("Desteklenmeyen storage tipi");
+            }
             accounts.addAll(loaded);
             System.out.println("[INFO] " + loaded.size() + " hesap yüklendi.");
         } catch (Exception e) {
@@ -75,7 +82,7 @@ public class AccountsManager {
 
         // TRY'ye çevir
         double tryAmount =
-            CurrencyConverter.toTRY(amount, from.getAccountType().name());
+            CurrencyConverter.toTRY(amount, from.getAccountType());
 
         // Hedef para birimine çevir
         double finalAmount;
@@ -143,12 +150,13 @@ public class AccountsManager {
     }
 
     private void save() {
-        if (storage != null) {
+        if (storage instanceof AccountsStorage) {
             try {
-                storage.save(accounts);
+                ((AccountsStorage) storage).save(accounts);
             } catch (Exception e) {
                 System.out.println("[WARN] CSV kaydedilemedi: " + e.getMessage());
             }
         }
+        // DatabaseAccountsStorage için save işlemi burada yapılmaz.
     }
 }

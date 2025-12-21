@@ -1,7 +1,7 @@
 accountNumber,ownerName,balance,accountType,openDate,status,className
-12,er,1676.0,EUR,2025-12-21,ACTIVE,SavingsAccount
-13,mah,577.0,USD,2025-12-21,ACTIVE,SavingsAccount
-45,mm,345.0,TRY,2025-12-21,ACTIVE,SavingsAccount
-156,ll,3080.0,TRY,2025-12-21,CLOSED,SavingsAccount
-14,ll,456.0,USD,2025-12-21,ACTIVE,CheckingAccount
-99,mehmet,200.0,TRY,2025-12-21,FROZEN,SavingsAccount
+1001,Ali Yilmaz,12500.75,TRY,2022-03-15,ACTIVE,SavingsAccount
+1002,Ayse Demir,7500.0,USD,2023-07-10,ACTIVE,CheckingAccount
+1003,Mehmet Kaya,4109.590909090909,EUR,2024-01-22,ACTIVE,SavingsAccount
+1004,Elif Aydin,0.0,TRY,2021-11-05,CLOSED,SavingsAccount
+1005,Canan Gunes,500.0,USD,2025-06-30,FROZEN,CheckingAccount
+1006,Deniz Arslan,7800.2,EUR,2023-09-18,ACTIVE,SavingsAccount
