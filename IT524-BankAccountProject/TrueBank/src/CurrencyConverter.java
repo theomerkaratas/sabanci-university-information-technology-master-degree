@@ -1,6 +1,5 @@
 public class CurrencyConverter {
 
-    // Merkez para birimi: TRY
     public static double toTRY(double amount, AccountType from) {
         switch (from) {
             case USD: return amount * 30.0;

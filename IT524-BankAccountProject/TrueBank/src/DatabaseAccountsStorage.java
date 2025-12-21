@@ -40,6 +40,4 @@ public class DatabaseAccountsStorage {
         }
         return list;
     }
-
-    // Opsiyonel: save(List<BaseAccount> accounts) metodu eklenebilir.
 }
