@@ -32,10 +32,7 @@ javac -d bin src/*.java
 Ana sınıfı (örneğin Main) çalıştırmak için **aşağıdaki komutu terminale yazın**:
 
 ```sh
-########################################
-# Uygulamayı başlatmak için:
 java -cp bin Main
-########################################
 ```
 
 > Eğer farklı bir ana sınıf kullanıyorsanız, örneğin `BankApp`, şu şekilde çalıştırabilirsiniz:
