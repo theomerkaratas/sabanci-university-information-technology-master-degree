@@ -5,3 +5,18 @@ accountNumber,ownerName,balance,accountType,openDate,status,className
 1004,Elif Aydin,0.0,TRY,2021-11-05,CLOSED,SavingsAccount
 1005,Canan Gunes,500.0,USD,2025-06-30,FROZEN,CheckingAccount
 1006,Deniz Arslan,7800.2,EUR,2023-09-18,ACTIVE,SavingsAccount
+1007,Murat Celik,15230.45,TRY,2020-06-12,ACTIVE,CheckingAccount
+1008,Zeynep Koc,320.75,USD,2024-02-01,ACTIVE,SavingsAccount
+1009,Emre Sahin,9800.0,EUR,2022-10-27,ACTIVE,CheckingAccount
+1010,Burcu Ozkan,45.9,TRY,2025-01-09,ACTIVE,SavingsAccount
+1011,Hakan Uslu,250000.0,USD,2019-04-18,ACTIVE,SavingsAccount
+1012,Selin Karaca,1200.5,EUR,2023-12-03,FROZEN,CheckingAccount
+1013,Ahmet Polat,6700.0,TRY,2022-08-21,ACTIVE,SavingsAccount
+1014,Ece Yildirim,890.33,USD,2024-05-14,ACTIVE,CheckingAccount
+1015,Onur Tas,13450.8,EUR,2021-01-30,CLOSED,SavingsAccount
+1016,Melis Aksoy,210.0,TRY,2025-03-11,ACTIVE,CheckingAccount
+1017,Kerem Dogan,9999.99,USD,2020-09-09,ACTIVE,SavingsAccount
+1018,Asli Sari,5600.6,EUR,2023-06-25,ACTIVE,CheckingAccount
+1019,Fatih Erdem,75.25,TRY,2024-11-02,FROZEN,SavingsAccount
+1020,Irem Cinar,18200.0,USD,2022-02-17,ACTIVE,CheckingAccount
+

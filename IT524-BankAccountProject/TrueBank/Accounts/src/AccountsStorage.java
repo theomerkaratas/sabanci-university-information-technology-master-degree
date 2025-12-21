@@ -30,6 +30,7 @@ public class AccountsStorage {
             br.readLine(); // header
             String line;
             while ((line = br.readLine()) != null) {
+                if (line.trim().isEmpty()) continue; // boş satırları atla
                 String[] p = line.split(",");
 
                 String accNo = p[0];
