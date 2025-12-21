@@ -27,13 +27,16 @@ public class Main {
                         AccountCreationHelper.createAccount(sc, manager);
                         break;
 
+
                     case 3:
                         DepositHelper.deposit(sc, manager);
                         break;
 
+
                     case 4:
                         WithdrawHelper.withdraw(sc, manager);
                         break;
+
 
                     case 5:
                         TransferHelper.transfer(sc, manager);

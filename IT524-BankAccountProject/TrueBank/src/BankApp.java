@@ -19,6 +19,5 @@ public class BankApp {
     }
 
     public void saveAll() {
-        // AccountsManager zaten otomatik kaydediyor
     }
 }

@@ -1,13 +1,18 @@
 import java.util.Scanner;
 
-public class WithdrawHelper {
+public class WithdrawHelper implements ClosedAccountCheckable {
     public static void withdraw(Scanner sc, AccountsManager manager) {
         System.out.print("Hesap No: ");
-        String acc = sc.nextLine();
-
+        String accNo = sc.nextLine();
+        BaseAccount acc = manager.findAccountByNumber(accNo);
+        if (new WithdrawHelper().checkClosedAccount(acc)) {
+            return;
+        }
+        if (!FrozenAccountHandler.handleIfFrozen(acc, sc, manager)) {
+            return;
+        }
         System.out.print("Tutar: ");
         double amt = Double.parseDouble(sc.nextLine());
-
-        manager.withdraw(acc, amt);
+        manager.withdraw(accNo, amt);
     }
 }

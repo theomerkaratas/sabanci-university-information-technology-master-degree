@@ -1,10 +1,17 @@
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class AccountCreationHelper {
     public static void createAccount(Scanner sc, AccountsManager manager) {
         System.out.print("Hesap No: ");
         String accNo = sc.nextLine();
+
+        List<String> existingAccNumbers = AccountNumberReader.getAccountNumbers("account.csv");
+        if (existingAccNumbers.contains(accNo)) {
+            System.out.println("[HATA] Bu numarada bir hesap zaten mevcut!");
+            return;
+        }
 
         System.out.print("Sahip Adı: ");
         String owner = sc.nextLine();

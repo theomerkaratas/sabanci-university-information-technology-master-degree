@@ -39,7 +39,6 @@ public class AccountsManager implements AccountOperations, TransactionHistory {
         save();
     }
 
-    // ================= PARA ÇEK =================
     public void withdraw(String accNo, double amount) {
         ValidationUtils.requirePositive(amount, "Çekilecek tutar");
 
@@ -59,7 +58,6 @@ public class AccountsManager implements AccountOperations, TransactionHistory {
         AccountStatusChanger.changeAccountStatus(accounts, accNo, status, storage);
     }
 
-    // ================= LİSTELEME =================
     public void listAccounts() {
         AccountPrinter.listAccounts(accounts);
     }
@@ -72,6 +70,7 @@ public class AccountsManager implements AccountOperations, TransactionHistory {
         transferWithCurrencyConversion(from, to, amount);
     }
 
+
     private BaseAccount findAccount(String accNo) {
         for (BaseAccount acc : accounts) {
             if (acc.getAccountNumber().equals(accNo)) {
@@ -79,6 +78,10 @@ public class AccountsManager implements AccountOperations, TransactionHistory {
             }
         }
         return null;
+    }
+
+    public BaseAccount findAccountByNumber(String accNo) {
+        return findAccount(accNo);
     }
 
     void save() {
