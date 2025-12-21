@@ -21,13 +21,6 @@ Ana sınıfı çalıştırmak için:
 java -cp bin Main
 ```
 
-## Docker ile Kullanım
-Veritabanı ve uygulamayı birlikte başlatmak için kök dizindeki `docker-compose.yml` dosyasını kullanabilirsiniz:
-
-```
-docker-compose up --build
-```
-
 ## Özellikler
 - Hesap açma, kapama
 - Para yatırma ve çekme

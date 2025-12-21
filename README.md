@@ -12,11 +12,11 @@ This repository organizes my projects into key subject areas:
 
 - **🌐 Networks** – network protocols, architectures, and distributed systems  
 - **🗄️ Databases** – design, SQL, modeling, and data management  
-- **📊 Data Science** – analytics, machine learning, and data-driven solutions  
 - **💻 Software Engineering** – application development, software design, and methodologies  
-- *(additional subjects will be added as I progress in the program)*  
+- *(additional subjects will be added as I progress in the program)*
 
 ---
+
 
 ## 📂 Repository Structure
 
@@ -24,12 +24,10 @@ Each folder represents a course or project. Every project includes its own `READ
 
 Example structure:
 
-- `networks/` → network-related projects  
-- `databases/` → SQL, database design, and modeling projects  
-- `data-science/` → data analysis and machine learning projects  
-- `software-engineering/` → coding, design, and software architecture projects  
+- `IT524-BankAccountProject/` → Java console-based banking application. Features account creation, deposit/withdrawal, transfers (with currency conversion), account status management, and transaction history. See the project README for usage and details.
+- `IT553-mysql-project/` → SQL and database design projects, including sample data, triggers, and web interface (PHP/MySQL). See the project README for setup and queries.
 
----
+----
 
 ## 🎯 Purpose of This Repository
 
