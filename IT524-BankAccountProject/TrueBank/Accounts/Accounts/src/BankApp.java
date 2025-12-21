@@ -7,7 +7,7 @@ public class BankApp {
     }
 
     public void addAccount(BaseAccount account) {
-        manager.addAccount(account);
+        AccountAdder.addAccount(manager, account);
     }
 
     public void transfer(String from, String to, double amount) {

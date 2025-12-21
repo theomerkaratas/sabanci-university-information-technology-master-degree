@@ -27,6 +27,6 @@ public class AccountCreationHelper {
             account = new SavingsAccount(accNo, owner, balance, type, today);
         }
 
-        manager.addAccount(account);
+        AccountAdder.addAccount(manager, account);
     }
 }

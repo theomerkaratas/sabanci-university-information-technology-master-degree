@@ -3,8 +3,8 @@ import java.util.List;
 
 public class AccountsManager {
 
-    private final ArrayList<BaseAccount> accounts = new ArrayList<>();
-    private final ArrayList<Transaction> transactions = new ArrayList<>();
+    final ArrayList<BaseAccount> accounts = new ArrayList<>();
+    final ArrayList<Transaction> transactions = new ArrayList<>();
     private Object storage;
 
     public AccountsManager() {}
@@ -27,19 +27,6 @@ public class AccountsManager {
         }
     }
 
-    // ================= HESAP EKLE =================
-    public void addAccount(BaseAccount account) {
-        accounts.add(account);
-        transactions.add(new Transaction(
-                account.getAccountNumber(),
-                "create",
-                account.getBalance()
-        ));
-        save();
-        System.out.println("[INFO] Hesap eklendi: " + account.getAccountNumber());
-    }
-
-    // ================= PARA YATIR =================
     public void deposit(String accNo, double amount) {
         ValidationUtils.requirePositive(amount, "Yatırılacak tutar");
 
@@ -149,7 +136,7 @@ public class AccountsManager {
         return null;
     }
 
-    private void save() {
+    void save() {
         if (storage instanceof AccountsStorage) {
             try {
                 ((AccountsStorage) storage).save(accounts);
