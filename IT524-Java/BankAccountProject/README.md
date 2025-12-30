@@ -20,7 +20,7 @@ Proje ana dizininde aşağıdaki komutla `Accounts` klasörüne girin:
 cd ./TrueBank
 ```
 
-### 3. Java Dosyalarını Derleyin (Gerekirse)
+### 3. Java Dosyalarını Derleme
 Tüm Java kaynak dosyalarını derlemek için:
 
 ```
@@ -32,29 +32,6 @@ javac -d bin src/*.java
 Ana sınıfı (örneğin Main) çalıştırmak için **aşağıdaki komutu terminale yazın**:
 
 ```sh
-java -cp bin Main
-```
-
-> Eğer farklı bir ana sınıf kullanıyorsanız, örneğin `BankApp`, şu şekilde çalıştırabilirsiniz:
->
-> ```
-> java -cp bin BankApp
-> ```
-
-> Not: Eğer uygulamayı farklı bir dizinden başlatırsanız, account.csv dosyasının da o dizinde olması gerekir.
-
-
-## Derleme
-Projeyi derlemek için:
-
-```
-javac -d bin src/*.java
-```
-
-## Çalıştırma
-Ana sınıfı çalıştırmak için:
-
-```
 java -cp bin Main
 ```
 
