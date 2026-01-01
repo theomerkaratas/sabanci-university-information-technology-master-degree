@@ -197,3 +197,48 @@ Uses for Cookies:
 and client's cookie file) and carried **in messages** (the cookie header lines).
 
 **Privacy Concern:** Cookies allow sites to track a user's activity _on their site_. **Third-party persistent cookies** (often from advertisers) can be used to track a user's identity and behavior _across multiple, different websites_, raising significant privacy issues.
+
+#### GDPR (EU General Data Protection Regulation) and Cookies
+- GDPR Stance: The European Union's GDPR recognizes that cookies, especially when combined with other data, can be used to create profiles and identify individuals.
+- Legal Classification: Therefore, such cookies are considered personal data.
+- User Consent Requirement: Under GDPR, websites must obtain the user's explicit, informed consent before placing non-essential cookies (especially tracking cookies) on their device. This is why you see "cookie consent" banners on EU websites.
+- User Control: The regulation gives users explicit control over whether their personal data (including cookies) can be collected and processed.
+
+## Web Caches
+A web cache (or proxy server) is an intermediate network entity that stores copies of recently requested web objects. Its primary goal is to satisfy client requests without needing to contact the distant origin server every time.
+
+How It Works:
+1. A user configures their browser to send all HTTP requests to a local web cache.
+2. For each request:
+  - Cache Hit: If the requested object is stored in the cache and is fresh, the cache returns it directly to the client.
+  - Cache Miss: If the object is not in the cache (or is stale), the cache acts as a client, requests the object from the origin server, stores a copy, and then forwards it to the original client.
+
+A web cache acts as both a server (to the requesting client) and a client (to the origin server).
+
+**Cache Control:** The origin server controls how its content is cached using HTTP response headers like:
+- `Cache-Control: max-age=<seconds>`: Tells the cache how long it can serve the object without checking for updates.
+- `Cache-Control: no-cache:` Tells the cache it must validate with the origin server before serving a cached copy.
+
+**Benefits of Caching:**
+1. Reduced Response Time: The cache is geographically or network-topologically closer to the client than the origin server. 
+2. Reduced Bandwidth: Decreases traffic on an institution's expensive access link to the wider internet.
+3. Content Delivery Leveling: Allows smaller content providers to handle high demand more effectively by offloading traffic to distributed caches.
+
+#### Caching Example and Calculation
+There are a couple of quantitative comparison of solutions to a network bottleneck problem.
+1. **Buy a Faster Link:** Increase the access link capacity.
+2. **Install a Web Cache:** Install a cheap web cache inside the institutional network.
+
+#### Browser Caching: Conditional GET
+
+The goal is to avoid transferring an object the browser already has if it hasn't changed on the server. This saves bandwidth and time.
+
+**Mechanism:**
+1. The browser stores cached objects along with the date it received them from the server.
+2. When the object might be stale, the browser sends a conditional GET request with an `If-modified-since: <date>` header.
+
+**Server Response:**
+- `304 Not Modified`: If the object hasn't changed since that date, the server sends this empty response. The browser uses its cached copy.
+- `200 OK` with new data: If the object has changed, the server sends the full new object.
+
+> This protocol ensures cached data is kept fresh without the overhead of transmitting unchanged objects repeatedly.
