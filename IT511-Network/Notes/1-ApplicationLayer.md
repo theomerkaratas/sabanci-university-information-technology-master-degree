@@ -487,6 +487,7 @@ It is a core Internet function, yet it is implemented at the application layer. 
 |     additional info (variable # of RRs)     |
 +---------------------------------------------+
 
+
 #### DNS Security
 
 - Major Threats:
