@@ -278,6 +278,25 @@ Remaining Problems with HTTP/2 over TCP:
 
 ## QUIC: Quick UDP Internet Connections
 
+```
+-----------------------------------------
+|             +-----------------------+ |
+|             |        HTTP/2         | |
+| Application +-----------------------+ |
+|             |         TLS           | |
+|             +-----------------------+ |
+-----------------------------------------
+|             +-----------------------+ |
+| Transport   |         TCP           | |
+|             +-----------------------+ |
+-----------------------------------------
+|             +-----------------------+ |
+| Network     |          IP           | |
+|             +-----------------------+ |
+-----------------------------------------
+            HTTP/2 over TCP
+```
+
 QUIC (Quick UDP Internet Connections) is an application-layer protocol that runs on top of UDP (instead of TCP). It was designed primarily to improve the performance of HTTP traffic.
 
 **Architecture Comparison:**
@@ -392,6 +411,20 @@ It is a core Internet function, yet it is implemented at the application layer. 
 **Why Not Centralized?** A single, centralized DNS server would be a single point of failure, a massive traffic bottleneck, and geographically distant for many users, making it slow and impossible to maintain. It does not scale.
 
 #### A Distributed, Hierarchical Database
+
+```
+                              Root DNS Servers
+                                     |
+        -------------------------------------------------------
+        |                          |                          |
+     .com DNS                  .org DNS                    .edu DNS
+        |                          |                          |
+   --------------           --------------           --------------
+   |            |           |            |           |            |
+yahoo.com     amazon.com   pbs.org      ...        nyu.edu      umass.edu
+DNS servers   DNS servers  DNS servers            DNS servers  DNS servers
+
+```
 
 **Hierarchical Structure:**
 - Root DNS Servers: The top of the hierarchy (.).
