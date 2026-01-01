@@ -242,3 +242,36 @@ The goal is to avoid transferring an object the browser already has if it hasn't
 - `200 OK` with new data: If the object has changed, the server sends the full new object.
 
 > This protocol ensures cached data is kept fresh without the overhead of transmitting unchanged objects repeatedly.
+
+#### HTTP/2
+- **Primary Goal:** Decrease delay when loading web pages that require multiple objects (HTML, CSS, images, scripts).
+- HTTP/1.1 Limitation: While it allowed multiple requests over a single persistent TCP connection (pipelining), it mandated First-Come-First-Served (FCFS) order for server responses.
+- The Problem – Head-of-Line (HOL) Blocking:
+  - If a large object (e.g., a video) is requested first, smaller objects requested later must wait in line behind it for transmission.
+  - If a TCP packet is lost, the entire connection stalls for retransmission, blocking all pending objects, not just the one with the lost packet.
+- HTTP/2 Approach: Increases server flexibility in sending objects. While core protocol semantics (methods, status codes) remain the same as HTTP/1.1, it introduces major changes to how data is framed and delivered over the connection.
+
+#### HTTP/2: Mitigating HOL Blocking
+##### Problem:
+- Scenario: A client requests one large object (O₁) and three smaller objects (O₂, O₃, O₄) over an HTTP/1.1 pipelined connection.
+- HTTP/1.1 Behavior: The server sends the objects back in the exact order they were requested (FCFS). Even though O₂, O₃, and O₄ are ready and small, they are stuck behind the large O₁ file.
+- Result: The browser cannot process/display O₂, O₃, O₄ until the transmission of O₁ is complete, increasing page load time.
+##### Solution:
+- Core Mechanism: Multiplexing. Objects are broken down into smaller frames.
+- HTTP/2 Behavior: The server can interleave frames from different objects on the single TCP connection.
+- Result in the Scenario: Frames from the smaller objects (O₂, O₃, O₄) can be sent between frames of the large object (O₁). This allows the browser to receive, process, and display the smaller objects much sooner. O₁ is delivered only slightly later.
+- Benefit: Significantly reduces HOL blocking and improves page load performance.
+
+#### HTTP/2 to HTTP/3
+Remaining Problems with HTTP/2 over TCP:
+1. Packet Loss Recovery: Since all multiplexed streams share a single TCP connection, the loss of any single TCP packet causes the entire connection to stall for retransmission, blocking all objects (streams). This reintroduces a form of HOL blocking at the transport layer.
+2. Incentive for Parallel Connections: To work around this, browsers often open multiple parallel TCP connections (as they did with HTTP/1.1), defeating part of HTTP/2's efficiency goal.
+3. No Built-in Security: Runs over plain TCP, requiring a separate TLS handshake for encryption (HTTPS).
+
+#### HTTP/3
+- Transport Change: Abandons TCP. Instead, it runs over QUIC, a modern transport protocol built on UDP.
+- Key Benefits:
+  - Per-Object/Stream Control: QUIC implements loss recovery and congestion control per stream, not per connection. The loss of a packet in one stream does not stall others.
+  - Integrated Security: Encryption (TLS 1.3) is a mandatory, integral part of the QUIC protocol, reducing connection setup time.
+  - Faster Setup: Combines cryptographic and transport handshakes, often allowing data transmission in "0-RTT" or "1-RTT".
+- Evolution: HTTP/3 is essentially the HTTP/2 semantics mapped onto the new QUIC transport layer, solving the underlying transport-layer issues of HTTP/2.
