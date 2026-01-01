@@ -470,23 +470,24 @@ It is a core Internet function, yet it is implemented at the application layer. 
 - **Authority Section**: Contains RRs that point to authoritative name servers.
 - **Additional Section**: Contains other "helpful" RRs (e.g., the IP address of an authoritative server listed in the Authority section).
 
-<--------2 bytes------> <------2 bytes-------><br>
-+----------------------+----------------------+<br>
-|     identification   |        flags         |<br>
-+----------------------+----------------------+<br>
-|     # questions      |    # answer RRs      |<br>
-+----------------------+----------------------+<br>
-|   # authority RRs    |  # additional RRs    |<br>
-+---------------------------------------------+<br>
-|      questions (variable # of questions)    |<br>
-+---------------------------------------------+<br>
-|         answers (variable # of RRs)         |<br>
-+---------------------------------------------+<br>
-|        authority (variable # of RRs)        |<br>
-+---------------------------------------------+<br>
-|     additional info (variable # of RRs)     |<br>
-+---------------------------------------------+<br>
-
+```
+<--------2 bytes------> <------2 bytes------->
++----------------------+----------------------+
+|     identification   |        flags         |
++----------------------+----------------------+
+|     # questions      |    # answer RRs      |
++----------------------+----------------------+
+|   # authority RRs    |  # additional RRs    |
++---------------------------------------------+
+|      questions (variable # of questions)    |
++---------------------------------------------+
+|         answers (variable # of RRs)         |
++---------------------------------------------+
+|        authority (variable # of RRs)        |
++---------------------------------------------+
+|     additional info (variable # of RRs)     |
++---------------------------------------------+
+```
 
 #### DNS Security
 
