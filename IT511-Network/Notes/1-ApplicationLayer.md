@@ -378,3 +378,139 @@ The Internet uses IP addresses (32/128-bit numbers) for routing, but we use doma
 **DNS is:**
 - A distributed, hierarchical database implemented across many name servers.
 - An application-layer protocol used by hosts and DNS servers to resolve (translate) names into addresses and vice versa.
+
+It is a core Internet function, yet it is implemented at the application layer. This places complexity at the network's "edge" rather than in the core infrastructure.
+
+#### DNS Services & Why a Distributed Design?
+
+**DNS Services:**
+- Primary: Hostname to IP address translation.
+- Host Aliasing: Mapping a simple alias (e.g., www.google.com) to a complex canonical hostname.
+- Mail Server Aliasing: Mapping a domain's mail address (e.g., @gmail.com) to its actual mail server cluster.
+- Load Distribution: Distributing requests among multiple replicated servers (e.g., a web farm) by returning different IP addresses for the same domain name.
+
+**Why Not Centralized?** A single, centralized DNS server would be a single point of failure, a massive traffic bottleneck, and geographically distant for many users, making it slow and impossible to maintain. It does not scale.
+
+#### A Distributed, Hierarchical Database
+
+**Hierarchical Structure:**
+- Root DNS Servers: The top of the hierarchy (.).
+- Top-Level Domain (TLD) Servers: Responsible for domains like `.com`, `.org`, `.edu`, and country codes (`.uk`, `.jp`).
+- Authoritative DNS Servers: Owned by organizations or their providers. Hold the definitive ("authoritative") mappings for their hosts.
+
+**Resolution Process (Simplified): To find www.amazon.com:**
+1. Client asks Root: "Where is .com?"
+2. Root replies: "Ask this .com TLD server."
+3. Client asks .com TLD: "Where is amazon.com?"
+4. TLD replies: "Ask this amazon.com authoritative server."
+5. Client asks Authoritative server: "What is the IP for www?"
+6. Authoritative server replies with the IP address.
+
+#### DNS: Root Name Servers
+
+- The root servers are the starting point of the DNS hierarchy. They are the "contact of last resort" for any name server that doesn't have a cached answer.
+- The Internet cannot function without them. They are a primary target for attacks, leading to the development of DNSSEC (DNS Security Extensions) for authentication and integrity.
+- Managed by ICANN (Internet Corporation for Assigned Names and Numbers).
+- There are 13 logical root server identities (A through M), but each is highly replicated worldwide using anycast for resilience and load distribution.
+
+#### Top-Level Domain (TLD) and Authoritative Servers
+
+- TLD Servers manage the next level below root (e.g., `.com`, `.org`, `.edu`, `.uk`). Companies like Verisign (for `.com`) or Educause (for `.edu`) operate these.
+- Authoritative DNS Servers: The final source of truth for a specific domain (e.g., `google.com`). An organization runs these servers (or pays a provider to) to publish the IP addresses of its public hosts (`www`, `mail`, etc.).
+
+#### Local DNS Name Servers
+
+- This is the first stop for any DNS query from a host. Typically provided by your ISP, company, or university.
+- It acts as a proxy for the host. It checks its local cache. If the answer isn't cached, it forwards the query into the DNS hierarchy on the host's behalf.
+- The local DNS server is not part of the strict hierarchy but is essential for the resolution process and performance (caching).
+
+#### DNS Name Resolution: Iterated vs. Recursive Query
+
+##### Iterative Query
+- The contacted server replies with the best answer it has, which is often the address of another server to ask next.
+- Example Flow: `Local Server -> Root (reply: "ask .com") -> Local Server -> .com TLD (reply: "ask amazon.com") -> Local Server -> amazon.com (reply: IP)`
+
+**Burden:** The querying server (local DNS) does most of the work.
+
+##### Recursive Query
+- The contacted server must obtain the mapping on behalf of the requester and return the final answer.
+- Example Flow: `Local Server (asks Root) -> Root (asks .com) -> .com (asks amazon.com) -> amazon.com (replies to .com) -> .com (replies to Root) -> Root (replies to Local Server)`
+
+**Burden:** Places heavy load on the higher-level servers (Root, TLD). Therefore, Root and TLD servers typically do not support recursive queries to avoid overload.
+
+#### Caching DNS Information
+
+- The purpose is to dramatically improve response time and reduce load on the DNS hierarchy.
+- Mechanism: Any DNS server (especially local servers) caches the mappings it learns. Subsequent queries for the same name can be answered immediately from the cache.
+- Time-to-Live (TTL): Each cached record has an expiration time (TTL) set by the authoritative server. After the TTL expires, the entry must be refreshed.
+- Consequence: DNS provides best-effort, eventually consistent mapping. If an IP address changes, the old address may still be served from caches worldwide until all TTLs expire.
+
+#### DNS Records
+
+- Resource Records (RRs): The fundamental data units stored in DNS. Format: (Name, Value, Type, TTL).
+
+**Key Record Types:**
+- **Type A**: `Name` = Hostname, `Value` = IPv4 Address.
+- **Type NS**: `Name` = Domain (e.g., ibm.com), `Value` = Hostname of the authoritative name server for that domain.
+- **Type CNAME**: `Name` = Alias (e.g., www.ibm.com), `Value` = Canonical (real) hostname.
+- **Type MX**: `Name` = Domain, Value = Hostname of the `SMTP` mail server for that domain. (Has a priority field).
+
+#### DNS Protocol Messages
+
+- DNS uses a single message format for both queries and replies.
+
+**Message Header Fields:**
+- **Identification**: A 16-bit ID to match queries with their replies.
+- **Flags**: Indicate if it's a query/reply, if recursion is desired/available, and if the reply is authoritative.
+- **Counters**: Number of questions, answer RRs, authority RRs, and additional RRs in the message.
+
+**Message Sections:**
+- **Question Section**: Contains the query (name, type of record requested).
+- **Answer Section**: Contains the Resource Records (RRs) that answer the question.
+- **Authority Section**: Contains RRs that point to authoritative name servers.
+- **Additional Section**: Contains other "helpful" RRs (e.g., the IP address of an authoritative server listed in the Authority section).
+
+<--------2 bytes------> <------2 bytes------->
++----------------------+----------------------+
+|     identification   |        flags         |
++----------------------+----------------------+
+|     # questions      |    # answer RRs      |
++----------------------+----------------------+
+|   # authority RRs    |  # additional RRs    |
++---------------------------------------------+
+|      questions (variable # of questions)    |
++---------------------------------------------+
+|         answers (variable # of RRs)         |
++---------------------------------------------+
+|        authority (variable # of RRs)        |
++---------------------------------------------+
+|     additional info (variable # of RRs)     |
++---------------------------------------------+
+
+#### DNS Security
+
+- Major Threats:
+  - DDoS Attacks: Flooding DNS servers (especially Root or TLD) with traffic. Mitigated by filtering, caching (which bypasses root), and massive replication.
+  - Spoofing / Cache Poisoning: Tricking a DNS server into accepting and caching a fake reply, redirecting users to malicious sites. Mitigated by DNSSEC, which adds cryptographic authentication to DNS records.
+  - Targeting TLDs: Attacking TLD servers (.com) is considered more dangerous than attacking root, as they are more critical for daily operations.
+
+# Socket Programming
+
+Two Fundamental Transport Services:
+- UDP Sockets: Provide an interface to unreliable, connectionless datagram service. Messages have boundaries.
+- TCP Sockets: Provide an interface to reliable, connection-oriented, byte-stream service. Data is a continuous stream without inherent message boundaries.
+
+Demonstration Application: A simple client-server echo application with modification.
+1. Client: Reads a line of text from the user (keyboard) and sends it to the server.
+2. Server: Receives the data, converts all characters to uppercase.
+3. Server: Sends the modified (uppercase) data back to the client.
+4. Client: Receives the modified data and displays it on the screen.
+
+#### Socket Programming with UDP – Key Characteristics
+
+- **Connectionless**: There is no initial handshake (connection setup) between the client and server before data is exchanged.
+- **Addressing**: The sender must explicitly attach the destination IP address and port number to each individual datagram it sends.
+- **Receiver Information**: The receiver can extract the sender's IP address and port number from each received datagram, allowing it to know where to send a reply.
+- **Service Model**: From the application's viewpoint, UDP provides unreliable transfer of discrete datagrams (groups of bytes).
+  - **Possible Issues**: Datagrams may be lost, delivered out of order, or arrive duplicated.
+  - **Application Responsibility**: The application itself must handle these issues if reliability is required.
