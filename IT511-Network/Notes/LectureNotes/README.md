@@ -5,7 +5,7 @@ This is the top layer of the network protocol stack. It is where network applica
 Application development focuses on end systems, not the network core (routers, switchers). Developers write programs that run on different end systems and communicate over the network.
 
 #### Client-Server Paradigm
-In the client-server arch, there is an always-on host called the server, which provides a permanent service. Clients are hosts that contact the server to communicate and consume the service.
+In the client-server architecture, there is an always-on host called the server, which provides a permanent service. Clients are hosts that contact the server to communicate and consume the service.
 
 **Server:** has a permanent IP address and is always on, ready to receive requests. often in data centers, for scaling
 
@@ -16,7 +16,7 @@ This model centralizes management and data storage on the server. It can become 
 **Example:** HTTP (Web), IMAP (email retrieval), FTP (file transfer)
 
 #### Peer-to-Peer (P2P) Architecture
-In a peer-to-peer arch, there is no dedicated, always-on server. Instead, peers (end systems) communicate directly with each other. Each peer acts as both a client and a server.
+In a peer-to-peer architecture, there is no dedicated, always-on server. Instead, peers (end systems) communicate directly with each other. Each peer acts as both a client and a server.
 
 **Key Advantage:** Self scalability
 
@@ -63,7 +63,7 @@ Applications have different requirements from the underlying transport layer ser
 #### Internet Transport Protocol
 
 **TCP (Transmission Control Protocol) Service:**
-- **Reliable, in-order data delivery.***
+- **Reliable, in-order data delivery.**
 - *Flow Control** (prevents overwhelming the receiver).
 - **Congestion Control** (prevents overwhelming the network).
 - **Connection-oriented** (requires handshake setup).
