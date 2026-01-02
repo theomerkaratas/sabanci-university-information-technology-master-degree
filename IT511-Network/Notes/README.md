@@ -1369,7 +1369,7 @@ sending process                        receiving process      ->       sending p
 **Sender's Rule**: `LastByteSent - LastByteAcked <= cwnd` => This limits in-flight data.
 
 **Sending Rate**: Approximately cwnd / RTT bytes/sec. TCP controls its rate by dynamically adjusting cwnd based on inferred network congestion.
-TCP rate ≈ \frac{cwnd}{RTT}
+$\text{TCP rate} \approx \frac{\text{cwnd}}{\text{RTT}}$
 
 `cwnd` is measured in bytes (or more conveniently, in units of MSS).
 
