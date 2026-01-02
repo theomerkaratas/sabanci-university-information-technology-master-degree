@@ -1426,3 +1426,170 @@ Three Main States:
 - **Status**: CUBIC is the default congestion control algorithm in Linux and has been widely used on the Internet. It provides higher and more stable throughput than classic TCP Reno, especially on high-bandwidth, long-delay (high BDP) paths.
 
 # Network Layer
+
+#### Network-Layer Services and Protocols
+
+- **Primary Role**: The network layer is responsible for transporting segments from the sending host to the receiving host across multiple networks.
+  - **Sender's Job**: Encapsulates transport-layer segments into datagrams (IP packets) and passes them to the link layer.
+  - **Receiver's Job**: Delivers the extracted segments up to the transport layer.
+
+- **Ubiquity**: Network layer protocols (primarily IP) exist in every Internet device—both end hosts and routers.
+
+- **Router's Critical Function:**
+  1. **Examines Header Fields**: Inspects the IP header of every datagram.
+  2.  **Moves Datagrams**: Forwards datagrams from an input port to the appropriate output port to move them along the path from source to destination. 
+
+<img src="network_layer_intro.png" width="500">
+
+#### Two Key Network-Layer Functions
+
+1. **Forwarding (Data Plane Function)**: The router-internal process of moving an arriving packet from an input link to the appropriate output link. It's a local action performed at each router using a forwarding table. (Analogy: Driving through a single highway interchange).
+2. **Routing (Control Plane Function)**: The network-wide process of determining the end-to-end path that packets will take from source to destination. Executed by routing algorithms that populate the forwarding tables. (Analogy: Planning the entire route for a trip).
+
+> Key Distinction: Routing determines the path; forwarding moves packets along the path.
+
+#### Network Layer: Data Plane vs. Control Plane
+
+**Data Plane (Per-router, Local):**
+- The forwarding function. It's a local, per-router operation.
+- **Job**: Decide how to handle a datagram arriving on an input port (typically: send it to which output port?).
+- Operates on short timescales (nanoseconds per packet).
+
+**Control Plane (Network-wide):**
+- The routing function. Determines the contents of the forwarding tables.
+- **Job**: Compute the paths (routes) that datagrams should take through the network.
+- Operates on longer timescales (seconds, minutes).
+
+**Two Control Plane Approaches:**
+- **Traditional (Per-router)**: Routing algorithms run in each router (e.g., OSPF, BGP).
+- **Software-Defined Networking (SDN)**: Routing logic runs in a remote, centralized controller that programs the routers' forwarding tables.
+
+#### Per-Router Control Plane (Traditional Approach)
+
+- **Architecture**: Each router runs its own routing algorithm software (e.g., OSPF daemon).
+- **Process**: Routers exchange routing messages with each other. Each router's algorithm computes its own forwarding table based on this distributed information.
+- **Flow**: Control plane (routing algorithm) populates the forwarding table. The data plane (forwarding hardware) consults this table for every packet.
+
+#### Software-Defined Networking (SDN) Control Plane
+
+- **Architecture**: Decouples the control and data planes. A remote, centralized controller (logically centralized, often physically distributed for reliability) computes the routes for the entire network.
+- **Process**: The controller communicates with simple forwarding agents in each router (via a protocol like OpenFlow). It computes and installs the forwarding table entries into the routers.
+**Benefit**: Enables more flexible, programmable, and manageable networks compared to the distributed, per-router approach.
+
+#### Router Architecture Overview
+
+<img src="router_control_plane_traditional_approach.png" width="500">
+
+- **Input Ports**: Perform physical/link-layer functions, lookup, and forwarding.
+- **Output Ports**: Buffer and transmit packets.
+- **Switching Fabric**: The internal "network" that connects input ports to output ports (e.g., via a crossbar, shared memory, or bus).
+- **Routing Processor**: Executes the control plane software (routing protocols, management). Operates on a slow, millisecond timescale.
+- **Forwarding Hardware**: Executes the data plane functions (table lookup, switching). Must operate at extremely high speed (nanoseconds, "line speed") to handle incoming packet rates.
+
+#### Input Port Functions
+
+```
+                                                     +-------------------------+ 
++------------------+   +-------------------------+   | decentralized switching |   +------------------+
+|  physical layer  |-->|  link layer protocol    |-->|         lookup          |-->|  switch fabric   |  
+| line termination |-->|        (receive)        |-->|       forwarding        |   +------------------+  
++------------------+   +-------------------------+   |        queueing         |  
+                                                     +-------------------------+                                                     
+```
+
+**Processing Steps at an Input Port:**
+1. **Physical Layer**: Bit-level reception.
+2. **Link Layer**: Frame processing (e.g., Ethernet decapsulation, error check).
+3. **Lookup & Forwarding (Critical Step)**: Examine the network-layer header (e.g., IP destination address) and perform a lookup in the forwarding table to determine the output port for this packet. This must happen at line speed.
+
+**Two Forwarding Paradigms:**
+- **Destination-Based Forwarding (Traditional)**: Lookup based only on the destination IP address.
+- **Generalized Forwarding (SDN/OpenFlow)**: Lookup can be based on any combination of header fields (source/dest IP, port, protocol, etc.), enabling more complex policies (e.g., firewalling, load balancing).
+
+**Queueing**: If packets arrive faster than they can be forwarded into the switching fabric, they are queued at the input port, which can lead to delays and loss.
+
+#### Destination-Based Forwarding & Longest Prefix Matching (LPM)
+
+- **The Problem**: IP addresses are not assigned in neat, contiguous blocks that align with table entries. A destination address may match multiple table entries of different lengths.
+- **Solution**: Longest Prefix Matching (LPM). The forwarding table contains entries with IP prefixes (e.g., 11001000 00010111 00010*** ********). When looking up a destination address, the router selects the entry with the longest (most specific) matching prefix.
+
+> **Longest Prefix Matching**: when looking for forwarding table entry for given destination address, use longest address prefix that matches destination address.
+
+**Example:**
+
+<img src="longest_prefix_matching_1.png" width="500">
+
+- Address: `11001000 00010111 00010110 10100001`
+  - Matches Prefix 0 (00010***): 21-bit match.
+  - Matches Prefix 2 (00011***): Does NOT match.
+  - **Result**: Use interface 0 (longest matching prefix).
+
+<img src="longest_prefix_matching_2.png" width="500">
+
+- Address: `11001000 00010111 00011000 10101010`
+- Matches Prefix 1 (00011000): 24-bit match.
+- Matches Prefix 2 (00011***): 21-bit match.
+- **Result**: Use interface 1 (longest matching prefix is 24 bits).
+
+<img src="longest_prefix_matching_3.png" width="500">
+
+**Why LPM?** It allows for hierarchical, aggregated routing. A more specific route (longer prefix) overrides a less specific one (shorter prefix). This is fundamental to how Internet routing scales.
+
+#### Network Layer: Internet Protocol Stack
+
+<img src="internet_protocol_stack.png" width="500">
+
+- **IP Protocol**: The core. Defines the datagram format, addressing scheme (IP addresses), and packet handling conventions (e.g., forwarding, fragmentation).
+- **Routing Protocols (OSPF, BGP) / SDN Controller**: Implement the control plane. They populate the forwarding table with the information IP needs to forward packets.
+- **ICMP Protocol**: Used for error reporting (e.g., "Destination Unreachable") and router signaling (e.g., ping, traceroute). It's a helper protocol that works alongside IP.
+- **Forwarding Table**: The data plane's "cheat sheet," filled by the control plane, used by IP to make per-packet forwarding decisions.
+
+#### IP Datagram Format
+
+```
+<--------------------------------32 bits-------------------------------->
++-----+-----------+-----------------+-----------------------------------+
+| ver | head len. | type of service |            length                 |
++-----+-----------+-----------------+--------+--------------------------+
+|         16-bit identifier         |  flgs  |     fragment offset      |
++------------------+----------------+--------+--------------------------+
+|   time to live   |   upper layer  |          header checksum          |
++------------------+----------------+-----------------------------------+
+|                          source IP address                            |
++-----------------------------------------------------------------------+
+|                        destination IP address                         |
++-----------------------------------------------------------------------+
+|                            options (if any)                           |
++-----------------------------------------------------------------------+
+|                             payload data                              |
+|            (variable lenght, typically a TCP or UDP segment)          |
++-----------------------------------------------------------------------+
+```
+
+- **Version (4 bits)**: IP version (e.g., 4 for IPv4).
+- **Header Length (4 bits)**: Length of IP header in 32-bit words (typically 5, meaning 20 bytes, if no options).
+- **Type of Service (8 bits)**: Historically for QoS; now used for Differentiated Services (DiffServ) and Explicit Congestion Notification (ECN).
+- **Total Length (16 bits)**: Length of the entire datagram (header + data) in bytes. Maximum is 65,535 bytes.
+- **Identifier, Flags, Fragment Offset (16+3+13 bits)**: Used for fragmentation and reassembly of packets that are too large for a link's MTU.
+- **Time to Live (TTL - 8 bits)**: Decremented by each router. Packet is discarded if TTL reaches 0, preventing infinite loops.
+- **Protocol (8 bits)**: Identifies the upper-layer protocol (e.g., 6 for TCP, 17 for UDP) for demultiplexing.
+- **Header Checksum (16 bits)**: Error-check for the header only (not the data). Recalculated at each hop.
+- **Source & Destination IP Address (32 bits each)**: The fundamental identifiers.
+- **Options (variable)**: Rarely used. Can include features like record route, timestamp.
+- **Data/Payload**: The transport-layer segment (TCP/UDP) being carried.
+- **Overhead Note**: Significant overhead: 20 bytes for IP + 20 for TCP = 40 bytes before application data.
+
+#### IP Addressing: Introduction
+
+- **IP Address**: A 32-bit identifier assigned to each interface of a host or router.
+- **Interface**: The connection point between a device and a physical link.
+
+- **Key Points:**
+  - Routers have multiple interfaces (and thus multiple IP addresses).
+  - Hosts typically have one or two interfaces (e.g., Ethernet and Wi-Fi).
+
+- **Dotted-Decimal Notation**: Human-readable format (e.g., 223.1.1.1), where each number represents 8 bits (an octet) of the 32-bit address.
+
+<img src="ip_addressing_introduction.png" width="500">
+
+## Subnets
