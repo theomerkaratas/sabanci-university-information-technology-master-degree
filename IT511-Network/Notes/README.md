@@ -1344,3 +1344,33 @@ sending process                        receiving process      ->       sending p
   - A single bit (e.g., ECN - Explicit Congestion Notification in TCP/IP, DECbit) to signal "congestion experienced."
   - An explicit rate the sender should use.
 - This requires changes in both routers and end-host protocols.
+
+#### TCP Congestion Control: AIMD (Additive Increase Multiplicative Decrease)
+
+- **Core Strategy**: TCP senders probe for available bandwidth by gradually increasing their sending rate until they detect packet loss (a sign of congestion), then they rapidly back off.
+- **AIMD Phases:**
+  - **Additive Increase**: For every RTT without loss, the sender increases its sending rate by 1 Maximum Segment Size (MSS). This is a linear, cautious increase.
+  - **Multiplicative Decrease**: Upon detecting a loss event, the sender cuts its sending rate multiplicatively (by half, in the basic case).
+
+- **Resulting Pattern**: The "sawtooth" pattern, where the sending rate climbs linearly, drops sharply on loss, and climbs again. This represents a continuous, distributed process of probing for and reacting to available bandwidth.
+
+- **Two Types of Multiplicative Decrease (depending on loss detection):**
+  - **Loss via Triple Duplicate ACKs (Fast Retransmit)**: `cwnd` is set to half of its previous value. (Characteristic of TCP Reno).
+  - **Loss via Timeout (More Severe)**: `cwnd` is reset to 1 MSS. (Characteristic of early TCP Tahoe; Reno also does this on timeout).
+
+- Why AIMD? Mathematical analysis has shown that AIMD, as a distributed, asynchronous algorithm run independently by all TCP flows, has two excellent properties:
+  1. It optimizes the total throughput of all flows across the network (achieves a desirable "fair" equilibrium).
+  2. It is stable—it converges to a steady state and avoids wild oscillations.
+
+#### TCP Congestion Control: Details
+
+**Key Variable**: Congestion Window (`cwnd`). This is the primary factor limiting how much data a TCP sender can have in flight. It's separate from the receiver's flow control window (`rwnd`). The actual window is `min(cwnd, rwnd)`.
+
+**Sender's Rule**: `LastByteSent - LastByteAcked <= cwnd` => This limits in-flight data.
+
+**Sending Rate**: Approximately cwnd / RTT bytes/sec. TCP controls its rate by dynamically adjusting cwnd based on inferred network congestion.
+TCP rate ≈ \frac{cwnd}{RTT}
+
+`cwnd` is measured in bytes (or more conveniently, in units of MSS).
+
+#### TCP Slow Start
