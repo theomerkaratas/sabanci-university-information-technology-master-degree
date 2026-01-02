@@ -5,10 +5,16 @@ What are the source and destination port values in the segments flowing from the
 
 # Answer 1
 
+
+
+
 # Question 2
 UDP and TCP use 1s complement for their checksums. Suppose you have the following three 8-bit bytes: 01010011, 01100110, 01110100. What is the 1s complement of the sum of these 8-bit bytes? (Note that although UDP and TCP use 16-bit words in computing the checksum, for this problem you are being asked to consider 8-bit sums.) Show all work. Why is it that UDP takes the 1s complement of the sum; that is, why not just use the sum? With the 1s complement scheme, how does the receiver detect errors? Is it possible that a 1-bit error will go undetected? How about a 2-bit error?
 
 # Answer 2
+
+
+
 
 
 # Question 3
@@ -17,15 +23,27 @@ In protocol rdt3.0, the ACK packets flowing from the receiver to the sender do n
 # Answer 3
 
 
+
+
+
 # Question 4
 Consider a channel that can lose packets but has a maximum delay that is known. Modify protocol rdt2.1 to include sender timeout and retransmit. Informally argue why your protocol can communicate correctly over this channel.
 
 # Answer 4
 
+
+
+
+
 # Question 5
 Suppose Host A and Host B use a GBN protocol with window size N = 3 and a long-enough range of sequence numbers. Assume Host A sends six application messages to Host B and that all messages are correctly received, except for the first acknowledgment and the fifth data segment. Draw a timing diagram, showing the data segments and the acknowledgments sent along with the corresponding sequence and acknowledge numbers, respectively.
 
 # Answer 5
+
+
+
+
+
 
 # Question 6
 Consider transferring an enormous file of L bytes from Host A to Host B.
@@ -35,6 +53,9 @@ Assume an MSS of 536 bytes.
 **b.** For the L you obtain in (a), find how long it takes to transmit the file. Assume that a total of 66 bytes of transport, network, and data-link header are added to each segment before the resulting packet is sent out over a 155 Mbps link. Ignore flow control and congestion control so A can pump out the segments back-to-back and continuously.
 
 # Answer 6
+
+
+
 
 
 
@@ -82,6 +103,9 @@ otherwise                                                  3
 ```
 
 # Answer 8
+
+
+
 
 
 
