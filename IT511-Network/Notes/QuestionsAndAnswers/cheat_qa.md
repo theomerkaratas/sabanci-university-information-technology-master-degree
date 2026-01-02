@@ -131,6 +131,7 @@ Consider the topology shown in Figure. Denote the three subnets with hosts (star
 **b.** Using your answer to part (a), provide the forwarding tables (using longest prefix matching) for each of the three routers.
 
 From 214.97.254/23, possible assignments are
+
 **a.**  
 Subnet A: 214.97.255/24 (256 addresses)  
 Subnet B: 214.97.254.0/25 – 214.97.254.0/29 (128 − 8 = 120 addresses)  
