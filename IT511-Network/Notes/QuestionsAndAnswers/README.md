@@ -76,7 +76,7 @@ otherwise                                                  3
 # Question 9
 Consider the topology shown in Figure. Denote the three subnets with hosts (starting clockwise at 12:00) as Networks A, B, and C. Denote the subnets without hosts as Networks D, E, and F.
 
-<img src="question_9.png" width="600">
+<img src="question_9.png" width="500">
 
 **a.** Assign network addresses to each of these six subnets, with the following constraints: All addresses must be allocated from 214.97.254/23; Subnet A should have enough addresses to support 250 interfaces; Subnet B should have enough addresses to support 120 interfaces; and Subnet C should have enough addresses to support 120 interfaces. Of course, subnets D, E and F should each be able to support two interfaces. For each subnet, the assignment should take the form a.b.c.d/x or a.b.c.d/x – e.f.g.h/y.
 **b.** Using your answer to part (a), provide the forwarding tables (using longest prefix matching) for each of the three routers.
@@ -86,6 +86,6 @@ Consider the topology shown in Figure. Denote the three subnets with hosts (star
 # Question 10
 Consider the following network. With the indicated link costs, use Dijkstra’s shortest-path algorithm to compute the shortest path from x to all network nodes. Show how the algorithm works by computing a table.
 
-<img src="question_10.png" width="600">
+<img src="question_10.png" width="500">
 
 
