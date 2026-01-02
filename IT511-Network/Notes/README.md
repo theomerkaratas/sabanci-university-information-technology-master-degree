@@ -1372,7 +1372,57 @@ sending process                        receiving process      ->       sending p
 
 $\text{TCP rate} \approx \frac{\text{cwnd}}{\text{RTT}}\ \text{bytes/sec}$
 
-
 `cwnd` is measured in bytes (or more conveniently, in units of MSS).
 
 #### TCP Slow Start
+
+- **Purpose**: To quickly ramp up the sending rate from a cold start at the beginning of a connection or after a timeout, avoiding underutilization of the available bandwidth.
+- Mechanism: Exponential Increase.
+  - **Start**: `cwnd` = 1 MSS.
+  - For every ACK received (not just once per RTT), `cwnd` is increased by 1 MSS.
+  - **Result**: `cwnd` doubles every RTT. (1 MSS -> 2 MSS -> 4 MSS -> 8 MSS...).
+- **Name is Misleading**: It starts slow but grows very fast.
+
+#### TCP: From Slow Start to Congestion Avoidance
+
+- **The Question**: When to stop the aggressive exponential increase and switch to the gentle linear (AIMD) increase?
+- **The Answer**: At the Slow Start Threshold (`ssthresh`).
+- **How ssthresh is Set**: On a loss event, `ssthresh` is set to half the value of cwnd when the loss was detected (`ssthresh = cwnd / 2`).
+
+-  **Operation:**
+  - When `cwnd < ssthresh`: Slow Start phase (exponential growth).
+  - When `cwnd >= ssthresh`: Congestion Avoidance phase (additive increase, linear growth).
+
+- **Graph**: Shows the exponential rise, the reduction of `ssthresh` on loss, and the subsequent linear growth in the Congestion Avoidance phase.
+
+<img src="tcp_from_slow_start_to_congestion_avoidance.png" width="500">
+
+#### Summary: TCP Congestion Control (State Machine)
+
+We are gonna summarize standard TCP Reno congestion control via diagram below:
+
+<img src="tcp_congestion_control.png" width="600">
+
+Three Main States:
+1. **Slow Start**: Exponential increase. Enters on start or timeout. Exits when `cwnd >= ssthresh` or on loss. 
+2. **Congestion Avoidance**: Additive Increase. The main steady state. On duplicate ACKs, enters Fast Recovery.
+3. **Fast Recovery**: Triggered by three duplicate ACKs (triple dupACK). Sender retransmits the missing packet, sets `ssthresh = cwnd/2`, and sets `cwnd = ssthresh + 3`. For each additional duplicate ACK, cwnd increases slightly (partial window inflation). On receiving a new ACK, exits to Congestion Avoidance, setting cwnd = ssthresh.
+
+**Loss Responses:**
+- **Triple DupACK**: Fast Retransmit and Fast Recovery. cwnd is halved.
+- **Timeout**: Severe response. cwnd is reset to 1 MSS, and Slow Start is re-entered.
+
+#### TCP CUBIC (A Modern Enhancement)
+
+- **Motivation**: Is the AIMD sawtooth, especially the linear probe, the best way to find bandwidth? Can we be smarter after a loss?
+- **Key Insight**: The W_max (window size at which the last loss occurred) is a good estimate of the network's capacity. After backing off, the congestion state near the bottleneck likely hasn't changed dramatically.
+- **CUBIC's Strategy**: After a loss, instead of linear increase, CUBIC uses a cubic function of time to grow the window.
+  - **Growth Pattern**: It initially grows faster than linear to quickly approach the previous W_max.
+  - **Then**: It grows very slowly and cautiously as it nears W_max, "hovering" around that point to maximize utilization without causing frequent losses.
+
+<img src="tcp_cubic.png" width="500">
+
+- **Parameter K**: The time point when the cubic function will reach W_max. It's tunable.
+- **Status**: CUBIC is the default congestion control algorithm in Linux and has been widely used on the Internet. It provides higher and more stable throughput than classic TCP Reno, especially on high-bandwidth, long-delay (high BDP) paths.
+
+# Network Layer
