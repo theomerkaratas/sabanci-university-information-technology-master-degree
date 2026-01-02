@@ -155,3 +155,32 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
 ## UDP: User Datagram Protocol
 
 #### Characteristics
+- **Service Model**: UDP is a minimal, "no-frills" transport protocol. It provides "best-effort" service, meaning segments can be lost, duplicated, or delivered out of order to the application.
+- **Connectionless**: There is no handshaking to establish a connection. Each UDP segment is processed independently.
+- **Why Use UDP? Key Advantages:**
+  1. **No Connection Establishment Delay**: Avoids the RTT delay of a setup handshake (important for real-time apps).
+  2. **Simplicity**: No connection state to maintain at sender or receiver, making it lightweight.
+  3. **Small Header Overhead**: The 8-byte header is small compared to TCP's 20+ bytes.
+  4. **No Congestion Control**: The sender can transmit at the application's native rate without being throttled by the transport layer. This is a double-edged sword: it can cause congestion but allows the app to function even when the network is impaired (e.g., VoIP).
+
+#### UDP Use Cases
+
+**Typical Applications:**
+- **Streaming Multimedia**: Loss-tolerant but sensitive to timing and rate (e.g., live video, VoIP).
+- **DNS**: Simple query/response where speed is critical and a retransmission can be sent if needed.
+- **SNMP**: Network management queries.
+- **HTTP/3**: The latest HTTP version uses QUIC, which is built on top of UDP, adding its own reliability and congestion control mechanisms at the application layer.
+
+> Design Philosophy: If an application needs reliability or congestion control, it must implement these features itself within the application layer, as HTTP/3 does.
+
+#### UDP RFC 768
+- **Official Standard:** This slide shows the original 1980 RFC that defines UDP.
+- **Key Points from the RFC:**
+  - UDP provides a datagram mode of communication.
+  - It assumes IP is the underlying protocol.
+  - It offers minimum protocol mechanism (very simple).
+  - It is transaction-oriented and does not guarantee delivery or protection against duplicates.
+  - Applications needing reliable, ordered streams should use TCP.
+
+![User Datagram Protocol Image](user_datagram_protocol.png)
+
