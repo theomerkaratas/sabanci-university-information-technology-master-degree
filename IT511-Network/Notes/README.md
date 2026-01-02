@@ -1370,7 +1370,7 @@ sending process                        receiving process      ->       sending p
 
 **Sending Rate**: Approximately cwnd / RTT bytes/sec. TCP controls its rate by dynamically adjusting cwnd based on inferred network congestion.
 
-$\text{TCP rate} \approx \frac{\text{cwnd}}{\text{RTT}}  \text{bytes/sec}$
+$\text{TCP rate} \approx \frac{\text{cwnd}}{\text{RTT}} \\text{bytes/sec}$
 
 `cwnd` is measured in bytes (or more conveniently, in units of MSS).
 
