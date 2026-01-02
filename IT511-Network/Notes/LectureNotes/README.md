@@ -1697,13 +1697,76 @@ Modeling the Network: For algorithmic purposes, a network is abstracted as a gra
 
 #### Routing algorithm classification
 
-- **Classification Based on Information Scope:**
-  - **Global (Link-State Algorith)**: Every router knows the complete network topology and all link costs.
-  - **Decentralized (Distance-Vector Algorith)**: A router knows only the cost to its direct neighbors and iteratively exchanges information with them to learn about the wider network. Example: Bellman-Ford algorithm.
+Routing algorithms can be classified based on **the information they use** and **how often routing information changes**.
 
-- **Classification Based on Change Rate:**
-  - **Static**: Routes change very slowly (e.g., manual configuration).
-  - **Dynamic**: Routes change automatically in response to network changes (link failures, congestion).
+###### 1. Classification Based on Information Scope:
+
+**Global (Link-State Algorithm)**
+- Each router has a **complete view of the entire network topology**.
+- Routers know:
+  - All nodes in the network  
+  - All links between nodes  
+  - The cost of each link  
+- Routers independently compute the **shortest path** to every destination using **Dijkstra’s algorithm**.
+- Information is distributed using **link-state advertisements (LSAs)**, which are flooded to all routers.
+
+Key Characteristics:
+- Fast convergence  
+- High memory and CPU usage  
+- Accurate and consistent routing tables  
+
+Examples:**
+- OSPF (Open Shortest Path First)  
+- IS-IS  
+
+**Decentralized (Distance-Vector Algorithm)**
+- Each router knows only:
+  - The cost to its **direct neighbors**
+  - The distance vectors received from those neighbors
+- Routers exchange routing information **periodically** with neighbors.
+- Paths are calculated using the **Bellman-Ford algorithm**.
+
+Key Characteristics:
+- Slower convergence  
+- Lower computation and memory requirements  
+- Susceptible to routing loops and the *count-to-infinity* problem  
+
+Example:* 
+- RIP (Routing Information Protocol)
+
+###### 2. Classification Based on Change Rate:
+  - **Static**: 
+
+**Static Routing**
+- Routes are manually configured by administrators.
+- No automatic updates when topology changes.
+- Suitable for small, stable networks.
+
+Advantages:
+- Low overhead  
+- Predictable behavior  
+
+Disadvantages:
+- Not scalable
+- Routes change very slowly (e.g., manual configuration).
+- No automatic failure recovery 
+
+**Dynamic Routing**
+- Routes are automatically updated in response to network changes such as:
+  - Link failures  
+  - Congestion  
+  - Topology updates  
+- Uses routing protocols to exchange information.
+- Periodic updates or in response to link cost changes
+
+Advantages:
+- Adaptive and fault-tolerant
+- Routers change more quickly
+- Suitable for large and complex networks  
+
+Examples:
+- Distance Vector: RIP  
+- Link State: OSPF, IS-IS 
 
 ### Summary Table
 
@@ -1713,3 +1776,4 @@ Modeling the Network: For algorithmic purposes, a network is abstracted as a gra
 | Decentralized | Neighbors only  | Bellman-Ford    | Periodic updates    | RIP            |
 | Static        | Fixed routes    | Manual          | None                | Static routing |
 | Dynamic       | Adaptive        | Algorithm-based | Automatic           | OSPF, RIP      |
+
