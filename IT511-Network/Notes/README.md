@@ -1590,7 +1590,7 @@ Three Main States:
 
 - **Dotted-Decimal Notation**: Human-readable format (e.g., 223.1.1.1), where each number represents 8 bits (an octet) of the 32-bit address.
 
-<img src="ip_addressing_introduction.png" width="500">
+<img src="ip_addressing_introduction.png" width="400">
 
 ## Subnets
 
@@ -1614,4 +1614,23 @@ Three Main States:
 
 #### How to Get an IP Address? (DHCP)
 
+**Two Questions:**
+1. Host gets its IP address: Via manual configuration or, more commonly, DHCP.
+2. Network gets its subnet prefix: Allocated by an ISP from a larger block.
+
+**DHCP (Dynamic Host Configuration Protocol):**
+- **Purpose**: Allow a host to dynamically obtain an IP address, subnet mask, default gateway, and DNS server info when joining a network. Enables "plug-and-play" networking.
+- **Process:**
+  1. DHCP Discover: Host broadcasts "Is there a DHCP server?"
+  2. DHCP Offer: Server(s) respond with a proposed IP address.
+  3. DHCP Request: Host broadcasts a request to use a specific offered address.
+  4. DHCP ACK: Server confirms and commits the lease.
+
+- **Lease**: Addresses are loaned for a period and can be reclaimed, enabling reuse.
+- **Server Location**: Often resides in the local router.
+
 #### How a Network Gets Its Address Block
+
+- **Process**: An organization (e.g., a company, university) obtains a block of IP addresses from its upstream Internet Service Provider (ISP).
+- **Example**: An ISP has a large block (`200.23.16.0/20`). It can subdivide this block into smaller chunks (e.g., `/23` blocks) and allocate them to different customer organizations.
+- **Hierarchical Allocation**: This creates a hierarchy: **IANA -> Regional Internet Registries (RIRs) -> ISPs -> Organizations -> Hosts**. This hierarchy is crucial for scalable routing.
