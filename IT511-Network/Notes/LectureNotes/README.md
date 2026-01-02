@@ -1715,7 +1715,7 @@ Key Characteristics:
 - High memory and CPU usage  
 - Accurate and consistent routing tables  
 
-Examples:**
+Examples:
 - OSPF (Open Shortest Path First)  
 - IS-IS  
 
@@ -1731,7 +1731,7 @@ Key Characteristics:
 - Lower computation and memory requirements  
 - Susceptible to routing loops and the *count-to-infinity* problem  
 
-Example:* 
+Example:
 - RIP (Routing Information Protocol)
 
 ###### 2. Classification Based on Change Rate:
