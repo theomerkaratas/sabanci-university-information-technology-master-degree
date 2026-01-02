@@ -196,6 +196,7 @@ Consider the topology shown in Figure. Denote the three subnets with hosts (star
 <img src="question_9.png" width="500">
 
 **a.** Assign network addresses to each of these six subnets, with the following constraints: All addresses must be allocated from 214.97.254/23; Subnet A should have enough addresses to support 250 interfaces; Subnet B should have enough addresses to support 120 interfaces; and Subnet C should have enough addresses to support 120 interfaces. Of course, subnets D, E and F should each be able to support two interfaces. For each subnet, the assignment should take the form a.b.c.d/x or a.b.c.d/x – e.f.g.h/y.
+
 **b.** Using your answer to part (a), provide the forwarding tables (using longest prefix matching) for each of the three routers.
 
 # Answer 9
