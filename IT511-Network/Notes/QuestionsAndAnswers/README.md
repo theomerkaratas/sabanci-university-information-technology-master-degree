@@ -161,6 +161,7 @@ otherwise                                                  3
 ```
 
 **a.** Provide a forwarding table that has five entries, uses longest prefix matching, and forwards packets to the correct link interfaces.
+
 **b.** Describe how your forwarding table determines the appropriate link interface for datagrams with destination addresses:
 
 ```
