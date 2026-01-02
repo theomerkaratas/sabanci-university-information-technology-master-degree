@@ -121,7 +121,7 @@ Compare GBN, SR, and TCP (no delayed ACK). Assume that the timeout values for al
 
 # Answer 7
 
-a. **GoBackN:**
+**a.** **GoBackN:**
 
 A sends 9 segments in total. They are initially sent segments 1, 2, 3, 4, 5 and later re-sent segments 2, 3, 4, and 5.  
 B sends 8 ACKs. They are 4 ACKs with sequence number 1, and 4 ACKs with sequence numbers 2, 3, 4, and 5.
@@ -137,8 +137,7 @@ A sends 6 segments in total. They are initially sent segments 1, 2, 3, 4, 5 and 
 B sends 5 ACKs. They are 4 ACKs with sequence number 2. There is one ACK with sequence number 6.  
 Note that TCP always sends an ACK with the expected sequence number.
 
-**b.**  
-TCP. This is because TCP uses fast retransmit without waiting until timeout.
+**b.** TCP. This is because TCP uses fast retransmit without waiting until timeout.
 
 # Question 8
 Consider a datagram network using 32-bit host addresses. Suppose a router has four links, numbered 0 through 3, and packets are to be forwarded to the link interfaces as follows:
@@ -174,10 +173,20 @@ otherwise                                                  3
 
 # Answer 8
 
+**a.**
 
+**Prefix Match**              **Link Interface**  
+11100000 00000000                     0  
+11100000 00000001                     1  
+1110000                               2  
+11100010                              3  
+otherwise                             3  
 
+**b.**
 
-
+Prefix match for first address is **5th entry**: link interface **3**  
+Prefix match for second address is **1st entry**: link interface **0**  
+Prefix match for third address is **4th entry**: link interface **2**
 
 # Question 9
 Consider the topology shown in Figure. Denote the three subnets with hosts (starting clockwise at 12:00) as Networks A, B, and C. Denote the subnets without hosts as Networks D, E, and F.
@@ -189,10 +198,44 @@ Consider the topology shown in Figure. Denote the three subnets with hosts (star
 
 # Answer 9
 
+From 214.97.254/23, possible assignments are
+
+**a.**  
+Subnet A: 214.97.255/24 (256 addresses)  
+Subnet B: 214.97.254.0/25 – 214.97.254.0/29 (128 − 8 = 120 addresses)  
+Subnet C: 214.97.254.128/25 (128 addresses)  
+
+Subnet D: 214.97.254.0/31 (2 addresses)  
+Subnet E: 214.97.254.2/31 (2 addresses)  
+Subnet F: 214.97.254.4/30 (4 addresses)  
+
+**b.**
+To simplify the solution, assume that no datagrams have router interfaces as ultimate destinations. Also, label D, E, F for the upper-right, bottom, and upper-left interior subnets, respectively.
 
 
+### Router 1
 
+**Longest Prefix Match**         **Outgoing Interface**
 
+11010110 01100001 11111111               Subnet A  
+11010110 01100001 11111110 00000000      Subnet D  
+11010110 01100001 11111110 00000001      Subnet F  
+
+### Router 2
+
+**Longest Prefix Match**         **Outgoing Interface**
+
+11010110 01100001 11111111 000000        Subnet D  
+11010110 01100001 11111110 0             Subnet B  
+11010110 01100001 11111110 0000001       Subnet E  
+
+### Router 3
+
+**Longest Prefix Match**         **Outgoing Interface**
+
+11010110 01100001 11111111 000001        Subnet F  
+11010110 01100001 11111110 000001        Subnet E  
+11010110 01100001 11111110 1             Subnet C  
 
 # Question 10
 Consider the following network. With the indicated link costs, use Dijkstra’s shortest-path algorithm to compute the shortest path from x to all network nodes. Show how the algorithm works by computing a table.
@@ -200,3 +243,13 @@ Consider the following network. With the indicated link costs, use Dijkstra’s 
 <img src="question_10.png" width="500">
 
 # Answer 10
+
+| Step | N'       | D(t), p(t) | D(u), p(u) | D(v), p(v) | D(w), p(w) | D(y), p(y) | D(z), p(z) |
+|------|----------|------------|------------|------------|------------|------------|------------|
+| 0    | x        | ∞          | ∞          | 3, x       | 6, x       | 6, x       | 8, x       |
+| 1    | xv       | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
+| 2    | xvu      | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
+| 3    | xvuw     | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
+| 4    | xvuwy    | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
+| 5    | xvuwyt   | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
+| 6    | xvuwytz  | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
