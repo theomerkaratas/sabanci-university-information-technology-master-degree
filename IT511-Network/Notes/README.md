@@ -1677,3 +1677,30 @@ Three Main States:
 The graph below illustrates the fundamental architectural difference: many independent, interacting brains (per-router) vs. one central brain controlling many simple devices (SDN).
 
 <img src="differneces_between_per_router_vs_sdn_control_plane.png" width="400">
+
+## Routing Fundamentals & Algorithm Classification
+
+- Objective: The fundamental goal is to find a "good" path through a network of routers from a source host to a destination host.
+- Path: A sequence of routers the packet will traverse.
+- Good: Can be defined by different metrics: shortest (least cost), fastest (lowest delay), or least congested. This is a central and challenging problem in networking.
+
+#### Graph abstraction: link costs
+
+Modeling the Network: For algorithmic purposes, a network is abstracted as a graph **G = (N, E)**
+
+**N**: Set of nodes (routers) => { u, v, w, x, y, z }
+**E**: Set of edges (communication links) => { (u,v), (u,x), (v,x), (v,w), (x,w), (x,y), (w,y), (w,z), (y,z) }
+
+**Link Cost ($c_{a,b}$)**: Each link has an associated cost. This can be static (e.g., always 1, or inversely related to bandwidth) or dynamic (reflecting current congestion). A cost of ∞ means no direct connection.
+
+<img src="link_cost_graph.png" width="300">
+
+#### Routing algorithm classification
+
+- **Classification Based on Information Scope:**
+  - **Global (Link-State Algorith)**: Every router knows the complete network topology and all link costs.
+  - **Decentralized (Distance-Vector Algorith)**: A router knows only the cost to its direct neighbors and iteratively exchanges information with them to learn about the wider network. Example: Bellman-Ford algorithm.
+
+- **Classification Based on Change Rate:**
+  - **Static**: Routes change very slowly (e.g., manual configuration).
+  - **Dynamic**: Routes change automatically in response to network changes (link failures, congestion).
