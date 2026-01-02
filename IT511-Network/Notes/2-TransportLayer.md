@@ -393,9 +393,11 @@ sending process                        receiving process      ->       sending p
 - **Sender States**: Doubled. The sender now has separate states for waiting for ACK/NAK for packet 0 and for packet 1. This allows it to know which packet is being acknowledged.
 - **Receiver Logic**: Checks the sequence number. If it receives the expected packet (0 or 1), it delivers data and sends ACK. If it receives a duplicate (e.g., 0 again), it simply re-ACKs it, telling the sender "I already have 0, send the next one (1)."
 
+**rdt2.1 Sender Handling Garbled**:
 <img src="rdt2.1_sender_handling_garbled.png" width="600">
 
-<img src="rdt2.1_receiver_handling_garbled.png" width="600">
+**rdt2.1 Receiver Handling Garbled**:
+<img src="rdt2.1_receiver_handling_garbled.png" width="700">
 
 - **Sender**: 
   - Needs only 2 sequence numbers (0,1) for a stop-and-wait protocol because only one outstanding packet exists at a time.
@@ -408,3 +410,73 @@ sending process                        receiving process      ->       sending p
 **Note**: receiver can not know if its last ACK/NAK received OK at sender
 
 #### rdt2.2 – A NAK-Free Protocol
+
+- **Optimization**: Achieves the same reliability as rdt2.1 but eliminates the NAK message.
+- **Mechanism**: The receiver always sends an ACK. However, the ACK explicitly includes the sequence number of the packet it is acknowledging (e.g., `ACK0`, `ACK1`).
+- **How it Handles Errors**: If the sender receives a duplicate ACK (e.g., gets `ACK0` again when expecting `ACK1`), it interprets this the same way as a NAK—it means the receiver did not get the next packet correctly, so the sender retransmits.
+- **Significance**: This ACK-with-sequence-number approach is used by TCP (it uses cumulative ACKs, a related concept).
+
+**rdt2.2 Sender and Receiver Fragments**:
+<img src="rdt2.2_sender_receiver_fragments.png" width="700">
+
+#### rdt3.0: Channels with Errors and Loss
+
+- **New Challenge**: The underlying channel is now modeled as unreliable in the worst way: it can lose packets (both data packets and ACK packets). Bit errors are also possible.
+- **Available Tools**: We have checksums (error detection), sequence numbers (duplicate detection), ACKs (feedback), and retransmissions (recovery from errors).
+- **The Gap**: These tools are not sufficient to handle loss. If a packet disappears, the sender receives no feedback at all (neither ACK nor NAK/corrupted ACK). It would wait forever.
+
+#### rdt3.0: Approach – The Timeout & Retransmit Mechanism
+
+- **Core Idea**: The sender sets a countdown timer after sending a packet. It waits a "reasonable" amount of time (the timeout interval) for an ACK.
+- **Retransmission Trigger**: If the timer expires before an ACK is received, the sender assumes the packet (or its ACK) was lost and retransmits the packet.
+- **Handling Delays, Not Loss**: If the packet or ACK was merely delayed (not lost), the retransmission creates a duplicate. This is okay because the sequence numbers (from rdt2.1/2.2) allow the receiver to detect and handle duplicates correctly.
+- **Protocol Style**: Still Stop-and-Wait (one packet at a time), but now with a timer.
+
+#### rdt3.0 Sender FSM
+
+- Key Timer Actions:
+  - `start_timer`: Started immediately after sending a packet.
+  - `stop_timer`: Stopped when the correct ACK is received.
+  - `timeout event`: A new event that triggers a transition. When it occurs, the sender retransmits the packet and restarts the timer.
+- State Logic: Similar to rdt2.2, but now the sender must also handle the case where nothing happens (the timeout).
+
+<img src="rdt3.0_sender.png" width="700">
+
+#### rdt3.0 in Action
+
+<img src="rdt3.0_in_action_a_and_b.png" width="600">
+
+**(a)** No Loss: Normal operation. Packet sent, ACK received, timer stopped, next packet sent.
+**(b)** Packet Loss: The data packet is lost. Sender's timer expires, it retransmits the packet, and recovery proceeds.
+
+<img src="rdt3.0_in_action_c_and_d.png" width="600">
+
+**(c)** ACK Loss: The ACK is lost. Sender's timer expires, it retransmits (causing a duplicate at the receiver). Receiver detects the duplicate via sequence number, re-sends the ACK, and the sender moves on.
+**(d)** Premature Timeout / Delayed ACK: The ACK is delayed, causing a timeout. The sender retransmits, creating a duplicate. The receiver gets the duplicate, discards it, and re-ACKs it. The sender eventually gets an ACK (could be from the first or second transmission) and proceeds. This shows the protocol is robust to timing variations.
+
+#### Performance of rdt3.0 (Stop-and-Wait) – The Problem
+
+- **Performance Metric**: Sender Utilization (U_sender). The fraction of time the sender is actually busy sending data vs. sitting idle.
+- **Example Calculation**: 1 Gbps link, 15 ms propagation delay (RTT ~30 ms), 8000-bit packet.
+- **Transmission Time (L/R)**: Time to push all bits of the packet onto the link -> `8000/10^9 = 8 microseconds`
+- **Total Time per Packet**: The sender sends for 8 µs, then sits idle for the rest of the RTT waiting for the ACK. Total cycle time -> `RTT + L/R ≈ 30.008 ms`
+
+<img src="rdt3.0_stop_and_wait_1.png" width="600">
+
+- **Utilization**: U_sender -> `(L/R) / (RTT + L/R) = 0.008 / 30.008 ≈ 0.00027`
+
+<img src="rdt3.0_stop_and_wait_2.png" width="600">
+
+- **Conclusion**: The sender is busy only 0.027% of the time! The protocol severely underutilizes the high-capacity link. It limits performance far below what the physical infrastructure can suppor
+
+#### Pipelined Protocols
+
+- **The Problem**: Stop-and-wait forces the sender to be idle for an entire RTT after each packet.
+- **The Solution**: Pipelining. Allow the sender to have multiple, "in-flight" packets (sent but not yet acknowledged) simultaneously.
+
+#### Benefits of Pipelining:
+
+- Dramatically increases sender utilization.
+- **Example**: With a window of 3 packets in flight, utilization increases by a factor of 3 (from ~0.00027 to ~0.0008 in the example—still low due to huge RTT/bandwidth product, but the principle holds).
+
+<img src="increase_utilization.png" width="600">
