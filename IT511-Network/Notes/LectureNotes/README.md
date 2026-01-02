@@ -100,8 +100,8 @@ TLS is implemented at the application layer. Applications use TLS libraries (lik
 #### Hypertext Transfer Protocol (HTTP)
 It is the application-layer protocol of the World Wide Web. It defines how messages are formatted and transmitted between web clients and servers.
 
-**Client/Server Model:***
-- *Client:** A web browser (e.g., Firefox, Safari) that requests objects via HTTP messages.
+**Client/Server Model:**
+- **Client:** A web browser (e.g., Firefox, Safari) that requests objects via HTTP messages.
 - **Server:** A web server (e.g., Apache, Nginx) that sends objects in HTTP response messages.
 
 **Basic Interaction:** The browser (client) sends an **HTTP request** for an object. The web server sends back an **HTTP response** containing the requested object.
