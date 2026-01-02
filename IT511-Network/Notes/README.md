@@ -1220,3 +1220,38 @@ sending process                        receiving process      ->       sending p
 - ***Fast Retransmit Action***: Upon receiving three duplicate ACKs, the sender immediately retransmits the oldest unACKed segment (the one presumed lost) without waiting for its timer to expire.
 - **Benefit**: Much faster recovery from single-segment losses within a window, improving performance.
 
+## TCP Flow Control
+
+#### The Problem
+
+- Scenario: The receiving application may read data from its TCP socket buffers slower than the network/TCP stack is delivering data to those buffers.
+- Problem: Without regulation, the sender could overflow the receiver's buffers, causing data loss.
+- Solution: TCP Flow Control. A receiver-side mechanism where the receiver tells the sender how much free buffer space it has, thereby controlling the sender's transmission rate to prevent overflow.
+
+#### The Mechanism
+
+- **Key Field**: Receive Window (rwnd). In every ACK segment, the receiver advertises its current free buffer space in the rwnd header field.
+- **Receiver's Buffer:**
+  - `RevBuffer`: Total size of the buffer (set by OS/application).
+  - `rwnd = RevBuffer - [Amount of Buffered, Unread Data]`
+- **Sender's Rule**: The sender is only allowed to have a number of unacknowledged ("in-flight") bytes less than or equal to the latest rwnd value received from the receiver.
+- `LastByteSent - LastByteAcked <= rwnd`
+- **Result**: The sender self-throttles based on the receiver's consumption rate, guaranteeing the receiver's buffer will not overflow.
+
+#### TCP Connection Management – The Need for Handshaking
+
+- Purpose: Before any data flows, both client and server must:
+  1. Agree to connect: Know that the other party is willing and able to communicate.
+  2. Synchronize parameters: Exchange initial sequence numbers (ISNs) and learn about each other's buffer sizes (e.g., `rwnd`).
+- State & Variables: The handshake transitions both sides to the ESTABlished state and initializes key connection variables.
+
+#### The Problem with a 2-Way Handshake
+
+- **Proposed 2-Way Handshake:**
+  1. Client sends: req_conn(x) (with its initial seq # x).
+  2. Server replies: acc_conn(x) (acknowledging x).
+- **Why It Fails:**
+  - An old, delayed req_conn(x) message from a previous connection could arrive at the server.
+  - The server, not knowing it's old, replies with acc_conn(x) and enters ESTAB state.
+  - The client might have already terminated that old connection. The server is now left in a "half-open connection" state, wasting resources, believing a non-existent client is connected.
+- **Root Cause**: The 2-way handshake cannot distinguish between a new connection request and a delayed duplicate request from an old connection. The server needs a way to confirm the client is currently alive and responding.
