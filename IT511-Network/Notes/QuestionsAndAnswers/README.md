@@ -108,7 +108,7 @@ There are $2^{32}$ = 4.294.967.296 possible sequence numbers.
 
 **a.** The sequence number does not increment by one with each segment. Rather, it increments by the number of bytes of data sent. So the size of the MSS is irrelevant — the maximum size file that can be sent from A to B is simply the number of bytes representable by $2^{32}$ ≈ 4.19 Gbytes
 
-**b.** The number of segments is [$2^{32}$ / 536] = 8,012,999. 66 bytes of header get added to each segment, giving a total of **528,857,934 bytes** of header.  
+**b.** The number of segments is $2^{32}$ / 536 = 8,012,999. 66 bytes of header get added to each segment, giving a total of **528,857,934 bytes** of header.  
 The total number of bytes transmitted is $2^{32}$ + 528.857.934 = 4.824 x $10^{9}$
 
 Thus, it would take **249 seconds** to transmit the file over a **155-Mbps** link.
@@ -121,8 +121,24 @@ Compare GBN, SR, and TCP (no delayed ACK). Assume that the timeout values for al
 
 # Answer 7
 
+a. **GoBackN:**
 
+A sends 9 segments in total. They are initially sent segments 1, 2, 3, 4, 5 and later re-sent segments 2, 3, 4, and 5.  
+B sends 8 ACKs. They are 4 ACKs with sequence number 1, and 4 ACKs with sequence numbers 2, 3, 4, and 5.
 
+**Selective Repeat:**
+
+A sends 6 segments in total. They are initially sent segments 1, 2, 3, 4, 5 and later re-sent segment 2.  
+B sends 5 ACKs. They are 4 ACKs with sequence number 1, 3, 4, 5. And there is one ACK with sequence number 2.
+
+**TCP:**
+
+A sends 6 segments in total. They are initially sent segments 1, 2, 3, 4, 5 and later re-sent segment 2.  
+B sends 5 ACKs. They are 4 ACKs with sequence number 2. There is one ACK with sequence number 6.  
+Note that TCP always sends an ACK with the expected sequence number.
+
+**b.**  
+TCP. This is because TCP uses fast retransmit without waiting until timeout.
 
 # Question 8
 Consider a datagram network using 32-bit host addresses. Suppose a router has four links, numbered 0 through 3, and packets are to be forwarded to the link interfaces as follows:
