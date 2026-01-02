@@ -77,7 +77,6 @@ Applications have different requirements from the underlying transport layer ser
 #### Internet Applications and Transport Protocols
 - **TCP for Reliability:** FTP (file transfer), SMTP (email), HTTP (web) use TCP for its reliable data transfer.
 - **UDP or TCP for Multimedia:** Internet telephony and streaming often use RTP over UDP for low latency, though some streaming uses HTTP/TCP. Interactive games often use UDP for speed.
-- **Key Point:** The choice of transport protocol (TCP vs. UDP) is a fundamental design decision based on the application's requirements from Slide 4/5.
 
 #### Securing TCP
 Problem is standard ("Vanilla") TCP and UDP sockets send data in cleartext, including sensitive information like passwords, which is a major security risk. 
@@ -726,7 +725,6 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
 > Design Philosophy: If an application needs reliability or congestion control, it must implement these features itself within the application layer, as HTTP/3 does.
 
 #### UDP RFC 768
-- **Official Standard:** This slide shows the original 1980 RFC that defines UDP.
 - **Key Points from the RFC:**
   - UDP provides a datagram mode of communication.
   - It assumes IP is the underlying protocol.
@@ -1067,7 +1065,7 @@ sending process                        receiving process      ->       sending p
 
 - Scenario: Window size N=4. Packet 2 is lost.
 - **Sequence of Events:**
-  1. Sender transmits packets 0,1,2,3,4,5 (fills and slides window).
+  1. Sender transmits packets 0,1,2,3,4,5.
   2. Receiver gets packets 0,1 (sends ACK0, ACK1). Packet 2 is lost.
   3. Receiver gets packets 3,4,5 (out-of-order). For each, it discards them and re-sends ACK1.
   4. Sender eventually gets multiple duplicate ACK1s (but GBN doesn't act on them specifically). The timer for packet 2 expires.
