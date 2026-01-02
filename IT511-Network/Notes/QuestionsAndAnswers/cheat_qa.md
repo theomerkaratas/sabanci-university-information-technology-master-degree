@@ -162,3 +162,11 @@ Consider the following network. With the indicated link costs, use Dijkstra’s 
 
 ##### Answer 10
 <img src="answer_10.png" width="500">
+
+
+
+
+
+
+
+==
