@@ -185,3 +185,226 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
 <img src="user_datagram_protocol.png" width="600">
 
 #### UDP Transport Layer Actions
+
+```
+        SNMP CLIENT                                 SNMP SERVER
++------------------------+                   +------------------------+
+|      application       |                   |      application       |
+|        (SNMP)          |                   |        (SNMP)          |
++------------------------+                   +------------------------+
+|      transport         |                   |      transport         |
+|        (UDP)           |                   |        (UDP)           |
++------------------------+                   +------------------------+
+|       network          |                   |       network          |
+|         (IP)           |                   |         (IP)           |
++------------------------+                   +------------------------+
+|        link            |                   |        link            |
++------------------------+                   +------------------------+
+|      physical          |                   |      physical          |
++------------------------+                   +------------------------+
+           |                                        |
+           |                                        |
+           +-------------  IP Network  -------------+
+```
+
+**UDP Sender Actions**:
+- Receives an application-layer message (SNMP msg).
+- Determines UDP header field values (source/dest ports, length, checksum).
+- Creates a UDP segment by adding the header.
+- Passes the segment to the IP layer.
+
+**UDP Receiver Actions**:
+- Receives the segment from the IP layer.
+- Checks the UDP checksum for errors.
+- Extracts the application-layer message.
+- Demultiplexes the message to the correct application socket based on the destination port number.
+
+#### UDP Segment Header
+
+```
+<-------------------32 bits-------------------->
++-----------------------+----------------------+
+|     Source Port       |    Destination Port  |
++-----------------------+----------------------+
+|        length         |       checksum       |
++----------------------------------------------+
+|                                              |
+|          Application Data (Payload)          |
+|                                              |
++----------------------------------------------+
+             TCP / UDP Segment Format
+```
+
+Header Fields (8 bytes total):
+- Source Port Number (16 bits)
+- Destination Port Number (16 bits)
+- Length (16 bits): Total length of the UDP segment (header + data) in bytes.
+- Checksum (16 bits): Used for error detection.
+Payload: The data from the application layer follows the header.
+
+#### UDP Checksum & Internet Checksum
+
+**Goal**: To detect errors (flipped bits) in the transmitted segment. It is not for error correction.
+
+**Sender's Job**:
+- Treats the entire UDP segment (and parts of the IP pseudo-header) as a sequence of 16-bit integers.
+- Adds them all together using one's complement addition.
+- Takes the one's complement of this sum, which becomes the checksum value placed in the header.
+
+**Receiver's Job**:
+- Performs the same calculation on the received segment (including the checksum field).
+- If the result is all 1 bits (one's complement of 0), no error is detected. Otherwise, an error is detected, and the segment is silently discarded.
+
+**Weakness**: The Internet checksum provides weak protection. It can fail to detect certain types of errors (e.g., reordered 16-bit words or compensating bit flips across words), as shown in the example where the sum remains unchanged despite bit flips.
+
+#### Summary: UDP
+
+> **Recap**: UDP is a simple, unreliable, connectionless datagram protocol.
+> **Advantages Reiterated**:
+> - Low overhead and latency (no connection setup).
+> - Robustness in impaired network conditions (no forced slowdown from congestion control).
+> - Provides a basic error detection mechanism (checksum).
+> **Final Point**: UDP serves as a flexible substrate. Applications that need more sophisticated services (like HTTP/3) can build them on top of UDP, giving them > more control than TCP allows.
+
+# Reliable Data Transfer (RDT)
+
+```
+         RELIABLE SERVICE (ABSTRACTION)                                      RELIABLE SERVICE (IMPLEMENTATION)
+                                                                                 
+sending process                        receiving process      ->       sending process                        receiving process       
++---------------+                      +---------------+      ->       +---------------+                      +---------------+      
+|   application |                      |   application |      ->       |   application |                      |   application |        
+|     data      |                      |     data      |      ->       |     data      |                      |     data      |        
++-------+-------+                      +-------+-------+      ->       +-------+-------+                      +-------+-------+        
+        |                                      ^              ->               |                                      ^       
+        |                                      |              ->               |                                      |      
+        |        reliable channel              |              ->       +-----------------------+        +-----------------------+      
+        +--------------------------------------+              ->       |  sender-side reliable |        | receiver-side reliable|        
+                                                              ->       |   data transfer       |        |   data transfer       |              
+                                                              ->       +-----------------------+        +-----------------------+              
+                                                              ->               |                                      ^           
+                                                                               |                                      |      
+                                                                               +------------ unreliable channel ------+      
+                                                                                             (network)                                  
+```
+
+#### The Principles
+
+- **Goal**: To provide the abstraction of a perfectly reliable channel to the upper layers (the application processes), even though the underlying communication medium (network) is unreliable.
+- **Abstraction**: From the application's viewpoint, data sent by the sending process simply arrives correctly at the receiving process.
+
+#### The Implementation Reality
+
+- Reality Check: The reliable channel is an abstraction. The actual implementation uses an unreliable channel (e.g., the network) that can lose, corrupt, or reorder packets.
+- Protocol's Job: To implement the reliable service by adding logic on both the sender and receiver sides. This logic forms the Reliable Data Transfer (RDT) protocol.
+
+#### Complexity Depends on Channel
+
+- The complexity of the RDT protocol is directly determined by the characteristics of the unreliable channel it must overcome.
+- The protocol design becomes more complex as the channel model becomes more hostile.
+
+#### The State Problem
+
+- **Fundamental Challenge**: The sender and receiver are separated entities. They cannot directly know each other's internal "state" (e.g., whether a packet was received).
+- **Solution via Messaging**: The only way for them to coordinate and infer each other's state is by exchanging control messages (like acknowledgements - ACKs) over the unreliable channel itself.
+
+#### RDT Protocol Interfaces (Service Primitives)
+
+```
+            SENDING PROCESS                              RECEIVING PROCESS
+      +-----------------------+                     +-----------------------+
+      |        data           |                     |        data           |
+      |   (application)       |                     |   (application)       |
+      +-----------+-----------+                     +-----------+-----------+
+                  |                                             ^
+                  | rdt_send()                                  | deliver_data()
+                  |                                             |
+  --------------------------------              ----------------------------------
+  |  sender-side implementation  |              |  receiver-side implementation  |
+  |  of rdt                      |              |  of rdt                        |
+  |  packet = make_pkt(data)     |              |  rdt_rcv(packet)               |
+  |  udt_send(packet)            |              |  extract(data)                 |
+  --------------------------------              ----------------------------------
+                  |                                             ^
+                  |                                             |
+      +-----------+-----------+                     +-----------+-----------+
+      |        data           |                     |        data           |
+      |   (application)       |                     |   (application)       |
+      +-----------------------+                     +-----------------------+
+                  |                                             ^
+                  |                                             |
+                  +------------ unreliable channel -------------+
+
+```
+
+**Sender Side**:
+- `rdt_send()`: Called by the upper-layer application to pass data down for reliable delivery.
+- `udt_send()`: Called by the RDT protocol to send a packet over the underlying unreliable channel.
+
+**Receiver Side**:
+- `rdt_rcv()`: Called when a packet arrives from the channel.
+- `deliver_data()`: Called by the RDT protocol to hand delivered data up to the application layer.
+
+#### Reliable Data Transfer: Getting Started Methodology 
+
+- **Approach**: Incremental, layered development of the protocol. We start with a simple perfect channel and add complications one by one.
+- **Scope**: Focus on unidirectional data transfer (one sender, one receiver), but note that control information (ACKs) must flow in the reverse direction.
+- **Tool**: Finite State Machines (FSMs): Used to specify the behavior of the sender and receiver. An FSM defines states, events that cause transitions, and actions taken during transitions.
+
+#### rdt1.0 – Reliable Transfer Over a Reliable Channel
+
+- **Assumption**: The underlying channel is perfectly reliable (no bit errors, no loss). This is a hypothetical starting point.
+- **Protocol Logic**: Trivial.
+  - **Sender FSM**: Wait for data from above, packetize it, send it.
+  - **Receiver FSM**: Wait for packet from below, extract data, deliver it up.
+- No feedback needed because the channel is perfect.
+
+<img src="rdt1.0_sender_and_receiver.png" width="500">
+
+#### rdt2.0 – Channel With Bit Errors
+
+- **New Challenge**: The channel can flip bits (corrupt packets). We use a checksum to detect errors.
+- **Recovery Mechanism**:
+  - **Feedback**: Receiver sends explicit control messages back to sender:
+    - **ACK**: Acknowledgement (packet received OK).
+      - receiver explicitly tells sender that pkt received OK
+    - **NAK**: Negative Acknowledgement (packet had errors).
+      - receiver explicitly tells sender that pkt had errors
+  - **Retransmission**: Sender retransmits the packet upon receiving a NAK.
+- **Protocol Style**: Stop-and-Wait. The sender sends one packet and then stops to wait for the receiver's response (ACK or NAK) before sending the next.
+
+#### rdt2.0 – FSM Specification and Corrupted Packet Scenario
+
+<img src="rdt2.0_sender.png" width="500">
+
+- **Sender Logic**: Has two main states: "Wait for call from above" (ready to send) and "Wait for ACK or NAK" (waiting for feedback). On NAK or corrupted ACK, it retransmits.
+- **Receiver Logic**: Sends ACK for good packets, NAK for corrupted packets.
+
+#### rdt2.0 Has a Fatal Flaw!
+
+- **The Problem**: What if the ACK or NAK message itself becomes corrupted? The sender cannot interpret the corrupted feedback and doesn't know if the receiver got the packet.
+- **Naïve Solution (Flawed)**: If the sender simply retransmits on corrupted feedback, it may cause duplicate packets if the ACK was actually OK but just corrupted in transit.
+- **Real Solution (rdt2.1)**: The sender adds a sequence number (just 1 bit: 0 or 1) to each data packet. The receiver uses this number to detect and discard duplicate packets.
+
+#### rdt2.1 – Handling Garbled ACK/NAKs
+
+**Key Changes:**
+- **Sequence Numbers**: Packets are labeled 0 or 1.
+- **Sender States**: Doubled. The sender now has separate states for waiting for ACK/NAK for packet 0 and for packet 1. This allows it to know which packet is being acknowledged.
+- **Receiver Logic**: Checks the sequence number. If it receives the expected packet (0 or 1), it delivers data and sends ACK. If it receives a duplicate (e.g., 0 again), it simply re-ACKs it, telling the sender "I already have 0, send the next one (1)."
+
+<img src="rdt2.1_sender_handling_garbled.png" width="600">
+
+<img src="rdt2.1_receiver_handling_garbled.png" width="600">
+
+- **Sender**: 
+  - Needs only 2 sequence numbers (0,1) for a stop-and-wait protocol because only one outstanding packet exists at a time.
+  - Must check if received ACK/NAK corrupted.
+- **States**:
+  - The number of states doubled to track which packet (0 or 1) is expected or in flight.
+- **Receiver**: 
+  - Must also track the expected sequence number.
+
+**Note**: receiver can not know if its last ACK/NAK received OK at sender
+
+#### rdt2.2 – A NAK-Free Protocol
