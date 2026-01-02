@@ -64,28 +64,36 @@ In protocol rdt3.0, the ACK packets flowing from the receiver to the sender do n
 
 # Answer 3
 
+<img src="answer_3.png" width="500">
 
+To best answer this question, consider why we needed sequence numbers in the first place. We saw that the sender needs sequence numbers so that the receiver can tell if a data packet is a duplicate of an already received data packet. In the case of ACKs, the sender does not need this info (i.e., a sequence number on an ACK) to tell detect a duplicate ACK. A duplicate ACK is obvious to the rdt3.0 receiver, since when it has received the original ACK it transitioned to the next state. The duplicate ACK is not the ACK that the sender needs and hence is ignored by the rdt3.0 sender
 
-
+> Bu soruyu en iyi şekilde yanıtlamak için, neden başta sıra numaralarına (sequence numbers) ihtiyaç duyduğumuzu düşünmeliyiz. Gönderici, bir veri paketinin daha önce alınıp alınmadığını anlayabilmek için sıra numaralarına ihtiyaç duyar.
+>Ancak ACK’ler (onay mesajları) söz konusu olduğunda, göndericinin bir ACK’nin kopya (duplicate) olup olmadığını anlamak için sıra numarasına ihtiyacı yoktur. Bunun nedeni, rdt3.0 alıcısının, orijinal ACK’yi aldıktan sonra zaten bir sonraki duruma (state) geçmiş olmasıdır.
+>Bu yüzden, tekrar gelen (duplicate) bir ACK, rdt3.0 göndericisi için anlamlı değildir; çünkü beklenen ACK değildir ve bu nedenle gönderici tarafından yok sayılır.
 
 # Question 4
 Consider a channel that can lose packets but has a maximum delay that is known. Modify protocol rdt2.1 to include sender timeout and retransmit. Informally argue why your protocol can communicate correctly over this channel.
 
 # Answer 4
 
+If the sending of this message were removed, the sending and receiving sides would deadlock, waiting for an event that would never occur. Here’s a scenario:
+- Sender sends pkt0, enters the “Wait for ACK0” state, and waits for a packet back from the receiver.
+- Receiver is in the “Wait for 0 from below” state, and receives a corrupted packet from the sender. Suppose it does not send anything back, and simply re-enters the “wait for 0 from below” state.
 
+Now, the sender is awaiting an ACK of some sort from the receiver, and the receiver is waiting for a data packet from the sender — a deadlock!
 
-
+> Eğer bu mesajın gönderilmesi kaldırılırsa, gönderici ve alıcı taraflar hiçbir zaman gerçekleşmeyecek bir olayı bekleyerek kilitlenir (deadlock). Aşağıdaki senaryoyu düşünelim:
+> - Gönderici, pkt0 paketini gönderir, “ACK0 bekle” durumuna geçer ve alıcıdan bir yanıt bekler.
+> - Alıcı, “aşağıdan 0 bekle” durumundadır ve göndericiden bozulmuş (hatalı) bir paket alır. Bu durumda hiçbir şey göndermediğini ve tekrar “aşağıdan 0 bekle” durumuna geçtiğini varsayalım.
+> Sonuç olarak, gönderici alıcıdan bir tür ACK beklemektedir; alıcı ise göndericiden yeni bir veri paketi beklemektedir. Böylece sistem deadlock olur.
 
 # Question 5
 Suppose Host A and Host B use a GBN protocol with window size N = 3 and a long-enough range of sequence numbers. Assume Host A sends six application messages to Host B and that all messages are correctly received, except for the first acknowledgment and the fifth data segment. Draw a timing diagram, showing the data segments and the acknowledgments sent along with the corresponding sequence and acknowledge numbers, respectively.
 
 # Answer 5
 
-
-
-
-
+<img src="answer_5.png" width="500">
 
 # Question 6
 Consider transferring an enormous file of L bytes from Host A to Host B.
