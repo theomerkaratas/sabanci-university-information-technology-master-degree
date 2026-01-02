@@ -1152,7 +1152,7 @@ sending process                        receiving process      ->       sending p
 +----+----+----+----+----+----+----+----+-----------------------------------+
 |HLEN|RES |URG |ACK |PSH |RST |SYN |FIN |            receive Window         |
 +---------------------------------------+-----------------------------------+
-|                Checksum               |   Urgent Pointer                  |
+|                Checksum               |           Urgent Pointer          |
 +---------------------------------------------------------------------------+
 |                           Options (variable lenght)                       |
 +---------------------------------------------------------------------------+
@@ -1176,3 +1176,47 @@ sending process                        receiving process      ->       sending p
 - **Options**: Variable length field for advanced features (e.g., MSS, window scaling).
 
 #### TCP Sequence Numbers and ACKs
+
+- **Sequence Numbers**: Count bytes in the data stream, not segments. The sequence number in a segment is the byte-stream number of its first data byte.
+- **Acknowledgements**: A cumulative ACK. ACK number n means "I have received all bytes up to byte n-1 and I am expecting byte n next."
+- **Out-of-Order Segments**: The TCP specification does not mandate a specific action. Implementations can either discard them (like Go-Back-N) or buffer them (like Selective Repeat). Modern TCP implementations buffer out-of-order segments for better performance.
+
+- **Example** : A telnet session. Host A sends byte 'C' (seq=42, 1 byte). Host B acknowledges it (ACK=43, meaning "I expect byte 43 next") and echoes back the 'C' (seq=79, data='C'). Host A then acknowledges the echo (ACK=80).
+
+<img src="simple_telnet_scenario.png" width="500">
+
+#### TCP Round Trip Time (RTT) and Timeout
+
+- **The Challenge**: Setting the retransmission timeout (RTO) value is critical. It must be adaptive because RTT varies.
+- If the timeout value is too short, it may cause premature timeouts and unnecessary retransmissions. 
+- If it is too long, it may result in slow reaction to packet loss.
+- **RTT Estimation**: Uses an Exponential Weighted Moving Average (EWMA):
+  - `EstimatedRTT = (1-α)*EstimatedRTT + α*SampleRTT`
+  - `α` is typically 0.125. This smooths out fluctuations.
+- Accounting for RTT Variation: To set a safe timeout, TCP estimates the deviation of RTT (DevRTT) using another EWMA:
+  - `DevRTT = (1-β)*DevRTT + β*|SampleRTT - EstimatedRTT|`
+  - `β` is typically 0.25.
+  - `DevRTT` is safety margin.
+- **Timeout Calculation:**
+  - `TimeoutInterval = EstimatedRTT + 4 * DevRTT`
+  - This adds a "safety margin" that scales with the observed RTT variability.
+
+#### TCP Sender (Simplified) Events
+
+- Data from Application: Create segment with sequence number. If timer not running for the oldest unACKed byte, start it.
+- Timeout: Retransmit the segment that caused the timeout. Restart the timer.
+- ACK Received: If the ACK acknowledges new data (advances the send window), update the state. If there are still outstanding unACKed bytes, restart the timer.
+
+#### TCP Retransmission Scenarios
+
+- Lost ACK Scenario: A duplicate ACK for the same data eventually arrives (e.g., ACK=100 sent twice). The cumulative nature means the later ACK covers all data up to that point, so no retransmission occurs.
+- Premature Timeout: The sender times out and retransmits a segment (Seq=92) even though the original segment and its ACK were merely delayed. The receiver gets a duplicate, discards it, and re-sends the same ACK (ACK=120). The sender's window advances correctly.
+- Key Point: Cumulative ACKs provide robustness. A single ACK can confirm receipt of many segments and can compensate for lost or delayed earlier ACKs.
+
+#### TCP Fast Retransmit
+
+- **Problem**: Waiting for a timeout to detect loss can be slow, especially with long RTTs.
+- **Heuristic**: The receipt of three duplicate ACKs (ACK=100, ACK=100, ACK=100) is a strong indicator that a segment was lost (because later segments arrived, generating the duplicate ACKs).
+- ***Fast Retransmit Action***: Upon receiving three duplicate ACKs, the sender immediately retransmits the oldest unACKed segment (the one presumed lost) without waiting for its timer to expire.
+- **Benefit**: Much faster recovery from single-segment losses within a window, improving performance.
+
