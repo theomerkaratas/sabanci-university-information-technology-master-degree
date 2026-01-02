@@ -1634,3 +1634,46 @@ Three Main States:
 - **Process**: An organization (e.g., a company, university) obtains a block of IP addresses from its upstream Internet Service Provider (ISP).
 - **Example**: An ISP has a large block (`200.23.16.0/20`). It can subdivide this block into smaller chunks (e.g., `/23` blocks) and allocate them to different customer organizations.
 - **Hierarchical Allocation**: This creates a hierarchy: **IANA -> Regional Internet Registries (RIRs) -> ISPs -> Organizations -> Hosts**. This hierarchy is crucial for scalable routing.
+
+## Network-Layer Functions
+
+#### Review & Control Plane Approaches
+
+**Review of Key Functions:**
+- **Data Plane (Forwarding)**: The local, per-packet action of moving a packet from a router's input port to its output port. This is the "how" of packet movement.
+- **Control Plane (Routing)**: The network-wide process of determining the end-to-end paths that packets should follow. This is the "where" decision that populates forwarding tables.
+
+**Two Architectures for the Control Plane:**
+1. **Per-Router Control (Traditional)**: Each router runs its own distributed routing algorithm (e.g., OSPF, BGP) and computes its own forwarding table independently, by communicating with its neighbors.
+2.  **Logically Centralized Control (Software-Defined Networking - SDN)**: The control logic is separated from the routers and runs in a centralized (or logically centralized) remote controller. This controller computes the routes for the entire network and programs the routers' forwarding tables.
+
+#### Per-Router Control Plane (Traditional Architecture)
+
+**Decentralized & Distributed**: The control plane functionality is replicated in every router.
+
+**How it Works:**
+1. Each router runs a routing algorithm daemon (e.g., an OSPF process).
+2. These daemons exchange routing protocol messages with each other to learn about network topology and paths.
+3. Based on this distributed information, each router's algorithm independently computes its own forwarding table.
+4. The data plane (forwarding hardware) in each router consults this locally computed table for every packet.
+
+**Analogy**: Like a group of drivers each planning their own route using a map and talking to other drivers, rather than having a central dispatcher.
+
+#### Software-Defined Networking (SDN) Control Plane
+
+**Centralized Intelligence, Simplified Switches**: The core innovation of SDN is the separation of the control plane from the data plane.
+
+**How it Works:**
+1. A remote controller (which can be physically distributed for reliability but is logically centralized) holds the "big picture" of the network.
+2. Routers become simple forwarding devices (data plane only) that expose a standardized API (e.g., OpenFlow).
+3. The controller runs the network-wide routing logic and computes all forwarding tables.
+4. The controller installs these table entries into the routers via the southbound API.
+
+**Benefits (Implied):**
+- **Programmability**: Network behavior can be changed easily by updating controller software.
+- **Centralized Management**: Easier to implement consistent policies, traffic engineering, and innovation.
+- **Simpler Switches**: Router hardware can be cheaper and less complex.
+
+The graph below illustrates the fundamental architectural difference: many independent, interacting brains (per-router) vs. one central brain controlling many simple devices (SDN).
+
+<img src="differneces_between_per_router_vs_sdn_control_plane.png" width="400">
