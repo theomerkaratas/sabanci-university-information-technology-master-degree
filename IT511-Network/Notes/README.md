@@ -1704,3 +1704,12 @@ Modeling the Network: For algorithmic purposes, a network is abstracted as a gra
 - **Classification Based on Change Rate:**
   - **Static**: Routes change very slowly (e.g., manual configuration).
   - **Dynamic**: Routes change automatically in response to network changes (link failures, congestion).
+
+### Summary Table
+
+| Category      | Knowledge Scope | Algorithm       | Update Method       | Examples       |
+|---------------|-----------------|-----------------|---------------------|----------------|
+| Global        | Full topology   | Dijkstra        | Link-state flooding | OSPF, IS-IS    |
+| Decentralized | Neighbors only  | Bellman-Ford    | Periodic updates    | RIP            |
+| Static        | Fixed routes    | Manual          | None                | Static routing |
+| Dynamic       | Adaptive        | Algorithm-based | Automatic           | OSPF, RIP      |
