@@ -946,9 +946,11 @@ sending process                        receiving process      ->       sending p
 - **Receiver Logic**: Checks the sequence number. If it receives the expected packet (0 or 1), it delivers data and sends ACK. If it receives a duplicate (e.g., 0 again), it simply re-ACKs it, telling the sender "I already have 0, send the next one (1)."
 
 **rdt2.1 Sender Handling Garbled**:
+
 <img src="rdt2.1_sender_handling_garbled.png" width="600">
 
 **rdt2.1 Receiver Handling Garbled**:
+
 <img src="rdt2.1_receiver_handling_garbled.png" width="700">
 
 - **Sender**: 
@@ -969,6 +971,7 @@ sending process                        receiving process      ->       sending p
 - **Significance**: This ACK-with-sequence-number approach is used by TCP (it uses cumulative ACKs, a related concept).
 
 **rdt2.2 Sender and Receiver Fragments**:
+
 <img src="rdt2.2_sender_receiver_fragments.png" width="700">
 
 #### rdt3.0: Channels with Errors and Loss
@@ -1032,3 +1035,144 @@ sending process                        receiving process      ->       sending p
 - **Example**: With a window of 3 packets in flight, utilization increases by a factor of 3 (from ~0.00027 to ~0.0008 in the example—still low due to huge RTT/bandwidth product, but the principle holds).
 
 <img src="increase_utilization.png" width="600">
+
+# Go-Back-N (GBN)
+
+#### Go-Back-N: Sender
+
+- Core Concept: The sender maintains a sliding window of size N. It can transmit up to N consecutive packets without waiting for acknowledgements.
+- **Sender Window Visualization:**
+  - `send_base`: Sequence number of the oldest unacknowledged packet.
+  - `nextseqnum`: Sequence number of the next packet to be sent.
+  - The window contains packets already sent but not yet ACKed.
+
+<img src="go_back_n_sender.png" width="500">
+
+- **Key Mechanisms:**
+  - **Cumulative ACKs**: An ACK with sequence number `n` acknowledges all packets up to and including n. When the sender receives ACK(n), it slides its window forward to begin at `n+1`.
+  - **Single Timer**: The sender maintains only one timer for the oldest in-flight packet (`send_base`).
+  - **Timeout Action**: If a timeout occurs for packet `n`, the sender retransmits packet `n` and all higher-numbered packets currently in its window (i.e., it goes back to n and re-sends everything from there). This is where the name comes from.
+
+#### Go-Back-N: Receiver
+
+- Receiver is Simple: The receiver only needs to remember one number: rcv_base (the expected sequence number of the next in-order packet).
+- **Receiver Actions:**
+  - **In-order Delivery**: If a packet with sequence number rcv_base arrives correctly, it's delivered to the app, an ACK is sent, and rcv_base is incremented.
+  - **Out-of-Order Packets**: If a packet arrives with a sequence number higher than rcv_base (out-of-order), the receiver discards it (or can choose to buffer, but the standard GBN discards). Crucially, it re-sends an ACK for the last correctly received in-order packet (i.e., for sequence number rcv_base - 1). This generates duplicate ACKs.
+  - **ACK Policy**: Receiver always sends an ACK for the highest in-order sequence number received so far.
+
+<img src="go_back_n_receiver.png" width="500">
+
+#### Go-Back-N in Action
+
+- Scenario: Window size N=4. Packet 2 is lost.
+- **Sequence of Events:**
+  1. Sender transmits packets 0,1,2,3,4,5 (fills and slides window).
+  2. Receiver gets packets 0,1 (sends ACK0, ACK1). Packet 2 is lost.
+  3. Receiver gets packets 3,4,5 (out-of-order). For each, it discards them and re-sends ACK1.
+  4. Sender eventually gets multiple duplicate ACK1s (but GBN doesn't act on them specifically). The timer for packet 2 expires.
+  5. Sender goes back to N=2 and retransmits packets 2,3,4,5.
+
+<img src="go_back_n_in_action.png" width="600">
+
+- **Inefficiency**: Even though packets 3,4,5 were received correctly by the network layer at the receiver, they were discarded and must be retransmitted. This wastes bandwidth.
+
+#### Selective Repeat (SR): The Approach
+
+- **Goal**: Overcome the inefficiency of GBN by having the sender retransmit only the specific packets that are lost or corrupted.
+- pipelining: multiple packets in flight
+- **Key Features:**
+  - **Receiver**: ACKs each correctly received packet individually, whether in-order or out-of-order. It buffers out-of-order packets.
+  - **Sender**: Maintains a sliding window but also maintains a timer for each individual unACKed packet in the window.
+  - **Timeout Action**: Only the specific timed-out packet is retransmitted.
+
+#### Selective Repeat: Sender & Receiver Windows
+
+<img src="selective_repeat_sender_receiver_windows.png" width="600">
+
+- **Sender Window**: Identical in concept to GBN's sender window: defines the range of sequence numbers the sender can use.
+- **Receiver Window**: The receiver also maintains a window of size N. It will accept and buffer any packet whose sequence number falls within this window. The window slides forward when the application delivers in-order data.
+
+#### Selective Repeat: Sender and Receiver Rules
+
+**Sender Rules:**
+- Send packet if its sequence number is within the window.
+- Timeout(n): Retransmit only packet n.
+- ACK(n): Mark packet n as received. If n is the send_base (the smallest unACKed packet), slide the window forward to the next smallest unACKed sequence number.
+
+**Receiver Rules:**
+- Packet in window [rcvbase, rcvbase+N-1]: Send ACK(n). Buffer if out-of-order. Deliver in-order data (and any buffered, now-in-order data) to the app, then slide the window forward.
+- Packet in [rcvbase-N, rcvbase-1]: This is a duplicate of a packet already ACKed (the receiver's window has already slid past it). Re-send ACK(n) to help the sender.
+- Otherwise (packet outside receiver's window): Ignore it.
+
+#### Selective Repeat in Action
+
+- **Scenario**: Window size N=4. Packet 2 is lost.
+- **Sequence of Events:**
+  1. Sender transmits packets 0,1,2,3.
+  2. Receiver gets 0,1 (sends ACK0, ACK1, delivers data). Gets packet 3 out-of-order (2 is lost). It buffers packet 3 and sends ACK3.
+  3. Sender gets ACK0, ACK1, slides window and sends packets 4,5.
+  4. Receiver gets packets 4,5, buffers them, sends ACK4, ACK5.
+  6. Packet 2's timer expires. Sender retransmits only packet 2.
+  7. When ACK2 finally arrives, the sender slides its window. At the receiver, packet 2 allows delivery of packets 2,3,4,5 in order, and the receiver window slides forward.
+
+<img src="selective_repeat_in_action.png" width="600">
+
+- **Efficiency**: Only the lost packet (2) was retransmitted, saving bandwidth compared to GBN.
+
+#### Selective Repeat – A Dilemma! (The Sequence Number Wrap-Around Problem)
+
+- **The Problem**: With a limited range of sequence numbers (e.g., 0,1,2,3) and a window size (N) that is too large relative to this range, ambiguity can arise.
+- **Scenario (b)**: The receiver's window has slid forward, and it expects packets 3,0,1. An old, delayed packet from a previous cycle with sequence number 0 arrives. The receiver cannot distinguish this old, duplicate packet 0 from a new, valid packet 0 that belongs to the current window. It incorrectly accepts the old duplicate.
+
+<img src="selective_repeat_a_dilemma.png" width="500">
+
+- **The Cause**: The receiver's view of the sequence number space overlaps with the sender's view in an ambiguous way because the sequence numbers have wrapped around.
+- **Solution**: To avoid this, the sequence number space must be larger than the window size. More precisely, for SR protocol to work correctly, the number of available sequence numbers must be at least twice the sender window size (`MaxSeqNum` >= 2 * N). This ensures that the receiver's window never overlaps ambiguously with the sender's previous window.
+
+# TCP
+- **Point-to-Point**: A TCP connection is between exactly one sender and one receiver.
+- **Reliable, In-Order Byte Stream**: Provides an unstructured, continuous flow of bytes to the application. It does not preserve "message boundaries" sent by the application.
+- **Full Duplex**: Data can flow in both directions simultaneously on the same connection.
+- **Maximum Segment Size (MSS)**: The maximum amount of application data that can be placed in a single TCP segment, typically determined by the underlying link layer to avoid fragmentation.
+- **Cumulative ACKs & Pipelining**: Uses cumulative acknowledgements and allows multiple in-flight segments (pipelining). The window size is dynamically controlled by congestion control and flow control mechanisms.
+- **Connection-Oriented**: Requires a three-way handshake to establish connection state (sequence numbers, buffers) before data exchange.
+- **Flow Controlled**: Prevents the sender from overwhelming the receiver by having the receiver advertise its available buffer space.
+
+#### TCP Segment Structure
+
+```
+<-----------------------------------32 bits--------------------------------->
++---------------------------------------+-----------------------------------+
+|               Source Port             |            Destination Port       |
++---------------------------------------+-----------------------------------+
+|                              Sequence Number                              |
++---------------------------------------------------------------------------+
+|                          Acknowledgement Number                           |
++----+----+----+----+----+----+----+----+-----------------------------------+
+|HLEN|RES |URG |ACK |PSH |RST |SYN |FIN |            receive Window         |
++---------------------------------------+-----------------------------------+
+|                Checksum               |   Urgent Pointer                  |
++---------------------------------------------------------------------------+
+|                           Options (variable lenght)                       |
++---------------------------------------------------------------------------+
+|                               Application Data                            |
+|                               (variable lenght)                           |
++---------------------------------------------------------------------------+
+```
+
+- Source & Destination Port Numbers (16 bits each): For multiplexing/demultiplexing.
+- **Sequence Number (32 bits)**: The byte number of the first data byte in this segment within the overall byte stream.
+- **Acknowledgement Number (32 bits)**: The sequence number of the next byte the receiver expects (cumulative ACK). Valid only if the ACK flag is set.
+- **Header Length (4 bits)**: Length of the TCP header in 32-bit words.
+- **Flags (6 bits)**: Control bits including:
+  - **ACK**: The acknowledgement field is valid.
+  - **RST, SYN, FIN**: Used for connection management (reset, synchronization/setup, finish/teardown).
+  - **CWR, ECE**: Used for Explicit Congestion Notification (ECN).
+  - **URG, PSH**: Less commonly used (urgent data, push function).
+- **Receive Window (16 bits)**: Used for flow control. Number of bytes the receiver is willing to accept.
+- **Checksum (16 bits)**: Internet checksum for error detection.
+- *Urgent Data Pointer (16 bits)*: Used if URG flag is set.
+- **Options**: Variable length field for advanced features (e.g., MSS, window scaling).
+
+#### TCP Sequence Numbers and ACKs
