@@ -182,7 +182,8 @@ To simplify the solution, assume that no datagrams have router interfaces as ult
 
 ##### Question 10
 Consider the following network. With the indicated link costs, use Dijkstra’s shortest-path algorithm to compute the shortest path from x to all network nodes. Show how the algorithm works by computing a table.
+
 <img src="question_10.png" width="300">
 
 ##### Answer 10
-<img src="answer_10.png" width="300">
+<img src="answer_10.png" width="400">
