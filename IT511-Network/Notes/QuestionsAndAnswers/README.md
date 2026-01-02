@@ -104,13 +104,12 @@ Assume an MSS of 536 bytes.
 
 # Answer 6
 
-There are $2^{32}$ - 4.294.967.296 possible sequence numbers.
+There are $2^{32}$ = 4.294.967.296 possible sequence numbers.
 
 **a.** The sequence number does not increment by one with each segment. Rather, it increments by the number of bytes of data sent. So the size of the MSS is irrelevant — the maximum size file that can be sent from A to B is simply the number of bytes representable by $2^{32}$ ≈ 4.19 Gbytes
 
-**b.** The number of segments is .... 8,012,999. 66 bytes of header get added to each segment, giving a total of **528,857,934 bytes** of header.  
-The total number of bytes transmitted is:
-....
+**b.** The number of segments is [$2^{32}$ / 536] = 8,012,999. 66 bytes of header get added to each segment, giving a total of **528,857,934 bytes** of header.  
+The total number of bytes transmitted is $2^{32}$ + 528.857.934 = 4.824 x $10^{9}$
 
 Thus, it would take **249 seconds** to transmit the file over a **155-Mbps** link.
 
