@@ -1299,7 +1299,7 @@ sending process                        receiving process      ->       sending p
 
 ##### Scenario 1: Infinite Buffers, No Retransmissions
 - **Setup**: Two flows sharing a link of capacity R. Router has infinite buffers.
-- **Observation**: As the sending rate ($\λ_{in}$) approaches `R/2` (the fair share), queuing delay increases towards infinity, but throughput eventually reaches `R/2`
+- **Observation**: As the sending rate ($\lambda_{in}$) approaches `R/2` (the fair share), queuing delay increases towards infinity, but throughput eventually reaches `R/2`
 - **Cost**: Extreme delay.
 
 <img src="causes_costs_of_suggestion_scenario_1.png" width="500">
@@ -1314,8 +1314,7 @@ sending process                        receiving process      ->       sending p
 
 <img src="causes_costs_of_suggestion_scenario_2.png" width="600">
 
-<img src="causes_costs_of_suggestion_scenario_2_graph_1.png" width="400">
-<img src="causes_costs_of_suggestion_scenario_2_graph_2.png" width="400">
+<img src="causes_costs_of_suggestion_scenario_2_graph_1.png" width="400"> <img src="causes_costs_of_suggestion_scenario_2_graph_2.png" width="400">
 
 ##### Scenario 3: Multi-Hop Paths, Multiple Flows
 - **Setup**: Four senders, multiple hops, shared queues.
