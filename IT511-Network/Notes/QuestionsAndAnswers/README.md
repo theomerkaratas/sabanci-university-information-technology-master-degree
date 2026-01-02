@@ -41,9 +41,23 @@ UDP and TCP use 1s complement for their checksums. Suppose you have the followin
 
 # Answer 2
 
+```
+      0 1 0 1 0 0 1 1
+    + 0 1 1 0 0 1 1 0
+    -----------------
+      1 0 1 1 1 0 0 1
 
+      1 0 1 1 1 0 0 1
+    + 0 1 1 1 0 1 0 0
+    -----------------
+      0 0 1 0 1 1 1 0
 
+One’s complement = 1 1 0 1 0 0 0 1
+```
 
+To detect errors, the receiver adds the four words (the three original words and the checksum). If the sum contains a zero, the receiver knows there has been an error. All one-bit errors will be detected, but two-bit errors can be undetected (e.g., if the last digit of the first word is converted to a 0 and the last digit of the second word is converted to a 1).
+
+> Hataları tespit etmek için alıcı, dört kelimeyi (üç orijinal kelime ve sağlama toplamını) toplar. Eğer toplamda bir sıfır varsa, alıcı bir hata olduğunu anlar. Tüm tek bitlik hatalar tespit edilir; ancak iki bitlik hatalar fark edilmeyebilir (örneğin, birinci kelimenin son biti 0’a ve ikinci kelimenin son biti 1’e dönüştürülürse).
 
 # Question 3
 In protocol rdt3.0, the ACK packets flowing from the receiver to the sender do not have sequence numbers (although they do have an ACK field that contains the sequence number of the packet they are acknowledging). Why is it that our ACK packets do not require sequence numbers?
