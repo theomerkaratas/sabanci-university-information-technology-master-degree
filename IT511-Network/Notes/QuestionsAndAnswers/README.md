@@ -64,7 +64,7 @@ In protocol rdt3.0, the ACK packets flowing from the receiver to the sender do n
 
 # Answer 3
 
-<img src="answer_3.png" width="500">
+<img src="answer_3.png" width="700">
 
 To best answer this question, consider why we needed sequence numbers in the first place. We saw that the sender needs sequence numbers so that the receiver can tell if a data packet is a duplicate of an already received data packet. In the case of ACKs, the sender does not need this info (i.e., a sequence number on an ACK) to tell detect a duplicate ACK. A duplicate ACK is obvious to the rdt3.0 receiver, since when it has received the original ACK it transitioned to the next state. The duplicate ACK is not the ACK that the sender needs and hence is ignored by the rdt3.0 sender
 
@@ -104,10 +104,27 @@ Assume an MSS of 536 bytes.
 
 # Answer 6
 
+There are \(2^{32} = 4,294,967,296\) possible sequence numbers.
 
+**a.** The sequence number does not increment by one with each segment. Rather, it increments by the number of bytes of data sent. So the size of the MSS is irrelevant — the maximum size file that can be sent from A to B is simply the number of bytes representable by  
+\[
+2^{32} \approx 4.19 \text{ Gbytes}.
+\]
 
+\[
+\frac{2^{32}}{536} = 8,012,999
+\]
 
+**b.** The number of segments is 8,012,999.  
+66 bytes of header get added to each segment, giving a total of **528,857,934 bytes** of header.  
 
+The total number of bytes transmitted is:
+
+\[
+2^{32} + 528,857,934 = 4.824 \times 10^{9} \text{ bytes}
+\]
+
+Thus, it would take **249 seconds** to transmit the file over a **155-Mbps** link.
 
 # Question 7
 Compare GBN, SR, and TCP (no delayed ACK). Assume that the timeout values for all three protocols are sufficiently long such that 5 consecutive data segments and their corresponding ACKs can be received (if not lost in the channel) by the receiving host (Host B) and the sending host (Host A) respectively. Suppose Host A sends 5 data segments to Host B, and the 2nd segment (sent from A) is lost. In the end, all 5 data segments have been correctly received by Host B.
