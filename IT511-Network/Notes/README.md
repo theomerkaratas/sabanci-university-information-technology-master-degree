@@ -1251,20 +1251,20 @@ sending process                        receiving process      ->       sending p
   1. Client sends: req_conn(x) (with its initial seq # x).
   2. Server replies: acc_conn(x) (acknowledging x).
 
-<img src="2_way_handshake_no_problem.png" width="500">
+<img src="2_way_handshake_no_problem.png" width="400">
 
 - **Why It Fails:**
   - An old, delayed req_conn(x) message from a previous connection could arrive at the server.
   - The server, not knowing it's old, replies with acc_conn(x) and enters ESTAB state.
   - The client might have already terminated that old connection. The server is now left in a "half-open connection" state, wasting resources, believing a non-existent client is connected.
 
-<img src="2_way_handshake_problem.png" width="500">
+<img src="2_way_handshake_problem.png" width="400">
 
 - **Root Cause**: The 2-way handshake cannot distinguish between a new connection request and a delayed duplicate request from an old connection. The server needs a way to confirm the client is currently alive and responding.
 
 #### TCP 3-Way Handshake (The Solution)
 
-<img src="3_way_handshake.png" width="500">
+<img src="3_way_handshake.png" width="600">
 
 - **Step 1: SYN**
   - Client → Server: SYN=1, Seq=x (client picks random initial sequence number x).
@@ -1321,8 +1321,7 @@ sending process                        receiving process      ->       sending p
 - **Observation**: As red traffic ($\lambda_{in}$) increases and congests a shared queue, it can cause packet drops for unrelated (blue) flows passing through the same queue. This leads to unfairness—blue's throughput can drop to zero.
 - **New Cost**: Wasted Upstream Resources. When a packet is dropped after traveling several hops, all the transmission capacity and buffer space used to move it along the path up to the point of drop is completely wasted. This is a major inefficiency.
 
-<img src="causes_costs_of_suggestion_scenario_3.png" width="600">
-<img src="causes_costs_of_suggestion_scenario_3_graph_1.png" width="400">
+<img src="causes_costs_of_suggestion_scenario_3.png" width="600"> <img src="causes_costs_of_suggestion_scenario_3_graph_1.png" width="400">
 
 #### Causes/Costs of Congestion – Insights
 
