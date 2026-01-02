@@ -162,23 +162,16 @@ Subnet F: 214.97.254.4/30 (4 addresses)
 **b.**
 To simplify the solution, assume that no datagrams have router interfaces as ultimate destinations. Also, label D, E, F for the upper-right, bottom, and upper-left interior subnets, respectively.
 ###### Router 1
-| Longest Prefix Match                | Outgoing Interface |
-|-------------------------------------|--------------------|
-| 11010110 01100001 11111111          | Subnet A           |
-| 11010110 01100001 11111110 00000000 | Subnet D           |
-| 11010110 01100001 11111110 00000001 | Subnet F           |
+
+<img src="question_9_1.png" width="300">
+
 ###### Router 2
-| Longest Prefix Match               | Outgoing Interface |
-|------------------------------------|--------------------|
-| 11010110 01100001 11111111 000000  | Subnet D           |
-| 11010110 01100001 11111110 0       | Subnet B           |
-| 11010110 01100001 11111110 0000001 | Subnet E           |
+
+<img src="question_9_2.png" width="300">
+
 ###### Router 3
-| Longest Prefix Match               | Outgoing Interface |
-|------------------------------------|--------------------|
-| 11010110 01100001 11111111 000001  | Subnet F           |
-| 11010110 01100001 11111110 000001  | Subnet E           |
-| 11010110 01100001 11111110 1       | Subnet C           |
+
+<img src="question_9_3.png" width="300">
 
 ##### Question 10
 Consider the following network. With the indicated link costs, use Dijkstra’s shortest-path algorithm to compute the shortest path from x to all network nodes. Show how the algorithm works by computing a table.
@@ -186,4 +179,4 @@ Consider the following network. With the indicated link costs, use Dijkstra’s 
 <img src="question_10.png" width="300">
 
 ##### Answer 10
-<img src="answer_10.png" width="400">
+<img src="answer_10.png" width="500">
