@@ -98,7 +98,7 @@ Note that TCP always sends an ACK with the expected sequence number.
 ##### Question 8
 Consider a datagram network using 32-bit host addresses. Suppose a router has four links, numbered 0 through 3, and packets are to be forwarded to the link interfaces as follows:
 
-<img src="question_8.png" width="300">
+<img src="question_8.png" width="400">
 
 **a.** Provide a forwarding table that has five entries, uses longest prefix matching, and forwards packets to the correct link interfaces.
 **b.** Describe how your forwarding table determines the appropriate link interface for datagrams with destination addresses:
@@ -146,15 +146,16 @@ Subnet F: 214.97.254.4/30 (4 addresses)
 
 **b.**
 To simplify the solution, assume that no datagrams have router interfaces as ultimate destinations. Also, label D, E, F for the upper-right, bottom, and upper-left interior subnets, respectively.
-###### Router 1
+
+**Router 1**
 
 <img src="answer_9_1.png" width="500">
 
-###### Router 2
+**Router 2**
 
 <img src="answer_9_2.png" width="500">
 
-###### Router 3
+**Router 3**
 
 <img src="answer_9_3.png" width="500">
 
