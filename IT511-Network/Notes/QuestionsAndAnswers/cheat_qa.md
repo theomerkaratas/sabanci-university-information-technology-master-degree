@@ -3,6 +3,8 @@ What are the source and destination port values in the segments flowing from the
 
 <img src="question_1.png" width="400">
 
+<img src="answer_1.png" width="400">
+
 ##### Answer 1
 **Host A Request:**
 Source Port: 26145, Source IP: a, Destination Port: 80, Destination IP: b
