@@ -161,12 +161,16 @@ Consider the following network. With the indicated link costs, use Dijkstra’s 
 <img src="question_10.png" width="300">
 
 ##### Answer 10
-<img src="answer_10.png" width="500">
+<img src="answer_10_1.png" width="500">
+
+<img src="answer_10_2.png" width="500">
 
 
-
-
-
-
-
+==
+==
+==
+==
+==
+==
+==
 ==
