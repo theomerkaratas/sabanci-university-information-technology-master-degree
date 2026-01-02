@@ -215,32 +215,32 @@ To simplify the solution, assume that no datagrams have router interfaces as ult
 
 ### Router 1
 
-**Longest Prefix Match**         **Outgoing Interface**
-
-11010110 01100001 11111111               Subnet A  
-11010110 01100001 11111110 00000000      Subnet D  
-11010110 01100001 11111110 00000001      Subnet F  
+| Longest Prefix Match                | Outgoing Interface |
+|-------------------------------------|--------------------|
+| 11010110 01100001 11111111          | Subnet A           |
+| 11010110 01100001 11111110 00000000 | Subnet D           |
+| 11010110 01100001 11111110 00000001 | Subnet F           |
 
 ### Router 2
 
-**Longest Prefix Match**         **Outgoing Interface**
-
-11010110 01100001 11111111 000000        Subnet D  
-11010110 01100001 11111110 0             Subnet B  
-11010110 01100001 11111110 0000001       Subnet E  
+| Longest Prefix Match               | Outgoing Interface |
+|------------------------------------|--------------------|
+| 11010110 01100001 11111111 000000  | Subnet D           |
+| 11010110 01100001 11111110 0       | Subnet B           |
+| 11010110 01100001 11111110 0000001 | Subnet E           |
 
 ### Router 3
 
-**Longest Prefix Match**         **Outgoing Interface**
-
-11010110 01100001 11111111 000001        Subnet F  
-11010110 01100001 11111110 000001        Subnet E  
-11010110 01100001 11111110 1             Subnet C  
+| Longest Prefix Match               | Outgoing Interface |
+|------------------------------------|--------------------|
+| 11010110 01100001 11111111 000001  | Subnet F           |
+| 11010110 01100001 11111110 000001  | Subnet E           |
+| 11010110 01100001 11111110 1       | Subnet C           |
 
 # Question 10
 Consider the following network. With the indicated link costs, use Dijkstra’s shortest-path algorithm to compute the shortest path from x to all network nodes. Show how the algorithm works by computing a table.
 
-<img src="question_10.png" width="500">
+<img src="question_10.png" width="400">
 
 # Answer 10
 
