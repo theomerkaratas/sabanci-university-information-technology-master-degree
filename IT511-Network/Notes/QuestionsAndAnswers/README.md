@@ -3,24 +3,29 @@ What are the source and destination port values in the segments flowing from the
 
 <img src="question_1.png" width="600">
 
+# Answer 1
 
 # Question 2
 UDP and TCP use 1s complement for their checksums. Suppose you have the following three 8-bit bytes: 01010011, 01100110, 01110100. What is the 1s complement of the sum of these 8-bit bytes? (Note that although UDP and TCP use 16-bit words in computing the checksum, for this problem you are being asked to consider 8-bit sums.) Show all work. Why is it that UDP takes the 1s complement of the sum; that is, why not just use the sum? With the 1s complement scheme, how does the receiver detect errors? Is it possible that a 1-bit error will go undetected? How about a 2-bit error?
 
+# Answer 2
 
 
 # Question 3
 In protocol rdt3.0, the ACK packets flowing from the receiver to the sender do not have sequence numbers (although they do have an ACK field that contains the sequence number of the packet they are acknowledging). Why is it that our ACK packets do not require sequence numbers?
 
+# Answer 3
 
 
 # Question 4
 Consider a channel that can lose packets but has a maximum delay that is known. Modify protocol rdt2.1 to include sender timeout and retransmit. Informally argue why your protocol can communicate correctly over this channel.
 
+# Answer 4
 
 # Question 5
 Suppose Host A and Host B use a GBN protocol with window size N = 3 and a long-enough range of sequence numbers. Assume Host A sends six application messages to Host B and that all messages are correctly received, except for the first acknowledgment and the fifth data segment. Draw a timing diagram, showing the data segments and the acknowledgments sent along with the corresponding sequence and acknowledge numbers, respectively.
 
+# Answer 5
 
 # Question 6
 Consider transferring an enormous file of L bytes from Host A to Host B.
@@ -29,6 +34,7 @@ Assume an MSS of 536 bytes.
 **a.** What is the maximum value of L such that TCP sequence numbers are not exhausted? Recall that the TCP sequence number field has 4 bytes.
 **b.** For the L you obtain in (a), find how long it takes to transmit the file. Assume that a total of 66 bytes of transport, network, and data-link header are added to each segment before the resulting packet is sent out over a 155 Mbps link. Ignore flow control and congestion control so A can pump out the segments back-to-back and continuously.
 
+# Answer 6
 
 
 
@@ -37,6 +43,9 @@ Compare GBN, SR, and TCP (no delayed ACK). Assume that the timeout values for al
 
 **a.** How many segments has Host A sent in total and how many ACKs has Host B sent in total? What are their sequence numbers? Answer this question for all three protocols.
 **b.** If the timeout values for all three protocol are much longer than 5 RTT, then which protocol successfully delivers all five data segments in shortest time interval?
+
+# Answer 7
+
 
 
 
@@ -72,6 +81,9 @@ otherwise                                                  3
 11100001 10000000 00010001 01110111
 ```
 
+# Answer 8
+
+
 
 # Question 9
 Consider the topology shown in Figure. Denote the three subnets with hosts (starting clockwise at 12:00) as Networks A, B, and C. Denote the subnets without hosts as Networks D, E, and F.
@@ -81,6 +93,11 @@ Consider the topology shown in Figure. Denote the three subnets with hosts (star
 **a.** Assign network addresses to each of these six subnets, with the following constraints: All addresses must be allocated from 214.97.254/23; Subnet A should have enough addresses to support 250 interfaces; Subnet B should have enough addresses to support 120 interfaces; and Subnet C should have enough addresses to support 120 interfaces. Of course, subnets D, E and F should each be able to support two interfaces. For each subnet, the assignment should take the form a.b.c.d/x or a.b.c.d/x – e.f.g.h/y.
 **b.** Using your answer to part (a), provide the forwarding tables (using longest prefix matching) for each of the three routers.
 
+# Answer 9
+
+
+
+
 
 
 # Question 10
@@ -88,4 +105,4 @@ Consider the following network. With the indicated link costs, use Dijkstra’s 
 
 <img src="question_10.png" width="500">
 
-
+# Answer 10
