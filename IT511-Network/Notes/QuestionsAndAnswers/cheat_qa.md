@@ -163,15 +163,15 @@ Subnet F: 214.97.254.4/30 (4 addresses)
 To simplify the solution, assume that no datagrams have router interfaces as ultimate destinations. Also, label D, E, F for the upper-right, bottom, and upper-left interior subnets, respectively.
 ###### Router 1
 
-<img src="answer_9_1.png" width="300">
+<img src="answer_9_1.png" width="500">
 
 ###### Router 2
 
-<img src="answer_9_2.png" width="300">
+<img src="answer_9_2.png" width="500">
 
 ###### Router 3
 
-<img src="answer_9_3.png" width="300">
+<img src="answer_9_3.png" width="500">
 
 ##### Question 10
 Consider the following network. With the indicated link costs, use Dijkstra’s shortest-path algorithm to compute the shortest path from x to all network nodes. Show how the algorithm works by computing a table.
