@@ -143,9 +143,10 @@ Prefix match for third address is **4th entry**: link interface **2**
 ##### Question 9
 Consider the topology shown in Figure. Denote the three subnets with hosts (starting clockwise at 12:00) as Networks A, B, and C. Denote the subnets without hosts as Networks D, E, and F.
 
-<img src="question_9.png" width="400">
+<img src="question_9.png" width="300">
 
 **a.** Assign network addresses to each of these six subnets, with the following constraints: All addresses must be allocated from 214.97.254/23; Subnet A should have enough addresses to support 250 interfaces; Subnet B should have enough addresses to support 120 interfaces; and Subnet C should have enough addresses to support 120 interfaces. Of course, subnets D, E and F should each be able to support two interfaces. For each subnet, the assignment should take the form a.b.c.d/x or a.b.c.d/x – e.f.g.h/y.
+
 **b.** Using your answer to part (a), provide the forwarding tables (using longest prefix matching) for each of the three routers.
 
 ##### Answer 9
@@ -157,6 +158,7 @@ Subnet C: 214.97.254.128/25 (128 addresses)
 Subnet D: 214.97.254.0/31 (2 addresses)  
 Subnet E: 214.97.254.2/31 (2 addresses)  
 Subnet F: 214.97.254.4/30 (4 addresses)  
+
 **b.**
 To simplify the solution, assume that no datagrams have router interfaces as ultimate destinations. Also, label D, E, F for the upper-right, bottom, and upper-left interior subnets, respectively.
 ###### Router 1
@@ -180,16 +182,7 @@ To simplify the solution, assume that no datagrams have router interfaces as ult
 
 ##### Question 10
 Consider the following network. With the indicated link costs, use Dijkstra’s shortest-path algorithm to compute the shortest path from x to all network nodes. Show how the algorithm works by computing a table.
-
 <img src="question_10.png" width="300">
 
 ##### Answer 10
-| Step | N'       | D(t), p(t) | D(u), p(u) | D(v), p(v) | D(w), p(w) | D(y), p(y) | D(z), p(z) |
-|------|----------|------------|------------|------------|------------|------------|------------|
-| 0    | x        | ∞          | ∞          | 3, x       | 6, x       | 6, x       | 8, x       |
-| 1    | xv       | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
-| 2    | xvu      | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
-| 3    | xvuw     | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
-| 4    | xvuwy    | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
-| 5    | xvuwyt   | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
-| 6    | xvuwytz  | 7, v       | 6, v       | 3, x       | 6, x       | 6, x       | 8, x       |
+<img src="answer_10.png" width="300">
