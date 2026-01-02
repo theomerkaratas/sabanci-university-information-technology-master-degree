@@ -98,6 +98,7 @@ Consider a datagram network using 32-bit host addresses. Suppose a router has fo
 <img src="question_8.png" width="400">
 
 **a.** Provide a forwarding table that has five entries, uses longest prefix matching, and forwards packets to the correct link interfaces.
+
 **b.** Describe how your forwarding table determines the appropriate link interface for datagrams with destination addresses:
 ```
 11111000 10010001 01010001 01010101
