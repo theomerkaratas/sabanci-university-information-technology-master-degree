@@ -182,5 +182,5 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
   - It is transaction-oriented and does not guarantee delivery or protection against duplicates.
   - Applications needing reliable, ordered streams should use TCP.
 
-![User Datagram Protocol Image](user_datagram_protocol.png)
+<img src="user_datagram_protocol.png" width="400">
 
