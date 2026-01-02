@@ -1250,8 +1250,99 @@ sending process                        receiving process      ->       sending p
 - **Proposed 2-Way Handshake:**
   1. Client sends: req_conn(x) (with its initial seq # x).
   2. Server replies: acc_conn(x) (acknowledging x).
+
+<img src="2_way_handshake_no_problem.png" width="500">
+
 - **Why It Fails:**
   - An old, delayed req_conn(x) message from a previous connection could arrive at the server.
   - The server, not knowing it's old, replies with acc_conn(x) and enters ESTAB state.
   - The client might have already terminated that old connection. The server is now left in a "half-open connection" state, wasting resources, believing a non-existent client is connected.
+
+<img src="2_way_handshake_problem.png" width="500">
+
 - **Root Cause**: The 2-way handshake cannot distinguish between a new connection request and a delayed duplicate request from an old connection. The server needs a way to confirm the client is currently alive and responding.
+
+#### TCP 3-Way Handshake (The Solution)
+
+<img src="3_way_handshake.png" width="500">
+
+- **Step 1: SYN**
+  - Client → Server: SYN=1, Seq=x (client picks random initial sequence number x).
+  - Client State: SYN_SENT.
+- **Step 2: SYN+ACK**
+  - Server → Client: SYN=1, Seq=y (server picks its own ISN y). ACK=1, ACKnum=x+1 (acknowledges client's SYN).
+  - Server State: SYN_RCVD.
+- **Step 3: ACK**
+  - Client → Server: ACK=1, ACKnum=y+1 (acknowledges server's SYN). This segment may already carry the first batch of application data.
+  - Both States: Transition to ESTABLISHED.
+- **Why it Works**: The third ACK confirms to the server that the client received its SYN-ACK and is currently alive, thereby validating the connection request as fresh, not a stale duplicate.
+
+#### Closing a TCP Connection
+
+- **Graceful Teardown**: Each side closes its half of the connection independently using the FIN (finish) flag.
+- **Typical Sequence:**
+1. One side (e.g., client) is done sending data. It sends a segment with FIN=1.
+2. The other side (server) acknowledges the FIN with an ACK.
+3. The server can continue sending its own data. When done, it sends its own FIN.
+4. The client ACKs the server's FIN.
+- Key Point: A FIN signals "I have no more data to send." The connection is fully closed only after both sides have sent and acknowledged FIN segments. ACKs for FINs can often be combined with the other side's own FIN (piggybacking).
+
+#### Principles of Congestion Control – The Problem
+
+- **Congestion**: "Too many sources sending too much data too fast for the network to handle." It's a network-wide resource contention problem.
+- **Manifestations**:
+  - **Long Delays**: Due to queueing in router buffers.
+  - **Packet Loss**: When router buffers overflow.
+- **Crucial Distinction**: Congestion control is different from flow control.
+  - **Flow Control**: Prevents a single fast sender from overwhelming a single slow receiver (an end-to-end issue).
+  - **Congestion Control**: Prevents the aggregate of many senders from overloading the network's links and routers (a system-wide issue).
+
+##### Scenario 1: Infinite Buffers, No Retransmissions
+- **Setup**: Two flows sharing a link of capacity R. Router has infinite buffers.
+- **Observation**: As the sending rate ($\λ_{in}$) approaches `R/2` (the fair share), queuing delay increases towards infinity, but throughput eventually reaches `R/2`
+- **Cost**: Extreme delay.
+
+<img src="causes_costs_of_suggestion_scenario_1.png" width="500">
+
+##### Scenario 2: Finite Buffers, With Retransmissions
+- **Setup**: One router with finite buffers. Senders retransmit lost packets.
+- **Ideal Knowledge**: If senders know exactly when packets are lost, they only retransmit needed packets. The "cost" is that some of the link's capacity (R/2) is wasted on retransmissions instead of new data, reducing goodput.
+- **Realistic Case**: Senders use timeouts, which can cause premature retransmissions and unneeded duplicate packets. This makes the problem worse:
+  - **Wasted Work**: Link carries multiple copies of the same packet.
+  - **Decreased Throughput**: The maximum achievable useful throughput is less than `R/2` because an increasing fraction of the capacity is spent on duplicates.
+- **Key Insight**: Retransmissions due to congestion consume bandwidth themselves, creating a positive feedback loop that can further reduce useful throughput.
+
+<img src="causes_costs_of_suggestion_scenario_2.png" width="600">
+
+<img src="causes_costs_of_suggestion_scenario_2_graph_1.png" width="400">
+<img src="causes_costs_of_suggestion_scenario_2_graph_2.png" width="400">
+
+##### Scenario 3: Multi-Hop Paths, Multiple Flows
+- **Setup**: Four senders, multiple hops, shared queues.
+- **Observation**: As red traffic ($\lambda_{in}$) increases and congests a shared queue, it can cause packet drops for unrelated (blue) flows passing through the same queue. This leads to unfairness—blue's throughput can drop to zero.
+- **New Cost**: Wasted Upstream Resources. When a packet is dropped after traveling several hops, all the transmission capacity and buffer space used to move it along the path up to the point of drop is completely wasted. This is a major inefficiency.
+
+<img src="causes_costs_of_suggestion_scenario_3.png" width="600">
+<img src="causes_costs_of_suggestion_scenario_3_graph_1.png" width="400">
+
+#### Causes/Costs of Congestion – Insights
+
+1. **Hard Limit**: Throughput cannot exceed link capacity.
+2. **Delay Cost**: Queuing delay increases as load approaches capacity.
+3. **Retransmission Cost**: Loss and needed retransmissions reduce effective throughput.
+4. **Duplicate Cost**: Unneeded duplicates (from premature timeouts) further reduce throughput.
+5. **Upstream Waste Cost**: Dropping a packet wastes all resources used to get it to the point of loss.
+
+#### Approaches Towards Congestion Control
+
+**End-to-End Congestion Control:**
+- The network provides no explicit information about congestion.
+- End systems (senders) must infer congestion from observable network symptoms: packet loss (via timeout or duplicate ACKs) and increased delay.
+- This is the approach used by standard TCP.
+
+**Network-Assisted Congestion Control:**
+- Routers directly participate by providing feedback to end hosts.
+- Feedback can be:
+  - A single bit (e.g., ECN - Explicit Congestion Notification in TCP/IP, DECbit) to signal "congestion experienced."
+  - An explicit rate the sender should use.
+- This requires changes in both routers and end-host protocols.
