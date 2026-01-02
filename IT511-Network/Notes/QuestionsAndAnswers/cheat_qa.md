@@ -6,26 +6,21 @@ What are the source and destination port values in the segments flowing from the
 ##### Answer 1
 **Host A Request:**
 Source Port: 26145, Source IP: a, Destination Port: 80, Destination IP: b
+
 **Server’s Response to Host A:**
 Source Port: 80, Source IP: b, Destination Port: 26145, Destination IP: a
+
 **Host C (Left Process) Request:**
 Source Port: 7532, Source IP: c, Destination Port: 80, Destination IP: b
+
 **Server’s Response to Host C (Left):**
 Source Port: 80, Source IP: b, Destination Port: 7532, Destination IP: c
+
 **Host C (Right Process) Request:**
 Source Port: 26145, Source IP: c, Destination Port: 80, Destination IP: b
+
 **Server’s Response to Host C (Right):**
 Source Port: 80, Source IP: b, Destination Port: 26145, Destination IP: c
-
-| Scenario                    | Source Port | Source IP  | Destination Port | Destination IP |
-|-----------------------------|-------------|------------|------------------|----------------|
-| **Host A → Server**         | 26145       | a          | 80               | b              |
-| **Server → Host A**         | 80          | b          | 26145            | a              |
-| **Host C (Left) → Server**  | 7532        | c          | 80               | b              |
-| **Server → Host C (Left)**  | 80          | b          | 7532             | c              |
-| **Host C (Right) → Server** | 26145       | c          | 80               | b              |
-| **Server → Host C (Right)** | 80          | b          | 26145            | c              |
-
 
 > **Importance of Demultiplexing:**
 > On Host C, two different processes (left and right) are communicating with the same server (b), and both use the same server port (80). The operating system on Host C uses the destination port number (26145 vs. 7532) to correctly deliver incoming segments to the appropriate process. Since these port numbers are different, the segments are delivered to the correct sockets (and therefore to the correct processes).
@@ -34,7 +29,6 @@ Source Port: 80, Source IP: b, Destination Port: 26145, Destination IP: c
 UDP and TCP use 1s complement for their checksums. Suppose you have the following three 8-bit bytes: 01010011, 01100110, 01110100. What is the 1s complement of the sum of these 8-bit bytes? (Note that although UDP and TCP use 16-bit words in computing the checksum, for this problem you are being asked to consider 8-bit sums.) Show all work. Why is it that UDP takes the 1s complement of the sum; that is, why not just use the sum? With the 1s complement scheme, how does the receiver detect errors? Is it possible that a 1-bit error will go undetected? How about a 2-bit error?
 
 ##### Answer 2
-
 ```
       0 1 0 1 0 0 1 1
     + 0 1 1 0 0 1 1 0
@@ -45,43 +39,30 @@ UDP and TCP use 1s complement for their checksums. Suppose you have the followin
     + 0 1 1 1 0 1 0 0
     -----------------
       0 0 1 0 1 1 1 0
-
 One’s complement = 1 1 0 1 0 0 0 1
 ```
-
 To detect errors, the receiver adds the four words (the three original words and the checksum). If the sum contains a zero, the receiver knows there has been an error. All one-bit errors will be detected, but two-bit errors can be undetected (e.g., if the last digit of the first word is converted to a 0 and the last digit of the second word is converted to a 1).
 
 ##### Question 3
 In protocol rdt3.0, the ACK packets flowing from the receiver to the sender do not have sequence numbers (although they do have an ACK field that contains the sequence number of the packet they are acknowledging). Why is it that our ACK packets do not require sequence numbers?
 
 ##### Answer 3
-
-<img src="answer_3.png" width="400">
-
 To best answer this question, consider why we needed sequence numbers in the first place. We saw that the sender needs sequence numbers so that the receiver can tell if a data packet is a duplicate of an already received data packet. In the case of ACKs, the sender does not need this info (i.e., a sequence number on an ACK) to tell detect a duplicate ACK. A duplicate ACK is obvious to the rdt3.0 receiver, since when it has received the original ACK it transitioned to the next state. The duplicate ACK is not the ACK that the sender needs and hence is ignored by the rdt3.0 sender
 
 ##### Question 4
 Consider a channel that can lose packets but has a maximum delay that is known. Modify protocol rdt2.1 to include sender timeout and retransmit. Informally argue why your protocol can communicate correctly over this channel.
 
 ##### Answer 4
-
 If the sending of this message were removed, the sending and receiving sides would deadlock, waiting for an event that would never occur. Here’s a scenario:
 - Sender sends pkt0, enters the “Wait for ACK0” state, and waits for a packet back from the receiver.
 - Receiver is in the “Wait for 0 from below” state, and receives a corrupted packet from the sender. Suppose it does not send anything back, and simply re-enters the “wait for 0 from below” state.
-
 Now, the sender is awaiting an ACK of some sort from the receiver, and the receiver is waiting for a data packet from the sender — a deadlock!
-
-> Eğer bu mesajın gönderilmesi kaldırılırsa, gönderici ve alıcı taraflar hiçbir zaman gerçekleşmeyecek bir olayı bekleyerek kilitlenir (deadlock). Aşağıdaki senaryoyu düşünelim:
-> - Gönderici, pkt0 paketini gönderir, “ACK0 bekle” durumuna geçer ve alıcıdan bir yanıt bekler.
-> - Alıcı, “aşağıdan 0 bekle” durumundadır ve göndericiden bozulmuş (hatalı) bir paket alır. Bu durumda hiçbir şey göndermediğini ve tekrar “aşağıdan 0 bekle” durumuna geçtiğini varsayalım.
-> Sonuç olarak, gönderici alıcıdan bir tür ACK beklemektedir; alıcı ise göndericiden yeni bir veri paketi beklemektedir. Böylece sistem deadlock olur.
 
 ##### Question 5
 Suppose Host A and Host B use a GBN protocol with window size N = 3 and a long-enough range of sequence numbers. Assume Host A sends six application messages to Host B and that all messages are correctly received, except for the first acknowledgment and the fifth data segment. Draw a timing diagram, showing the data segments and the acknowledgments sent along with the corresponding sequence and acknowledge numbers, respectively.
 
 ##### Answer 5
-
-<img src="answer_5.png" width="400">
+<img src="answer_5.png" width="300">
 
 ##### Question 6
 Consider transferring an enormous file of L bytes from Host A to Host B.
@@ -98,12 +79,10 @@ Thus, it would take **249 seconds** to transmit the file over a **155-Mbps** lin
 
 ##### Question 7
 Compare GBN, SR, and TCP (no delayed ACK). Assume that the timeout values for all three protocols are sufficiently long such that 5 consecutive data segments and their corresponding ACKs can be received (if not lost in the channel) by the receiving host (Host B) and the sending host (Host A) respectively. Suppose Host A sends 5 data segments to Host B, and the 2nd segment (sent from A) is lost. In the end, all 5 data segments have been correctly received by Host B.
-
 **a.** How many segments has Host A sent in total and how many ACKs has Host B sent in total? What are their sequence numbers? Answer this question for all three protocols.
 **b.** If the timeout values for all three protocol are much longer than 5 RTT, then which protocol successfully delivers all five data segments in shortest time interval?
 
 ##### Answer 7
-
 **a.** **GoBackN:**
 A sends 9 segments in total. They are initially sent segments 1, 2, 3, 4, 5 and later re-sent segments 2, 3, 4, and 5.  
 B sends 8 ACKs. They are 4 ACKs with sequence number 1, and 4 ACKs with sequence numbers 2, 3, 4, and 5.
@@ -171,7 +150,6 @@ Consider the topology shown in Figure. Denote the three subnets with hosts (star
 
 ##### Answer 9
 From 214.97.254/23, possible assignments are
-
 **a.**  
 Subnet A: 214.97.255/24 (256 addresses)  
 Subnet B: 214.97.254.0/25 – 214.97.254.0/29 (128 − 8 = 120 addresses)  
@@ -179,10 +157,8 @@ Subnet C: 214.97.254.128/25 (128 addresses)
 Subnet D: 214.97.254.0/31 (2 addresses)  
 Subnet E: 214.97.254.2/31 (2 addresses)  
 Subnet F: 214.97.254.4/30 (4 addresses)  
-
 **b.**
 To simplify the solution, assume that no datagrams have router interfaces as ultimate destinations. Also, label D, E, F for the upper-right, bottom, and upper-left interior subnets, respectively.
-
 ###### Router 1
 | Longest Prefix Match                | Outgoing Interface |
 |-------------------------------------|--------------------|
