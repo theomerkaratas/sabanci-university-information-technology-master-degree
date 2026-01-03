@@ -1,39 +1,13 @@
-#### Transport Layer Actions (Sender & Receiver)
-**Sender Side**
-1. Receives an application-layer message from the application process above.
-2. Determines the values for the segment header fields (e.g., source/destination port numbers, sequence numbers for TCP, length for UDP).
-3. Creates a transport-layer segment by encapsulating the application message with this header.
-4. Passes the segment down to the network (IP) layer for delivery.
-
-**Receiver Side**
-1. Receives the segment from the network (IP) layer below.
-2. Checks header values (for error detection, demultiplexing, etc.).
-3. Extracts the application-layer message from the segment.
-4. Demultiplexes the message: uses the header information (primarily the destination port number) to deliver the message to the correct socket, and thus the correct waiting application process.
-
-##### Two Principal Internet Transport Protocols
-**TCP (Transmission Control Protocol):**
-- More precise demultiplexing using the 4-tuple (source & destination IP and port).
-- Reliable, in-order byte-stream delivery.
-- Congestion Control: Throttles the sender to prevent network overload.
-- Flow Control: Prevents the sender from overwhelming the receiver.
-- Connection-oriented: Requires a handshake to establish state before data exchange.
-**UDP (User Datagram Protocol):**
-- Simple demultiplexing using destination port number only.
-- "Best-effort" service: Unreliable, unordered delivery. It is essentially a minimal extension of the IP datagram service to the application layer.
-- No frills: No connection setup, no reliability, no congestion control, no flow control.
-
-> Missing from Both: Neither TCP nor UDP provides performance guarantees like minimum bandwidth or maximum delay. They offer a best-effort service model.
-
 #### Multiplexing/Demultiplexing
 - **Multiplexing (at sender)**: The job of gathering data chunks from multiple application processes (different sockets), encapsulating each with a header (which will later be used for demultiplexing), and passing them to the network layer. Many sockets, one network path.
 - **Demultiplexing (at receiver)**: The job of delivering the data in received transport-layer segments to the correct application process (socket) by examining the header fields in the segment. One network path, many sockets.
-
-###### Question
+##### Question
 When the server receives a segment, how does it know which local process (e.g., an HTTP response) should go to a waiting Firefox process vs. another service?
-###### Demultiplexing at Receiver
+
+**Demultiplexing at Receiver**
 Shows incoming segments being directed to different sockets/processes on the server based on header information.
-###### Multiplexing at Sender
+
+**Multiplexing at Sender**
 Shows the client's transport layer gathering data from multiple application sockets and sending them out as segments.
 
 ##### How Demultiplexing Works – The Gist
