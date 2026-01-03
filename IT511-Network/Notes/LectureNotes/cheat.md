@@ -1,26 +1,4 @@
-**Subnets**: A subnet is a group of device interfaces that can communicate directly with each other at the link layer without passing through a router. (Physically isolated network segments).
-- **How to Identify Subnets**: Mentally "detach" each interface from its device. Each isolated "island" of connected interfaces forms a subnet.
-- **IP Address Structure within a Subnet**: An IP address can be divided into two parts:
-  - **Subnet Part (High-order bits)**: Common to all devices on the same subnet.
-  - **Host Part (Low-order bits)**: Unique to each device within the subnet.
-- **Subnet Address**: Represented using CIDR notation: `a.b.c.d/x`, where `x` is the number of bits in the subnet part. Example: `223.1.1.0/24` (subnet part is first 24 bits; host part is last 8 bits). The subnet address itself typically has all host bits set to 0.
-
-### IP addressing: CIDR
-- **CIDR (Classless Inter-Domain Routing)**: The modern, flexible addressing scheme that replaced the rigid class-based (A, B, C) system.
-- **Key Feature**: The subnet prefix length (`/x`) is variable and explicitly specified. This allows for efficient allocation of address blocks of any size.
-- **Format**: `a.b.c.d/x`. Example: `200.23.16.0/23` means the first 23 bits identify the network/subnet, and the remaining 9 bits identify hosts within it.
-```
-<----------- subnet part ------------>   <-- host part -->
-11001000       00010111       00010000       00000000
-```
-
-##### How to Get an IP Address? (DHCP)
-**Two Questions:**
-1. Host gets its IP address: Via manual configuration or, more commonly, DHCP.
-2. Network gets its subnet prefix: Allocated by an ISP from a larger block.
-
-**DHCP (Dynamic Host Configuration Protocol):**
-- **Purpose**: Allow a host to dynamically obtain an IP address, subnet mask, default gateway, and DNS server info when joining a network. Enables "plug-and-play" networking.
+**DHCP (Dynamic Host Configuration Protocol):** Allow a host to dynamically obtain an IP address, subnet mask, default gateway, and DNS server info when joining a network. Enables "plug-and-play" networking.
 - **Process:**
   1. DHCP Discover: Host broadcasts "Is there a DHCP server?"
   2. DHCP Offer: Server(s) respond with a proposed IP address.
