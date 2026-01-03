@@ -1,8 +1,6 @@
-### Socket Programming
 Two Fundamental Transport Services:
 - UDP Sockets: Provide an interface to unreliable, connectionless datagram service. Messages have boundaries.
 - TCP Sockets: Provide an interface to reliable, connection-oriented, byte-stream service. Data is a continuous stream without inherent message boundaries.
-
 Demonstration Application: A simple client-server echo application with modification.
 1. Client: Reads a line of text from the user (keyboard) and sends it to the server.
 2. Server: Receives the data, converts all characters to uppercase.
@@ -17,7 +15,7 @@ Demonstration Application: A simple client-server echo application with modifica
   - **Possible Issues**: Datagrams may be lost, delivered out of order, or arrive duplicated.
   - **Application Responsibility**: The application itself must handle these issues if reliability is required.
 
-# Transportation Layer
+### Transportation Layer
 ##### Transport Services and Protocols
 - **Primary Role**: To provide logical communication between application processes (not just hosts) running on different end systems.
 - **Sender Actions**: At the sender, the transport layer takes application-layer messages, breaks them into smaller chunks called segments, adds a transport-layer header, and passes these segments down to the network layer.
