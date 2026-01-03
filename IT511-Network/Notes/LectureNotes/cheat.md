@@ -1,10 +1,11 @@
 #### Reliable Data Transfer (RDT) - The Principles
 - **Goal**: To provide the abstraction of a perfectly reliable channel to the upper layers (the application processes), even though the underlying communication medium (network) is unreliable.
 - **Abstraction**: From the application's viewpoint, data sent by the sending process simply arrives correctly at the receiving process.
-##### RDT Protocol Interfaces (Service Primitives)
+#### RDT Protocol Interfaces (Service Primitives)
 **Sender Side**:
 - `rdt_send()`: Called by the upper-layer application to pass data down for reliable delivery.
 - `udt_send()`: Called by the RDT protocol to send a packet over the underlying unreliable channel.
+
 **Receiver Side**:
 - `rdt_rcv()`: Called when a packet arrives from the channel.
 - `deliver_data()`: Called by the RDT protocol to hand delivered data up to the application layer.
