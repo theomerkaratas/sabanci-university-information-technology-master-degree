@@ -1,20 +1,4 @@
-**DHCP (Dynamic Host Configuration Protocol):** Allow a host to dynamically obtain an IP address, subnet mask, default gateway, and DNS server info when joining a network. Enables "plug-and-play" networking.
-- **Process:**
-  1. DHCP Discover: Host broadcasts "Is there a DHCP server?"
-  2. DHCP Offer: Server(s) respond with a proposed IP address.
-  3. DHCP Request: Host broadcasts a request to use a specific offered address.
-  4. DHCP ACK: Server confirms and commits the lease.
-- **Lease**: Addresses are loaned for a period and can be reclaimed, enabling reuse.
-- **Server Location**: Often resides in the local router.
-
-##### How a Network Gets Its Address Block
-- **Process**: An organization (e.g., a company, university) obtains a block of IP addresses from its upstream Internet Service Provider (ISP).
-- **Example**: An ISP has a large block (`200.23.16.0/20`). It can subdivide this block into smaller chunks (e.g., `/23` blocks) and allocate them to different customer organizations.
-- **Hierarchical Allocation**: This creates a hierarchy: **IANA -> Regional Internet Registries (RIRs) -> ISPs -> Organizations -> Hosts**. This hierarchy is crucial for scalable routing.
-
-### Network-Layer Functions
-##### Review & Control Plane Approaches
-**Review of Key Functions:**
+**Network-Layer Functions:**
 - **Data Plane (Forwarding)**: The local, per-packet action of moving a packet from a router's input port to its output port. This is the "how" of packet movement.
 - **Control Plane (Routing)**: The network-wide process of determining the end-to-end paths that packets should follow. This is the "where" decision that populates forwarding tables.
 **Two Architectures for the Control Plane:**
