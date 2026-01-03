@@ -1,6 +1,6 @@
 Two Fundamental Transport Services:
-- UDP Sockets: Provide an interface to unreliable, connectionless datagram service. Messages have boundaries.
-- TCP Sockets: Provide an interface to reliable, connection-oriented, byte-stream service. Data is a continuous stream without inherent message boundaries.
+UDP Sockets: Provide an interface to unreliable, connectionless datagram service. Messages have boundaries.
+TCP Sockets: Provide an interface to reliable, connection-oriented, byte-stream service. Data is a continuous stream without inherent message boundaries.
 Demonstration Application: A simple client-server echo application with modification.
 1. Client: Reads a line of text from the user (keyboard) and sends it to the server.
 2. Server: Receives the data, converts all characters to uppercase.
