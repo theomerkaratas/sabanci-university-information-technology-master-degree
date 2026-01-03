@@ -46,6 +46,7 @@ Applications have different requirements from the underlying transport layer ser
 - **Congestion Control** (prevents overwhelming the network).
 - **Connection-oriented** (requires handshake setup).
 - **Does not provide:** Timing guarantees, minimum throughput, or built-in security.
+
 **UDP (User Datagram Protocol) Service:**
 - **Unreliable data transfer.** No guarantees of delivery, order, or non-duplication.
 - **Connectionless.** No setup delay.
