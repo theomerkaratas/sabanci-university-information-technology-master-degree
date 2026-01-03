@@ -1,37 +1,19 @@
-Two Fundamental Transport Services:
-- UDP Sockets: Provide an interface to unreliable, connectionless datagram service. Messages have boundaries.
-- TCP Sockets: Provide an interface to reliable, connection-oriented, byte-stream service. Data is a continuous stream without inherent message boundaries.
-1. Client: Reads a line of text from the user (keyboard) and sends it to the server.
-2. Server: Receives the data, converts all characters to uppercase.
-3. Server: Sends the modified (uppercase) data back to the client.
-4. Client: Receives the modified data and displays it on the screen.
-
-##### Socket Programming with UDP – Key Characteristics
-- **Connectionless**: There is no initial handshake (connection setup) between the client and server before data is exchanged.
-- **Addressing**: The sender must explicitly attach the destination IP address and port number to each individual datagram it sends.
-- **Receiver Information**: The receiver can extract the sender's IP address and port number from each received datagram, allowing it to know where to send a reply.
-- **Service Model**: From the application's viewpoint, UDP provides unreliable transfer of discrete datagrams (groups of bytes).
-  - **Possible Issues**: Datagrams may be lost, delivered out of order, or arrive duplicated.
-  - **Application Responsibility**: The application itself must handle these issues if reliability is required.
-
 ### Transportation Layer
-##### Transport Services and Protocols
 - **Primary Role**: To provide logical communication between application processes (not just hosts) running on different end systems.
 - **Sender Actions**: At the sender, the transport layer takes application-layer messages, breaks them into smaller chunks called segments, adds a transport-layer header, and passes these segments down to the network layer.
 - **Receiver Actions**: At the receiver, the transport layer reassembles the received segments back into the original messages and delivers them to the correct application process.
 - The Internet offers two primary transport protocols: TCP (reliable) and UDP (unreliable).
-
-##### Transport vs. Network Layer Services
+#### Transport vs. Network Layer Services
 - **Network Layer (IP)**: Provides logical communication between hosts. It is responsible for delivering packets from the source host to the destination host.
 - **Transport Layer (TCP/UDP)**: Provides logical communication between processes (applications) within those hosts. It extends the host-to-host delivery service of the network layer to a process-to-process delivery service.
 
 ##### Transport Layer Actions (Sender & Receiver)
-###### Sender Side
+**Sender Side**
 1. Receives an application-layer message from the application process above.
 2. Determines the values for the segment header fields (e.g., source/destination port numbers, sequence numbers for TCP, length for UDP).
 3. Creates a transport-layer segment by encapsulating the application message with this header.
 4. Passes the segment down to the network (IP) layer for delivery.
-###### Receiver Side
+**Receiver Side**
 1. Receives the segment from the network (IP) layer below.
 2. Checks header values (for error detection, demultiplexing, etc.).
 3. Extracts the application-layer message from the segment.
