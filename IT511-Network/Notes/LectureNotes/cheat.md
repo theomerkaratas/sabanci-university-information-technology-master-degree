@@ -1,18 +1,10 @@
-### Transportation Layer
-- **Primary Role**: To provide logical communication between application processes (not just hosts) running on different end systems.
-- **Sender Actions**: At the sender, the transport layer takes application-layer messages, breaks them into smaller chunks called segments, adds a transport-layer header, and passes these segments down to the network layer.
-- **Receiver Actions**: At the receiver, the transport layer reassembles the received segments back into the original messages and delivers them to the correct application process.
-- The Internet offers two primary transport protocols: TCP (reliable) and UDP (unreliable).
-#### Transport vs. Network Layer Services
-- **Network Layer (IP)**: Provides logical communication between hosts. It is responsible for delivering packets from the source host to the destination host.
-- **Transport Layer (TCP/UDP)**: Provides logical communication between processes (applications) within those hosts. It extends the host-to-host delivery service of the network layer to a process-to-process delivery service.
-
-##### Transport Layer Actions (Sender & Receiver)
+#### Transport Layer Actions (Sender & Receiver)
 **Sender Side**
 1. Receives an application-layer message from the application process above.
 2. Determines the values for the segment header fields (e.g., source/destination port numbers, sequence numbers for TCP, length for UDP).
 3. Creates a transport-layer segment by encapsulating the application message with this header.
 4. Passes the segment down to the network (IP) layer for delivery.
+
 **Receiver Side**
 1. Receives the segment from the network (IP) layer below.
 2. Checks header values (for error detection, demultiplexing, etc.).
