@@ -1,18 +1,4 @@
-#### Reliable Data Transfer (RDT) - The Principles
-- **Goal**: To provide the abstraction of a perfectly reliable channel to the upper layers (the application processes), even though the underlying communication medium (network) is unreliable.
-- **Abstraction**: From the application's viewpoint, data sent by the sending process simply arrives correctly at the receiving process.
-##### Reliable Data Transfer: Getting Started Methodology 
-- **Approach**: Incremental, layered development of the protocol. We start with a simple perfect channel and add complications one by one.
-- **Scope**: Focus on unidirectional data transfer (one sender, one receiver), but note that control information (ACKs) must flow in the reverse direction.
-- **Tool**: Finite State Machines (FSMs): Used to specify the behavior of the sender and receiver. An FSM defines states, events that cause transitions, and actions taken during transitions.
-##### Pipelined Protocols
-- **The Problem**: Stop-and-wait forces the sender to be idle for an entire RTT after each packet.
-- **The Solution**: Pipelining. Allow the sender to have multiple, "in-flight" packets (sent but not yet acknowledged) simultaneously.
-##### Benefits of Pipelining:
-- Dramatically increases sender utilization.
-- **Example**: With a window of 3 packets in flight, utilization increases by a factor of 3 (from ~0.00027 to ~0.0008 in the example—still low due to huge RTT/bandwidth product, but the principle holds).
-# Go-Back-N (GBN)
-##### Go-Back-N: Sender
+#### Go-Back-N: Sender
 - Core Concept: The sender maintains a sliding window of size N. It can transmit up to N consecutive packets without waiting for acknowledgements.
 - **Sender Window Visualization:**
   - `send_base`: Sequence number of the oldest unacknowledged packet.
