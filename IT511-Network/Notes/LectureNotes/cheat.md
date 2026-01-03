@@ -1,18 +1,6 @@
 #### Reliable Data Transfer (RDT) - The Principles
 - **Goal**: To provide the abstraction of a perfectly reliable channel to the upper layers (the application processes), even though the underlying communication medium (network) is unreliable.
 - **Abstraction**: From the application's viewpoint, data sent by the sending process simply arrives correctly at the receiving process.
-##### The Implementation Reality
-- Reality Check: The reliable channel is an abstraction. The actual implementation uses an unreliable channel (e.g., the network) that can lose, corrupt, or reorder packets.
-- Protocol's Job: To implement the reliable service by adding logic on both the sender and receiver sides. This logic forms the Reliable Data Transfer (RDT) protocol.
-
-##### Complexity Depends on Channel
-- The complexity of the RDT protocol is directly determined by the characteristics of the unreliable channel it must overcome.
-- The protocol design becomes more complex as the channel model becomes more hostile.
-
-##### The State Problem
-- **Fundamental Challenge**: The sender and receiver are separated entities. They cannot directly know each other's internal "state" (e.g., whether a packet was received).
-- **Solution via Messaging**: The only way for them to coordinate and infer each other's state is by exchanging control messages (like acknowledgements - ACKs) over the unreliable channel itself.
-
 ##### RDT Protocol Interfaces (Service Primitives)
 **Sender Side**:
 - `rdt_send()`: Called by the upper-layer application to pass data down for reliable delivery.
@@ -25,28 +13,6 @@
 - **Approach**: Incremental, layered development of the protocol. We start with a simple perfect channel and add complications one by one.
 - **Scope**: Focus on unidirectional data transfer (one sender, one receiver), but note that control information (ACKs) must flow in the reverse direction.
 - **Tool**: Finite State Machines (FSMs): Used to specify the behavior of the sender and receiver. An FSM defines states, events that cause transitions, and actions taken during transitions.
-
-##### rdt1.0 – Reliable Transfer Over a Reliable Channel
-- **Assumption**: The underlying channel is perfectly reliable (no bit errors, no loss). This is a hypothetical starting point.
-- **Protocol Logic**: Trivial.
-  - **Sender FSM**: Wait for data from above, packetize it, send it.
-  - **Receiver FSM**: Wait for packet from below, extract data, deliver it up.
-- No feedback needed because the channel is perfect.
-
-##### rdt2.0 – Channel With Bit Errors
-- **New Challenge**: The channel can flip bits (corrupt packets). We use a checksum to detect errors.
-- **Recovery Mechanism**:
-  - **Feedback**: Receiver sends explicit control messages back to sender:
-    - **ACK**: Acknowledgement (packet received OK).
-      - receiver explicitly tells sender that pkt received OK
-    - **NAK**: Negative Acknowledgement (packet had errors).
-      - receiver explicitly tells sender that pkt had errors
-  - **Retransmission**: Sender retransmits the packet upon receiving a NAK.
-- **Protocol Style**: Stop-and-Wait. The sender sends one packet and then stops to wait for the receiver's response (ACK or NAK) before sending the next.
-
-##### rdt2.0 – FSM Specification and Corrupted Packet Scenario
-- **Sender Logic**: Has two main states: "Wait for call from above" (ready to send) and "Wait for ACK or NAK" (waiting for feedback). On NAK or corrupted ACK, it retransmits.
-- **Receiver Logic**: Sends ACK for good packets, NAK for corrupted packets.
 
 ##### rdt2.0 Has a Fatal Flaw!
 - **The Problem**: What if the ACK or NAK message itself becomes corrupted? The sender cannot interpret the corrupted feedback and doesn't know if the receiver got the packet.
