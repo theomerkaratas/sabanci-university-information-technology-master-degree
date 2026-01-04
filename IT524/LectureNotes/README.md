@@ -995,7 +995,7 @@ public class Dog extends Animal {
 
 The space of possible designs that could be achieved by choosing different sets of alternatives is often called the design space
 
-<img src="design-space.png" width="600">
+<img src="design_space.png" width="600">
 
 ### Component
 
@@ -1433,7 +1433,7 @@ vs
   - Robustness Principle
   - Inversion of Control
 
-<img src="solid.png" width="400">
+<img src="solid.png" width="300">
 
 - Module
   - SOLID
