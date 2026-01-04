@@ -1,55 +1,50 @@
-# TrueBank Java Hesap Uygulaması
+# TrueBank Java Account Application
 
-## Proje Hakkında
+## About the Project
 
-Bu proje, Java ile yazılmış temel bir banka hesap yönetim uygulamasıdır. Hesap açma, para yatırma, çekme, transfer ve işlem geçmişi gibi temel bankacılık işlemlerini destekler. Konsol üzerinden veya (geliştirirseniz) web arayüzü ile kullanılabilir.
+This project is a basic bank account management application written in Java. It supports essential banking operations such as opening accounts, depositing money, withdrawing funds, transfers, and viewing transaction history. It can be used via the console or (if you choose to extend it) through a web interface.
 
-## Klasörler
+## Folders
 
-- `src/` : Tüm Java kaynak kodları burada bulunur.
-- `bin/` : Derlenmiş .class dosyaları burada tutulur.
+- `src/` : Contains all Java source code.
+- `bin/` : Stores the compiled `.class` files.
 
-## Terminalden Java Kodunu Çalıştırma
+## Running the Java Code from the Terminal
 
-### 1. Accounts Klasörüne Girin
+### 1. Navigate to the Accounts Folder
 
-Proje ana dizininde aşağıdaki komutla `TrueBank` klasörüne girin:
+From the project root directory, enter the `TrueBank` folder with the following command:
 
 ```
 cd ./TrueBank
 ```
 
-### 2. Java Dosyalarını Derleme
+### 2. Compile the Java Files
 
-Tüm Java kaynak dosyalarını derlemek için:
+To compile all Java source files:
 
 ```
 javac -d bin src/*.java
 ```
 
-### 3. Uygulamayı Çalıştırın
+### 3. Run the Application
 
-Ana sınıfı (örneğin Main) çalıştırmak için **aşağıdaki komutu terminale yazın**:
+To run the main class (for example, `Main`), **type the following command into the terminal**:
 
 ```sh
 java -cp bin Main
 ```
 
-## Özellikler
+## Features
 
-- Hesap açma, kapama
-- Para yatırma ve çekme
-- Hesaplar arası transfer (kur dönüşümlü)
-- Hesap durumu değiştirme
-- İşlem geçmişi görüntüleme
+- Open and close accounts
+- Deposit and withdraw money
+- Inter-account transfers (with currency conversion)
+- Change account status
+- View transaction history
 
-## Notlar
+## Developers
 
-- Uygulama varsayılan olarak konsol tabanlıdır. Web arayüzü eklemek için SparkJava veya Spring Boot gibi bir framework entegre edebilirsiniz.
-- Veritabanı bağlantısı için PostgreSQL kullanılır.
-
-## Geliştiriciler
-
-- [Ömer Karataş](https://www.linkedin.com/in/omerfarukkaratas/)
+- [Ömer Karataş](https://www.linkedin.com/in/theomerkaratas/)
 - [Erkin Mahmatlı](https://www.linkedin.com/in/erkin-mahmatlı-a201bb19b/)
 - [Onur Vatandaş](https://www.linkedin.com/in/onurvatandas/)

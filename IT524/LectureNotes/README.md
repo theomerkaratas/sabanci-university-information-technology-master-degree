@@ -185,7 +185,7 @@ class House {
 ```
 House houseObject = new House();
 
-[ object ]  --------------------->  [ class ]
+[ object ]  ----->  [ class ]
 ```
 
 ### Characteristics of Objects
@@ -262,7 +262,7 @@ myClass myObject = new myClass();
 - An object is an instance of a class.
 
 ```
-[ Instantiator ]  - - - - - - - - - - >  [ Instantiatee ]
+[ Instantiator ]  - - - - - - - - >  [ Instantiatee ]
 ```
 
 ### Type
@@ -331,9 +331,9 @@ abstract class MyAbstractClass {
           |
 +----------------------+
 |  ConcreteSubclass    |
-+----------------------+                                 +-----------------------------+
-| Operation() * - - - -| - - - - - - - - - - - - - - - > | Implementation pseudocode   |
-+----------------------+                                 +-----------------------------+
++----------------------+                     +-----------------------------+
+| Operation() * - - - -| - - - - - - - - - > | Implementation pseudocode   |
++----------------------+                     +-----------------------------+
 ```
 
 ### Abstract Class and Methods in OOPs Concepts
@@ -688,24 +688,24 @@ Parent class method
 **Example:**
 
 ```
-+------------------------------------+         +--------------------------------------------------+
-| Class MathTeacher extends Teacher  |         | Class Teacher {                                  |
-| implements Mathematician {         |         |     private String tname;                        |
-|                                    |         |     private double tsalary;                      |
-|     public void solveMathProb() {  |-------->|     private String mainsubject;                  |
-|         ...                        |         |                                                  |
-|     }                              |         |     public String getName() {                    |
-| }                                  |         |         return this.tname;                       |
-+------------------------------------+         |     }                                            |
-                 ▲                             |                                                  |
-                 |                             |     public String setName(String value) {        |
-                 |                             |         this.tname = value;                      |
-   +-----------------------------+             |     }                                            |
-   | Interface Mathematician {   |             |                                                  |
-   |     String expertiseInMath; |             |     // getter setter for salary and subject      |
-   |     void solveMathProb();   |             |     ....                                         |
-   | }                           |             | }                                                |
-   +-----------------------------+             +--------------------------------------------------+
++------------------------------------+         +-----------------------------------------------+
+| Class MathTeacher extends Teacher  |         | Class Teacher {                               |
+| implements Mathematician {         |         |     private String tname;                     |
+|                                    |         |     private double tsalary;                   |
+|     public void solveMathProb() {  |-------->|     private String mainsubject;               |
+|         ...                        |         |                                               |
+|     }                              |         |     public String getName() {                 |
+| }                                  |         |         return this.tname;                    |
++------------------------------------+         |     }                                         |
+                 ▲                             |                                               |
+                 |                             |     public String setName(String value) {     |
+                 |                             |         this.tname = value;                   |
+   +-----------------------------+             |     }                                         |
+   | Interface Mathematician {   |             |                                               |
+   |     String expertiseInMath; |             |     // getter setter for salary and subject   |
+   |     void solveMathProb();   |             |     ....                                      |
+   | }                           |             | }                                             |
+   +-----------------------------+             +-----------------------------------------------+
 ```
 
 Example of class implements an interface:
@@ -1256,13 +1256,13 @@ A system that is part of a larger system, and which has a definite interface
 #### Use Polymorphism Instead
 
 ```
-                +------------------+
-                |      Shape       |
-                +------------------+
-                | + draw()         |
-                +------------------+
-                        ▲
-                        |
+                       +-----------+
+                       |   Shape   |
+                       +-----------+
+                       | + draw()  |
+                       +-----------+
+                             ▲
+                             |
         -----------------------------------------
         |                    |                  |
 +---------------+   +----------------+   +-------------+
