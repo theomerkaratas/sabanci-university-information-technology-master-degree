@@ -980,6 +980,12 @@ public class Dog extends Animal {
   - Simplest Working Thing
   - Avoid Premature Optimization
   - Boy-Scout Rule
+- Inter-Module
+  - Minimize Coupling
+  - Law of Demeter
+  - Composition over Inheritance
+  - Robustness Principle
+  - Inversion of Control
 
 ### Keep It Simple Stupid (KISS)
 
@@ -1059,3 +1065,30 @@ public class Dog extends Animal {
 - How
   - With each commit make sure it does not degrade the codebase quality.
   - Any time someone sees some code that isn't as clear as it should be, they should take the opportunity to fix it right there and then.
+
+### Minimize Coupling
+
+- Coupling between modules/components is their degree of mutual interdependence; lower coupling is better.
+- Why
+  - Coupling is the probability that code unit "B" will "break" after an unknown change to code unit "A".
+  - A change in one module usually forces a ripple effect of changes in other modules.
+- How
+  - Eliminate, minimize, and reduce complexity of necessary relationships.
+  - By hiding implementation details, coupling is reduced.
+  - Apply the Law of Demeter.
+
+### Law of Demeter
+
+- Governs the communication structure within an object-oriented design
+- Principle of least knowledge → Don't talk to strangers!
+- Why
+  - It usually tightens coupling
+  - It might reveal too much implementation details
+- How
+  - A method of an object may only call methods of:
+    - The object itself.
+    - An argument of the method.
+    - Any object created within the method.
+    - Any direct properties/fields of the object.
+  - The law can be stated simply as "use only one dot".
+    - the code a.b.Method() breaks the law where a.Method() does not.
