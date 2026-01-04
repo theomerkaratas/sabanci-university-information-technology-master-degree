@@ -1,33 +1,45 @@
-# 🎓 Information Technology Master's Program Projects
+# Sabancı University Master’s Degree Projects
 
-This repository contains the projects I am developing as part of my **Master’s in Information Technology at Sabancı University**.  
-Each project reflects coursework, practical exercises, and applied research across multiple areas of IT.
+Welcome to my **Sabancı University Master’s Degree Projects** repository! 🎓  
+This repository contains the projects, assignments, course materials, and practical exercises completed during my **Master of Science in Information Technology** at **Sabancı University**.
 
----
-
-## 📘 About
-
-The program covers a variety of domains in information technology.  
-This repository organizes my projects into key subject areas:
-
-- **🌐 Networks** – network protocols, architectures, and distributed systems  
-- **🗄️ Databases** – design, SQL, modeling, and data management  
-- **💻 Software Engineering** – application development, software design, and methodologies  
-- *(additional subjects will be added as I progress in the program)*
+It aims to organize and share academic work from graduate-level IT courses so that you can explore the topics, assignments, and practical work I’ve completed throughout the program.
 
 ---
 
+## 📘 Course List
 
-## 📂 Repository Structure
+| Course Code | Course Name |
+|-------------|-------------|
+| IT 501 | Introduction to Computer Programming |
+| IT 511 | Fundamentals of Data Communication and TCP/IP Networks |
+| IT 524 | Object-Oriented Programming with Java |
+| IT 553 | Database Design and Management |
+| IT 513 | System and Network Security (Elective) |
+| IT 526 | Enterprise Java Frameworks and Design Patterns (Elective) |
+| IT 535 | Mobile Programming (Elective) |
+| IT 537 | Interactive Front-End Programming (Elective) |
+| IT 538 | Software Testing (Elective) |
+| IT 563 | Agile Project Management Methodology (Elective) |
+| IT 566 | IT Governance |
+| IT 592 | Project Course |
 
-Each folder represents a course or project. Every project includes its own `README.md` with setup instructions and documentation.
+The folders and materials in this repository are grouped based on the courses listed above.
 
-Example structure:
+---
 
-- `IT524-BankAccountProject/` → Java console-based banking application. Features account creation, deposit/withdrawal, transfers (with currency conversion), account status management, and transaction history. See the project README for usage and details.
-- `IT553-mysql-project/` → SQL and database design projects, including sample data, triggers, and web interface (PHP/MySQL). See the project README for setup and queries.
+## 🧠 What’s Inside
 
-----
+This repository includes:
+
+- Projects and assignments from graduate IT courses  
+- Notes and documentation related to coursework  
+- Code samples and practical exercises  
+- Database schemas, reports, and development artifacts
+
+Each course folder may contain documentation (PDF/Markdown), source code, and instructions for running or reviewing the project.
+
+---
 
 ## 🎯 Purpose of This Repository
 
@@ -35,5 +47,3 @@ Example structure:
 - **Hands-on practice** – apply theory in real projects  
 - **Reusability** – provide templates and solutions for future work  
 - **Showcase** – highlight my technical skills and academic journey  
-
----
