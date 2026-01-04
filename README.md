@@ -3,6 +3,8 @@
 Welcome to my **Sabancı University Master’s Degree Projects** repository! 🎓  
 This repository contains the projects, assignments, course materials, and practical exercises completed during my **Master of Science in Information Technology** at **Sabancı University**.
 
+Course info -> https://fens.sabanciuniv.edu/en/msit
+
 It aims to organize and share academic work from graduate-level IT courses so that you can explore the topics, assignments, and practical work I’ve completed throughout the program.
 
 ---
@@ -15,12 +17,12 @@ It aims to organize and share academic work from graduate-level IT courses so th
 | IT 511 | Fundamentals of Data Communication and TCP/IP Networks |
 | IT 524 | Object-Oriented Programming with Java |
 | IT 553 | Database Design and Management |
-| IT 513 | System and Network Security (Elective) |
-| IT 526 | Enterprise Java Frameworks and Design Patterns (Elective) |
-| IT 535 | Mobile Programming (Elective) |
-| IT 537 | Interactive Front-End Programming (Elective) |
-| IT 538 | Software Testing (Elective) |
-| IT 563 | Agile Project Management Methodology (Elective) |
+| IT 513 | System and Network Security |
+| IT 526 | Enterprise Java Frameworks and Design Patterns |
+| IT 535 | Mobile Programming |
+| IT 537 | Interactive Front-End Programming |
+| IT 538 | Software Testing |
+| IT 563 | Agile Project Management Methodology |
 | IT 566 | IT Governance |
 | IT 592 | Project Course |
 
