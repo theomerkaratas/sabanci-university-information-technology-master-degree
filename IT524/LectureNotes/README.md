@@ -1431,7 +1431,7 @@ vs
   - Law of Demeter
   - Composition over Inheritance
   - Robustness Principle
-  - Inversion of Control <img src="rdt2.solid.png" width="400">
+  - Inversion of Control <img src="solid.png" width="400">
 - Module
   - SOLID
     - Single Responsibility Principle
@@ -1695,3 +1695,681 @@ vs
   - abstract out dependences
 
 # CHAPTER 5: CLEAN CODE
+
+## 1. Meaningful Names
+
+### 1. Core Principle: Names Should Be Self-Explanatory
+
+- A name (variable, function, class) must immediately communicate:
+  - **Why it exists** – Its purpose and rationale.
+  - **What it does** – Its function or the data it holds.
+  - **How it is used** – Its role in the code without needing additional context.
+- Example (Bad vs Good):
+  - ❌ `int d`; → Meaningless, requires a comment to understand.
+  - ✅ `int elapsedTimeInDays`; → Instantly clear purpose and unit of measurement.
+
+### 2. Avoid Disinformation
+
+- Never create names that mislead or give false hints about their purpose or type.
+- Example: Do not name a collection `accountList` unless its type is specifically a `List`. If the underlying type is a `Set` or a general `Collection`, this name is disinformation.
+- Better Alternatives: Use neutral plurals like `accounts`, `accountGroup`, or `accountCollection`.
+
+### 3. Use Searchable Names
+
+- Single-letter names (like `i`, `j`, `k`) are acceptable only as loop counters in small, local scope.
+- For constants or variables used in multiple places, imperative to use names that are easy to find via search.
+  - ❌ Finding `7` or `MAX` is nearly impossible.
+  - ✅ `MAX_USERS_PER_PAGE` is highly searchable and clear.
+
+### 4. Naming Interfaces and Implementations
+
+- Do NOT prefix interfaces with `I` (e.g., `IShapeFactory`). This is an outdated convention and adds unnecessary clutter.
+- DO encode the implementation, not the interface.
+  - Interface: `ShapeFactory`
+  - Concrete Implementation: `ShapeFactoryImpl`, `CachedShapeFactory`, `RemoteShapeFactory`
+- **Why?** It keeps the interface name clean and focuses the implementation name on how it differs.
+
+### 5. Class and Method Names
+
+- **Classes & Objects (Nouns):**
+  - Should be nouns or noun phrases.
+  - Good Examples: `Customer`, `AccountParser`, `HttpRequest`.
+  - Bad Example: A class named `Manage` or `Process` (these are verbs).
+- **Methods (Verbs):**
+  -Should be verbs or verb phrases, clearly stating the action they perform.
+  - Good Examples: `calculateTotal()`, `sendNotification()`, `isValid()`.
+- **Constructors & Static Factory Methods:**
+  - For overloaded constructors, prefer static factory methods with descriptive names.
+  - This is clearer than having multiple constructors that differ only in parameter order/type.
+  - Example: `Complex.fromRealNumber(23.0)` is far more readable than `new Complex(23.0, 0.0)`.
+  - Pro Tip: You can enforce the use of these factory methods by making the corresponding constructors private.
+
+### 6. Don’t Pun (Avoid Ambiguity)
+
+- Goal: Code should be easy to understand at a glance, not require deep study.
+- Rule: Avoid using the same word for two different concepts.
+  - ❌ If you have an add method that concatenates two strings in one class, don't use add in another class to insert an element into a collection. Use insert or append instead for clarity.
+  - Consistency in naming reduces cognitive load.
+
+### 7. Don’t Add Gratuitous Context (Be Precise)
+
+- Shorter, precise names are better than long, redundant ones.
+- Only add as much context as is necessary for clarity. Do not repeat the class name in every member variable.
+- Example: Inside an `Address` class:
+  - Bad: `addressStreet`, `addressCity` (The class name `Address` is already the context).
+  - Good: `street`, c`ity.
+- Instance Names: `shoppingAddress` and `homeAddress` are excellent instance names for objects of the `Address` class.
+- Class-Level Context: If you have fundamentally different types of addresses (e.g., a network `MacAddress` or a `Url`), they should be separate classes, not just differently-named fields.
+
+## 2. Functions
+
+### 1. Functions Should Be Small
+
+- The first rule about functions is that they should be small
+- The second rule is that they should be even smaller than that
+- Ideally:
+  - Lines of code: Just two, three, or four lines
+  - Should be transparently obvious what they do
+  - Should tell a story when combined with other functions
+
+#### Blocks and Indenting
+
+- The indent level of a function should not be greater than one or two
+- Deep nesting is a sign that a function is doing too much
+
+### 2. Do One Thing
+
+- Functions should do one thing
+- They should do it well
+- They should do it only
+
+#### How to Identify "One Thing"
+
+- A function is doing one thing if you can describe its purpose at one level of abstraction
+- Test: If you can extract another function from it with a name that isn't just a restatement of its implementation, it's doing more than one thing
+
+### 3. One Level of Abstraction per Function
+
+- All statements within a function should be at the same level of abstraction
+- Mixing abstraction levels makes functions harder to understand and maintain
+
+### 4. The Stepdown Rule
+
+- Code should read like a top-down narrative
+- Each function should lead to the next at the next level of detail
+- Descent one abstraction level at a time from high-level concepts to implementation details
+
+### 5. Switch Statements
+
+- Problem: Switch statements inherently do N things (violate SRP)
+- Solution:
+  1. Bury them in a low-level class
+  2. Never repeat the same switch statement
+  3. Use polymorphism instead whenever possible
+- Factory Pattern: A great way to hide switch statements in factory implementations
+
+### 6. Use Descriptive Names
+
+- A long descriptive name is better than a short enigmatic name
+- A long descriptive name is better than a long descriptive comment
+- Be consistent in naming:
+  1. Use the same phrases, nouns, and verbs across related functions
+  2. Consistent naming makes code intuitive and meets user expectations
+
+### 7. Function Arguments
+
+#### Ideal Number of Arguments
+
+1. **Best**: Zero arguments (niladic) - easiest to test and understand
+2. **Good**: One argument (monadic)
+3. **Acceptable**: Two arguments (dyadic)
+4. **Avoid**: Three arguments (triadic) - should be avoided where possible
+5. **Never use**: More than three (polyadic) - requires special justification and still shouldn't be used
+
+#### Why Fewer Arguments Are Better
+
+- Testing complexity: Consider writing test cases for all combinations of arguments
+- Cognitive load: More arguments = harder to understand and use correctly
+
+#### Avoid Output Arguments
+
+- If a function must transform its input, it should return a value rather than modify arguments
+- Output arguments are confusing and error-prone
+
+### 8. Flag Arguments and Argument Objects
+
+#### Flag Arguments Are Ugly
+
+- Passing a boolean into a function is a terrible practice
+- It means the function does two things, not one:
+  - `true` → do one thing
+  - `false` → do another thing
+- Better: Split into two separate functions
+
+#### Argument Objects
+
+- If a function needs more than 2-3 arguments, some should be wrapped into a class
+- Example:
+  - ❌ `makeCircle(x, y, radius, color, thickness)`
+  - ✅ `makeCircle(centerPoint, circleProperties)`
+
+### 9. Command Query Separation
+
+- Functions should either:
+  - Do something (command - changes state), or
+  - Answer something (query - returns data), but not both
+- Example:
+  - ❌ `if (set("username", "john"))` ← Does this set AND check?
+  - ✅ `setUsername("john")`; and separately `if (usernameExists("john"))`
+
+### 10. Prefer Exceptions to Error Codes
+
+- Error codes:
+  - Require immediate checking
+  - Lead to nested if statements
+  - Clutter the main logic
+- Exceptions:
+  - Separate error handling from main logic
+  - Can be caught at appropriate levels
+
+### 11. Error Handling Is One Thing
+
+- Functions that handle errors should do nothing else
+- If a function has both business logic and error handling, it's doing two things
+
+### 12. Have No Side Effects
+
+- Side effects are lies: Your function promises to do one thing but secretly does others
+- Hidden consequences create confusing bugs and make code hard to reason about
+
+### 13. Extract Try-Catch Blocks
+
+- Try-catch blocks are ugly and should be extracted into their own functions
+- This keeps the main logic clean and separates error handling concerns
+
+### 14. Eliminate Duplication
+
+- Duplication may be the root of all evil in software
+- Since the invention of subroutines, software development has been an ongoing attempt to eliminate duplication
+- Every piece of knowledge should have a single, unambiguous representation
+
+### 15. Functions as Storytelling
+
+- Master programmers think of systems as stories to be told rather than programs to be written
+- Well-named, small functions that do one thing create a narrative that explains the system's behavior
+- Code should read like well-written prose
+
+## 3. Comments
+
+#### 1. The Nature of Comments: Useful but Dangerous
+
+- Comments should be seen as a necessary evil, not a primary tool
+- Proper use: To compensate for failure to express intent clearly in code
+- Fundamental problem: Code evolves, comments don't always follow
+
+##### The Maintenance Challenge
+
+- As code changes and moves:
+  - Comments don't always get updated
+  - Comments become orphaned from the code they describe
+  - Result: Comments decrease accuracy and can provide misinformation
+
+##### Primary Principle
+
+- Clear, expressive code with few comments is far superior to:
+  - Cluttered, complex code with many comments
+- Better approach: Spend time cleaning the code rather than explaining messy code with comments
+
+#### 2. Explain Yourself in Code (Not Comments)
+
+- Before writing a comment, ask: "Can I make the code itself clearer?"
+- Examples:
+  - ❌ Comment: `// Check if user is over 18`
+  - ✅ Code: `if (user.isAdult())`
+  - ❌ Comment: `// Calculate total price including tax`
+  - ✅ Code: `calculateTotalWithTax()`
+
+#### 3. Good Comments
+
+##### Legal Comments
+
+- Copyright and licensing information
+- Typically at the top of files
+
+**Example:**
+
+```java
+// Copyright 2024 Our Company. All rights reserved.
+// Licensed under the MIT License.
+```
+
+##### Informative Comments
+
+- Provide basic information that can't be expressed in code
+
+**Example:**
+
+```java
+// Returns an instance of the Responder being tested.
+protected abstract Responder responderInstance();
+
+// Format matched kk:mm:ss EEE, MMM dd, yyyy
+Pattern timeMatcher = Pattern.compile("\\d*:\\d*:\\d* \\w*, \\w* \\d*, \\d*");
+```
+
+##### Explanation of Intent
+
+- Clarify why a particular approach was chosen
+- Explain design decisions or business logic
+
+**Example:**
+
+```java
+// Using LinkedList here because we need constant-time removals
+// in the middle of the list when processing live data streams.
+List<DataPoint> liveData = new LinkedList<>();
+```
+
+##### Clarification Comments
+
+- Translate obscure arguments or return values into readable form
+- Use when renaming isn't an option (e.g., external APIs, legacy code)
+
+**Example:**
+
+```java
+// The 'r' parameter represents the compression ratio (0.0 to 1.0)
+// where 1.0 is maximum compression, 0.0 is no compression
+public Image compress(Image source, float r) {
+    // ...
+}
+```
+
+##### Warning of Consequences
+
+- Alert other programmers about non-obvious side effects or dangers
+
+**Example:**
+
+```java
+// WARNING: This method has O(n²) complexity. Don't use with large datasets.
+public List<String> findDuplicates(List<String> items) {
+    // ...
+}
+
+// This test takes ~3 minutes to run on the CI server
+@Test
+public void testFullIntegration() {
+    // ...
+}
+```
+
+##### TODO Comments
+
+- Mark temporary workarounds or planned improvements
+- Important: Include context and owner if possible
+
+**Example:**
+
+```java
+// TODO: Refactor this to use the new PaymentService once it's stable
+//       Assigned to: John (johnd@company.com)
+public void processPayment(Payment payment) {
+    legacyPaymentProcessor.process(payment);  // Temporary solution
+}
+
+// TODO-JIRA: PROJ-123 - Handle edge case when user has multiple roles
+```
+
+##### Amplification Comments
+
+- Emphasize the importance of something that might seem trivial
+- Highlight non-obvious implications
+
+**Example:**
+
+```java
+String input = userInput.trim();
+// Note: The trim() is crucial here because the legacy system
+// treats trailing spaces as significant characters in the ID field.
+```
+
+#### 4. Bad Comments (Anti-Patterns)
+
+##### Commented-Out Code
+
+- Never leave commented-out code in the codebase
+- Reasons it's bad:
+  - Creates clutter and distraction
+  - Outdated (no longer compiles or works with current system)
+  - Version control exists for a reason
+- The right approach:
+  - If you need old code: Check out from source control (Git, SVN, etc.)
+  - Delete commented code with confidence
+
+##### Redundant Comments
+
+- Comments that simply repeat what the code already says
+
+**Example:**
+
+```java
+// Bad:
+// Get the user's name
+String name = user.getName();
+
+// Set the counter to zero
+counter = 0;
+
+// Loop through all items
+for (Item item : items) {
+    // Process each item
+    process(item);
+}
+```
+
+##### Journal/Log Comments
+
+- Tracking changes within the code file itself
+
+**Example:**
+
+```java
+// 2024-01-15: Added email validation - John
+// 2024-01-20: Fixed null pointer bug - Sarah
+// 2024-02-01: Updated for new API version - Mike
+```
+
+- Better: Use version control commit messages
+
+##### Position Markers
+
+- Unnecessary banners and separators
+
+**Example:**
+
+```java
+///////////////////////////////////////////////
+// MEMBER VARIABLES
+///////////////////////////////////////////////
+
+// ********** HELPER METHODS **********
+```
+
+- Better: Let the code structure speak for itself
+
+##### Noise Comments
+
+- Comments that add no value
+
+**Examples:**
+
+```java
+// Default constructor
+public User() {
+    // ...
+}
+
+/* Getter for name */
+public String getName() {
+    return name;
+}
+```
+
+```
+         ┌─────────────────┐
+         │ Need to explain │
+         │ something?      │
+         └────────┬────────┘
+                  │
+    ┌─────────────┴─────────────┐
+    │ Can the code itself be   │
+    │ made clearer instead?    │
+    └─────────────┬─────────────┘
+                  │
+         ┌────────┴────────┐
+    Yes ─┤ Refactor code   ├─► Cleaner code, no comment needed
+         │ Better names    │
+         │ Smaller methods │
+         └─────────────────┘
+                  │ No
+                  ▼
+         ┌─────────────────┐
+         │ Is it for:      │
+         │ • Legal info    │
+         │ • Why not how   │
+         │ • Warnings      │
+         │ • Complex logic │
+         │ • API docs      │
+         └────────┬────────┘
+                  │ Yes
+                  ▼
+         ┌─────────────────┐
+         │ Write concise,  │
+         │ accurate comment│
+         └─────────────────┘
+```
+
+## 4. Formatting
+
+### 1. Vertical Formatting
+
+#### The Newspaper Metaphor
+
+- Code should read like a well-structured newspaper article:
+- Headline: The class name at the top tells you what it's about
+- First paragraph: High-level overview (public methods, main functionality)
+- Following paragraphs: Increasing levels of detail as you scroll down
+- Details at the bottom: Private methods, helper functions, implementation details
+
+#### Vertical Distance Principle
+
+- Closely related concepts should be vertically close to each other
+- Unrelated concepts should be separated vertically
+
+#### Variable Declaration Placement
+
+##### Local Variables
+
+- Declare as close as possible to their first usage
+- Avoid declaring all variables at the top of a function (old C-style)
+
+**Example:**
+
+```java
+// Good: Variable declared near usage
+public void processOrder(Order order) {
+    // ... some code ...
+
+    // Calculate tax when needed
+    BigDecimal taxRate = getTaxRate(order.getState());
+    BigDecimal taxAmount = order.getSubtotal().multiply(taxRate);
+
+    // ... more code that uses taxAmount ...
+}
+
+// Bad: All variables at top, far from usage
+public void processOrder(Order order) {
+    BigDecimal taxRate;
+    BigDecimal taxAmount;
+    String customerName;
+    Date orderDate;
+
+    // ... 20 lines of code ...
+
+    taxRate = getTaxRate(order.getState());  // Far from declaration
+}
+```
+
+##### Instance Variables
+
+- Declare at the top of the class
+- Consistent location helps readers find them quickly
+- Group related variables together
+
+**Example:**
+
+```java
+public class CustomerService {
+    // Configuration-related variables
+    private final int maxRetryAttempts;
+    private final Duration timeout;
+
+    // Dependency injections
+    private final CustomerRepository repository;
+    private final EmailService emailService;
+
+    // State variables
+    private int activeSessions;
+    private Queue<CustomerRequest> pendingRequests;
+
+    // ... constructors and methods follow ...
+}
+```
+
+#### Function Organization
+
+##### Dependent Functions
+
+- Functions that call each other should be vertically close
+- Caller should be above callee when possible
+- This creates a natural reading flow
+
+**Example:**
+
+```java
+public class OrderProcessor {
+    // High-level public API (top of the class)
+    public Receipt processOrder(Order order) {
+        validateOrder(order);
+        Payment payment = processPayment(order);
+        return generateReceipt(order, payment);
+    }
+
+    // Medium-level helper (called by processOrder)
+    private Payment processPayment(Order order) {
+        BigDecimal amount = calculateTotalAmount(order);
+        return chargeCreditCard(order.getCustomer(), amount);
+    }
+
+    // Low-level implementation details (bottom of the class)
+    private BigDecimal calculateTotalAmount(Order order) {
+        BigDecimal subtotal = order.getSubtotal();
+        BigDecimal tax = calculateTax(subtotal);
+        BigDecimal shipping = calculateShipping(order);
+        return subtotal.add(tax).add(shipping);
+    }
+
+    private BigDecimal calculateTax(BigDecimal amount) {
+        return amount.multiply(TAX_RATE);
+    }
+
+    private BigDecimal calculateShipping(Order order) {
+        // ... shipping calculation logic ...
+    }
+}
+```
+
+#### Vertical Ordering & Flow
+
+- High-level concepts at the top, details at the bottom
+- Function call dependencies should point downward
+- Create a smooth reading experience: Start general, get specific as you go down
+- Reader should never need to jump around to understand the code
+
+### 2. Horizontal Formatting
+
+#### Line Length
+
+- Modern standard: 80-120 characters maximum
+- Rationale:
+  - Fits comfortably on most screens
+  - Allows side-by-side code review
+  - Encourages breaking complex expressions
+- Exception: Long strings or URLs might exceed this limit
+
+#### Horizontal Openness and Density
+
+##### Use Whitespace for Emphasis
+
+- Add spaces around assignment operators and binary operators
+- This accentuates the major elements (left side vs right side)
+
+**Example:**
+
+```java
+// Good: Clear separation of elements
+int total = initialValue + additionalItems * multiplier;
+
+// Bad: Too cramped
+int total=initialValue+additionalItems*multiplier;
+
+// Also good for complex expressions
+boolean isValid = (user != null)
+                  && (user.isActive())
+                  && (user.hasPermission(Permission.EDIT));
+```
+
+##### No Space Before Parentheses for Function Calls
+
+- Function names and their parentheses are closely related
+- Keep them together without spaces
+
+**Example:**
+
+```java
+// Good: Function name and parenthesis together
+processOrder(order);
+calculateTotal(items, taxRate);
+
+// Bad: Unnecessary space
+processOrder (order);
+calculateTotal (items, taxRate);
+```
+
+##### Spacing in Parameter Lists
+
+- No space after opening parenthesis
+- No space before closing parenthesis
+- Space after commas to separate parameters
+
+**Example:**
+
+```java
+// Good: Clean, readable parameter lists
+public void configure(String host, int port, boolean secure) {
+    // ...
+}
+
+// Bad: Inconsistent spacing
+public void configure( String host,int port ,boolean secure ) {
+    // ...
+}
+```
+
+#### Indentation
+
+- Consistent indentation is crucial for readability
+- Standard: 2 or 4 spaces (choose one and stick to it)
+- Never mix tabs and spaces
+
+**Example:**
+
+```java
+// Good: Clear indentation shows structure
+public List<Order> findRecentOrders(Date startDate) {
+    List<Order> results = new ArrayList<>();
+
+    for (Customer customer : getAllCustomers()) {
+        if (customer.isActive()) {
+            for (Order order : customer.getOrders()) {
+                if (order.getDate().after(startDate)) {
+                    results.add(order);
+                }
+            }
+        }
+    }
+
+    return results;
+}
+```
