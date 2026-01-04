@@ -1431,7 +1431,10 @@ vs
   - Law of Demeter
   - Composition over Inheritance
   - Robustness Principle
-  - Inversion of Control <img src="solid.png" width="400">
+  - Inversion of Control
+
+<img src="solid.png" width="400">
+
 - Module
   - SOLID
     - Single Responsibility Principle
