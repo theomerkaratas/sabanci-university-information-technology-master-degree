@@ -965,6 +965,452 @@ public class Dog extends Animal {
 
 # CHAPTER 3
 
+### The Process of Design
+
+- Design is a problem-solving process whose objective is to find and describe a way:
+  - To implement the system’s functional requirements...
+  - While respecting the constraints imposed by the quality, platform and process requirements...
+    - including the budget
+  - And while adhering to general principles of good quality
+
+### Design as a Series of Decisions
+
+- A designer is faced with a series of design issues
+  - These are sub-problems of the overall design problem.
+  - Each issue normally has several alternative solutions:
+    - design options.
+  - The designer makes a design decision to resolve each issue.
+    - This process involves choosing the best option from among the alternatives
+
+### Making Decisions
+
+- To make each design decision, the software engineer uses the knowledge of
+  - the requirements
+  - the design as created so far
+  - the technology available
+  - software design principles and ‘best practices’
+  - what has worked well in the past
+
+### Design Space
+
+The space of possible designs that could be achieved by choosing different sets of alternatives is often called the design space
+
+<img src="design-space.png" width="600">
+
+### Component
+
+- Any piece of software or hardware that has a clear role
+  - A component can be isolated, allowing you to replace it with a different component that has equivalent functionality
+  - E.g., frameworks, source code files, executables, DLLs, and databases
+  - Many components are designed to be reusable
+  - Conversely, others perform special-purpose functions
+
+### Module
+
+- A component that is defined at the programming language level
+  - For example, methods, classes and packages are modules in Java
+
+### System
+
+- A logical entity, having a set of definable responsibilities or objectives, and consisting of hardware, software or both
+  - A system can have a specification which is then implemented by a collection of components
+  - A system continues to exist, even if its components are changed or replaced
+  - The goal of requirements analysis is to determine the responsibilities of a system
+
+### Subsystem
+
+A system that is part of a larger system, and which has a definite interface
+
+### UML diagram of system parts
+
+<img src="uml_diagram.png" width="600">
+
+### Top-Down and Bottom-Up Design
+
+- Top-down design
+  - First design the very high level structure of the system
+  - Then gradually work down to detailed decisions about low-level constructs
+  - Finally arrive at detailed decisions such as:
+    - the format of particular data items;
+    - the individual algorithms that will be used
+- Bottom-up design
+  - Make decisions about reusable low-level utilities.
+  - Then decide how these will be put together to create high-level constructs.
+
+| Top-down design                                                          | Bottom-up design                                                                                         |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| Emphasis is on planning and complete understanding of the system.        | Emphasis is on coding and early testing, which can begin as soon as the first module has been specified. |
+| No coding can begin until a sufficient level of detail has been reached. | Re-usability of code is one of the main benefits.                                                        |
+| —                                                                        | Since the big picture is missing, you may not always build a system from the pieces you’ve started.      |
+
+- A mix of top-down and bottom-up approaches are normally used
+  - Top-down design is almost always needed to give the system a good structure
+  - Bottom-up design is normally useful so that reusable components can be created
+
+### Different Aspects of Design
+
+- Architecture design:
+  - The division into subsystems and components,
+  - How these will be connected
+  - How they will interact
+  - Their interfaces
+- Class design
+  - The various features of classes
+- User interface design
+- Algorithm design
+  - The design of computational mechanisms
+- Protocol design:
+  - The design of communications protocol.
+
+### Principles Leading to Good Design
+
+- Overall goals of good design:
+  - Increasing profit by reducing cost and increasing revenue
+  - Ensuring that we actually conform with the requirements
+  - Accelerating development
+  - Increasing qualities such as
+    - Usability
+    - Efficiency
+    - Reliability
+    - Maintainability
+    - Reusability
+
+### Design Principle 1: Divide and conquer
+
+- Trying to deal with something big all at once is normally much harder than dealing with a series of smaller things
+  - Separate people can work on each part
+  - An individual software engineer can specialize
+  - Each individual component is smaller, and therefore easier to understand
+  - Parts can be replaced or changed without having to replace or extensively change other parts
+
+#### Ways of Dividing a Software System
+
+- A distributed system is divided up into clients and servers
+- A system is divided up into subsystems
+- A subsystem can be divided up into one or more packages
+- A package is divided up into classes
+- A class is divided up into methods
+
+### Design Principle 2: Increase Cohesion Where Possible
+
+- A subsystem or module has high cohesion if it keeps together things that are related to each other, and keeps out other things
+- This makes the system as a whole easier to understand and change
+- Type of cohesion:
+  - Functional
+  - Layer
+  - Communicational
+  - Sequential
+  - Procedural
+  - Temporal
+  - Utility
+
+#### Functional Cohesion
+
+- This is achieved when all the code that computes a particular result is kept together - and everything else is kept out
+  - i.e. when a module only performs a single computation, and returns a result, without having side-effects
+- Examples of high cohesion
+  - `sin()`
+  - `getEmployeeName()`
+  - `calcLoanPayment()`
+  - `getIconLocation()`
+- Examples of low cohesion
+  - `getEmployeeNameAndChangeHerSalary()`
+- Benefits to the system
+  - Easier to understand
+  - More reusable
+  - Easier to replace
+- Modules that update a database, create a new file or interact with the user are not functionally cohesive
+
+#### Layer Cohesion
+
+- All the facilities for providing or accessing a set of related services are kept together, and everything else is kept out
+  - The layers should form a hierarchy
+    - Higher layers can access services of lower layers,
+    - Lower layers do not access higher layers
+  - The set of procedures through which a layer provides its services is the application programming interface (API)
+  - You can replace a layer without having any impact on the other layers
+    - You just replicate the API
+
+##### Example of The Use of Layers
+
+<img src="example_of_the_use_of_layers.png" width="600">
+
+### Communicational Cohesion
+
+- All the modules that access or manipulate certain data are kept together (e.g. in the same class) - and everything else is kept out
+  - A class would have good communicational cohesion
+    - If all the system’s facilities for storing and manipulating its data are contained in this class.
+    - If the class does not do anything other than manage its data.
+  - Main advantage: When you need to make changes to the data, you find all the code in one place
+
+#### Sequential Cohesion
+
+- Procedures, in which one procedure provides input to the next, are kept together – and everything else is kept out
+  - You should achieve sequential cohesion, only once you have already achieved the preceding types of cohesion
+
+```java
+    public void processFile(){
+        File f = openFile();
+        Content c = f.readFile();
+        Result r = c.makeComputations();
+        r.print();
+           f.closeFile();
+    }
+```
+
+#### Procedural Cohesion
+
+- Procedures that are used one after another are kept together
+  - Even if one does not necessarily provide input to the next
+  - Weaker than sequential cohesion
+
+```java
+    public void  printSomething(){
+        printRevenueReport();
+        printExpenseReport();
+        printEmployeePhoneNumbers();
+        printInvitations();
+    }
+```
+
+#### Temporal Cohesion
+
+- Operations that are performed during the same phase of the execution of the program are kept together, and everything else is kept out
+  - For example, placing together the code used during system start-up or initialization
+  - Weaker than procedural cohesion
+
+```java
+    public void initialize(){
+        Module mode1, model2, model3;
+        …
+        module1.initialize();
+        module2.initialize();
+        module3.initialize();
+    }
+```
+
+#### Utility Cohesion
+
+- Related utilities which cannot be logically placed in other cohesive units are kept together
+  - A utility is a procedure or class that has wide applicability to many different subsystems and is designed to be reusable
+  - For example, the `java.lang.Math` class
+
+### Design Principle 3: Reduce Coupling Where Possible
+
+- Coupling occurs when there are interdependencies between one module and another (complement of cohesion)
+  - The more tightly coupled a set of modules is, the harder it is to understand
+  - A network of interdependencies makes it hard to see at a glance how some component works.
+  - When interdependencies exist, changes in one place will require changes somewhere else.
+  - Type of coupling:
+    - Content
+    - Common
+    - Control
+    - Stamp
+    - Data
+    - Routine Call
+    - Type use
+    - Inclusion/Import
+    - External
+
+#### Content Coupling
+
+- Occurs when one component surreptitiously modifies data that is internal to another component
+  - To reduce content coupling you should therefore encapsulate all instance variables
+    - Declare them private
+    - Provide get and set methods
+  - A worse form of content coupling occurs when you directly modify an instance variable of an instance variable
+
+#### Common Coupling
+
+- Occurs whenever you use a global variable
+  - All the components using the global variable become coupled to each other
+  - A weaker form of common coupling is when a variable can be accessed by a subset of the system’s classes
+    - e.g. a Java package
+  - Can be acceptable for creating global variables that represent system-wide default values
+  - The Singleton pattern provides encapsulated global access to an object
+
+#### Control Coupling
+
+- Occurs when one procedure calls another using a ‘flag’ or ‘command’ that explicitly controls what the second procedure does
+  - To make a change you have to change both the calling and called method
+  - The use of polymorphic operations is normally the best way to avoid control coupling
+  - One way to reduce the control coupling could be to have a look-up table
+    - commands are then mapped to a method that should be called when that command is issued
+
+##### Example of Control Coupling
+
+```java
+    public routineX(String command){
+
+    if (command.equals("drawCircle")
+        drawCircle();
+
+    else if (command.equals(“drawRectangle”))
+        drawRectangle();
+
+    else if (command.equals(“drawTriangle”))
+        drawTriangle();
+    }
+```
+
+#### Use Polymorphism Instead
+
+```
+                +------------------+
+                |      Shape       |
+                +------------------+
+                | + draw()         |
+                +------------------+
+                        ▲
+                        |
+        -----------------------------------------
+        |                    |                  |
++---------------+   +----------------+   +-------------+
+|    Circle     |   |   Rectangle    |   |   Triangle  |
++---------------+   +----------------+   +-------------+
+```
+
+```java
+    public routineX(String command){
+
+    if (command.equals("drawCircle"))
+        drawCircle();
+
+    else if (command.equals(“drawRectangle”))
+        drawRectangle();
+
+    else if (command.equals(“drawTriangle”))
+        drawTriangle();
+    }
+```
+
+vs
+
+```java
+    public routineX(Shape s){
+        s.draw();
+    }
+```
+
+#### Data Coupling
+
+- Occurs whenever the types of method arguments are either primitive or else simple library classes
+  - The more arguments a method has, the higher the coupling
+    - All methods that use the method must pass all the arguments
+  - You should reduce coupling by not giving methods unnecessary arguments
+  - There is a trade-off between data coupling and stamp coupling
+    - Increasing one often decreases the other
+
+#### Routine Call Coupling
+
+- Occurs when one routine (or method in an object oriented system) calls another
+  - The routines are coupled because they depend on each other’s behaviour
+  - Routine call coupling is always present in any system.
+  - If you repetitively use a sequence of two or more methods to compute something
+    - then you can reduce routine call coupling by writing a single routine that encapsulates the sequence.
+
+```java
+    public void draw(Shape aShape){
+        aShape.drawBackground();
+        aShape.drawForeground();
+        aShape.drawBorder();
+    }
+```
+
+#### Type Use Coupling
+
+- Occurs when a module uses a data type defined in another module
+  - It occurs any time a class declares an instance variable or a local variable as having another class for its type
+  - The consequence of type use coupling is that if the type definition changes, then the users of the type may have to change
+  - Always declare the type of a variable to be the most general possible class or interface that contains the required operations
+
+#### Inclusion or Import Coupling
+
+- Occurs when one component imports a package (as in Java) or when one component includes another (as in C++)
+- The including or importing component is now exposed to everything in the included or imported component
+- If the included/imported component changes something or adds something
+  - This may raises a conflict with something in the includer, forcing the includer to change
+- An item in an imported component might have the same name as something you have already defined
+
+#### External Coupling
+
+- When a module has a dependency on such things as the operating system, shared libraries or the hardware
+  - It is best to reduce the number of places in the code where such dependencies exist
+
+### Design Principle 4: Keep The Level of Abstraction as High as Possible
+
+- Ensure that your designs allow you to hide or defer consideration of details, thus reducing complexity
+  - A good abstraction is said to provide information hiding
+  - Abstractions allow you to understand the essence of a subsystem without having to know unnecessary details
+
+#### Abstraction and Classes
+
+- Classes are data abstractions that contain procedural abstractions
+  - Abstraction is increased by defining all variables as private
+  - The fewer public methods in a class, the better the abstraction
+  - Superclasses and interfaces increase the level of abstraction
+  - Attributes and associations are also data abstractions
+  - Methods are procedural abstractions
+    - Better abstractions are achieved by giving methods fewer parameters
+
+### Design Principle 5: Increase Reusability Where Possible (Design for Reuse)
+
+- Design the various aspects of your system so that they can be used again in other contexts
+  - Generalize your design as much as possible
+  - Follow the preceding three design principles
+    - Increase cohesion -> well defined components
+    - Reduce coupling -> stand alone components
+    - Increase abstraction -> more general components
+
+### Design Principle 6: Reuse Existing Designs and Code Where Possible (Design with Reuse)
+
+- Design with reuse is complementary to design for reuse
+  - Actively reusing designs or code allows you to take advantage of the investment you or others have made in reusable components
+    - Cloning should not be seen as a form of reuse
+
+### Design Principle 7: Design for Flexibility
+
+- Actively anticipate changes that a design may have to undergo in the future, and prepare for them
+  - Reduce coupling and increase cohesion
+    - This allows you to more readily replace part of a system
+  - Create abstractions
+    - Create interfaces and super-classes with polymorphic methods
+  - Do not hard-code anything
+  - Use reusable code and make code reusable
+    - For example, adding hooks tends to make designs more flexible
+
+### Design Principle 8: Anticipate Obsolescence
+
+- Plan for changes in the technology or environment so the software will continue to run or can be easily changed
+  - Avoid using early releases of technology
+  - Avoid using software libraries that are specific to particular environments
+  - Avoid using undocumented features or little-used features of software libraries
+  - Avoid using software or special hardware from companies that are less likely to provide long-term support
+  - Use standard languages and technologies that are supported by multiple vendors
+
+### Design Principle 9: Design For Portability
+
+- Have the software run on as many platforms as possible
+  - Avoid the use of facilities that are specific to one particular environment
+    - E.g. a library only available in Microsoft Windows
+  - Use standardizes interfaces as much as possible
+    - E.g., The Portable Operating System Interface (POSIX) or POSIX threads (pthreads)
+
+### Design Principle 10: Design for Testability
+
+- Take steps to make testing easier
+  - Design a program to automatically test the software
+    - Ensure that all the functionality of the code can by driven by an external program, bypassing a graphical user interface
+
+### Design Principle 11: Design Defensively
+
+- Never trust how others will try to use a component you are designing
+  - Handle all cases where other code might attempt to use your component inappropriately
+  - Check that all of the inputs to your component are valid:
+    - Unfortunately, over-zealous defensive design can result in unnecessarily repetitive checking
+
+# CHAPTER 4
+
 ## OO Design Principles
 
 - First of all, these are not strict laws, but rather guidelines or advice.
@@ -985,7 +1431,19 @@ public class Dog extends Animal {
   - Law of Demeter
   - Composition over Inheritance
   - Robustness Principle
-  - Inversion of Control
+  - Inversion of Control <img src="rdt2.solid.png" width="400">
+- Module
+  - SOLID
+    - Single Responsibility Principle
+    - Open/Closed Principle
+    - Liskov Substitution Principle
+    - Interface Segregation Principle
+    - Dependency Inversion Principle
+  - Maximize Cohesion
+  - Hide Implementation Details
+  - Curly’s Law
+  - Encapsulate What Changes
+  - Command Query Separation
 
 ### Keep It Simple Stupid (KISS)
 
@@ -1053,6 +1511,7 @@ public class Dog extends Animal {
   - Don't optimize until you need to, and only after profiling you discover a bottleneck
 
 > Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.
+>
 > Donald Knuth
 
 ### Boy-Scout Rule
@@ -1091,3 +1550,148 @@ public class Dog extends Animal {
     - Any direct properties/fields of the object.
   - The law can be stated simply as "use only one dot".
     - the code a.b.Method() breaks the law where a.Method() does not.
+
+### Composition over Inheritance
+
+- The “composition over inheritance” principle states that objects with complex behaviors should do so by containing instances of objects with individual behaviors rather than inheriting a class and adding new behaviors.
+- Class inheritance (“is-a” relationship) is a stronger form of coupling than composition (“uses-a” relationship).
+- A class that offers its services primarily through public class inheritance (PCI) is basically saying “to use my services you can’t just hire me; you must become me”. That’s a strong commitment!
+- Why
+  - Less coupling between classes.
+  - Using inheritance, subclasses easily make assumptions, and break LSP.
+- How
+  - Test for LSP (substitutability) to decide when to inherit.
+  - Compose when there is a “has a” (or “uses a”) relationship, inherit when “is a”.
+
+### Composition over Inheritance
+
+```
+               +----------------+
+               |      Animal    |
+               +----------------+
+                ^              ^
+                |              |
+  +----------------+     +----------------+
+  |   WaterAnimal  |     |  FlyingAnimal  |
+  +----------------+     +----------------+
+  | + swim()       |     | + fly()        |
+  +----------------+     +----------------+
+                                 ^
+                                 |
+                         +----------------+
+                         |       Bird     |
+                         +----------------+
+                         | + walk()       |
+                         | + fly()        |
+                         +----------------+
+
+               +------------------+
+               |       Duck       |
+               +------------------+
+               | + swim()         |
+               | + fly()          |
+               +------------------+
+```
+
+- The inheritance hierarchy can become messy in the blink of an eye.
+- Less flexibility for defining special-case behaviors, particularly when you want to implement behavior from one inheritance branch in another inheritance branch.
+- Composition is a lot cleaner to write, easier to maintain, and allows for near-infinite flexibility as far as what kinds of behaviors you can define.
+- Each individual behavior is its own class, and you create complex behaviors by combining individual behaviors.
+
+```
++-----------------------------------------------+----------------------------------------------+
+|            Inheritance (is-a)                 |             Composition (uses-a)             |
++-----------------------------------------------+----------------------------------------------+
+|                             +-------------+   |   +-------------+    uses   +-------------+  |
+|                             | super-class |   |   |  consumer   |  -------> |  front-end  |  |
+|                             +-------------+   |   +-------------+           +-------------+  |
+|                                     ▲         |                                    ▲         |
+|                                     |         |                                    | 1       |
+|  +-------------+    uses    +-------------+   |                             +-------------+  |
+|  |  consumer   |  ------->  |  sub-class  |   |                             |  back-end   |  |
+|  +-------------+            +-------------+   |                             +-------------+  |
++----------------------------------------------------------------------------------------------+
+```
+
+### Inversion of Control (IoC)
+
+- Inversion of Control is also known as the Hollywood Principle, "Don't call us, we'll call you".
+- It is a design principle in which custom-written portions of a computer program receive the flow of control from a generic framework.
+- Inversion of control carries the strong implication that the reusable code and the problem-specific code are developed independently even though they operate together in an application.
+- Why
+  - Inversion of Control is used to increase modularity of the program and make it extensible.
+  - To prevent side effects when replacing a module.
+- How
+  - Using Dependency Injection
+  - Using Factory, Strategy, Template Method patterns
+
+### Maximize Cohesion
+
+- Cohesion of a single module/component is the degree to which its responsibilities form a meaningful unit; higher cohesion is better.
+- Why
+  - Increased difficulty in understanding modules.
+  - Increased difficulty in maintaining a system, because logical changes in the domain affect multiple modules, and because changes in one module require changes in related modules.
+  - Increased difficulty in reusing a module because most applications won’t need the random set of operations provided by a module.
+- How
+  - Group related functionalities sharing a single responsibility (e.g. in a class, module, etc.).
+
+### Hide Implementation Details
+
+- A software module hides information (i.e. implementation details) by providing an interface, and not leak any unnecessary information.
+- Why
+  - When the implementation changes, the interface clients are using does not have to change.
+- How
+  - Minimize accessibility of classes and members.
+  - Don’t expose member data in public.
+  - Avoid putting private implementation details into a class’s interface.
+  - Decrease coupling to hide more implementation details.
+
+### Curly’s Law
+
+- Curly's Law is about choosing a single, clearly defined goal for any bit
+  of code: Do One Thing.
+- A variable should mean one thing, and one thing only.
+- It should not mean one thing in one circumstance and carry a different value from a different domain some other time.
+  - It should not mean two things at once.
+  - It should mean One Thing and should mean it all the time.
+
+### Encapsulate What Changes
+
+- Encapsulate the concept that varies, i.e. a design is better when those parts that vary are encapsulated in a separate module.
+- A good design identifies the hotspots that are most likely to change and encapsulates them behind an API.
+- When an anticipated change then occurs, the modifications are kept local.
+- Why
+  - To minimize required modifications when a change occurs
+- How
+  - Encapsulate the concept that varies behind an API
+  - Possibly separate the varying concept into its own module
+
+### Incremental Development
+
+- “Keep developing until you get it right”.
+- Incremental development is based on agile methodology.
+- Agile methods generally promote a disciplined project management process that encourages:
+  - frequent inspection and adaptation,
+  - a leadership philosophy that encourages teamwork,
+  - self-organization and accountability,
+  - a set of engineering best practices that allow for rapid delivery of high-quality software,
+  - and a business approach that aligns development with customer needs and company goals.
+
+### Design for Change
+
+- Anticipate new requirements and changes to existing requirements
+- Design for evolution
+- Inflexible design risks major redesign in the future
+  - Unanticipated changes are expensive
+- Each design pattern ensures that a system can change in some specific ways.
+
+### Common Causes of Redesign
+
+- Creating an object by specifying a class explicitly
+  - create objects indirectly.
+- Dependence on specific operations.
+  - avoid hard-coded requests
+- Dependence on hardware and software platform.
+  - abstract out dependences
+
+# CHAPTER 5: CLEAN CODE
