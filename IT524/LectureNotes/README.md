@@ -912,3 +912,150 @@ public class MathTeacher extends Teacher {
 - Lets objects vary their relationships to each other at run-time.
 
 - Polymorphism is an object-oriented programming feature that allows us to perform a single action in different ways.
+- Let’s say we have a class `Animal` that has a method `animalSound()`, here we can not give implementation to this method as we do not know which `Animal` class would extend `Animal` class. So, we make this method abstract like below. Now suppose we have two `Animal` classes `Dog` and `Lion` that extends `Animal` class.
+
+```java
+public abstract class Animal {
+
+    public abstract void animalSound();
+
+}
+```
+
+```java
+public class Lion extends Animal {
+
+    @Override
+    public void animalSound() {
+        System.out.println("Roar");
+    }
+
+}
+```
+
+```java
+public class Dog extends Animal {
+
+    @Override
+    public void animalSound() {
+        System.out.println("Woof");
+    }
+
+}
+```
+
+#### Program to an Interface, not an Implementation
+
+- Two benefits
+  - Clients remain unaware of the specific types of objects they use, as long as the objects adhere to the interface that clients expect.
+  - Clients remain unaware of the classes that implement these objects.
+- Greatly reduce implementation dependence
+- Declare/commit to variables via interfaces.
+- Use creational patterns
+  - Abstract out object creation
+  - Associate an interface with its implementation transparently
+
+#### Reuse Mechanisms
+
+- (Class) Inheritance
+  - White-box reuse
+- Composition
+  - Black-box reuse
+  - Must have well-defined interfaces
+
+# CHAPTER 3
+
+## OO Design Principles
+
+- First of all, these are not strict laws, but rather guidelines or advice.
+- They are mostly obtained through experience over time.
+- Just knowing these principles does not automatically make you a good software engineer.
+- Throughout this course, we will go through some well-known and widely used principles.
+
+- Generic:
+  - KISS
+  - DRY
+  - YAGNI
+  - Separation of Concerns
+  - Simplest Working Thing
+  - Avoid Premature Optimization
+  - Boy-Scout Rule
+
+### Keep It Simple Stupid (KISS)
+
+- Most systems work best if they are kept simple rather than made complex.
+- **Why:**
+  - Less code takes less time to write, has less bugs, and is easier to modify.
+  - Simplicity is the ultimate sophistication.
+  - It seems that perfection is reached not when there is nothing left to add, but when there is nothing left to take away.
+- **How:**
+  - Avoid inheritance, polymorphism, and other complicated OOP concepts unless necessary.
+  - Avoid low-level optimization of algorithms
+  - Avoid large code blocks
+
+### Don't Repeat Yourself (DRY)
+
+- Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.
+- Each significant piece of functionality in a program should be implemented in just one place in the source code.
+- Why
+  - Duplication (inadvertent or purposeful duplication) can lead to maintenance nightmares, poor factoring, and logical contradictions.
+  - A modification of any single element of a system does not require a change in other logically unrelated elements.
+  - Additionally, elements that are logically related all change predictably and uniformly and are thus kept in sync.
+- How
+  - Put business rules, long expressions, if statements, math formulas, metadata, etc. in only one place.
+  - Where similar functions are carried out by distinct pieces of code, it is generally beneficial to combine them into one by abstracting out the varying parts.
+
+### You Ain't Gonna Need It (YAGNI)
+
+- Don't implement something until it is necessary.
+- Why
+  - Any work that's only used for a feature that's needed tomorrow, means losing effort from features that need to be done for the current iteration.
+  - It leads to code bloat; the software becomes larger and more complicated.
+- How
+  - Always implement things when you need them, never when you just foresee that you need them.
+
+### Separation of Concerns
+
+- Separating a computer program into distinct sections, such that each section addresses a separate concern.
+  - e.g. the business logic of the application is one concern and the user interface is another concern.
+    - Changing the user interface should not require changes to business logic and vice versa.
+- Why
+  - Simplify development and maintenance of software applications.
+  - When concerns are well-separated, individual sections can be reused, as well as developed and updated independently.
+- How
+  - Divide and conquer
+    - Break program functionality into separate modules that overlap as little as possible
+
+### Simplest Working Thing
+
+- Why
+  - Real progress against the real problem is maximized if we just work on what the problem really is.
+- How
+  - Ask yourself: "What is the simplest thing that could possibly work?"
+  - First, implement a new capability in the simplest way you can think of that "could possibly work"
+  - Second, and this is critical to the rule, refactor the system to be the simplest possible code including all the features it now has.
+
+### Avoid Premature Optimization
+
+- Don’t even think about optimization unless your code is working, but slower than you want. Only then should you start thinking about optimizing, and then only with the aid of empirical data.
+- Understanding what is and isn’t "premature" is critical of course.
+- Why
+  - It is unknown upfront where the bottlenecks will be.
+  - After optimization, it might be harder to read and thus maintain.
+- How
+  - Make It Work Make It Right Make It Fast
+  - Don't optimize until you need to, and only after profiling you discover a bottleneck
+
+> Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.
+>
+> - Donald Knuth
+
+### Boy-Scout Rule
+
+- "Leave the campground cleaner than you found it". The boy-scout rule states that we should always leave the code cleaner than we found it.
+- Why
+  - When making changes to an existing codebase the code quality tends to degrade, accumulating technical debt.
+  - Following the boy scout rule, we should mind the quality with each commit. Technical debt is resisted by continuous refactoring, no matter how small.
+- How
+  - With each commit make sure it does not degrade the codebase quality.
+  - Any time someone sees some code that isn't as clear as it should be, they should take the opportunity to fix it right there and then.
