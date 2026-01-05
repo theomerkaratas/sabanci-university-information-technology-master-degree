@@ -1374,90 +1374,66 @@ If a program is hard to test, it will have bugs. You must design the software sp
 - Just knowing these principles does not automatically make you a good software engineer.
 - Throughout this course, we will go through some well-known and widely used principles.
 
-| Category     | Principles                                                                                                     |
-| ------------ | -------------------------------------------------------------------------------------------------------------- |
-| Generic      | KISS, DRY, YAGNI, Separation of Concerns, Simplest Working Thing, Avoid Premature Optimization, Boy-Scout Rule |
-| Inter-Module | Minimize Coupling, Law of Demeter, Composition over Inheritance, Robustness Principle, Inversion of Control    |
+| Category     | Principles                                                                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Generic      | KISS, DRY, YAGNI, Separation of Concerns, Simplest Working Thing, Avoid Premature Optimization, Boy-Scout Rule                                   |
+| Inter-Module | Minimize Coupling, Law of Demeter, Composition over Inheritance, Robustness Principle, Inversion of Control                                      |
+| Module       | SOLID (SRP, OCP, LSP, ISP, DIP), Maximize Cohesion, Hide Implementation Details, Curly’s Law, Encapsulate What Changes, Command Query Separation |
 
 <img src="solid.png" width="300">
 
-- Module
-  - SOLID
-    - Single Responsibility Principle
-    - Open/Closed Principle
-    - Liskov Substitution Principle
-    - Interface Segregation Principle
-    - Dependency Inversion Principle
-  - Maximize Cohesion
-  - Hide Implementation Details
-  - Curly’s Law
-  - Encapsulate What Changes
-  - Command Query Separation
-
 ### Keep It Simple Stupid (KISS)
 
-- Most systems work best if they are kept simple rather than made complex.
-- **Why:**
-  - Less code takes less time to write, has less bugs, and is easier to modify.
-  - Simplicity is the ultimate sophistication.
-  - It seems that perfection is reached not when there is nothing left to add, but when there is nothing left to take away.
-- **How:**
-  - Avoid inheritance, polymorphism, and other complicated OOP concepts unless necessary.
-  - Avoid low-level optimization of algorithms
-  - Avoid large code blocks
+The core idea is that complexity is the enemy of reliability. A simple system is easier to build, easier to debug, and easier to change.
+
+- **The Philosophy:** Perfection is achieved not when there is nothing left to add, but when there is nothing left to take away.
+- **Why:** Less code equals fewer bugs and less time spent on development.
+- **How:** Do not use complex OOP features like deep inheritance or polymorphism unless they are absolutely necessary.
+  - Avoid "premature optimization" (trying to make an algorithm super fast before you even know if it's slow).
+  - Keep code blocks (methods/classes) small.
 
 ### Don't Repeat Yourself (DRY)
 
-- Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.
-- Each significant piece of functionality in a program should be implemented in just one place in the source code.
-- Why
-  - Duplication (inadvertent or purposeful duplication) can lead to maintenance nightmares, poor factoring, and logical contradictions.
-  - A modification of any single element of a system does not require a change in other logically unrelated elements.
-  - Additionally, elements that are logically related all change predictably and uniformly and are thus kept in sync.
-- How
-  - Put business rules, long expressions, if statements, math formulas, metadata, etc. in only one place.
-  - Where similar functions are carried out by distinct pieces of code, it is generally beneficial to combine them into one by abstracting out the varying parts.
+This is perhaps the most famous rule in software engineering. Every piece of logic must live in one single place.
+
+- **The Problem:** If you copy-paste code (duplication), and you find a bug, you have to fix it in five different places. If you miss one, you have a "logical contradiction."
+- **The Benefit:** When you change a requirement, you only change the code in one place, and the whole system stays in sync.
+- **How:** If you see similar functions in different places, abstract out the parts that are the same and move them into a single method or class.
+  - Store business rules and complex math formulas in only one location.
 
 ### You Ain't Gonna Need It (YAGNI)
 
-- Don't implement something until it is necessary.
-- Why
-  - Any work that's only used for a feature that's needed tomorrow, means losing effort from features that need to be done for the current iteration.
-  - It leads to code bloat; the software becomes larger and more complicated.
-- How
-  - Always implement things when you need them, never when you just foresee that you need them.
+This principle fights against "Over-engineering." Developers often love to build features "just in case" they need them in the future.
+
+- **The Rule:** Never implement a feature until it is actually necessary for the current version of the software.
+- **Why:** Effort Waste: Time spent on a "future" feature is time stolen from "current" important features.
+  - **Code Bloat:** It makes the software larger and more complicated than it needs to be.
+- **How:** Focus only on the requirements of the current iteration.
 
 ### Separation of Concerns
 
-- Separating a computer program into distinct sections, such that each section addresses a separate concern.
-  - e.g. the business logic of the application is one concern and the user interface is another concern.
-    - Changing the user interface should not require changes to business logic and vice versa.
-- Why
-  - Simplify development and maintenance of software applications.
-  - When concerns are well-separated, individual sections can be reused, as well as developed and updated independently.
-- How
-  - Divide and conquer
-    - Break program functionality into separate modules that overlap as little as possible
+This principle tells us to divide the program into sections that handle completely different tasks.
+
+- **Example:** The Business Logic (how to calculate interest) should be separate from the User Interface (the colors of the buttons).
+- **Why:** You should be able to change the UI (move from a website to a mobile app) without touching the logic that handles the data.
+- **How:** Use Divide and Conquer. Break the functionality into modules that overlap as little as possible.
 
 ### Simplest Working Thing
 
-- Why
-  - Real progress against the real problem is maximized if we just work on what the problem really is.
-- How
-  - Ask yourself: "What is the simplest thing that could possibly work?"
-  - First, implement a new capability in the simplest way you can think of that "could possibly work"
-  - Second, and this is critical to the rule, refactor the system to be the simplest possible code including all the features it now has.
+This is a two-step process for making progress without getting stuck in perfectionism.
+
+- **Why:** It keeps the team focused on solving the real problem immediately.
+- **How:**
+  - **Implement:** Find the absolute simplest way to make the feature work.
+  - **Refactor (Critical Step):** Once it works, clean up the code so it becomes the simplest possible version of itself that includes all features.
 
 ### Avoid Premature Optimization
 
-- Don’t even think about optimization unless your code is working, but slower than you want. Only then should you start thinking about optimizing, and then only with the aid of empirical data.
-- Understanding what is and isn’t "premature" is critical of course.
-- Why
-  - It is unknown upfront where the bottlenecks will be.
-  - After optimization, it might be harder to read and thus maintain.
-- How
-  - Make It Work Make It Right Make It Fast
-  - Don't optimize until you need to, and only after profiling you discover a bottleneck
+Optimization is the process of making code run faster or use less memory. Premature optimization is doing this before it is actually necessary.
+
+- **The Philosophy:** "Make It Work, Make It Right, Make It Fast."
+- **Why:** You don't know where the bottlenecks (slow parts) will be until the code is running. If you optimize too early, the code becomes harder to read and maintain for no real benefit.
+- **How:** Only optimize when the code is working but slower than desired. Use empirical data (profiling) to find the actual problem.
 
 > Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.
 >
