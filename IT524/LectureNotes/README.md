@@ -788,7 +788,7 @@ public class Demo implements Inf2 {
 
 #### Abstraction
 
-Abstraction is the process of hiding the complex internal logic and showing only the necessary functionality to the user.
+**Abstraction** is the process of hiding the complex internal logic and showing only the necessary functionality to the user.
 
 - **Focus:** It focuses on "what" the object does rather than "how" it does it.
 - **Real-world Example:** In your notes, the Online Banking Login is a perfect example. You provide your ID and password; you don't need to know the database query logic or the server encryption protocols. That complexity is abstracted away.
@@ -934,22 +934,16 @@ public class Dog extends Animal {
 
 #### Program to an Interface, not an Implementation
 
-- Two benefits
-  - Clients remain unaware of the specific types of objects they use, as long as the objects adhere to the interface that clients expect.
-  - Clients remain unaware of the classes that implement these objects.
-- Greatly reduce implementation dependence
-- Declare/commit to variables via interfaces.
-- Use creational patterns
-  - Abstract out object creation
-  - Associate an interface with its implementation transparently
+**Program to an Interface** is a design principle that focuses on defining behaviors through interfaces rather than concrete implementations.
+
+- **Reduced Coupling:** Clients remain unaware of the specific types or classes of objects they use, as long as the objects adhere to the expected interface.
+- **Implementation Independence:** It greatly reduces the system's dependence on specific implementations.
+- **Best Practice:** Declare variables using interfaces and use creational patterns to handle object creation transparently.
 
 #### Reuse Mechanisms
 
-- (Class) Inheritance
-  - White-box reuse
-- Composition
-  - Black-box reuse
-  - Must have well-defined interfaces
+- **Class Inheritance (White-box reuse):** Reusing functionality by extending a class. It is called "white-box" because the internal details of the parent class are often visible to the subclass.
+- **Object Composition (Black-box reuse):** Reusing functionality by assembling or composing objects. It is called "black-box" because the internal details of the objects are hidden, requiring well-defined interfaces.
 
 # CHAPTER 3
 
@@ -1065,62 +1059,42 @@ The core idea is that a large system is too complex for one brain.
 - A package is divided up into classes
 - A class is divided up into methods
 
-### Design Principle 2: Increase Cohesion Where Possible
+### Design Principle 2: Increase Cohesion
 
-- A subsystem or module has high cohesion if it keeps together things that are related to each other, and keeps out other things
-- This makes the system as a whole easier to understand and change
-- Type of cohesion:
-  - Functional
-  - Layer
-  - Communicational
-  - Sequential
-  - Procedural
-  - Temporal
-  - Utility
+Cohesion is a measure of how strongly-related the responsibilities of a single module (class, method, or package) are. The goal is always High Cohesion.
 
-#### Functional Cohesion
+#### a. Functional Cohesion
 
-- This is achieved when all the code that computes a particular result is kept together - and everything else is kept out
-  - i.e. when a module only performs a single computation, and returns a result, without having side-effects
-- Examples of high cohesion
-  - `sin()`
-  - `getEmployeeName()`
-  - `calcLoanPayment()`
-  - `getIconLocation()`
-- Examples of low cohesion
-  - `getEmployeeNameAndChangeHerSalary()`
-- Benefits to the system
-  - Easier to understand
-  - More reusable
-  - Easier to replace
-- Modules that update a database, create a new file or interact with the user are not functionally cohesive
+This occurs when a module performs exactly one task or computation.
 
-#### Layer Cohesion
+- **Ideal:** It takes an input, returns an output, and has no "side-effects" (doesn't change other things unexpectedly).
+- **Examples:** sin(), calcLoanPayment().
+- **Bad Example:** getEmployeeNameAndChangeHerSalary() (This is low cohesion because it combines two unrelated actions).
 
-- All the facilities for providing or accessing a set of related services are kept together, and everything else is kept out
-  - The layers should form a hierarchy
-    - Higher layers can access services of lower layers,
-    - Lower layers do not access higher layers
-  - The set of procedures through which a layer provides its services is the application programming interface (API)
-  - You can replace a layer without having any impact on the other layers
-    - You just replicate the API
+#### b. Layer Cohesion
+
+This organizes the system into a hierarchy.
+
+- **Rules:** Higher layers use the services of lower layers. Lower layers never reach up to higher layers.
+- **API:** Each layer provides services through an Application Programming Interface.
+- **Benefit:** You can swap out an entire layer (like changing a database) without affecting the rest of the system, as long as the API remains the same.
 
 ##### Example of The Use of Layers
 
 <img src="example_of_the_use_of_layers.png" width="600">
 
-### Communicational Cohesion
+### c. Communicational Cohesion
 
-- All the modules that access or manipulate certain data are kept together (e.g. in the same class) - and everything else is kept out
-  - A class would have good communicational cohesion
-    - If all the system’s facilities for storing and manipulating its data are contained in this class.
-    - If the class does not do anything other than manage its data.
-  - Main advantage: When you need to make changes to the data, you find all the code in one place
+Everything that touches a specific data set is kept together.
 
-#### Sequential Cohesion
+- **In Java:** A class has high communicational cohesion if it contains all the methods to store and manipulate its specific data (like a Student class containing only student-related logic).
 
-- Procedures, in which one procedure provides input to the next, are kept together – and everything else is kept out
-  - You should achieve sequential cohesion, only once you have already achieved the preceding types of cohesion
+#### d. Sequential Cohesion
+
+Procedures are grouped because the output of one is the input to the next.
+
+- **Flow:** $A \rightarrow B \rightarrow C$.
+- **Example:** A method that opens a file, reads it, processes that data, and then prints the result.
 
 ```java
     public void processFile(){
@@ -1132,11 +1106,11 @@ The core idea is that a large system is too complex for one brain.
     }
 ```
 
-#### Procedural Cohesion
+#### e. Procedural Cohesion
 
-- Procedures that are used one after another are kept together
-  - Even if one does not necessarily provide input to the next
-  - Weaker than sequential cohesion
+- Procedures are grouped because they are performed in a specific order, even if they don't share data.
+
+> **Note:** This is weaker than sequential cohesion because the steps are only related by "order," not by data flow.
 
 ```java
     public void  printSomething(){
@@ -1147,11 +1121,11 @@ The core idea is that a large system is too complex for one brain.
     }
 ```
 
-#### Temporal Cohesion
+#### f. Temporal Cohesion
 
-- Operations that are performed during the same phase of the execution of the program are kept together, and everything else is kept out
-  - For example, placing together the code used during system start-up or initialization
-  - Weaker than procedural cohesion
+Operations are grouped because they happen at the same time (phase of execution).
+
+- **Example:** An `initialize()` or `startup()` method. All the modules being started might be totally unrelated, but they all need to start at the same time.
 
 ```java
     public void initialize(){
@@ -1163,53 +1137,63 @@ The core idea is that a large system is too complex for one brain.
     }
 ```
 
-#### Utility Cohesion
+#### g. Utility Cohesion
 
-- Related utilities which cannot be logically placed in other cohesive units are kept together
-  - A utility is a procedure or class that has wide applicability to many different subsystems and is designed to be reusable
-  - For example, the `java.lang.Math` class
+Grouping related, highly reusable tools that don't fit into other categories.
 
-### Design Principle 3: Reduce Coupling Where Possible
+- **Example:** `java.lang.Math`. It contains sqrt(), abs(), and PI. These aren't related by data or sequence, but they are all "Math Utilities."
 
-- Coupling occurs when there are interdependencies between one module and another (complement of cohesion)
-  - The more tightly coupled a set of modules is, the harder it is to understand
-  - A network of interdependencies makes it hard to see at a glance how some component works.
-  - When interdependencies exist, changes in one place will require changes somewhere else.
-  - Type of coupling:
-    - Content
-    - Common
-    - Control
-    - Stamp
-    - Data
-    - Routine Call
-    - Type use
-    - Inclusion/Import
-    - External
+```
+Cohesion Strength Hierarchy
 
-#### Content Coupling
+Functional (Strongest)
+        ↓
+      Layer
+        ↓
+ Communicational
+        ↓
+    Sequential
+        ↓
+    Procedural
+        ↓
+     Temporal
+        ↓
+ Utility (Weakest)
+```
 
-- Occurs when one component surreptitiously modifies data that is internal to another component
-  - To reduce content coupling you should therefore encapsulate all instance variables
-    - Declare them private
-    - Provide get and set methods
-  - A worse form of content coupling occurs when you directly modify an instance variable of an instance variable
+### Design Principle 3: Reduce Coupling
 
-#### Common Coupling
+Coupling refers to the degree of interdependence between software modules.
 
-- Occurs whenever you use a global variable
-  - All the components using the global variable become coupled to each other
-  - A weaker form of common coupling is when a variable can be accessed by a subset of the system’s classes
-    - e.g. a Java package
-  - Can be acceptable for creating global variables that represent system-wide default values
-  - The Singleton pattern provides encapsulated global access to an object
+- **The Goal:** Aim for Low Coupling.
+- **Why?**
+  - Tightly coupled systems are hard to understand because you can't look at one component in isolation.
+  - **The Ripple Effect:** When modules are coupled, a change in one place often forces a change somewhere else.
 
-#### Control Coupling
+#### a. Content Coupling (The Highest/Worst)
 
-- Occurs when one procedure calls another using a ‘flag’ or ‘command’ that explicitly controls what the second procedure does
-  - To make a change you have to change both the calling and called method
-  - The use of polymorphic operations is normally the best way to avoid control coupling
-  - One way to reduce the control coupling could be to have a look-up table
-    - commands are then mapped to a method that should be called when that command is issued
+This occurs when a component surreptitiously (secretly or without permission) modifies the internal state of another.
+
+- **The Problem:** If Class A changes a variable inside Class B directly, and Class B fails, you will spend hours looking for the bug in Class B, even though Class A caused it.
+- **How to Fix:** Encapsulate all instance variables.
+  - Use the private access modifier.
+  - Only allow changes through setters that can validate the data.
+
+#### b. Common Coupling (Global Data)
+
+This happens when multiple modules share a global variable.
+
+- **The Problem:** It creates a "hidden" link between every class that uses that variable. If you change the variable's type or meaning, you might break 50 different classes.
+- **The Java Solution:** Java doesn't have true "globals" like C++, but public static variables act similarly.
+  - **Singleton Pattern:** Use this to provide a single, controlled point of access to a global-like object.
+
+#### c. Control Coupling (The 'Flag' Problem)
+
+This occurs when Class A tells Class B exactly how to behave by passing a flag (like a boolean or an integer code).
+
+- **Example:** calculate(data, "SUM_MODE").
+- **The Problem:** The caller (Class A) has to know too much about the internal logic of the receiver (Class B). If you add a new mode, you must change both classes.
+- **The Solution:** Use Polymorphism. Instead of a flag, pass an object that knows how to do its own calculation.
 
 ##### Example of Control Coupling
 
@@ -1266,22 +1250,23 @@ vs
     }
 ```
 
-#### Data Coupling
+#### d. Stamp Coupling vs Data Coupling
 
-- Occurs whenever the types of method arguments are either primitive or else simple library classes
-  - The more arguments a method has, the higher the coupling
-    - All methods that use the method must pass all the arguments
-  - You should reduce coupling by not giving methods unnecessary arguments
-  - There is a trade-off between data coupling and stamp coupling
-    - Increasing one often decreases the other
+These two are often a trade-off.
 
-#### Routine Call Coupling
+|             | Stamp Coupling                                                                                     | Data Coupling                                                                                      |
+| ----------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Description | You pass a whole object (e.g., a Customer object) to a method that only needs the customer's name. | You pass only the primitive data needed (e.g., a String name).                                     |
+| Risk        | The method is now coupled to the entire Customer class definition.                                 | If you need 10 different pieces of data, the method signature becomes too long and hard to manage. |
 
-- Occurs when one routine (or method in an object oriented system) calls another
-  - The routines are coupled because they depend on each other’s behaviour
-  - Routine call coupling is always present in any system.
-  - If you repetitively use a sequence of two or more methods to compute something
-    - then you can reduce routine call coupling by writing a single routine that encapsulates the sequence.
+- **Rule of Thumb:** Pass only what is necessary to keep the interface clean.
+
+#### e. Routine Call Coupling
+
+This is the most common type. It occurs whenever one method calls another.
+
+- **The Problem:** It is unavoidable, but if Method A calls B, C, D, and E in a specific sequence every time, they are tightly coupled.
+- **How to Fix:** Encapsulate that sequence into a single, higher-level routine so the caller only has to make one call
 
 ```java
     public void draw(Shape aShape){
@@ -1291,97 +1276,94 @@ vs
     }
 ```
 
-#### Type Use Coupling
+#### f. Type Use Coupling
 
-- Occurs when a module uses a data type defined in another module
-  - It occurs any time a class declares an instance variable or a local variable as having another class for its type
-  - The consequence of type use coupling is that if the type definition changes, then the users of the type may have to change
-  - Always declare the type of a variable to be the most general possible class or interface that contains the required operations
+This occurs when you declare a variable using another class as its Type.
 
-#### Inclusion or Import Coupling
+- **Example:** `ArrayList<String> list = new ArrayList<>();`
+- **The Problem:** Your code is now tied specifically to ArrayList. If you want to change to a `LinkedList` later, you have to change your code.
+- **The Solution:** Use the most general interface.
+  - **Better:** `List<String> list = new ArrayList<>();` (This couples you to the List interface, which is much more stable).
 
-- Occurs when one component imports a package (as in Java) or when one component includes another (as in C++)
-- The including or importing component is now exposed to everything in the included or imported component
-- If the included/imported component changes something or adds something
-  - This may raises a conflict with something in the includer, forcing the includer to change
-- An item in an imported component might have the same name as something you have already defined
+#### g. Inclusion or Import Coupling
 
-#### External Coupling
+This is the use of the import keyword.
 
-- When a module has a dependency on such things as the operating system, shared libraries or the hardware
-  - It is best to reduce the number of places in the code where such dependencies exist
+- **The Problem:** By importing java.util.\*, you are exposed to every class in that package. If a new version of Java adds a class with the same name as one of yours, a conflict occurs.
+- **How to Fix:** Only import the specific classes you need (e.g., `import java.util.List;`).
+
+#### h. External Coupling
+
+This is dependency on things outside your code: the Operating System, a specific database (MySQL vs. PostgreSQL), or hardware (a specific printer).
+
+- **The Solution:** Reduce the number of places in your code where these dependencies exist. Use "Wrapper" classes to hide the external details.
 
 ### Design Principle 4: Keep The Level of Abstraction as High as Possible
 
-- Ensure that your designs allow you to hide or defer consideration of details, thus reducing complexity
-  - A good abstraction is said to provide information hiding
-  - Abstractions allow you to understand the essence of a subsystem without having to know unnecessary details
+The goal of Abstraction is Information Hiding. It allows you to focus on the "Essence" (the core idea) without getting lost in the "Details" (the messy code).
 
-#### Abstraction and Classes
-
-- Classes are data abstractions that contain procedural abstractions
-  - Abstraction is increased by defining all variables as private
-  - The fewer public methods in a class, the better the abstraction
-  - Superclasses and interfaces increase the level of abstraction
-  - Attributes and associations are also data abstractions
-  - Methods are procedural abstractions
-    - Better abstractions are achieved by giving methods fewer parameters
+- **Classes as Abstractions:** A class is a Data Abstraction (it represents a concept, like a Bank or User).
+- **Methods as Abstractions:** A method is a Procedural Abstraction (it represents an action, like withdraw()).
+- **How to increase Abstraction:**
+  - Define all variables as private.
+  - Minimize the number of public methods (the smaller the public interface, the better the abstraction).
+  - Use Superclasses and Interfaces to represent general concepts.
+  - Give methods fewer parameters to keep the procedural abstraction simple.
 
 ### Design Principle 5: Increase Reusability Where Possible (Design for Reuse)
 
-- Design the various aspects of your system so that they can be used again in other contexts
-  - Generalize your design as much as possible
-  - Follow the preceding three design principles
-    - Increase cohesion -> well defined components
-    - Reduce coupling -> stand alone components
-    - Increase abstraction -> more general components
+This is a "proactive" approach. You are designing your current software so that parts of it can be used in other contexts (future projects) later.
+
+- **Generalization:** Instead of writing code that only works for one specific situation, you generalize the design.
+- **The Trinity of Reuse:** To make a component reusable, it must follow the previous principles:
+  - **High Cohesion:** The component is well-defined.
+  - **Low Coupling:** The component can stand alone.
+  - **High Abstraction:** The component is general enough for different uses.
 
 ### Design Principle 6: Reuse Existing Designs and Code Where Possible (Design with Reuse)
 
-- Design with reuse is complementary to design for reuse
-  - Actively reusing designs or code allows you to take advantage of the investment you or others have made in reusable components
-    - Cloning should not be seen as a form of reuse
+This is the opposite of Principle 5. Instead of building for the future, you are looking at the past investment made by others and using their work to save time.
+
+- **Investment Advantage:** By reusing proven code (libraries, frameworks, designs), you reduce bugs and development time.
+- **The "Cloning" Trap:** Your document emphasizes that cloning (copy-pasting code) is **NOT** a form of reuse. True reuse means using the same component as a single source of truth.
 
 ### Design Principle 7: Design for Flexibility
 
-- Actively anticipate changes that a design may have to undergo in the future, and prepare for them
-  - Reduce coupling and increase cohesion
-    - This allows you to more readily replace part of a system
-  - Create abstractions
-    - Create interfaces and super-classes with polymorphic methods
-  - Do not hard-code anything
-  - Use reusable code and make code reusable
-    - For example, adding hooks tends to make designs more flexible
+A flexible design anticipates change. You assume that the requirements will change, and you prepare the code for it.
+
+- **Avoid Hard-coding:** Never hard-code values. Use variables or configuration files so you can change behavior without recompiling.
+- **Polymorphic Methods:** By using interfaces and super-classes, you can swap different object types at runtime, making the system dynamic.
+- **Hooks:** These are "hanging points" in your code where future developers can "hook" in new functionality easily.
 
 ### Design Principle 8: Anticipate Obsolescence
 
-- Plan for changes in the technology or environment so the software will continue to run or can be easily changed
-  - Avoid using early releases of technology
-  - Avoid using software libraries that are specific to particular environments
-  - Avoid using undocumented features or little-used features of software libraries
-  - Avoid using software or special hardware from companies that are less likely to provide long-term support
-  - Use standard languages and technologies that are supported by multiple vendors
+Software can become "dead" if it depends on dying technology. This principle is about future-proofing.
+
+- **Avoid Early Releases:** Don't use "Version 0.1" of a new technology; it might change or disappear.
+- **Vendor Independence:** Avoid libraries that only work for one specific company's hardware. If that company goes bankrupt, your software dies too.
+- **Standardization:** Stick to standard languages (like Java SE) and documented features that are supported by multiple vendors.
 
 ### Design Principle 9: Design For Portability
 
-- Have the software run on as many platforms as possible
-  - Avoid the use of facilities that are specific to one particular environment
-    - E.g. a library only available in Microsoft Windows
-  - Use standardizes interfaces as much as possible
-    - E.g., The Portable Operating System Interface (POSIX) or POSIX threads (pthreads)
+Portability means the software should run on as many platforms (Windows, Mac, Linux, Android) as possible with minimal changes.
+
+- **Platform-Specific Facilities:** Avoid using a library that only exists on Windows if you want to run on Linux.
+- **Standard Interfaces:** Use standards like POSIX (Portable Operating System Interface). This ensures that system calls (like opening a file) behave the same way on different operating systems.
 
 ### Design Principle 10: Design for Testability
 
-- Take steps to make testing easier
-  - Design a program to automatically test the software
-    - Ensure that all the functionality of the code can by driven by an external program, bypassing a graphical user interface
+If a program is hard to test, it will have bugs. You must design the software specifically to make testing easier.
+
+- **Automated Testing:** Design the code so that another program (like a Unit Test) can run it automatically.
+- **Bypass the GUI:** You should be able to test the "logic" of the code without needing to open the graphical user interface. If the logic is tied to a button click, it's hard to automate.
 
 ### Design Principle 11: Design Defensively
 
-- Never trust how others will try to use a component you are designing
-  - Handle all cases where other code might attempt to use your component inappropriately
-  - Check that all of the inputs to your component are valid:
-    - Unfortunately, over-zealous defensive design can result in unnecessarily repetitive checking
+"Design Defensively" means you never trust how other programmers (or users) will use your component.
+
+- **Input Validation:** Always check if the inputs are valid (e.g., is the age negative? is the string null?).
+- **Handle Inappropriate Use:** If someone calls your method incorrectly, your code should catch it rather than crashing the whole system.
+- **The Warning:** Be careful! Over-zealous defensive design (checking the same thing 10 times) makes the code slow and messy. Balance is key.
 
 # CHAPTER 4
 
@@ -1392,20 +1374,10 @@ vs
 - Just knowing these principles does not automatically make you a good software engineer.
 - Throughout this course, we will go through some well-known and widely used principles.
 
-- Generic:
-  - KISS
-  - DRY
-  - YAGNI
-  - Separation of Concerns
-  - Simplest Working Thing
-  - Avoid Premature Optimization
-  - Boy-Scout Rule
-- Inter-Module
-  - Minimize Coupling
-  - Law of Demeter
-  - Composition over Inheritance
-  - Robustness Principle
-  - Inversion of Control
+| Category     | Principles                                                                                                     |
+| ------------ | -------------------------------------------------------------------------------------------------------------- |
+| Generic      | KISS, DRY, YAGNI, Separation of Concerns, Simplest Working Thing, Avoid Premature Optimization, Boy-Scout Rule |
+| Inter-Module | Minimize Coupling, Law of Demeter, Composition over Inheritance, Robustness Principle, Inversion of Control    |
 
 <img src="solid.png" width="300">
 
