@@ -2,52 +2,50 @@
 
 ### THE NATURE OF SOFTWARE
 
-- Software is intangible
-  - Hard to understand development effort
-- Software is easy to reproduce
-  - Cost is in its development
-    - In other engineering products, manufacturing is the costly stage
-- The industry is labor-intensive
+Understanding software is different from understanding traditional engineering (like building a bridge) because software is intangible. You cannot touch it or see its physical dimensions.
 
-  - Hard to automate
+**Key Characteristics:**
 
-- Untrained people can hack something together
-  - Quality problems are hard to notice
-- Software is easy to modify
-  - People make changes without fully understanding it
-- Software does not ‘wear out’
-  - It deteriorates by having its design changed:
-    - Erroneously, or
-    - In ways that were not anticipated, thus making it complex
+- **Intangibility:** Because software is intangible, it is hard to understand development effort. Managers cannot simply look at a "pile of bricks" to see how much work is left.
+- **Reproduction vs. Manufacturing:** In traditional engineering, "manufacturing" is the most expensive stage.
+  - In software, the cost is in its development. Once the code is written, it is easy to reproduce (copying files costs almost nothing).
+- **Labor-Intensive:** Software creation relies heavily on human brainpower. It is hard to automate the creative process of coding, making the industry very dependent on skilled labor.
+- **Quality and "Hacking":** Because untrained people can hack something together, a program might look like it works on the surface, but quality problems are hard to notice until the system fails or needs maintenance.
+- **Ease of Modification:** Software is easy to modify, which is a double-edged sword. People often make changes without fully understanding the original logic, leading to bugs.
+
+**Does Software Wear Out?**
+
+Unlike a car tire, software does not ‘wear out’ through physical friction. Instead, it deteriorates (gets worse) over time because:
+
+- Changes are made erroneously (with errors).
+- Changes are made in ways that were not anticipated, increasing the system's complexity until it becomes unmanageable.
 
 ### SOFTWARE CRISIS
 
-- Much software has poor design and is getting worse
-- Many software projects are either never delivered, or are delivered late and over budget
-- There is strong demand for new and changed software, which customers expect to be of high quality and to be produced rapidly.
-- Are we in a perpetual ‘software crisis’???
+The "Software Crisis" refers to the long-standing problems in the industry regarding how software is produced.
+
+- **Design Issues:** Much software has poor design, and as systems grow, the design often gets worse.
+- **The "Late & Over Budget" Problem:** A huge percentage of software projects are either never delivered or fail to meet deadlines and financial limits.
+- **The Conflict:** There is a massive demand for new software, and customers want it to be high quality and produced rapidly. This creates a "perpetual crisis" because our ability to build complex systems often lags behind our desire for them.
 
 ### TYPES OF SOFTWARE
 
-- Custom
-  - For a specific customer
-- Generic
-  - Sold on open market
-  - Often called
-  - COTS (Commercial Off The Shelf)
-- Shrink-wrapped
+**Categorization by Market:**
 
-  - Built into hardware
-  - Hard to change
+| Type           | Description                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| Custom         | Developed specifically for a specific customer.                                            |
+| Generic        | Sold on the open market to many users. Also known as COTS (Commercial Off The Shelf).      |
+| Shrink-wrapped | High-volume generic software (like old-school boxed software).                             |
+| Embedded       | Built directly into hardware (like a microwave controller). These are very hard to change. |
 
-- Real time software
-  - E.g., control and monitoring systems
-  - Must react immediately
-  - Safety often a concern
-- Data processing software
-  - Used to run businesses
-  - Accuracy and security of data are key
-- Some software has both aspects
+**Categorization by Function:**
+
+| Software Type            | Description                                                                                       |
+| ------------------------ | ------------------------------------------------------------------------------------------------- |
+| Real-time software       | Control and monitoring systems that must react immediately to inputs; safety is often critical.   |
+| Data processing software | Used mainly to run businesses (e.g., banking systems); accuracy and data security are key.        |
+| Hybrid                   | Combines real-time and data processing aspects (e.g., banking apps with real-time stock updates). |
 
 ### WHAT IS SOFTWARE ENGINEERING
 
@@ -58,53 +56,43 @@
   - IEEE: (1) the application of a systematic, disciplined, quantifiable approach to the development, operation, maintenance of software; that is, the application of engineering to software. (2) The study of approaches as in (1).
   - The Canadian Standards Association: The systematic activities involved in the design, implementation and testing of software to optimize its production and support.
 
-- **Solving customers’ problems**
+#### The Core Definition:
 
-  - This is the goal of software engineering
-  - Sometimes the solution is to buy, not build
-  - Adding unnecessary features does not help solve the problem
-  - Software engineers must communicate effectively to identify and understand the problem
+- It is the process of solving customers’ problems through the systematic development and evolution of large, high-quality software systems while respecting cost, time, and other constraints.
+- Let's break down those bold terms:
 
-- **Systematic development and evolution**
+**Solving customers’ problems**
 
-  - An engineering process involves applying well understood techniques in an organized and disciplined way
-  - Many well-accepted practices have been formally standardized
-    - e.g. by the IEEE or ISO
-  - Most development work is evolution
+- This is the ultimate goal.
+- Software engineers must communicate effectively to understand what the problem actually is.
+- Sometimes, the best solution is to buy an existing product rather than build a new one.
+- Important: Adding "cool" but unnecessary features is not engineering; if it doesn't help solve the problem, it shouldn't be there.
 
-- **Large, high quality software systems**
+**Systematic development and evolution**
 
-  - Software engineering techniques are needed because large systems cannot be completely understood by one person
-  - Teamwork and co-ordination are required
-  - **Key challenge**: Dividing up the work and ensuring that the parts of the system work properly together
-  - The end-product must be of sufficient quality
+- Engineering means using organized and disciplined techniques rather than "hacking."
+- Many of these techniques are formally standardized (e.g., by IEEE or ISO).
+- Evolution: Most work in the industry isn't starting from scratch; it is the "evolution" (updating and changing) of existing systems.
 
-- **Cost, time and other constraints**
-  - Finite resources
-  - The benefit must outweigh the cost
-  - Others are competing to do the job cheaper and faster
-  - Inaccurate estimates of cost and time have caused many project failures
+**Large, high quality software systems**
+
+- Why do we need "engineering"? Because large systems cannot be completely understood by one person.
+- This requires teamwork and coordination.
+- **Key Challenge:** How to divide the work into parts and ensure those parts work properly together.
+
+**Cost, time and other constraints**
+
+- Resources (money, people, time) are finite.
+- Inaccurate estimates of how much time or money a project needs are a leading cause of project failures.
 
 ### STAKEHOLDERS IN SOFTWARE ENGINEERING
 
-1. Users
-
-- Those who use the software
-
-2. Customers
-
-- Those who pay for the software
-
-3. Software developers
-
-- Requirement specialists
-- Database specialists
-- Programmers
-- Configuration management specialists
-
-4. Development Managers
-
-> All four roles can be fulfilled by the same person
+| Stakeholder Role     | Description                                                                                                                                                           |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Users                | People who directly use the software to perform tasks.                                                                                                                |
+| Customers            | Individuals or organizations that pay for the software; may differ from users.                                                                                        |
+| Software Developers  | Technical team responsible for building the software, including requirement specialists, database specialists, programmers, and configuration management specialists. |
+| Development Managers | People who oversee the project, including planning, budget, and team management.                                                                                      |
 
 ### SOFTWARE QUALITY
 
@@ -126,46 +114,45 @@
 
 ### SOFTWARE ENGINEERING PROJECTS
 
-- Most projects are evolutionary or maintenance projects, involving work on _legacy_ systems
-- <u>Corrective projects:</u> fixing defects
-- <u>Adaptive projects:</u> changing the system in response to changes in
-  - Operating system
-  - Database
-  - Rules and regulations
-- <u>Enhancement projects:</u> adding new features for users
-- <u>Reengineering or perfective projects:</u> changing the system internally so it is more maintainable
+In the professional world, you rarely start with a blank page. Most work involves Legacy Systems (older systems already in use).
+
+**Project Categories:**
+
+| Project Type                        | Description                                                                                   |
+| ----------------------------------- | --------------------------------------------------------------------------------------------- |
+| Corrective Projects                 | Fixing defects or bugs in the software.                                                       |
+| Adaptive Projects                   | Modifying the system to adapt to environmental changes (e.g., new OS, database, regulations). |
+| Enhancement Projects                | Adding new features or functionalities for users.                                             |
+| Reengineering / Perfective Projects | Improving internal code quality and maintainability without changing user-visible behavior.   |
+
+**Green vs Brown:**
 
 | Green Field Projects                                 | Brown Field Projects                                             |
 | ---------------------------------------------------- | ---------------------------------------------------------------- |
 | New development                                      | Development of new software on top of existing (legacy) software |
 | Significantly less common than evolutionary projects | Rebuilding a system from an existing project                     |
 
-- Projects that involve building on a framework or a set of
-  existing components.
-  - A framework is an application that is missing some important details
-    - E.g., Specific rules of this organization
-- Such projects:
-  - Involve plugging together components that are:
-    - Already developed
-    - Provide significant functionality
-  - Benefit from reusing reliable software
-  - Provide much of the same freedom to innovate found in green field development
+**Framework-Based Projects:**
+
+- Instead of "Green Field Development" (starting from scratch), many projects use a Framework.
+  - A Framework is like a "half-finished" application. It provides the structure but misses specific details (like specific rules of an organization).
+  - You plug together components that are already developed.
+  - Benefit: You reuse reliable software, which saves time and reduces errors.
 
 # CHAPTER 2
 
-### Why do we use Object Oriented Programming?
+### Object-Oriented Programming (OOP) Essentials
 
-- OOP is a programming paradigm based on the concept of _objects_ that contain data and methods.
-- It increases flexibility and maintainability of programs.
-- It brings together data and its behavior (methods) in a single location (object).
-- OOP makes easier to understand how a program works.
+Java is an OOP language. This paradigm brings together data and behavior (methods) in a single location called an Object.
+
+<img src="oop.png" width="600">
 
 ## OBJECT
 
-- Object is a bundle of data and its behavior (often known as methods).
-- An object performs an operation when it receives a request (or message) from a client.
-- Objects have two characteristics: states and behaviors.
-- Objects are instances of classes.
+- This is an instance of a class. If "Car" is the class, "My Blue BMW" is the object.
+  - States: The data (e.g., speed, fuel level).
+  - Behaviors: The operations/methods (e.g., accelerate, brake).
+  - Communication: An object performs an operation when it receives a request (or message) from a client.
 
 **Example:**
 
@@ -198,8 +185,7 @@ House houseObject = new House();
 
 ## CLASS
 
-- Can be considered as blueprint using which you can create as many objects as you like.
-- Classes have data members (also known as fields, instance variables and object states).
+- Think of this as the blueprint. It defines the internal data representation and the operations.
 
 ```java
 public class Website {
@@ -229,11 +215,10 @@ public class Website {
 
 ## CONSTRUCTOR
 
-- It looks like a method, but it is not a method.
-- In Java, there is always a constructor with empty parameters for each class.
-- Its name is same as class name.
-- It does not return any value.
-- Can take one or more parameters.
+- The Constructor is a special block of code used to initialize objects.
+  - It has the same name as the class.
+  - It does not return a value (not even void).
+  - In Java, every class has a default constructor (empty parameters) if you don't write one.
 
 ```java
 myClass myObject = new myClass();
@@ -284,11 +269,13 @@ myClass myObject = new myClass();
 
 ### Subclassing
 
-- Inheritance:
-  - Subclass inherits all the definitions (data and operations) of the super class. (mod. visibility)
-- Subclasses can refine and redefine behaviors of their parent classes.
-  - A subclass may override an operation defined by its parent class.
-  - Overriding gives subclasses a chance to handle requests instead of their parent classes.
+Subclassing is the mechanism for code reuse.
+
+- **Inheritance:** The subclass inherits all data (fields) and operations (methods) from the super class (depending on visibility/access modifiers).
+- **Refining & Redefining:** Subclasses don't just copy; they can refine (improve) or redefine behaviors.
+- **Overriding:** This is the act of a subclass providing its own version of a method already defined in the parent.
+  - **Overridden method:** The original version in the parent class.
+  - **Overriding method:** The new version in the child class.
 
 ```
 +--------------+
@@ -305,11 +292,10 @@ myClass myObject = new myClass();
 
 ### Abstract Class
 
-- An abstract class defines a common interface for its subclasses.
-- Defers some or all implementation to operations defined in subclasses
-  - abstract operations
-- Cannot be instantiated.
-- Classes that aren't abstract are called concrete classes.
+- An Abstract Class acts as a template.
+- **Common Interface:** It defines what methods subclasses should have but doesn't always provide the code.
+- **Abstract Operations:** It defers (postpones) the implementation to the subclasses. These methods are declared but have no body.
+- **Non-instantiable:** You cannot create an object (instantiate) of an abstract class. You can only create objects of Concrete Classes (classes that are not abstract).
 
 **Example:**
 
@@ -499,7 +485,7 @@ overriding abstract method
 
 ### Super Keyword
 
-- The super keyword refers to the objects of immediate parent class.
+- The `super` keyword is a reference variable used to refer to the immediate parent class object.
 - The use of super keyword
   - To access the data members of parent class when both parent and child class have member with same name.
   - To explicitly call the no-arg and parameterized constructor of parent class.
@@ -675,15 +661,18 @@ Parent class method
 
 ## INTERFACE
 
-- Every operation declared by an object specifies the operation's name, the objects it takes as parameters, and the operation's return value.
-- This is known as the operation's signature.
-- The set of all signatures defined by an object's operations is called the interface to the object.
-- An object's interface says nothing about its implementation—different objects are free to implement requests differently.
-- All methods in an interface are implicitly public and abstract. Using the keyword abstract before each method is optional.
-- An interface may contain final variables.
-- A class can extend only one other class, but it can implement any number of interfaces.
-- When a class implements an interface it must give the definition of all the abstract methods of interface, else it can be declared as abstract class.
-- An interface reference can point to objects of its implementing classes.
+In Java, an Interface is a completely "abstract" group of related methods with empty bodies. It acts as a contract between the class and the outside world.
+
+**Key Concepts:**
+
+- **Signature:** Every operation (method) has a name, parameters, and a return value. Together, these form the operation's signature.
+- **Interface Definition:** The collection of all these signatures is the interface.
+- **Implementation-Free:** An interface describes what an object can do, but says nothing about how (implementation) it does it.Different objects can implement the same request in different ways.
+- **Rules for Interfaces:**
+  - **Implicitly Public & Abstract:** All methods are automatically public and abstract. You don't have to type these keywords.
+  - **Variables:** An interface can only contain final variables (constants).
+  - **Multiple Implementation:** A class can extend only one parent class, but it can implement any number of interfaces.
+  - **Requirement:** If a class implements an interface, it must define all its methods. If it doesn't, that class itself must be declared abstract.
 
 **Example:**
 
@@ -745,9 +734,10 @@ class Demo implements MyInterface {
 
 ### Interface and Inheritance
 
-- Interfaces can extend the other interfaces.
-- Inf2 extends Inf1 so If class implements the Inf2 it must provide implementation of all the methods
-  of interfaces Inf2 as well as Inf1.
+Interfaces are not static; they can also grow.
+
+- An interface can extend another interface.
+- If `Inf2` extends `Inf1`, any class implementing `Inf2` must provide code for methods from both `Inf1` and `Inf2`.
 
 ```java
 interface Inf1 {
@@ -798,26 +788,20 @@ public class Demo implements Inf2 {
 
 #### Abstraction
 
-- Show only relevant data and hide unnecessary details of an object from the user.
-- For example, when you login to your bank account online,
-  - you enter your user id and password and press login,
-  - what happens when you press login,
-  - how the input data sent to server,
-  - how it gets verified is all abstracted away from you.
+Abstraction is the process of hiding the complex internal logic and showing only the necessary functionality to the user.
+
+- **Focus:** It focuses on "what" the object does rather than "how" it does it.
+- **Real-world Example:** In your notes, the Online Banking Login is a perfect example. You provide your ID and password; you don't need to know the database query logic or the server encryption protocols. That complexity is abstracted away.
 
 #### Encapsulation
 
-- Requests are the only way to get an object to execute an operation.
-- Operations are the only way to change an object's internal data.
-- Because of these restrictions, the object's internal state is said to be encapsulated.
-  - it cannot be accessed directly
-  - its representation is invisible from outside the object.
-- Objects are known only through their interfaces.
-- It means binding object state (fields) and behavior (methods) together.
-- Benefits of encapsulation
-  - If you want to change the implementation details of the class, you can freely do so without affecting the classes that are using it.
-  - Make the instance variables private so that they can not be accessed directly from outside the class.
-  - get and set methods in the class to set and get the values of the fields.
+**Encapsulation** is the practice of bundling data (fields) and methods into a single unit (a class) and restricting direct access to the data.
+
+- **The Rule:** Requests (methods) are the only way to change an object's internal data.
+- **Internal State:** The representation is invisible from the outside. Objects are known only through their interfaces.
+- **Implementation:** Make instance variables private.
+  - Provide get and set methods (getters/setters) to control how data is accessed or modified.
+- **Benefits:** You can change the internal code of a class (implementation details) without breaking other classes that use it.
 
 ```java
 class EmployeeCount {
@@ -845,14 +829,16 @@ public class EncapsulationExample {
 
 #### Inheritance
 
-➕ Straightforward
-➕ Easy to modify the implementation being reused
-➖ Can’t change the implementation dynamically
-➖ “breaks encapsulation”: super class is exposed to subclass; changing super class likely to force a change in subclasses
+As we discussed before, inheritance allows a class to acquire the properties of another.
 
-- If two or more classes have common data members and methods, we can use inheritance.
-- There is an is-a relationship for inheritance.
-- MathTeacher object can use data members and methods of the Teacher class.
+- **Relationship:** It represents an "is-a" relationship. (e.g., A MathTeacher is-a Teacher).
+- **Pros (➕):**
+  - Straightforward and easy to reuse code.
+  - Easy to modify the reused implementation.
+- **Cons (➖):**
+  - Breaks Encapsulation: The internal details of a superclass are often exposed to the subclass.
+  - Tight Coupling: Changing the superclass often forces you to change all subclasses.
+  - Static: You cannot change the implementation dynamically at runtime.
 
 ```java
 class Teacher {
@@ -907,9 +893,11 @@ public class MathTeacher extends Teacher {
 
 #### Polymorphism
 
-- Issuing a request doesn't commit you to a specific implementation until runtime.
-- **Polymorphism**: being able to substitute objects that have identical interfaces for each other at run-time.
-- Lets objects vary their relationships to each other at run-time.
+**Polymorphism** (meaning "many forms") is the ability of an object to take on many forms based on its interface.
+
+- **Late Binding:** Issuing a request doesn't commit you to a specific implementation until runtime.
+- **Substitution:** You can substitute objects that have identical interfaces for each other while the program is running.
+- **Benefit:** It allows objects to vary their relationships and behaviors dynamically, making the system highly flexible.
 
 - Polymorphism is an object-oriented programming feature that allows us to perform a single action in different ways.
 - Let’s say we have a class `Animal` that has a method `animalSound()`, here we can not give implementation to this method as we do not know which `Animal` class would extend `Animal` class. So, we make this method abstract like below. Now suppose we have two `Animal` classes `Dog` and `Lion` that extends `Animal` class.
@@ -965,61 +953,64 @@ public class Dog extends Animal {
 
 # CHAPTER 3
 
-### The Process of Design
+### 1. The Process of Design
 
-- Design is a problem-solving process whose objective is to find and describe a way:
-  - To implement the system’s functional requirements...
-  - While respecting the constraints imposed by the quality, platform and process requirements...
-    - including the budget
-  - And while adhering to general principles of good quality
+Design is not just about drawing diagrams; it is a problem-solving process. The goal is to figure out how to build the system while balancing three main things:
 
-### Design as a Series of Decisions
+- **Functional Requirements:** What the system must do.
+- **Constraints:** The limitations you must work within, such as quality, the platform (hardware/OS), and process requirements (like the budget).
+- **General Principles:** Adhering to standards of "good quality" code.
 
-- A designer is faced with a series of design issues
-  - These are sub-problems of the overall design problem.
-  - Each issue normally has several alternative solutions:
-    - design options.
-  - The designer makes a design decision to resolve each issue.
-    - This process involves choosing the best option from among the alternatives
+### 2. Design as a Series of Decisions
 
-### Making Decisions
+Think of a software designer as someone solving a puzzle.
 
-- To make each design decision, the software engineer uses the knowledge of
-  - the requirements
-  - the design as created so far
-  - the technology available
-  - software design principles and ‘best practices’
-  - what has worked well in the past
+- **Design Issues:** These are the sub-problems you face during the project.
+- **Design Options:** For every issue, there are usually several alternative solutions.
+- **Design Decision:** The act of choosing the best option to resolve the issue.
 
-### Design Space
+#### Design Space
 
-The space of possible designs that could be achieved by choosing different sets of alternatives is often called the design space
+The **Design Space** represents the total range of all possible designs you could create by picking different sets of alternatives. Your job is to navigate this space to find the most efficient path.
 
 <img src="design_space.png" width="600">
 
-### Component
+#### How are decisions made?
 
-- Any piece of software or hardware that has a clear role
-  - A component can be isolated, allowing you to replace it with a different component that has equivalent functionality
-  - E.g., frameworks, source code files, executables, DLLs, and databases
-  - Many components are designed to be reusable
-  - Conversely, others perform special-purpose functions
+Software engineers use five key "knowledge pools":
 
-### Module
+1. The project requirements.
+2. The design created so far (how new choices fit with old ones).
+3. Available technology.
+4. Best practices and design principles.
+5. Past experience (what worked before).
 
-- A component that is defined at the programming language level
-  - For example, methods, classes and packages are modules in Java
+### 3. Structural Building Blocks
 
-### System
+#### A. Component
 
-- A logical entity, having a set of definable responsibilities or objectives, and consisting of hardware, software or both
-  - A system can have a specification which is then implemented by a collection of components
-  - A system continues to exist, even if its components are changed or replaced
-  - The goal of requirements analysis is to determine the responsibilities of a system
+A Component is any piece of software or hardware with a clear role.
 
-### Subsystem
+- **Isolation:** You can "unplug" a component and replace it with another that has the same functionality.
+- **Examples:** Source code files, DLLs, databases, or frameworks.
+- **Reusability:** Many are built to be reused in multiple projects.
 
-A system that is part of a larger system, and which has a definite interface
+#### B. Module
+
+A Module is a specific type of component defined at the programming language level.
+
+- In Java, examples of modules include methods, classes, and packages.
+
+#### C. System
+
+A System is the highest logical level. It is a set of responsibilities implemented by hardware and software.
+
+- **Specification:** A system is defined by its requirements (what it is supposed to do).
+- **Continuity:** A system exists even if you swap out every single component inside it.
+
+#### D. Subsystem
+
+A Subsystem is simply a "system within a system." It has a definite interface so the rest of the larger system knows how to talk to it.
 
 ### UML diagram of system parts
 
@@ -1049,39 +1040,22 @@ A system that is part of a larger system, and which has a definite interface
 
 ### Different Aspects of Design
 
-- Architecture design:
-  - The division into subsystems and components,
-  - How these will be connected
-  - How they will interact
-  - Their interfaces
-- Class design
-  - The various features of classes
-- User interface design
-- Algorithm design
-  - The design of computational mechanisms
-- Protocol design:
-  - The design of communications protocol.
+Design isn't just one task; it's a collection of specific focuses:
 
-### Principles Leading to Good Design
+- **Architecture Design:** Dividing the system into subsystems and defining their interfaces.
+- **Class Design:** Defining the features of individual classes.
+- **Algorithm Design:** Designing the computational logic.
+- **Protocol Design:** Designing communication rules between parts.
 
-- Overall goals of good design:
-  - Increasing profit by reducing cost and increasing revenue
-  - Ensuring that we actually conform with the requirements
-  - Accelerating development
-  - Increasing qualities such as
-    - Usability
-    - Efficiency
-    - Reliability
-    - Maintainability
-    - Reusability
+## Design Principles
 
 ### Design Principle 1: Divide and conquer
 
-- Trying to deal with something big all at once is normally much harder than dealing with a series of smaller things
-  - Separate people can work on each part
-  - An individual software engineer can specialize
-  - Each individual component is smaller, and therefore easier to understand
-  - Parts can be replaced or changed without having to replace or extensively change other parts
+The core idea is that a large system is too complex for one brain.
+
+- **Specialization:** Different people can work on different parts.
+- **Replaceability:** You can change a small part without breaking the whole system.
+- **Hierarchy of Division:** `System` → `Subsystems` → `Packages` → `Classes` → `Methods`.
 
 #### Ways of Dividing a Software System
 
