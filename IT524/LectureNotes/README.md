@@ -2053,10 +2053,10 @@ public String getName() {
          │ something?      │
          └────────┬────────┘
                   │
-    ┌─────────────┴─────────────┐
-    │ Can the code itself be   │
-    │ made clearer instead?    │
-    └─────────────┬─────────────┘
+     ┌────────────┴───────────┐
+     │ Can the code itself be │
+     │ made clearer instead?  │
+     └────────────┬───────────┘
                   │
          ┌────────┴────────┐
     Yes ─┤ Refactor code   ├─► Cleaner code, no comment needed
@@ -2088,22 +2088,22 @@ public String getName() {
 #### The Newspaper Metaphor
 
 - Code should read like a well-structured newspaper article:
-- Headline: The class name at the top tells you what it's about
-- First paragraph: High-level overview (public methods, main functionality)
-- Following paragraphs: Increasing levels of detail as you scroll down
-- Details at the bottom: Private methods, helper functions, implementation details
+  - **Headline:** The class name at the top tells you what it's about
+  - **First paragraph:** High-level overview (public methods, main functionality)
+  - **Following paragraphs:** Increasing levels of detail as you scroll down
+  - **Details at the bottom:** Private methods, helper functions, implementation details
 
 #### Vertical Distance Principle
 
-- Closely related concepts should be vertically close to each other
-- Unrelated concepts should be separated vertically
+- **Related Concepts:** Closely related concepts should be vertically close to each other.
+- **Separation:** Unrelated concepts should be separated vertically to delineate different ideas.
 
 #### Variable Declaration Placement
 
 ##### Local Variables
 
-- Declare as close as possible to their first usage
-- Avoid declaring all variables at the top of a function (old C-style)
+- **Proximity to Usage:** Declare variables as close as possible to their first usage to minimize scope and improve readability.
+- **Avoid Legacy Style:** Avoid the old C-style practice of declaring all variables at the top of a function, which forces readers to scroll back and forth.
 
 **Example:**
 
@@ -2134,9 +2134,8 @@ public void processOrder(Order order) {
 
 ##### Instance Variables
 
-- Declare at the top of the class
-- Consistent location helps readers find them quickly
-- Group related variables together
+- **Consistent Location:** Declare all instance variables at the top of the class so readers know exactly where to look for the object's state.
+- **Grouping:** Group related variables together (e.g., configuration, dependencies, state) to show logical relationships.
 
 **Example:**
 
@@ -2162,9 +2161,8 @@ public class CustomerService {
 
 ##### Dependent Functions
 
-- Functions that call each other should be vertically close
-- Caller should be above callee when possible
-- This creates a natural reading flow
+- **Vertical Proximity:** Functions that call each other should be vertically close to each other to create a natural reading flow.
+- **Caller First:** When possible, place the caller function above the callee function to maintain a logical flow of execution.
 
 **Example:**
 
@@ -2203,28 +2201,24 @@ public class OrderProcessor {
 
 #### Vertical Ordering & Flow
 
-- High-level concepts at the top, details at the bottom
-- Function call dependencies should point downward
-- Create a smooth reading experience: Start general, get specific as you go down
-- Reader should never need to jump around to understand the code
+- **General to Specific:** Place high-level concepts at the top of the file and detailed implementations at the bottom.
+- **Dependency Flow:** Ensure function call dependencies point downward, so callers appear above callees.
+- **Smooth Reading:** Create a smooth reading experience where the reader starts with general ideas and gets more specific as they scroll down, eliminating the need to jump around.
 
 ### 2. Horizontal Formatting
 
 #### Line Length
 
-- Modern standard: 80-120 characters maximum
-- Rationale:
-  - Fits comfortably on most screens
-  - Allows side-by-side code review
-  - Encourages breaking complex expressions
-- Exception: Long strings or URLs might exceed this limit
+- **Character Limit:** Adhere to a modern standard of 80-120 characters per line to ensure code fits comfortably on most screens and allows for side-by-side review.
+- **Breaking Complex Lines:** encourage breaking complex expressions into multiple lines to improve readability.
+- **Exceptions:** Allow exceptions for long strings or URLs that might naturally exceed this limit.
 
 #### Horizontal Openness and Density
 
 ##### Use Whitespace for Emphasis
 
-- Add spaces around assignment operators and binary operators
-- This accentuates the major elements (left side vs right side)
+- **Operator Spacing:** Add spaces around assignment operators and binary operators to accentuate the major elements (separating the left side from the right side).
+- **Group Separation:** Use whitespace to separate distinct groups of operations or logic.
 
 **Example:**
 
@@ -2243,8 +2237,8 @@ boolean isValid = (user != null)
 
 ##### No Space Before Parentheses for Function Calls
 
-- Function names and their parentheses are closely related
-- Keep them together without spaces
+- **Visual Connection:** Keep function names and their parentheses together to show they are closely related.
+- **Avoid separation:** Do not put a space between the function name and the opening parenthesis.
 
 **Example:**
 
@@ -2260,9 +2254,9 @@ calculateTotal (items, taxRate);
 
 ##### Spacing in Parameter Lists
 
-- No space after opening parenthesis
-- No space before closing parenthesis
-- Space after commas to separate parameters
+- **Opening Parenthesis:** Do not place a space after the opening parenthesis.
+- **Closing Parenthesis:** Do not place a space before the closing parenthesis.
+- **Comma Spacing:** Always add a space after a comma to separate parameters clearly.
 
 **Example:**
 
@@ -2280,9 +2274,9 @@ public void configure( String host,int port ,boolean secure ) {
 
 #### Indentation
 
-- Consistent indentation is crucial for readability
-- Standard: 2 or 4 spaces (choose one and stick to it)
-- Never mix tabs and spaces
+- **Hierarchy:** Use consistent indentation to show the hierarchy and structure of the code.
+- **Standard:** Choose a standard (2 spaces or 4 spaces) and stick to it throughout the project.
+- **Consistency:** Never mix tabs and spaces; configure your editor to use spaces.
 
 **Example:**
 
