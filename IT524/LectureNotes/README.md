@@ -157,22 +157,21 @@ Java is an OOP language. This paradigm brings together data and behavior (method
 **Example:**
 
 ```java
-class House {
-    string address:
-    string color:
-    double area:
-    int numberOfRooms:
-    void openDoor() {
+class Car {
+    double speed;
+    double fuelLevel;
+
+    void accelerate() {
     }
-    void closeDoor() {
+    void brake() {
     }
 }
 ```
 
 ```
-House houseObject = new House();
+Car myBlueBMW = new Car();
 
-[ object ]  ----->  [ class ]
+[ object ] <----> [ class ]
 ```
 
 ### Characteristics of Objects
@@ -185,30 +184,37 @@ House houseObject = new House();
 
 ## CLASS
 
-- Think of this as the blueprint. It defines the internal data representation and the operations.
+- A class is a blueprint or template from which objects are created.
+- It defines the structure and behavior shared by all objects of that type.
+  - **Fields (Attributes):** Variables that hold the data for an object (e.g., color, speed).
+  - **Methods (Operations):** Functions that define what the object can do (e.g., accelerate, stop).
+  - **Constructor:** A special method used to initialize new objects.
 
 ```java
-public class Website {
+public class Car {
 
-    // fields (or instance variable)
-    String webName;
-    int webAge;
+    // Fields (state)
+    String color;
+    double speed;
 
-    // constructor
-    Website(String name, int age){
-        this.webName = name;
-        this.webAge = age;
+    // Constructor
+    Car(String color, double speed) {
+        this.color = color;
+        this.speed = speed;
     }
 
-    public static void main(String args[]){
+    // Method (behavior)
+    void accelerate() {
+        speed += 10;
+        System.out.println("Accelerating. New speed: " + speed);
+    }
 
-        // Creating objects
-        Website obj1 = new Website("beginnersbook", 5);
-        Website obj2 = new Website("google", 18);
+    public static void main(String args[]) {
+        // Creating objects from the Class blueprint
+        Car myCar = new Car("Red", 0);
 
-        // Accessing object data through reference
-        System.out.println(obj1.webName + " " + obj1.webAge);
-        System.out.println(obj2.webName + " " + obj2.webAge);
+        // Behaviors
+        myCar.accelerate();
     }
 }
 ```
