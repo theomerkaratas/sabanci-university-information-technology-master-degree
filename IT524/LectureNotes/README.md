@@ -364,31 +364,7 @@ public class Dog extends Animal {
 - In this example we have an abstract class Animal that has an abstract method `animalSound()`:
   - Since the animal sound differs from one animal to another, there is no point in giving the implementation to this method as every child class must override this method to give its own implementation details.
 - Now each animal must have a sound, by making this method abstract we made it compulsory to the child class to give implementation details to this method. This way we ensures that every animal has a sound.
-
-### Abstract Class Declaration
-
-```java
-// abstract parent class
-abstract class Animal {
-    // abstract method
-    public abstract void sound();
-}
-
-// Dog class extends Animal class
-public class Dog extends Animal {
-
-    public void sound() {
-        System.out.println("Woof");
-    }
-
-    public static void main(String args[]) {
-        Animal obj = new Dog();
-        obj.sound();
-    }
-}
-```
-
-Hence for such kind of scenarios we generally declare the class as abstract and later concrete classes extend these classes and override the methods accordingly and can have their own methods as well.
+- Hence for such kind of scenarios we generally declare the class as abstract and later concrete classes extend these classes and override the methods accordingly and can have their own methods as well.
 
 ```java
 abstract class MyAbstractClass {
@@ -397,6 +373,15 @@ abstract class MyAbstractClass {
     }
 }
 ```
+
+| Feature 🧩            | extends 🧬               | implements 🤝      |
+| --------------------- | ------------------------ | ------------------ |
+| Used with             | Class / Abstract Class   | Interface          |
+| Meaning               | is-a relationship 🐶➡️🐾 | can-do ability 💪  |
+| Code inheritance      | Yes ✅                   | No ❌              |
+| Multiple usage        | Only one ❌              | Multiple ✅        |
+| Constructor           | Inherited 🏗️             | Not available 🚫   |
+| Method implementation | Required if abstract ⚠️  | Always required ⚠️ |
 
 **Rules:**
 
