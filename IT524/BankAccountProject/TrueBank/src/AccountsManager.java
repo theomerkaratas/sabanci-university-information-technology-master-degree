@@ -7,7 +7,8 @@ public class AccountsManager implements AccountOperations, TransactionHistory {
     final ArrayList<Transaction> transactions = new ArrayList<>();
     private Object storage;
 
-    public AccountsManager() {}
+    public AccountsManager() {
+    }
 
     public AccountsManager(Object storage) {
         this.storage = storage;
@@ -15,8 +16,6 @@ public class AccountsManager implements AccountOperations, TransactionHistory {
             List<BaseAccount> loaded;
             if (storage instanceof AccountsStorage) {
                 loaded = ((AccountsStorage) storage).load();
-            } else if (storage instanceof DatabaseAccountsStorage) {
-                loaded = ((DatabaseAccountsStorage) storage).load();
             } else {
                 throw new IllegalArgumentException("Desteklenmeyen storage tipi");
             }
@@ -50,6 +49,7 @@ public class AccountsManager implements AccountOperations, TransactionHistory {
         transactions.add(new Transaction(accNo, "withdraw", amount));
         save();
     }
+
     public void transferWithCurrencyConversion(String fromNo, String toNo, double amount) {
         CurrencyTransferHelper.transferWithCurrencyConversion(accounts, transactions, fromNo, toNo, amount, storage);
     }
@@ -69,7 +69,6 @@ public class AccountsManager implements AccountOperations, TransactionHistory {
     public void transfer(String from, String to, double amount) {
         transferWithCurrencyConversion(from, to, amount);
     }
-
 
     private BaseAccount findAccount(String accNo) {
         for (BaseAccount acc : accounts) {
