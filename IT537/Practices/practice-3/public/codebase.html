@@ -1,0 +1,24 @@
+<h1>Codebase</h1>
+
+<p>
+  The core rule here is a one-to-one mapping between the codebase and the app.
+</p>
+
+<ul>
+  <li>
+    The Single Source of Truth: If you have multiple repositories for the same
+    app, you don't have an app—you have a distributed system. If multiple apps
+    share the same code, that shared code must be moved into a library and
+    included via a dependency manager (Factor II).
+  </li>
+  <li>
+    The "Deploy" Concept: While there is only one codebase, there will be many
+    deploys. A "deploy" is a running instance of that code. For example, you
+    might have one deploy running on a developer's laptop, one in a staging
+    environment, and several in production.
+  </li>
+  <li>
+    Consistency: Every deploy runs the exact same code, though they may be
+    running different commits or versions of that code.
+  </li>
+</ul>

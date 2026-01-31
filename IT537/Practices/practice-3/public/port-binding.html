@@ -1,0 +1,25 @@
+<h1>Port Binding</h1>
+
+<p>
+  A twelve-factor app is completely self-contained and does not rely on the
+  runtime injection of a webserver into the execution environment.
+</p>
+
+<ul>
+  <li>
+    <strong>Self-Contained Services:</strong> The web app exports HTTP as a
+    service by binding to a port and listening for incoming requests. It
+    "becomes" the server itself.
+  </li>
+  <li>
+    <strong>Protocol Agnostic:</strong> While HTTP is the most common, any
+    service (like Redis or an XMPP server) can be exported via port binding. In
+    development, the app is accessed via a URL like
+    <code>http://localhost:5000/</code>.
+  </li>
+  <li>
+    <strong>Composition:</strong> Port binding means that one app can become the
+    backing service for another app by providing the URL to the consumer app in
+    its configuration.
+  </li>
+</ul>

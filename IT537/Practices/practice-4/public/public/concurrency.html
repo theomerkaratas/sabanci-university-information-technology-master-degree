@@ -1,0 +1,27 @@
+<h1>Concurrency</h1>
+
+<p>
+  Scale the application by adding more independent processes rather than making
+  a single process larger.
+</p>
+
+<ul>
+  <li>
+    <strong>The Process Model:</strong> Assign different tasks to different
+    process types. For example, HTTP requests are handled by a
+    <code>web</code> process, while long-running background tasks are handled by
+    a <code>worker</code> process.
+  </li>
+  <li>
+    <strong>Horizontal Scaling:</strong> Because processes are stateless and
+    share-nothing (Factor VI), scaling is as simple as spinning up more copies
+    of a specific process type. This allows the app to handle increased load
+    effortlessly.
+  </li>
+  <li>
+    <strong>Individual Management:</strong> Different process types can be
+    scaled independently. If you have a backlog of background jobs, you can
+    scale the <code>worker</code> processes without needing to add more
+    <code>web</code> processes.
+  </li>
+</ul>

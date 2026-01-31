@@ -1,0 +1,22 @@
+<h1>Logs</h1>
+
+<p>Treat logs as event streams rather than files stored on a disk.</p>
+
+<ul>
+  <li>
+    <strong>Standard Output:</strong> The application should not concern itself
+    with routing or storing its own logs. It should simply write its event
+    stream to <code>stdout</code> (standard output).
+  </li>
+  <li>
+    <strong>Environment Handling:</strong> In development, the dev sees the
+    stream in their terminal. In production, the execution environment captures
+    these streams and routes them to a final destination, such as a log-indexing
+    system like ELK or Splunk.
+  </li>
+  <li>
+    <strong>Introspection:</strong> Treating logs as a continuous stream allows
+    for real-time analysis, alerting, and long-term storage without the app
+    needing to manage log rotation or file permissions.
+  </li>
+</ul>
