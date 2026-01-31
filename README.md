@@ -23,7 +23,7 @@ It aims to organize and share academic work from graduate-level IT courses so th
 | IT 526      | Enterprise Java Frameworks and Design Patterns         |
 | IT 535      | Mobile Programming                                     |
 | IT 537      | Interactive Front-End Programming                      |
-| IT 538      | Software Testing                                       |
+| SEC 509     | Secure Coding & Software Security                      |
 | IT 563      | Agile Project Management Methodology                   |
 | IT 566      | IT Governance                                          |
 | IT 592      | Project Course                                         |
