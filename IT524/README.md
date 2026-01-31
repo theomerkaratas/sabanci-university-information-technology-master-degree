@@ -14,5 +14,6 @@ This folder contains the coursework and projects completed for **IT524: Object-O
 
 This directory contains **two separate Java projects** developed as part of this course. Each project helps you practice key object-oriented programming techniques.
 
-1. 🏦 BankAccountProject
-2. ⚽ FootJoy
+1. [🏦 BankAccountProject](./BankAccountProject)
+2. [⚽ FootJoy](./FootJoy)
+3. [📓 Lecture Notes](./LectureNotes)

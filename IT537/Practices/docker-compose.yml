@@ -4,7 +4,7 @@ services:
   practice-1:
     build: .
     ports:
-      - "8081:80"
+      - "8001:80"
     volumes:
       - ./practice-1:/usr/share/nginx/html
     container_name: practice-1
@@ -12,7 +12,7 @@ services:
   practice-2:
     build: .
     ports:
-      - "8082:80"
+      - "8002:80"
     volumes:
       - ./practice-2:/usr/share/nginx/html
     container_name: practice-2
@@ -20,7 +20,7 @@ services:
   practice-3:
     build: .
     ports:
-      - "8083:80"
+      - "8003:80"
     volumes:
       - ./practice-3:/usr/share/nginx/html
     container_name: practice-3
@@ -28,7 +28,7 @@ services:
   practice-4:
     build: .
     ports:
-      - "8084:80"
+      - "8004:80"
     volumes:
       - ./practice-4:/usr/share/nginx/html
     container_name: practice-4
@@ -36,7 +36,47 @@ services:
   practice-5:
     build: .
     ports:
-      - "8085:80"
+      - "8005:80"
     volumes:
       - ./practice-5:/usr/share/nginx/html
     container_name: practice-5
+
+  practice-6:
+    build: .
+    ports:
+      - "8006:80"
+    volumes:
+      - ./practice-6:/usr/share/nginx/html
+    container_name: practice-6
+
+  practice-7:
+    build: .
+    ports:
+      - "8007:80"
+    volumes:
+      - ./practice-7:/usr/share/nginx/html
+    container_name: practice-7
+
+  practice-8:
+    build: .
+    ports:
+      - "8008:80"
+    volumes:
+      - ./practice-8:/usr/share/nginx/html
+    container_name: practice-8
+
+  practice-9:
+    build: .
+    ports:
+      - "8009:80"
+    volumes:
+      - ./practice-9:/usr/share/nginx/html
+    container_name: practice-9
+
+  practice-10:
+    build: .
+    ports:
+      - "8010:80"
+    volumes:
+      - ./practice-10:/usr/share/nginx/html
+    container_name: practice-10

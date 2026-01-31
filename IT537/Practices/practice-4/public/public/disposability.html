@@ -1,0 +1,23 @@
+<h1>Disposability</h1>
+
+<p>Maximize robustness with fast startup and graceful shutdown.</p>
+
+<ul>
+  <li>
+    <strong>Fast Startup:</strong> Processes should strive to minimize startup
+    time. This allows for more agile release cycles and moving processes across
+    hardware quickly if a failure occurs.
+  </li>
+  <li>
+    <strong>Graceful Shutdown:</strong> Processes should shut down cleanly when
+    they receive a <code>SIGTERM</code> signal. For a web process, this means
+    refusing new requests but finishing the one it is currently processing
+    before exiting.
+  </li>
+  <li>
+    <strong>Crash Resilience:</strong> The app should be designed to handle
+    unexpected, non-graceful terminations. By being stateless and using robust
+    queuing systems for workers, the app remains stable even if a process dies
+    suddenly.
+  </li>
+</ul>

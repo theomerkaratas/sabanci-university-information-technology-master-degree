@@ -1,0 +1,27 @@
+<h1>Dev/Prod Parity</h1>
+
+<p>
+  Keep development, staging, and production as similar as possible to minimize
+  friction and bugs.
+</p>
+
+<ul>
+  <li>
+    <strong>The Three Gaps:</strong> Traditionally, there are gaps in
+    <strong>time</strong> (weeks between deploys),
+    <strong>personnel</strong> (devs write code, ops deploy it), and
+    <strong>tools</strong> (using SQLite locally but Postgres in prod). A
+    twelve-factor app closes these gaps.
+  </li>
+  <li>
+    <strong>Tooling Consistency:</strong> Developers should use the same backing
+    services in their local environment as are used in production. Using
+    "lightweight" versions of databases locally often leads to subtle,
+    hard-to-track bugs.
+  </li>
+  <li>
+    <strong>Continuous Deployment:</strong> By keeping environments identical,
+    developers can feel confident deploying code minutes after it is written,
+    leading to a faster and more agile development cycle.
+  </li>
+</ul>
