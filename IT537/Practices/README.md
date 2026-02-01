@@ -1,26 +1,4 @@
-<style>
-  .readme-container {
-    background-color: white !important;
-    color: #1a1a1a !important;
-    padding: 40px;
-    border-radius: 12px;
-    font-family: sans-serif;
-  }
-  .readme-container h1, .readme-container h2, .readme-container h3 {
-    color: #000 !important;
-  }
-  .readme-container table {
-    color: #1a1a1a !important;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  .readme-container th, .readme-container td {
-    border: 1px solid #dfe2e5;
-    padding: 10px;
-  }
-</style>
-
-<div class="readme-container">
+<div style="background-color: white; color: #1a1a1a; padding: 30px; border-radius: 10px; font-family: sans-serif;" markdown="1">
 
 # IT537 Practices
 
