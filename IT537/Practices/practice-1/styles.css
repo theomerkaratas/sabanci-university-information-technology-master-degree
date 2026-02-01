@@ -1,0 +1,20 @@
+html {
+    background: black;
+    color: white
+}
+
+a:link {
+    color: yellow;
+}
+
+a:visited {
+    color: rgb(201, 76, 76);
+}
+
+.job-title {
+    color: rgb(169, 154, 154)
+}
+
+#title {
+    color: rgb(100, 176, 248)
+}
