@@ -1,4 +1,4 @@
-<div style="background-color: white; color: #1a1a1a; padding: 30px; border-radius: 10px;">
+<div style="background-color: white; color: #1a1a1a; padding: 30px; border-radius: 10px;" markdown="1">
 
 # IT 537 - Interactive Front-End Programming
 
