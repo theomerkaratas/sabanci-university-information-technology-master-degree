@@ -1,12 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRACTICE 14</title>
-    <link rel="stylesheet" href="./styles.css">
-</head>
-<body>
-    <h1>Practice 14</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS Flag Project</title>
+    <style>
+      html {
+        background-color: black;
+        color: #e8e2db;
+      }
+
+      .flag {
+        background-color: #547792;
+        height: 600px;
+        width: 900px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-value: -1;
+      }
+
+      body {
+        text-align: center;
+      }
+
+      div.flag > p {
+        font-size: 75px;
+        margin-top: 0px;
+      }
+
+      .flag > div {
+        background-color: #fab95b;
+        position: absolute;
+        width: 900px;
+        height: 300px;
+        top: 150px;
+      }
+
+      div > div > p {
+        background-color: #e8e2db;
+        margin-top: 50px;
+        font-size: 75px;
+        color: #1a3263;
+        height: 200px;
+        width: 200px;
+        border-radius: 200px;
+        position: relative;
+        left: 350px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="flag">
+      <p>The Flag</p>
+      <div>
+        <div>
+          <p>of Laos</p>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

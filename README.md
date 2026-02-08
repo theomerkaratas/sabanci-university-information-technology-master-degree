@@ -15,7 +15,7 @@ It aims to organize and share academic work from graduate-level IT courses so th
 
 | Course Code       | Course Name                                            |
 | ----------------- | ------------------------------------------------------ |
-| IT 501            | Introduction to Computer Programming                   |
+| [IT 501](./IT501) | Introduction to Computer Programming                   |
 | [IT 511](./IT511) | Fundamentals of Data Communication and TCP/IP Networks |
 | [IT 524](./IT524) | Object-Oriented Programming with Java                  |
 | [IT 553](./IT553) | Database Design and Management                         |
