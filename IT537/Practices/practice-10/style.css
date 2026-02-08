@@ -1,0 +1,32 @@
+html {
+    background: black;
+    font-family: "Fjalla One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white
+}
+
+body {
+    text-align: center
+}
+
+#motivational-photo {
+    padding-top: 20px;
+    padding-bottom: 5px
+}
+
+#daenerys-photo {
+    border: 5px solid white;
+    padding: 0px;
+    width: 750px;
+}
+
+#main-text {
+    font-size: 75px;
+    text-transform: uppercase
+}
+
+#second-text {
+    text-transform: capitalize
+}
+

@@ -18,3 +18,9 @@ a:visited {
 #title {
     color: rgb(100, 176, 248)
 }
+
+.myname {
+    font-family: "Rubik Storm", system-ui;
+    color: yellow;
+    text-align: left;
+}
