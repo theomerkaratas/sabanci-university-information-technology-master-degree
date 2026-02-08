@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  practice-24:
+    build: .
+    ports:
+      - "8024:80"
+    volumes:
+      - .:/usr/share/nginx/html
+    container_name: practice-24
