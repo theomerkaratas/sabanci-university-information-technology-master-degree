@@ -16,18 +16,18 @@ This directory contains various practice projects for the IT537 course, dockeriz
 | [**Practice 6**](./practice-6)   | CSS Selectors                           | 8006 |
 | [**Practice 7**](./practice-7)   | Spanish Vocabulary                      | 8007 |
 | [**Practice 8**](./practice-8)   | CSS Properties                          | 8008 |
-| [**Practice 9**](./practice-9)   | Test Page 9                             | 8009 |
-| [**Practice 10**](./practice-10) | Practice 10                             | 8010 |
-| [**Practice 11**](./practice-11) | Placeholder for future exercise         | 8011 |
-| [**Practice 12**](./practice-12) | Placeholder for future exercise         | 8012 |
-| [**Practice 13**](./practice-13) | Placeholder for future exercise         | 8013 |
-| [**Practice 14**](./practice-14) | Placeholder for future exercise         | 8014 |
-| [**Practice 15**](./practice-15) | Placeholder for future exercise         | 8015 |
-| [**Practice 16**](./practice-16) | Placeholder for future exercise         | 8016 |
-| [**Practice 17**](./practice-17) | Placeholder for future exercise         | 8017 |
-| [**Practice 18**](./practice-18) | Placeholder for future exercise         | 8018 |
-| [**Practice 19**](./practice-19) | Placeholder for future exercise         | 8019 |
-| [**Practice 20**](./practice-20) | Placeholder for future exercise         | 8020 |
+| [**Practice 9**](./practice-9)   | CSS Box Model                           | 8009 |
+| [**Practice 10**](./practice-10) | Motivational Poster                     | 8010 |
+| [**Practice 11**](./practice-11) | CSS Cascade                             | 8011 |
+| [**Practice 12**](./practice-12) | Combining CSS Selectors                 | 8012 |
+| [**Practice 13**](./practice-13) | CSS Positioning Exercise                | 8013 |
+| [**Practice 14**](./practice-14) | CSS Flag Project                        | 8014 |
+| [**Practice 15**](./practice-15) | CSS Float                               | 8015 |
+| [**Practice 16**](./practice-16) | Responsiveness                          | 8016 |
+| [**Practice 17**](./practice-17) | Media Query                             | 8017 |
+| [**Practice 18**](./practice-18) | Agency                                  | 8018 |
+| [**Practice 19**](./practice-19) | Practice 19                             | 8019 |
+| [**Practice 20**](./practice-20) | Practice 20                             | 8020 |
 
 ## How to Use
 
