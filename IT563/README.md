@@ -1,3 +1,4 @@
+<div style="background-color: white; color: #1a1a1a; padding: 30px; border-radius: 10px;" markdown="1">
 # AGILE PROJECT MANAGEMENT METHODOLOGY
 
 ## Introduction to Agile Software Development
@@ -240,7 +241,7 @@ Success has multiple dimensions:
 
 A truly successful project delivers value across all these dimensions.
 
-<img src="dimension_of_success.png" width="400">
+<img src="dimension_of_success.png" width="200">
 
 ### Organizational Success
 
@@ -561,3 +562,5 @@ The Scrum Lifecycle is a high-level view of how a project progresses from start 
 - A Series of Sprints: The project is executed through repeated cycles (Sprints), each following the pattern: Sprint Planning -> Daily Scrums -> Development Work -> Sprint Review -> Sprint Retrospective.
 - Release: After one or more Sprints, a Potentially Shippable Product Increment is released to users.
 - This cycle repeats until the product is complete or funding ends.
+
+</div>
