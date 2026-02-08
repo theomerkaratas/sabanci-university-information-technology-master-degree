@@ -2,7 +2,7 @@
 
 # IT537 Practices
 
-This directory contains various practice projects for the IT537 course, dockerized for easy deployment.
+This directory contains various practice projects for the IT537 course. Each project is dockerized and can be run either collectively or individually.
 
 ## Content Overview
 
@@ -28,46 +28,82 @@ This directory contains various practice projects for the IT537 course, dockeriz
 | [**Practice 18**](./practice-18) | Agency                                  | 8018 |
 | [**Practice 19**](./practice-19) | Practice 19                             | 8019 |
 | [**Practice 20**](./practice-20) | Practice 20                             | 8020 |
+| [**Practice 21**](./practice-21) | Practice 21                             | 8021 |
+| [**Practice 22**](./practice-22) | Practice 22                             | 8022 |
+| [**Practice 23**](./practice-23) | Practice 23                             | 8023 |
+| [**Practice 24**](./practice-24) | Practice 24                             | 8024 |
+| [**Practice 25**](./practice-25) | Practice 25                             | 8025 |
+| [**Practice 26**](./practice-26) | Practice 26                             | 8026 |
+| [**Practice 27**](./practice-27) | Practice 27                             | 8027 |
+| [**Practice 28**](./practice-28) | Practice 28                             | 8028 |
+| [**Practice 29**](./practice-29) | Practice 29                             | 8029 |
+| [**Practice 30**](./practice-30) | Practice 30                             | 8030 |
+| [**Practice 31**](./practice-31) | Practice 31                             | 8031 |
+| [**Practice 32**](./practice-32) | Practice 32                             | 8032 |
+| [**Practice 33**](./practice-33) | Practice 33                             | 8033 |
+| [**Practice 34**](./practice-34) | Practice 34                             | 8034 |
+| [**Practice 35**](./practice-35) | Practice 35                             | 8035 |
+| [**Practice 36**](./practice-36) | Practice 36                             | 8036 |
+| [**Practice 37**](./practice-37) | Practice 37                             | 8037 |
+| [**Practice 38**](./practice-38) | Practice 38                             | 8038 |
+| [**Practice 39**](./practice-39) | Practice 39                             | 8039 |
+| [**Practice 40**](./practice-40) | Practice 40                             | 8040 |
+
+---
 
 ## How to Use
 
-This project uses **Docker** and **Docker Compose** to run all practice sites simultaneously.
-
 ### Prerequisites
 
-- Docker
-- Docker Compose
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
-### Running the Projects
+---
 
-1.  Open your terminal and navigate to this directory:
+### Option 1: Running a Specific Practice (Recommended)
+
+To save system resources, it is recommended to run only the practice you are currently working on. Each practice has its own `docker-compose.yml` file.
+
+1.  **Navigate** to the specific practice directory (e.g., `practice-1`):
 
     ```bash
-    cd IT537/Practices
+    cd IT537/Practices/practice-1
     ```
 
-2.  Start the containers depending on your Docker Compose version:
-
-    **For newer Docker Compose (v2+):**
+2.  **Start** the container:
 
     ```bash
     docker compose up -d
     ```
 
-    **For older Docker Compose (v1):**
+3.  **Access** it in your browser using the corresponding port (e.g., [http://localhost:8001](http://localhost:8001)).
 
-    ```bash
-    docker-compose up -d
-    ```
-
-    _The `-d` flag runs the containers in detached mode (in the background)._
-
-3.  Access the practices in your browser using the ports listed in the table above (e.g., [http://localhost:8001](http://localhost:8001)).
-
-4.  To stop the containers:
+4.  **Stop** the container when finished:
     ```bash
     docker compose down
     ```
-    _(or `docker-compose down`)_
+
+---
+
+### Option 2: Running All Projects Simultaneously
+
+If you need to have all practices available at once, you can use the root `docker-compose.yml` file. Note that this will lift 40 containers and may significantly impact system performance.
+
+1.  **Navigate** to the root practices directory:
+
+    ```bash
+    cd IT537/Practices
+    ```
+
+2.  **Toggle on** all services:
+
+    ```bash
+    docker compose up -d
+    ```
+
+3.  **Toggle off** all services:
+    ```bash
+    docker compose down
+    ```
 
 </div>
