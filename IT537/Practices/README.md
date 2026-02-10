@@ -29,8 +29,8 @@ This directory contains various practice projects for the IT537 course. Each pro
 | [**Practice 19**](./practice-19) | Practice 19                             | 8019 |
 | [**Practice 20**](./practice-20) | Practice 20                             | 8020 |
 | [**Practice 21**](./practice-21) | Practice 21                             | 8021 |
-| [**Practice 22**](./practice-22) | Practice 22                             | 8022 |
-| [**Practice 23**](./practice-23) | Practice 23                             | 8023 |
+| [**Practice 22**](./practice-22) | Chessboard with CSS Grid                | 8022 |
+| [**Practice 23**](./practice-23) | Grid Sizing Fundamentals                | 8023 |
 | [**Practice 24**](./practice-24) | Practice 24                             | 8024 |
 | [**Practice 25**](./practice-25) | Practice 25                             | 8025 |
 | [**Practice 26**](./practice-26) | Practice 26                             | 8026 |
