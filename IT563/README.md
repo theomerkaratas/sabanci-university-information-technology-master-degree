@@ -554,13 +554,158 @@ A 3-hour meeting for the Team, the ScrumMaster, and the Product Owner after the 
 
 ### The Scrum Lifecycle (Big Picture)
 
-The Scrum Lifecycle is a high-level view of how a project progresses from start to finish using Scrum. While not detailed in the slide, it typically involves:
+The Scrum Lifecycle is a structured process designed to deliver value quickly and reliably. At the center of this cycle is the Iteration (also known as a Sprint), which is a time-boxed period of work typically lasting 2 to 4 weeks.
 
 <img src="scrum_lifecycle.png" width="400">
 
-- Product Backlog Creation & Refinement: Continuously managing the single source of requirements.
-- A Series of Sprints: The project is executed through repeated cycles (Sprints), each following the pattern: Sprint Planning -> Daily Scrums -> Development Work -> Sprint Review -> Sprint Retrospective.
-- Release: After one or more Sprints, a Potentially Shippable Product Increment is released to users.
-- This cycle repeats until the product is complete or funding ends.
+Key components of this lifecycle include:
+
+- Backlog Management: Work begins with the Product Backlog, from which specific items are selected to create the Sprint Backlog for the current iteration.
+- Daily Synchronization: Every 24 hours, the team holds a Daily Scrum Meeting to coordinate their efforts.  
+- Outcome: The goal of every iteration is to produce a Potentially Shippable Product Increment—a functional piece of software that provides immediate value.
+
+### Core Terminology and Hierarchy
+
+- Understanding the specific terminology used in Scrum is essential for effective project management:
+- Product: The piece of software being developed under the company.
+- Project: Refers to the major releases of the product.
+- Backlog: A comprehensive list of stories and tasks associated with an entity.
+- Iteration (Sprint): A time-boxed work period, often on a weekly or bi-weekly basis.
+- Typical Product Hierarchy: In practice, a New Product is broken down into multiple Releases (e.g., Release 1, Release 2), each containing a series of Sprints (e.g., Sprints 1–4) .
+
+### Understanding Backlogs, Stories, and Tasks
+
+<img src="product_backlog_graph.png" width="400">
+
+Scrum organizes work through a clear hierarchy of items that represent different levels of detail and value:
+
+- **Product Backlog:** Represents the entire planned scope of the product.
+- **Project Backlog:** Contains parts of the product backlog chosen and allocated for a specific major release.
+- **Iteration Backlog:** The most granular level, containing the specific work allocated for a single sprint.
+
+### Typical Product Hierarchy
+
+The work in Scrum is often structured in a Typical Product Hierarchy. This hierarchy helps break down large, complex pieces of work into manageable units. It typically flows from large themes or epics, down to smaller stories (descriptions of desired functionality from a user's perspective), and further into specific tasks.
+
+### Tracking Progress: Burn-up and Burn-down Charts
+
+Two primary charts are used to visualize progress and ensure the team is on track:
+
+<img src="project_burn_up.png" width="400">
+
+- **Project Burn-up:** This chart tracks the overall progress of the project in terms of story points. It visually depicts the accumulation of completed story points (the "Done" area, often in green) plotted against the total scope of the project over time. It shows how much work has been completed and how the total scope may change.
+
+<img src="iteration_burndown.png" width="400">
+
+- **Iteration Burn-down:** This chart tracks the progress of tasks within a single iteration (Sprint) as a function of time. It typically shows the amount of work remaining (often in hours) on the vertical axis against the days of the Sprint on the horizontal axis. The ideal trend is a downward slope to zero, showing the team "burning down" their remaining work.
+
+### Distinguishing Stories and Tasks
+
+In a typical use case, stories are clearly separated from tasks.
+
+- Stories represent units of customer or user value. They describe what needs to be built and why, from a user's perspective. A story has value when completed (e.g., "As a user, I can log in so I can access my account").
+- Tasks are the concrete, technical steps required to implement a story. They describe how the work will be done. Tasks might not have direct user value on their own (e.g., "Design login UI mockup," "Set up authentication API endpoint").
+
+> This separation enables prioritization to be done at the story level (based on business value), while tasks are added to a story for detailed planning and tracking of the activities needed to complete it. A story can contain one or more tasks.
+
+### Estimating Stories and Tasks
+
+Effort estimation is applied differently to stories and tasks:
+
+- Stories are typically estimated in story points, which are relative units of size/complexity.
+- Tasks are estimated in man-hours, representing a more concrete effort forecast. A key metric for tasks is Effort Left, which is the team's current estimate of the work still required to complete the task.
+
+### Story and Task States
+
+Stories (and tasks) move through a series of pre-defined states during their lifecycle. These states provide clarity on the current status of any work item:
+
+- **Not Started:** No work has yet been put into realizing this story/task.
+- **In Progress:** Work is ongoing and some effort has already been invested.
+- **Blocked:** The work cannot proceed. Most likely, some action must be taken by the team ('us') or an external party before work can continue.
+- **Pending:** The work is waiting for something external that can reasonably be expected to happen without the team taking any further immediate action.
+- **Ready:** The core work is otherwise done, but some relatively minor "definition of done" criteria are yet to be met (e.g., the story must be demoed to the product owner, released to production, or discussed in a stand-up meeting).
+  Deferred: The story/task has been decided to be skipped in the current project or iteration. Its effort/points are omitted from all progress metrics. This allows teams to quickly scope out items without moving them to a different backlog.
+- **Done:** The final state of a task/story after it has been fully completed according to all criteria. Reaching "Done" affects the project's progress metrics (e.g., burn-up chart).
+
+### Organizing Work with Labels
+
+To improve organization and tracking, stories can be labeled according to various categories such as:
+
+- Bugs (defects to be fixed).
+- Usability improvements (enhancements to the user experience).
+- New features (new functionality).
+- Planned for a specific release.
+
+This labeling system provides a simple issue tracking mechanism within the backlog, allowing teams to filter and manage work by type or purpose easily.
+
+### The Concept of Effort Estimation
+
+A core Agile practice is Effort Estimation, which is the process of evaluating the relative size and complexity of work items. The relative size of stories is estimated in so-called story points. Story points are abstract units that measure effort, complexity, and risk combined, rather than pure time. While story points are common, one can use other measures like person-days for estimation.
+
+### Using an Exponential Scale for Estimation
+
+It is recommended to use an exponential scale when estimating story points. The reason for this is that as the size of a story gets bigger, it becomes increasingly harder to precisely distinguish the difference between N and N-1 points. An exponential scale acknowledges this uncertainty for larger items.
+
+- The Fibonacci Scale: One popular option is to use the Fibonacci scale (1, 2, 3, 5, 8, 13, ...). This non-linear sequence naturally creates larger gaps between numbers as they increase, which aligns with the increasing uncertainty in estimating larger stories.
+
+### Interpreting Story Points
+
+Story points can be loosely associated with timeframes to help teams calibrate their estimates, but this is a guideline, not a direct conversion. For example:
+
+- 1 point: A story that can be done in one sitting without a break.
+- 2 points: Requires about a half-day of work.
+- 3 points: Requires about a day of work.
+- 5 points: Requires about two days.
+- 8 points: Requires about a week.
+
+A critical rule is: If a story is estimated to require more than 8 points, it should be broken down into smaller stories. This ensures work items are manageable within a short iteration.
+Most importantly: Do not use or map the story points to engineering hours directly! The purpose of story points is to measure relative complexity and enable velocity tracking, not to create fixed time commitments.
+
+### The Estimation Process
+
+The slides outline a general flow for estimation and planning, which can be summarized as:
+
+1. Quick analysis of the story.
+2. Reviewing the project or iteration overview.
+3. Estimating in terms of story points.
+4. Finalizing the effort estimation.
+
+<img src="dashboard.png" width="400">
+
+### Jira Issue Categories and Hierarchy
+
+In tools like Jira, work is categorized into a hierarchy that helps manage scope:
+
+- **Stories (User Stories):** Short requirements or requests written from the perspective of an end user. They are the primary unit of work discussed in estimation.
+- **Epics:** Large bodies of work that can be broken down into a number of smaller stories. Epics represent significant feature areas or initiatives.
+- **Initiatives:** Collections of related epics that drive toward a common, high-level goal.
+- **Themes:** Large focus areas that span across the organization, grouping multiple initiatives.
+
+<img src="jira_isue_categories.png" width="400">
+
+### Jira Examples of Agile Stories
+
+Examples help illustrate what a well-formed story looks like in a real context. For instance, if a company was improving a rocket launch streaming service, stories might be:
+
+- "iPhone users need access to a vertical view of the live feed when using the mobile app."
+- "Desktop users need a 'view full screen' button in the lower right-hand corner of the video player."
+
+These examples show stories are user-centric and describe a specific need.
+
+### Comprehensive Jira Issue Statuses
+
+Jira uses a detailed workflow managed through issue statuses. Understanding these states is key for tracking progress in a tool:
+
+- **Open / To Do**: The issue is reported and ready to be worked on.
+- **In Progress**: The issue is being actively worked on.
+- **In Review / Under Review**: Work is complete and is awaiting or undergoing peer review.
+- **Approved**: A reviewer has approved the work.
+- **Resolved**: A resolution has been applied, awaiting final verification.
+- **Done / Closed**: The issue is considered finished correctly. Closed issues can be reopened.
+- **Reopened**: A previously resolved issue was incorrect and needs more work.
+- **Rejected**: A reviewer has rejected the completed work.
+- **Cancelled**: Work has stopped on the issue.
+- **Building / Build Broken**: Statuses related to the integration and build process after code is committed.
+- **Backlog / Selected for Development**: Planning statuses indicating the issue is waiting for a future sprint or has been chosen for upcoming work.
 
 </div>
