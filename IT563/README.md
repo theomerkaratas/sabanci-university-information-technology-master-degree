@@ -708,4 +708,285 @@ Jira uses a detailed workflow managed through issue statuses. Understanding thes
 - **Building / Build Broken**: Statuses related to the integration and build process after code is committed.
 - **Backlog / Selected for Development**: Planning statuses indicating the issue is waiting for a future sprint or has been chosen for upcoming work.
 
+## Lean Software Development
+
+### Introduction to Lean Software Development
+
+Lean Software Development is an Agile approach that applies principles from lean manufacturing to the process of creating software. Its core philosophy is to maximize customer value while minimizing waste.
+
+### Defining "Lean"
+
+The term "Lean" describes a production practice that considers the expenditure of resources for any goal other than the creation of value for the end customer to be wasteful. Consequently, any such expenditure becomes a target for elimination.
+
+> Therefore, Lean implementation is focused on getting the right things to the right place at the right time in the right quantity to achieve perfect workflow. This pursuit aims to minimize waste while remaining flexible and able to change. (Source: Wikipedia)
+
+### The Origins of Lean Development
+
+Lean Software Development does not originate in software. It borrows principles from the theory of lean manufacturing, which itself comes from the Japanese manufacturing industry, specifically the Toyota Production System (TPS). Lean Software Development is, therefore, the application of lean principles to software development, involving the translation of widely accepted lean principles into agile practices.
+
+### Historical Context: The Automotive Industry in the 1980s
+
+The power of lean thinking was demonstrated in the late 1980s automotive industry. Consider two competing cars:
+
+- The GM Cutlass took 7 years to go from concept to market.
+- The Honda Accord took only 3 years.
+
+> Despite the much shorter development time, the Honda Accord also achieved better quality. This result was counter-intuitive to traditional thinking, which assumed that shorter development time would lead to increased cost and potentially lower quality.
+
+### The Traditional vs. The Japanese (Lean) Approach
+
+| **The Traditional Approach (@ Detroit)**                                                                                                                                                                                                                                         | **The Japanese/Lean Approach (@ Toyota and Honda)**                                                                                                      |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| - Operated on the belief that late changes are extremely costly.<br>- Mandated a sequential development process (like Waterfall).<br>- Adopted a lengthy development cycle to try to get everything right upfront.<br>- Allowed no adaptation in the later stages of production. | - Employed rapid, concurrent development where different phases overlapped.<br>- Designed to accommodate and make changes late in the development cycle. |
+
+### The Core Difference: Managing the Cost of Change
+
+The two approaches were founded on opposite strategies for handling change:
+
+- **Traditional Strategy (Detroit):** The goal was to make the right design decision in the first place to avoid the need to change later on, precisely because changes were believed to be prohibitively expensive during production.
+- **Lean Strategy (Toyota/Honda):** The goal was to avoid irreversible design decisions in the first place. Instead, they sought to delay design decisions as much as possible in order to make design decisions with the best available information later in the process.
+
+### Just-In-Time (JIT) Manufacturing
+
+A key lean principle is Just-In-Time Manufacturing, pioneered by Toyota. The idea is: "Don't decide what to manufacture until you have a customer order; then make it as fast as possible." This eliminates waste from overproduction and inventory, tying production directly to demand.
+
+### Beyond Late Decisions: Organizational and Process Differences
+
+The differences extended beyond timing into organizational structure and process:
+
+| Traditional Model                                                                                                       | Lean Model                                                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pushed critical decisions up to a few high-level authorities.                                                           | Emerged decisions from detailed, engineering-level discussions.                                                                                                                     |
+| Used sequential processes.                                                                                              | Used concurrent processes; integrating making, testing, and maintenance considerations into the design phase itself.                                                                |
+| Resulted in designs subject to modification by both marketing and managers, often far removed from engineering reality. | Was often guided by a single leader who envisioned what the car should be and continually kept the vision in front of the engineers doing the work, ensuring alignment and purpose. |
+
+### Adaptation to Software Development
+
+The success of Lean development was later adapted by many automobile companies in the 1990s and was understood and proven by managers in many other disciplines, including those with design environments as complex as software development. This naturally led to the question: "Why not borrow lean development principles for software development?"
+
+### A Word of Caution: Translation is Key
+
+However, lean principles have not always been successfully applied in new domains. The slides emphasize that:
+
+- The essence of lean thinking must be understood. It's a mindset, not just a set of steps.
+- Principles are essential and universal, but practices are applied just to carry out principles.
+- There are no "best practices" applicable in all domains.
+- Principles must be translated to practices for a particular domain (like software), and this translation is not always easy. A direct copy of manufacturing practices without understanding the underlying principle will likely fail.
+
+### The Seven Core Principles
+
+Lean Software Development is built upon seven fundamental principles that guide its practices and mindset. These principles are a direct translation of lean manufacturing thinking to the software domain:
+
+1. **Eliminate Waste:** The foundational principle. Anything in the development process that does not add value to the product from the customer's perspective should be avoided.
+2. **Amplify Learning:** Recognizes that software development is an exercise in discovery. Processes should be designed to maximize feedback and learning through short cycles, testing, and experimentation.
+3. **Decide as Late as Possible:** In the face of uncertainty, it is often better to delay decisions until the last responsible moment when the most information is available, allowing for more informed and flexible choices.
+4. **Deliver as Fast as Possible:** Short, rapid delivery cycles create more frequent and reliable feedback from customers, which in turn fuels learning and reduces the risk of building the wrong thing.
+5. **Empower the Team:** The people doing the work are best positioned to make decisions about it. This principle advocates to let people decide, not the process. Managers should support and enable the team.
+6. **Build Integrity In:** The goal is to create products with conceptual and perceived integrity—products that are maintainable, adaptable, and extensible. Quality and good design are not afterthoughts but are built into the process from the start.
+7. **See the Whole:** Avoid sub-optimizing individual parts of the system or process at the expense of the overall value stream. Focus on the whole product and process, not getting trapped in local optimizations that create waste elsewhere.
+
+### The Origins in the Toyota Production System (TPS)
+
+These principles originate from the Toyota Production System (TPS), developed in the 1940s. Toyota faced a unique challenge: a need for cheap cars but a market not big enough for mass production economies of scale. This forced them to invent a new way of working for manufacturing, logistics, and product development. The fundamental principle articulated by Taiichi Ohno, the key architect of TPS, was to Eliminate Waste.
+
+### How to See Waste in Software Development
+
+To identify waste, one must critically examine everything in the software development process that is not direct analysis and coding. For each activity, ask:
+
+- Does it really add value for customers?
+- Is there a way to do without it?
+
+This approach is inspired by Shigeo Shingo, who identified seven classic types of manufacturing waste.
+
+### Translating the Seven Wastes to Software
+
+The seven manufacturing wastes have direct parallels in software development:
+
+| Manufacturing Waste | Software Development Waste                                             |
+| ------------------- | ---------------------------------------------------------------------- |
+| Inventory           | Partially done work (e.g., untested code, undelivered features)        |
+| Extra Processing    | Extra Processes (e.g., unnecessary documentation, excessive approvals) |
+| Overproduction      | Extra Features (features not actually needed by the user)              |
+| Transportation      | Task Switching (context switching between different tasks or projects) |
+| Waiting             | Waiting (for decisions, approvals, builds, or other team members)      |
+| Motion              | Motion (hunting for information, navigating cumbersome tools)          |
+| Defects             | Defects (bugs and errors that require rework)                          |
+
+### The Role of Management Activities
+
+In the Lean view, management activities do not directly add customer value, but their proper function is to help in eliminating the wastes listed above. Therefore, complicated project tracking is itself a sign of waste. Effective management should focus on enabling flow by:
+
+- Minimizing the amount of unfinished work in the pipeline (limiting Work-in-Progress).
+- Helping teams prioritize and release work as soon as possible to get feedback and deliver value.
+
+### Identifying Waste with Value Stream Mapping
+
+A key tool for implementing the "See the Whole" and "Eliminate Waste" principles is Value Stream Mapping. This involves analyzing the entire process end-to-end, from a customer request until the final release of the product or feature. The central question this mapping seeks to answer is: "How much time and effort is actually spent on adding value to the product, versus time spent on waiting, moving, or reworking?"
+
+### A Manufacturing Example: The Cola Can
+
+A classic example illustrates the staggering amount of waste that can exist in a process. For a cola can:
+
+- Total lead time from raw material to store shelf: 319 days (about 10 and a half months).
+- Time where value is actually being added (e.g., shaping, filling, sealing): Only 3 hours.
+- This means value-adding activity constitutes just 0.04% of the total time. The rest (99.96%) is waste—inventory, transportation, waiting, etc.
+
+<img src="cola_process_diagram.png" width="400">
+
+### Value Stream Mapping in Traditional vs. Agile Software Development
+
+The same analysis can be applied to software processes:
+
+**Traditional Software Development Example:** The map might reveal long periods of waiting, such as:
+
+- A project waiting ~6 weeks before starting.
+- A design review taking 3 weeks to schedule.
+- Coding delayed for 3 weeks due to resource conflicts with other projects.
+- 6 weeks allocated for testing and deployment.
+
+<img src="value_stream_mapping_traditional.png" width="400">
+
+**Agile Software Development:** In contrast, an Agile value stream map would aim to show a much tighter, faster flow with minimal waiting between steps, emphasizing continuous movement of small batches of work from idea to deployment.
+
+<img src="value_stream_mapping_agile.png" width="400">
+
+### A Critical Distinction: Development vs. Production
+
+While Lean principles are overall applicable to both, it is crucial to understand that Lean production practices cannot be directly applied to software development. This is because they address two fundamentally different activities:
+
+- Software Development is like designing a recipe. It is a creative, problem-solving, knowledge-generating activity.
+- Production (Manufacturing) is like following a recipe to produce a dish. It is a repetitive, predictable, physical execution activity.
+
+### Key Differences Between Development and Production
+
+The slides highlight the opposing characteristics of these two domains:
+
+| Characteristic        | Development (Designing the Recipe)                                                   | Production (Producing the Dish)                                            |
+| --------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| Quality Definition    | Quality is "fitness for use." Does it solve the user's problem well?                 | Quality is "conformance to requirements." Does it match the spec?          |
+| Variability           | Variable results are good. Experimentation leads to innovation and better solutions. | Variable results are bad. Consistency and predictability are paramount.    |
+| The Role of Iteration | Iteration generates value. Each cycle provides learning that improves the design.    | Iteration generates waste (called rework). Going back is a costly mistake. |
+
+### The Nature of Design: Iterative Cycles
+
+Research into how experienced designers work reveals an important truth: when facing ill-defined problems (which have no single right answer or obvious best solution), they do not follow a rigid top-down design process. Instead, they cycle between high-level design and detailed solution exploration. This back-and-forth allows them to learn more about the problem and progressively structure it effectively.
+
+### Applying This to Software Development
+
+Software development is also a problem-solving activity, often dealing with ill-defined requirements and novel challenges. Therefore, effective software development mirrors the designer's approach: Problem solving involves cycles of investigation, experimentation, and checking the results. This iterative, learning-focused cycle is the essence of Agile and Lean Software Development, aligning with the principles of Amplify Learning and Decide as Late as Possible.
+
+### The Critical Role of Feedback
+
+Lean and Agile development emphasize fast, concrete feedback over speculation. Several practical examples illustrate this principle:
+
+| **Topic**                  | **Lean/Agile Feedback Approach**                                              | **Speculation/Traditional Approach**                                          |
+| :------------------------- | :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------- |
+| **Quality**                | Run tests as soon as code is written for immediate feedback on correctness.   | Let defects accumulate to be fixed later at a higher cost.                    |
+| **Design & Understanding** | Check out ideas by writing code (spikes/prototypes) for tangible insights.    | Add more documentation or detailed planning based on untested assumptions.    |
+| **Requirements**           | Show potential user screens (demos/mockups) for early user feedback.          | Gather more written requirements which are often misinterpreted.              |
+| **Tool Selection**         | Test top three tool candidates with a small pilot.                            | Study more carefully through lengthy analysis and comparison documents.       |
+| **Large-Scale Changes**    | Try the new idea out as a small, integrated experiment (e.g., Web front end). | Try to figure out how to convert an entire system in a single massive effort. |
+
+### Making Progress Visible
+
+Feedback requires visibility. Tools like burn-down charts and tracking tests written & passed provide visible progress throughout iterations. These artifacts make the current state of the project transparent to the entire team, enabling informed decisions and timely adjustments.
+
+### The Predictive vs. Adaptive Paradigm
+
+The slides contrast two opposing views of the development process:
+
+- The Traditional (Predictive) Paradigm: Believes software development should be specified in detail prior to implementation. This stems from the core belief that if you don't get the requirements nailed down and the design right upfront, it will surely cost a lot to make changes later. This paradigm tries to eliminate uncertainty through extensive early planning.
+
+### The Case for Deciding as Late as Possible
+
+The "Decide as Late as Possible" principle directly challenges the predictive paradigm by asking: "What if...?"
+
+- What if there is uncertainty?
+- What if customer needs are not clear at the start?
+- What if customer needs are subject to change?
+- What if technology is moving?
+
+In such an environment—which describes most software projects—then an adaptive approach is a better bet than a rigid, predictive one.
+
+### Agile Planning: Flexibility Through Options
+
+It is crucial to understand that Agile approaches are NOT unplanned. Instead, they use planning differently:
+
+- Plans enhance flexibility to respond to change, rather than locking the team into a single path.
+- Planning involves designing experiments and learning to reduce uncertainty.
+- A key planning activity is creating options to delay a decision. An analogy is to reserve a hotel room (keeping your option open) rather than booking it (making a final, costly commitment) far in advance.
+
+### The Nature of Informed, Adaptive Plans
+
+Therefore, a Lean/Agile plan has a specific character:
+
+- A plan should not pre-specify detailed actions based on speculation about an uncertain future.
+- A plan should adapt based on reality and the feedback received as the project unfolds.
+
+### Tactics for the "Last Responsible Moment"
+
+The principle "Decide as Late as Possible" is operationalized by aiming to make decisions at the last responsible moment. This is defined as the moment at which failing to make a decision eliminates an important alternative. To safely delay decisions without creating chaos, teams use specific technical and procedural tactics:
+
+- Use modularization and separation of concerns in the codebase.
+- Rely on interfaces to define contracts between components.
+- Avoid extra features and future capabilities (YAGNI - "You Ain't Gonna Need It").
+- Avoid repetition (follow the DRY principle - "Don't Repeat Yourself").
+
+> These tactics keep the system flexible, allowing important decisions about implementation details to be made later when more information is available.
+
+### Delivering Fast with Kanban Systems
+
+The principle Deliver as fast as possible is often implemented using a Kanban System. Kanban is a pull system, where customer needs pull the work through the development process. This is in contrast to a push system, where a predetermined schedule pushes work onto the team regardless of current capacity or immediate demand.
+
+### The Core of a Software Kanban System
+
+A Software Kanban System visualizes the workflow and limits work-in-progress to optimize flow.
+
+- **Visualization:** Work items are represented as cards on a board with columns representing different phases (e.g., To Do, In Progress, Done). These phases can be anything; they can be as simple as New, In Progress, Done.
+- **WIP (Work in Progress) Limit:** This is the critical rule. Each phase (or the entire system) has a strict limit on how many items can be in progress at once. This limit prevents overloading the team, exposes bottlenecks, and ensures work flows to completion quickly.
+
+### Kanban vs. Scrum
+
+While both are Agile, Kanban has a distinct focus:
+
+- Kanban focuses on continuous progress, maintaining a steady flow, and strict limitation on work in progress (WIP). It does not prescribe fixed-length iterations (sprints); work is pulled continuously as capacity allows.
+- The Kanban system complements other process models like Scrum; many teams use a "Scrumban" hybrid, applying WIP limits and flow optimization within the Scrum framework.
+
+### Empowering the Team
+
+The principle Empower the team stands in contrast to traditional process improvement models.
+
+- Frameworks like CMM/CMMI often introduce central control, centralized decision-making, and top-down process design.
+- Agile and Lean methods aim at moving decisions to the lowest possible level—to the people doing the work. This requires developing the capacity of people for wise decision making and placing an emphasis on experimentation and feedback as the primary mechanism for control and improvement, rather than on bureaucratic oversight.
+
+### Building Integrity In
+
+The principle Build integrity in means quality and coherence are designed into the product from the start, not inspected in later. Key practices that support this include:
+
+- **Refactoring:** Continuously improving the design of existing code without changing its external behavior to maintain flexibility and clarity.
+- **Testing:** Using practices like Test-Driven Development (TDD) to ensure correctness and drive good design.
+- **Integrated Problem Solving:** Involving the whole team (developers, testers, etc.) collaboratively to solve problems, ensuring that all perspectives (technical, quality, user) are considered from the beginning.
+
+### Seeing the Whole
+
+The principle See the whole applies systems thinking to software development. It warns against local optimizations that harm the overall system. Key concepts include:
+
+- Considering limits to growth (e.g., a team can only handle so much WIP).
+- Shifting the burden from addressing root causes to applying quick fixes that create bigger problems later.
+- Attacking root causes rather than symptoms of problems.
+
+The overarching directive: **Do not sub-optimize one part of the process or system if it damages the overall flow or product value.**
+
+### Summary of the Seven Lean Principles
+
+The slides provide a concise summary of each principle and its practical implication:
+
+1. **Eliminate waste:** Spend time only on what adds real customer value.
+2. **Amplify learning:** When you have tough problems, increase feedback.
+3. **Decide as late as possible:** Keep your options open as long as practical, but no longer.
+4. **Deliver as fast as possible:** Deliver value to customers as soon as they ask for it.
+5. **Empower the team:** Let the people who add value use their full potential.
+6. **Build integrity in:** Don't try to tack on integrity after the fact—build it in.
+7. **See the whole:** Beware of the temptation to optimize parts at the expense of the whole.
+
 </div>
