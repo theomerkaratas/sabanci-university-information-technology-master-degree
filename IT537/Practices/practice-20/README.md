@@ -1,13 +1,19 @@
-# Practice 20: Flex Direction and Sizing
+# Practice 20: Flexbox Visual Guide
 
-This practice explores the core concepts of Flexbox, focusing on how to align items and manage their initial sizes.
+This practice provides a comprehensive, interactive look at Flexbox layout properties. It includes a navigation hub to visualize how different properties affect element alignment and sizing.
+
+## Visual Learning Hub
+
+The project contains an interactive [Visual Guide (index.html)](./index.html) that allows you to swap between different Flexbox configurations:
+
+- **Flex Wrap:** Single-line vs multi-line content.
+- **Alignment:** Detailed examples for `justify-content`, `align-items`, and `align-content`.
 
 ## Topics Covered
 
-- **Flex Container:** Using `display: flex` to enable the flex context.
-- **Flex Direction:** Controlling the primary axis (row or column).
-- **Flex Basis:** Setting the initial size of a flex item before free space is distributed.
-- **Sizing with Width vs Basis:** Understanding how `flex-basis` interacts with `width`.
+- **Main vs Cross Axis:** Understanding how alignment changes based on direction.
+- **Multi-line Alignment:** Using `flex-wrap` and `align-content` for complex layouts.
+- **Flex Sizing:** Interaction between `flex-grow`, `flex-shrink`, and `flex-basis`.
 
 ## Flexbox Container Properties
 
@@ -56,6 +62,16 @@ This practice explores the core concepts of Flexbox, focusing on how to align it
 | **flex-shrink** | `flex-shrink: 0`    | Element will not shrink even if space is tight. |
 | **flex-basis**  | `flex-basis: 300px` | Initial "ideal" size of the element.            |
 
+## Flex Shorthand
+
+The `flex` property is a shorthand for `flex-grow`, `flex-shrink`, and `flex-basis` (in that order).
+
+| Shorthand          | Equivalent To                                      |
+| :----------------- | :------------------------------------------------- |
+| `flex: 1 0 300px;` | `flex-grow: 1; flex-shrink: 0; flex-basis: 300px;` |
+| `flex: 1;`         | `flex-grow: 1; flex-shrink: 1; flex-basis: 0%;`    |
+| `flex: 0 1 auto;`  | The default value.                                 |
+
 ## Code Snippet Example
 
 ```css
@@ -68,3 +84,8 @@ div > div {
   flex-basis: 100px; /* Each child starts with 100px height (in column mode) */
 }
 ```
+
+## Further Reading
+
+- For more info, check out the [Complete Guide to CSS Flexbox Layout](https://css-tricks.com/snippets/css/complete-guide-to-css-flexbox-layout/) on CSS-Tricks.
+- You can also learn while playing a game: [Flexbox Froggy](https://appbrewery.github.io/flexboxfroggy/)
