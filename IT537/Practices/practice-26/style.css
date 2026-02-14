@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+}
+
+.example-container {
+    @apply min-h-screen bg-slate-950 p-8 flex flex-col items-center;
+}
+
+.card {
+    @apply bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-slate-700;
+}
+
+.btn-primary {
+    @apply px-8 py-4 rounded-2xl font-bold text-white transition-all duration-500 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-[length:200%_auto] shadow-xl shadow-indigo-500/25 hover:bg-[position:right_center] hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/40 active:scale-95 flex items-center justify-center text-lg tracking-wide;
+}
+
+.nav-link {
+    @apply text-slate-400 hover:text-white transition-colors duration-200 flex items-center gap-2;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-slate-950 text-slate-200;
+}
