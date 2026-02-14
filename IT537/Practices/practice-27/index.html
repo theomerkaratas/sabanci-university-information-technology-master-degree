@@ -19,7 +19,9 @@
     </script>
   </head>
 
-  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 p-4 md:p-12 font-sans">
+  <body
+    class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 p-2 sm:p-4 md:p-12 font-sans"
+  >
     <button
       onclick="document.documentElement.classList.toggle('dark')"
       class="fixed top-6 right-6 p-3 rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
@@ -54,120 +56,295 @@
         ></path>
       </svg>
     </button>
-    <main class="max-w-4xl mx-auto bg-white dark:bg-slate-900 shadow-2xl rounded-3xl overflow-hidden ring-1 ring-slate-200 dark:ring-slate-800">
+    <main
+      class="max-w-4xl mx-auto bg-white dark:bg-slate-900 shadow-2xl rounded-2xl md:rounded-3xl overflow-hidden ring-1 ring-slate-200 dark:ring-slate-800"
+    >
       <!-- Header Section -->
-      <div class="p-8 md:p-12 bg-slate-100/50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 flex flex-col md:flex-row items-center gap-10">
+      <div
+        class="p-6 md:p-12 bg-slate-100/50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 flex flex-col md:flex-row items-center gap-6 md:gap-10"
+      >
         <div class="relative group">
-          <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-          <img src="photo.jpg" alt="Omer Karatas" class="relative w-48 h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-white dark:border-slate-800 shadow-lg" />
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"
+          ></div>
+          <img
+            src="photo.jpg"
+            alt="Omer Karatas"
+            class="relative w-32 h-32 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-white dark:border-slate-800 shadow-lg"
+          />
         </div>
-        
+
         <div class="text-center md:text-left flex-1">
-          <h1 class="text-5xl md:text-7xl font-black mb-4 tracking-tighter bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-400 bg-clip-text text-transparent">Omer Karatas</h1>
-          <p class="text-xl md:text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-2">DevOps and Site Reliability Engineer</p>
-          <p class="text-slate-500 dark:text-slate-400 font-medium mb-6">Besiktas, Istanbul</p>
-          
-          <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm font-medium">
-            <a href="mailto:theomerkaratas@gmail.com" class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm hover:shadow-md transition-all">
-              <span class="text-indigo-500 text-lg">@</span> theomerkaratas@gmail.com
+          <h1
+            class="text-3xl sm:text-5xl md:text-7xl font-black mb-3 md:mb-4 tracking-tighter bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-400 bg-clip-text text-transparent"
+          >
+            Omer Karatas
+          </h1>
+          <p
+            class="text-lg sm:text-xl md:text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-1 md:mb-2"
+          >
+            DevOps and Site Reliability Engineer
+          </p>
+          <p
+            class="text-slate-500 dark:text-slate-400 font-medium mb-4 md:mb-6"
+          >
+            Besiktas, Istanbul
+          </p>
+
+          <div
+            class="flex flex-wrap justify-center md:justify-start gap-4 text-sm font-medium"
+          >
+            <a
+              href="mailto:theomerkaratas@gmail.com"
+              class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm hover:shadow-md transition-all"
+            >
+              <span class="text-indigo-500 text-base md:text-lg">@</span>
+              theomerkaratas@gmail.com
             </a>
-            <span class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm">
-              <span class="text-indigo-500 text-lg">📞</span> +90 544 727 52 54
+            <span
+              class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm"
+            >
+              <span class="text-indigo-500 text-base md:text-lg">📞</span> +90
+              544 727 52 54
             </span>
             <div class="flex gap-2 mt-2 md:mt-0">
-              <a href="https://www.linkedin.com/in/theomerkaratas/" class="px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg font-bold hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-all">LinkedIn</a>
-              <a href="https://github.com/theomerkaratas" class="px-4 py-2 bg-slate-900 dark:bg-slate-700 text-white rounded-lg font-bold hover:bg-black dark:hover:bg-slate-600 transition-all">GitHub</a>
+              <a
+                href="https://www.linkedin.com/in/theomerkaratas/"
+                class="px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg font-bold hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-all"
+                >LinkedIn</a
+              >
+              <a
+                href="https://github.com/theomerkaratas"
+                class="px-4 py-2 bg-slate-900 dark:bg-slate-700 text-white rounded-lg font-bold hover:bg-black dark:hover:bg-slate-600 transition-all"
+                >GitHub</a
+              >
             </div>
           </div>
         </div>
       </div>
 
-      <div class="p-8 md:p-12 space-y-12">
+      <div class="p-6 md:p-12 space-y-8 md:space-y-12">
         <!-- Summary Section -->
         <section>
-          <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-4">
-            <span class="h-8 w-1.5 bg-indigo-500 rounded-full"></span>
+          <h2
+            class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-4 md:mb-6 flex items-center gap-3 md:gap-4"
+          >
+            <span class="h-6 md:h-8 w-1.5 bg-indigo-500 rounded-full"></span>
             Summary
           </h2>
-          <p class="text-lg leading-relaxed text-slate-700 dark:text-slate-300 font-medium italic opacity-90">
-            DevOps and Site Reliability Engineer skilled in CI/CD, Kubernetes, and
-            Infrastructure as Code with Terraform and Ansible. Experienced in building
-            reliable cloud platforms, implementing observability with Prometheus,
-            Grafana, and ELK, and developing Terraform plugins in Go. Strong
-            background in Linux, SQL, and automation, with proven ability to improve
-            system reliability and deployment speed.
+          <p
+            class="text-lg leading-relaxed text-slate-700 dark:text-slate-300 font-medium italic opacity-90"
+          >
+            DevOps and Site Reliability Engineer skilled in CI/CD, Kubernetes,
+            and Infrastructure as Code with Terraform and Ansible. Experienced
+            in building reliable cloud platforms, implementing observability
+            with Prometheus, Grafana, and ELK.
           </p>
         </section>
         <!-- Experience Section -->
         <section>
-          <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-8 flex items-center gap-4">
-            <span class="h-8 w-1.5 bg-indigo-500 rounded-full"></span>
+          <h2
+            class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 md:gap-4"
+          >
+            <span class="h-6 md:h-8 w-1.5 bg-indigo-500 rounded-full"></span>
             Experience
           </h2>
-          
+
           <div class="space-y-12">
             <!-- Experience Item 1 -->
-            <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700">
-              <div class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-indigo-500 ring-4 ring-white dark:ring-slate-900"></div>
-              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Devops and Site Reliability Engineer</h3>
-              <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
-                <span class="text-lg font-bold text-indigo-600 dark:text-indigo-400">TOM</span>
-                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-semibold text-slate-600 dark:text-slate-400">Aug 2025 - Present</span>
+            <div
+              class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700"
+            >
+              <div
+                class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-indigo-500 ring-4 ring-white dark:ring-slate-900"
+              ></div>
+              <h3
+                class="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white"
+              >
+                Devops and Site Reliability Engineer
+              </h3>
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 md:mb-4 gap-1 sm:gap-2"
+              >
+                <span
+                  class="text-lg font-bold text-indigo-600 dark:text-indigo-400"
+                  >TOM</span
+                >
+                <span
+                  class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 w-fit"
+                  >Aug 2025 - Present</span
+                >
               </div>
-              <ul class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300">
-                <li>Designed, automated, and maintained CI/CD pipelines using tools such as <strong>Jenkins, ArgoCD, and GitHub Actions</strong>, ensuring faster and more reliable deployments across multi-environment clusters.</li>
-                <li>Optimized cloud infrastructure with <strong>Terraform and Ansible</strong>, managing Kubernetes clusters, databases, and networking components while ensuring high availability and cost efficiency.</li>
-                <li>Initiating forward-thinking <strong>Infrastructure as Code</strong> projects, positioning the organization for long-term success through automated provisioning and configuration management.</li>
-                <li>Driving system observability using <strong>Prometheus, Grafana, and ELK Stack</strong>, enabling proactive monitoring and faster resolution times for incidents.</li>
-                <li>Implementing and managing a robust alerting system, integrating automated call processes to immediately engage relevant teams during critical incidents.</li>
+              <ul
+                class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300"
+              >
+                <li>
+                  Designed, automated, and maintained CI/CD pipelines using
+                  tools such as
+                  <strong>Jenkins, ArgoCD, and GitHub Actions</strong>, ensuring
+                  faster and more reliable deployments across multi-environment
+                  clusters.
+                </li>
+                <li>
+                  Optimized cloud infrastructure with
+                  <strong>Terraform and Ansible</strong>, managing Kubernetes
+                  clusters, databases, and networking components while ensuring
+                  high availability and cost efficiency.
+                </li>
+                <li>
+                  Initiating forward-thinking
+                  <strong>Infrastructure as Code</strong> projects, positioning
+                  the organization for long-term success through automated
+                  provisioning and configuration management.
+                </li>
+                <li>
+                  Driving system observability using
+                  <strong>Prometheus, Grafana, and ELK Stack</strong>, enabling
+                  proactive monitoring and faster resolution times for
+                  incidents.
+                </li>
+                <li>
+                  Implementing and managing a robust alerting system,
+                  integrating automated call processes to immediately engage
+                  relevant teams during critical incidents.
+                </li>
               </ul>
             </div>
 
             <!-- Experience Item 2 -->
-            <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700">
-              <div class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-slate-400 ring-4 ring-white dark:ring-slate-900"></div>
-              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Cloud SRE</h3>
-              <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
-                <span class="text-lg font-bold text-indigo-600 dark:text-indigo-400">Huawei</span>
-                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-semibold text-slate-600 dark:text-slate-400">Feb 2025 - Aug 2025</span>
+            <div
+              class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700"
+            >
+              <div
+                class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-slate-400 ring-4 ring-white dark:ring-slate-900"
+              ></div>
+              <h3
+                class="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white"
+              >
+                Cloud SRE
+              </h3>
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 md:mb-4 gap-1 sm:gap-2"
+              >
+                <span
+                  class="text-lg font-bold text-indigo-600 dark:text-indigo-400"
+                  >Huawei</span
+                >
+                <span
+                  class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 w-fit"
+                  >Feb 2025 - Aug 2025</span
+                >
               </div>
-              <ul class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300">
-                <li>Developing and maintaining <strong>Terraform plugins for RDS using Go Language</strong>, including writing test cases and comprehensive documentation.</li>
-                <li>Possess foundational knowledge of core Huawei Cloud services such as <strong>EIP, DRS, DAS, VPC, RDS, and ECS</strong>.</li>
-                <li>Configuring network parameters and troubleshooting connectivity issues.</li>
-                <li>Diagnosing and resolving database and system issues using logs and performance metrics.</li>
+              <ul
+                class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300"
+              >
+                <li>
+                  Developing and maintaining
+                  <strong>Terraform plugins for RDS using Go Language</strong>,
+                  including writing test cases and comprehensive documentation.
+                </li>
+                <li>
+                  Possess foundational knowledge of core Huawei Cloud services
+                  such as <strong>EIP, DRS, DAS, VPC, RDS, and ECS</strong>.
+                </li>
+                <li>
+                  Configuring network parameters and troubleshooting
+                  connectivity issues.
+                </li>
+                <li>
+                  Diagnosing and resolving database and system issues using logs
+                  and performance metrics.
+                </li>
               </ul>
             </div>
 
             <!-- Experience Item 3 -->
-            <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700">
-              <div class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-slate-400 ring-4 ring-white dark:ring-slate-900"></div>
-              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Data Analytics Associate</h3>
-              <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
-                <span class="text-lg font-bold text-indigo-600 dark:text-indigo-400">Garanti BBVA Emeklilik</span>
-                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-semibold text-slate-600 dark:text-slate-400">Aug 2024 - Jan 2025</span>
+            <div
+              class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700"
+            >
+              <div
+                class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-slate-400 ring-4 ring-white dark:ring-slate-900"
+              ></div>
+              <h3
+                class="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white"
+              >
+                Data Analytics Associate
+              </h3>
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 md:mb-4 gap-1 sm:gap-2"
+              >
+                <span
+                  class="text-lg font-bold text-indigo-600 dark:text-indigo-400"
+                  >Garanti BBVA Emeklilik</span
+                >
+                <span
+                  class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 w-fit"
+                  >Aug 2024 - Jan 2025</span
+                >
               </div>
-              <ul class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300">
-                <li>Conducting customer analytics using <strong>SPSS, Excel, and SQL</strong> to support data-driven decision-making.</li>
-                <li>Performing CRM tasks, including customer segmentation and campaign performance tracking.</li>
-                <li>Extracting and analyzing data from DWH to provide actionable insights for customer engagement strategies.</li>
+              <ul
+                class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300"
+              >
+                <li>
+                  Conducting customer analytics using
+                  <strong>SPSS, Excel, and SQL</strong> to support data-driven
+                  decision-making.
+                </li>
+                <li>
+                  Performing CRM tasks, including customer segmentation and
+                  campaign performance tracking.
+                </li>
+                <li>
+                  Extracting and analyzing data from DWH to provide actionable
+                  insights for customer engagement strategies.
+                </li>
               </ul>
             </div>
-          </div>
-        </section>
+
             <!-- Experience Item 4 -->
-            <div class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700">
-              <div class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-slate-400 ring-4 ring-white dark:ring-slate-900"></div>
-              <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Data Management Intern</h3>
-              <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
-                <span class="text-lg font-bold text-indigo-600 dark:text-indigo-400">Vodafone</span>
-                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-semibold text-slate-600 dark:text-slate-400">Dec 2023 - May 2024</span>
+            <div
+              class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700"
+            >
+              <div
+                class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-slate-400 ring-4 ring-white dark:ring-slate-900"
+              ></div>
+              <h3
+                class="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white"
+              >
+                Data Management Intern
+              </h3>
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 md:mb-4 gap-1 sm:gap-2"
+              >
+                <span
+                  class="text-lg font-bold text-indigo-600 dark:text-indigo-400"
+                  >Vodafone</span
+                >
+                <span
+                  class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 w-fit"
+                  >Dec 2023 - May 2024</span
+                >
               </div>
-              <ul class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300">
-                <li>Enable single version of the truth through the provision of a structured <strong>Logical Data Model</strong> focused on business needs.</li>
-                <li>Assist as a data modeler in designing data processes and managing DWH IT backlog.</li>
-                <li>Translating business requirements into conceptual and logical data models.</li>
-                <li>Interpreting business requirements and determine optimum Data and Analytics solutions.</li>
+              <ul
+                class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300"
+              >
+                <li>
+                  Enable single version of the truth through the provision of a
+                  structured <strong>Logical Data Model</strong> focused on
+                  business needs.
+                </li>
+                <li>
+                  Assist as a data modeler in designing data processes and
+                  managing DWH IT backlog.
+                </li>
+                <li>
+                  Translating business requirements into conceptual and logical
+                  data models.
+                </li>
+                <li>
+                  Interpreting business requirements and determine optimum Data
+                  and Analytics solutions.
+                </li>
               </ul>
             </div>
           </div>
@@ -175,46 +352,110 @@
 
         <!-- Education Section -->
         <section>
-          <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-8 flex items-center gap-4">
-            <span class="h-8 w-1.5 bg-indigo-500 rounded-full"></span>
+          <h2
+            class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 md:gap-4"
+          >
+            <span class="h-6 md:h-8 w-1.5 bg-indigo-500 rounded-full"></span>
             Education
           </h2>
-          <div class="grid md:grid-cols-2 gap-8">
-            <div class="p-6 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-100 dark:border-slate-800">
-              <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Sabanci University</h4>
-              <p class="text-indigo-600 dark:text-indigo-400 font-bold mb-2">Master of Science - Information Technology</p>
-              <p class="text-slate-500 dark:text-slate-400 text-sm italic">Sep 2025 - Sep 2026</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <div
+              class="p-4 sm:p-6 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-100 dark:border-slate-800"
+            >
+              <h4
+                class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-1"
+              >
+                Sabanci University
+              </h4>
+              <p
+                class="text-indigo-600 dark:text-indigo-400 font-bold mb-1 sm:mb-2 text-sm sm:text-base"
+              >
+                Master of Science - Information Technology
+              </p>
+              <p
+                class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm italic"
+              >
+                Sep 2025 - Sep 2026
+              </p>
             </div>
-            <div class="p-6 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-100 dark:border-slate-800">
-              <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Bahcesehir University</h4>
-              <p class="text-indigo-600 dark:text-indigo-400 font-bold mb-2">Bachelor of Science - Industrial Engineering</p>
-              <p class="text-slate-500 dark:text-slate-400 text-sm italic">Sep 2017 - Jan 2024</p>
+            <div
+              class="p-4 sm:p-6 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-100 dark:border-slate-800"
+            >
+              <h4
+                class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-1"
+              >
+                Bahcesehir University
+              </h4>
+              <p
+                class="text-indigo-600 dark:text-indigo-400 font-bold mb-1 sm:mb-2 text-sm sm:text-base"
+              >
+                Bachelor of Science - Industrial Engineering
+              </p>
+              <p
+                class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm italic"
+              >
+                Sep 2017 - Jan 2024
+              </p>
             </div>
           </div>
         </section>
 
         <!-- Certification Section -->
         <section>
-          <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-8 flex items-center gap-4">
-            <span class="h-8 w-1.5 bg-indigo-500 rounded-full"></span>
+          <h2
+            class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 md:gap-4"
+          >
+            <span class="h-6 md:h-8 w-1.5 bg-indigo-500 rounded-full"></span>
             Certification
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
-              <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-lg text-indigo-600 dark:text-indigo-400 text-xl font-bold">K</div>
-              <span class="font-bold text-slate-800 dark:text-slate-200">KCNA: Kubernetes Associate</span>
+            <div
+              class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800"
+            >
+              <div
+                class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-lg text-indigo-600 dark:text-indigo-400 text-xl font-bold"
+              >
+                K
+              </div>
+              <span class="font-bold text-slate-800 dark:text-slate-200"
+                >KCNA: Kubernetes Associate</span
+              >
             </div>
-            <div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
-              <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-lg text-indigo-600 dark:text-indigo-400 text-xl font-bold">T</div>
-              <span class="font-bold text-slate-800 dark:text-slate-200">Terraform Associate 003</span>
+            <div
+              class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800"
+            >
+              <div
+                class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-lg text-indigo-600 dark:text-indigo-400 text-xl font-bold"
+              >
+                T
+              </div>
+              <span class="font-bold text-slate-800 dark:text-slate-200"
+                >Terraform Associate 003</span
+              >
             </div>
-            <div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
-              <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-lg text-indigo-600 dark:text-indigo-400 text-xl font-bold">D</div>
-              <span class="font-bold text-slate-800 dark:text-slate-200">ITU: Data Science Program</span>
+            <div
+              class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800"
+            >
+              <div
+                class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-lg text-indigo-600 dark:text-indigo-400 text-xl font-bold"
+              >
+                D
+              </div>
+              <span class="font-bold text-slate-800 dark:text-slate-200"
+                >ITU: Data Science Program</span
+              >
             </div>
-            <div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
-              <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-lg text-indigo-600 dark:text-indigo-400 text-xl font-bold">A</div>
-              <span class="font-bold text-slate-800 dark:text-slate-200">Elements of AI (Helsinki)</span>
+            <div
+              class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800"
+            >
+              <div
+                class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-lg text-indigo-600 dark:text-indigo-400 text-xl font-bold"
+              >
+                A
+              </div>
+              <span class="font-bold text-slate-800 dark:text-slate-200"
+                >Elements of AI (Helsinki)</span
+              >
             </div>
           </div>
         </section>
