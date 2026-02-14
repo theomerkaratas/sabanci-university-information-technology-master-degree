@@ -16,7 +16,10 @@ The course covers essential web development technologies including:
 
 ## 📂 Contents
 
-- [**🚀 Practices**](./Practices)  
-  A collection of 20+ hands-on exercises and practice projects covering various front-end concepts.
+[**🚀 Practices**](./Practices)  
+ A collection of 20+ hands-on exercises and practice projects covering various front-end concepts.
+
+[**📄 Interactive Resume**](./Resume)  
+ A professional, mobile-responsive interactive resume featuring dark mode, typing animations, and LinkedIn integration.
 
 </div>
