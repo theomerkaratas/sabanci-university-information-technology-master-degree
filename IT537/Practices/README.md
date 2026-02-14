@@ -26,28 +26,28 @@ This directory contains various practice projects for the IT537 course. Each pro
 | [**Practice 16**](./practice-16) | Responsiveness                          | 8016 |
 | [**Practice 17**](./practice-17) | Media Query                             | 8017 |
 | [**Practice 18**](./practice-18) | Agency                                  | 8018 |
-| [**Practice 19**](./practice-19) | Practice 19                             | 8019 |
-| [**Practice 20**](./practice-20) | Practice 20                             | 8020 |
-| [**Practice 21**](./practice-21) | Practice 21                             | 8021 |
+| [**Practice 19**](./practice-19) | CSS Layout Techniques (Float, Flex...)  | 8019 |
+| [**Practice 20**](./practice-20) | Flexbox Layout Examples                 | 8020 |
+| [**Practice 21**](./practice-21) | Flexbox Pricing Table                   | 8021 |
 | [**Practice 22**](./practice-22) | Chessboard with CSS Grid                | 8022 |
 | [**Practice 23**](./practice-23) | Grid Sizing Fundamentals                | 8023 |
-| [**Practice 24**](./practice-24) | Practice 24                             | 8024 |
-| [**Practice 25**](./practice-25) | Practice 25                             | 8025 |
-| [**Practice 26**](./practice-26) | Practice 26                             | 8026 |
-| [**Practice 27**](./practice-27) | Practice 27                             | 8027 |
-| [**Practice 28**](./practice-28) | Practice 28                             | 8028 |
-| [**Practice 29**](./practice-29) | Practice 29                             | 8029 |
-| [**Practice 30**](./practice-30) | Practice 30                             | 8030 |
-| [**Practice 31**](./practice-31) | Practice 31                             | 8031 |
-| [**Practice 32**](./practice-32) | Practice 32                             | 8032 |
-| [**Practice 33**](./practice-33) | Practice 33                             | 8033 |
-| [**Practice 34**](./practice-34) | Practice 34                             | 8034 |
-| [**Practice 35**](./practice-35) | Practice 35                             | 8035 |
-| [**Practice 36**](./practice-36) | Practice 36                             | 8036 |
-| [**Practice 37**](./practice-37) | Practice 37                             | 8037 |
-| [**Practice 38**](./practice-38) | Practice 38                             | 8038 |
-| [**Practice 39**](./practice-39) | Practice 39                             | 8039 |
-| [**Practice 40**](./practice-40) | Practice 40                             | 8040 |
+| [**Practice 24**](./practice-24) | CSS Layout Demos and Exercises          | 8024 |
+| [**Practice 25**](./practice-25) | Mondrian Project                        | 8025 |
+| [**Practice 26**](./practice-26) | CSS Practice Exercises (1-10)           | 8026 |
+| [**Practice 27**](./practice-27) | Modern Resume with Tailwind CSS         | 8027 |
+| [**Practice 28**](./practice-28) | Project Template                        | 8028 |
+| [**Practice 29**](./practice-29) | Project Template                        | 8029 |
+| [**Practice 30**](./practice-30) | Project Template                        | 8030 |
+| [**Practice 31**](./practice-31) | Project Template                        | 8031 |
+| [**Practice 32**](./practice-32) | Project Template                        | 8032 |
+| [**Practice 33**](./practice-33) | Project Template                        | 8033 |
+| [**Practice 34**](./practice-34) | Project Template                        | 8034 |
+| [**Practice 35**](./practice-35) | Project Template                        | 8035 |
+| [**Practice 36**](./practice-36) | Project Template                        | 8036 |
+| [**Practice 37**](./practice-37) | Project Template                        | 8037 |
+| [**Practice 38**](./practice-38) | Project Template                        | 8038 |
+| [**Practice 39**](./practice-39) | Project Template                        | 8039 |
+| [**Practice 40**](./practice-40) | Project Template                        | 8040 |
 
 ---
 
