@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Resume</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bungee&family=Fjalla+One&family=Rubik+Storm&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <style>
+      .typing-cursor {
+        border-right: 3px solid #2563eb;
+        animation: blink 0.75s step-end infinite;
+        margin-left: 2px;
+      }
+      .dark .typing-cursor {
+        border-right-color: #60a5fa;
+      }
+      @keyframes blink {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: currentColor;
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 p-2 sm:p-4 md:p-12 font-sans"
+  >
+    <button
+      onclick="document.documentElement.classList.toggle('dark')"
+      class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
+      title="Toggle Dark Mode"
+    >
+      <svg
+        class="hidden dark:block w-6 h-6 text-yellow-400 font-bold"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"
+        ></path>
+      </svg>
+      <svg
+        class="dark:hidden w-6 h-6 text-slate-700 font-bold"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+        ></path>
+      </svg>
+    </button>
+    <main
+      class="max-w-4xl mx-auto bg-white dark:bg-slate-900 shadow-2xl rounded-2xl md:rounded-3xl overflow-hidden ring-1 ring-slate-200 dark:ring-slate-800"
+    >
+      <div
+        class="p-6 md:p-12 bg-slate-100/50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 flex flex-col md:flex-row items-center gap-6 md:gap-10"
+      >
+        <div class="relative group">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"
+          ></div>
+          <img
+            src="photo.jpg"
+            alt="Omer Karatas"
+            class="relative w-32 h-32 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-white dark:border-slate-800 shadow-lg"
+          />
+        </div>
+
+        <div class="text-center md:text-left flex-1 w-full">
+          <h1
+            class="text-4xl sm:text-5xl md:text-7xl font-black mb-2 md:mb-4 py-2 tracking-tighter bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-400 bg-clip-text text-transparent"
+          >
+            Ömer Karataş
+          </h1>
+          <p
+            class="text-xl sm:text-xl md:text-2xl font-semibold text-blue-600 dark:text-blue-400 mb-2 md:mb-2 min-h-[1.5em]"
+          >
+            <span id="typewriter"></span><span class="typing-cursor"></span>
+          </p>
+          <p
+            class="text-lg sm:text-slate-500 dark:text-slate-400 font-medium mb-6 md:mb-6"
+          >
+            Beşiktaş, İstanbul
+          </p>
+
+          <div
+            class="flex flex-col md:flex-row flex-wrap justify-center md:justify-start gap-3 md:gap-4 text-lg font-medium w-full"
+          >
+            <a
+              href="mailto:theomerkaratas@gmail.com"
+              class="flex items-center justify-center md:justify-start gap-2 px-4 py-3 md:px-4 md:py-2 bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-800 w-full md:w-auto"
+            >
+              <span class="text-blue-500 text-xl md:text-lg">@</span>
+              theomerkaratas@gmail.com
+            </a>
+            <a
+              href="tel:+905447275254"
+              class="flex items-center justify-center md:justify-start gap-2 px-4 py-3 md:px-4 md:py-2 bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 dark:border-slate-800 w-full md:w-auto"
+            >
+              <span class="text-blue-500 text-xl md:text-lg">📞</span> +90 544
+              727 52 54
+            </a>
+            <div
+              class="flex flex-col sm:flex-row gap-3 md:gap-2 mt-1 md:mt-0 w-full md:w-auto"
+            >
+              <a
+                href="https://www.linkedin.com/in/theomerkaratas/"
+                class="flex items-center justify-center px-4 py-3 md:px-4 md:py-2 bg-blue-600 dark:bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 dark:hover:bg-blue-500 shadow-lg shadow-blue-200 dark:shadow-none transition-all w-full md:w-auto"
+                >LinkedIn</a
+              >
+              <a
+                href="https://github.com/theomerkaratas"
+                class="flex items-center justify-center px-4 py-3 md:px-4 md:py-2 bg-slate-900 dark:bg-slate-800 text-white rounded-xl font-bold hover:bg-black dark:hover:bg-slate-700 transition-all w-full md:w-auto"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-6 md:p-12 space-y-8 md:space-y-12">
+        <section>
+          <h2
+            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-4 md:mb-6 flex items-center gap-4"
+          >
+            <span class="h-8 w-1.5 bg-blue-500 rounded-full"></span>
+            Summary
+          </h2>
+          <p
+            class="text-xl leading-relaxed text-slate-700 dark:text-slate-300 font-medium italic opacity-90"
+          >
+            DevOps and Site Reliability Engineer skilled in CI/CD, Kubernetes,
+            and Infrastructure as Code with Terraform and Ansible. Experienced
+            in building reliable cloud platforms, implementing observability
+            with Prometheus, Grafana, and ELK.
+          </p>
+        </section>
+        <section>
+          <h2
+            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-4"
+          >
+            <span class="h-8 w-1.5 bg-blue-500 rounded-full"></span>
+            Experience
+          </h2>
+
+          <div class="space-y-12">
+            <div
+              class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700"
+            >
+              <div
+                class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-blue-500 ring-4 ring-white dark:ring-slate-900"
+              ></div>
+              <h3
+                class="text-2xl sm:text-2xl font-bold text-slate-900 dark:text-white"
+              >
+                Devops and Site Reliability Engineer
+              </h3>
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-4 gap-2"
+              >
+                <span class="text-xl font-bold text-blue-600 dark:text-blue-400"
+                  >TOM</span
+                >
+                <span
+                  class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-semibold text-slate-600 dark:text-slate-400 w-fit uppercase tracking-wider"
+                  >Aug 2025 - Present</span
+                >
+              </div>
+              <ul
+                class="list-disc ml-5 space-y-4 text-slate-700 dark:text-slate-300 marker:text-blue-600 dark:marker:text-blue-400"
+              >
+                <li>
+                  Designed, automated, and maintained CI/CD pipelines using
+                  tools such as
+                  <strong>Jenkins, ArgoCD, and GitHub Actions</strong>, ensuring
+                  faster and more reliable deployments across multi-environment
+                  clusters.
+                </li>
+                <li>
+                  Optimized cloud infrastructure with
+                  <strong>Terraform and Ansible</strong>, managing Kubernetes
+                  clusters, databases, and networking components while ensuring
+                  high availability and cost efficiency.
+                </li>
+                <li>
+                  Initiating forward-thinking
+                  <strong>Infrastructure as Code</strong> projects, positioning
+                  the organization for long-term success through automated
+                  provisioning and configuration management.
+                </li>
+                <li>
+                  Driving system observability using
+                  <strong>Prometheus, Grafana, and ELK Stack</strong>, enabling
+                  proactive monitoring and faster resolution times for
+                  incidents.
+                </li>
+                <li>
+                  Implementing and managing a robust alerting system,
+                  integrating automated call processes to immediately engage
+                  relevant teams during critical incidents.
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700"
+            >
+              <div
+                class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-blue-500 ring-4 ring-white dark:ring-slate-900"
+              ></div>
+              <h3
+                class="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white"
+              >
+                Cloud SRE
+              </h3>
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 md:mb-4 gap-1 sm:gap-2"
+              >
+                <span class="text-lg font-bold text-blue-600 dark:text-blue-400"
+                  >Huawei</span
+                >
+                <span
+                  class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 w-fit"
+                  >Feb 2025 - Aug 2025</span
+                >
+              </div>
+              <ul
+                class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300 marker:text-blue-600 dark:marker:text-blue-400"
+              >
+                <li>
+                  Developing and maintaining
+                  <strong>Terraform plugins for RDS using Go Language</strong>,
+                  including writing test cases and comprehensive documentation.
+                </li>
+                <li>
+                  Possess foundational knowledge of core Huawei Cloud services
+                  such as <strong>EIP, DRS, DAS, VPC, RDS, and ECS</strong>.
+                </li>
+                <li>
+                  Configuring network parameters and troubleshooting
+                  connectivity issues.
+                </li>
+                <li>
+                  Diagnosing and resolving database and system issues using logs
+                  and performance metrics.
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700"
+            >
+              <div
+                class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-blue-500 ring-4 ring-white dark:ring-slate-900"
+              ></div>
+              <h3
+                class="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white"
+              >
+                Data Analytics Associate
+              </h3>
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 md:mb-4 gap-1 sm:gap-2"
+              >
+                <span class="text-lg font-bold text-blue-600 dark:text-blue-400"
+                  >Garanti BBVA Emeklilik</span
+                >
+                <span
+                  class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 w-fit"
+                  >Aug 2024 - Jan 2025</span
+                >
+              </div>
+              <ul
+                class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300 marker:text-blue-600 dark:marker:text-blue-400"
+              >
+                <li>
+                  Conducting customer analytics using
+                  <strong>SPSS, Excel, and SQL</strong> to support data-driven
+                  decision-making.
+                </li>
+                <li>
+                  Performing CRM tasks, including customer segmentation and
+                  campaign performance tracking.
+                </li>
+                <li>
+                  Extracting and analyzing data from DWH to provide actionable
+                  insights for customer engagement strategies.
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-slate-200 dark:before:bg-slate-700"
+            >
+              <div
+                class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-blue-500 ring-4 ring-white dark:ring-slate-900"
+              ></div>
+              <h3
+                class="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white"
+              >
+                Data Management Intern
+              </h3>
+              <div
+                class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 md:mb-4 gap-1 sm:gap-2"
+              >
+                <span class="text-lg font-bold text-blue-600 dark:text-blue-400"
+                  >Vodafone</span
+                >
+                <span
+                  class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 w-fit"
+                  >Dec 2023 - May 2024</span
+                >
+              </div>
+              <ul
+                class="list-disc ml-4 space-y-3 text-slate-700 dark:text-slate-300 marker:text-blue-600 dark:marker:text-blue-400"
+              >
+                <li>
+                  Enable single version of the truth through the provision of a
+                  structured <strong>Logical Data Model</strong> focused on
+                  business needs.
+                </li>
+                <li>
+                  Assist as a data modeler in designing data processes and
+                  managing DWH IT backlog.
+                </li>
+                <li>
+                  Translating business requirements into conceptual and logical
+                  data models.
+                </li>
+                <li>
+                  Interpreting business requirements and determine optimum Data
+                  and Analytics solutions.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2
+            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-4"
+          >
+            <span class="h-8 w-1.5 bg-blue-500 rounded-full"></span>
+            Education
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <div
+              class="relative p-4 sm:p-6 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-100 dark:border-slate-800 flex flex-col justify-between"
+            >
+              <div>
+                <h4
+                  class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-1"
+                >
+                  Sabanci University
+                </h4>
+                <p
+                  class="text-blue-600 dark:text-blue-400 font-bold mb-1 sm:mb-2 text-sm sm:text-base"
+                >
+                  Master of Science - Information Technology
+                </p>
+                <p
+                  class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm italic"
+                >
+                  Sep 2025 - Sep 2026
+                </p>
+              </div>
+              <div
+                class="mt-4 flex justify-end md:absolute md:bottom-6 md:right-6 md:mt-0"
+              >
+                <a
+                  href="https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition-all shadow-md shadow-blue-200 dark:shadow-none"
+                >
+                  <span>View Projects</span>
+                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div
+              class="p-4 sm:p-6 bg-slate-50 dark:bg-slate-800/30 rounded-2xl border border-slate-100 dark:border-slate-800"
+            >
+              <h4
+                class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-1"
+              >
+                Bahcesehir University
+              </h4>
+              <p
+                class="text-blue-600 dark:text-blue-400 font-bold mb-1 sm:mb-2 text-sm sm:text-base"
+              >
+                Bachelor of Science - Industrial Engineering
+              </p>
+              <p
+                class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm italic"
+              >
+                Sep 2017 - Jan 2024
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2
+            class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-4"
+          >
+            <span class="h-8 w-1.5 bg-blue-500 rounded-full"></span>
+            Certification
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div
+              class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800"
+            >
+              <div
+                class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-transparent rounded-lg overflow-hidden"
+              >
+                <img
+                  src="kcna_logo.png"
+                  alt="KCNA"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <span class="font-bold text-slate-800 dark:text-slate-200"
+                >KCNA: Kubernetes Associate</span
+              >
+            </div>
+            <div
+              class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800"
+            >
+              <div
+                class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-transparent rounded-lg overflow-hidden"
+              >
+                <img
+                  src="terraform logo.png"
+                  alt="Terraform"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <span class="font-bold text-slate-800 dark:text-slate-200"
+                >Terraform Associate 003</span
+              >
+            </div>
+            <div
+              class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800"
+            >
+              <div
+                class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-transparent rounded-lg overflow-hidden"
+              >
+                <img
+                  src="itu_logo.png"
+                  alt="ITU"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <span class="font-bold text-slate-800 dark:text-slate-200"
+                >ITU: Data Science Program</span
+              >
+            </div>
+            <div
+              class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800/50 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800"
+            >
+              <div
+                class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-transparent rounded-lg overflow-hidden"
+              >
+                <img
+                  src="elements_of_ai_logo.svg"
+                  alt="Elements of AI"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <span class="font-bold text-slate-800 dark:text-slate-200"
+                >Elements of AI (Helsinki)</span
+              >
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="mt-12 text-center text-slate-400 dark:text-slate-600 pb-12">
+      <p>
+        &copy; 2026 Omer Karatas &bull; Sabanci University IT537 Practice
+        Project
+      </p>
+    </footer>
+    <script>
+      const textElement = document.getElementById("typewriter");
+      const phrases = [
+        "DevOps Engineer",
+        "Site Reliability Engineer",
+        "Go Developer",
+        "Industrial Engineer",
+        "Kubernetes Engineer",
+      ];
+      let phraseIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let typingSpeed = 100;
+
+      function type() {
+        const currentPhrase = phrases[phraseIndex];
+
+        if (isDeleting) {
+          textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+          charIndex--;
+          typingSpeed = 50;
+        } else {
+          textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+          charIndex++;
+          typingSpeed = 100;
+        }
+
+        if (!isDeleting && charIndex === currentPhrase.length) {
+          isDeleting = true;
+          typingSpeed = 2000; // Pause at the end
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          typingSpeed = 500; // Pause before next word
+        }
+
+        setTimeout(type, typingSpeed);
+      }
+
+      document.addEventListener("DOMContentLoaded", type);
+    </script>
+  </body>
+</html>
