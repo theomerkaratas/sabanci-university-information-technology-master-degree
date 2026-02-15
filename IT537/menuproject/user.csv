@@ -1,3 +1,5 @@
 Username,Password,Type
 customer,customer123,customer
 new_customer,password123,customer
+yaren,ömer,customer
+ömer,yaren,customer
