@@ -1,9 +1,63 @@
-// Data Manager - CSV Export/Import System
+const API_URL = '/api/orders';
 
 class DataManager {
-    // Export orders to CSV
-    static exportOrdersToCSV() {
-        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    // API: Fetch all orders from server
+    static async fetchOrdersFromServer() {
+        try {
+            const response = await fetch(API_URL);
+            if (!response.ok) throw new Error('Failed to fetch orders');
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+            // Fallback to localStorage if server fails
+            return JSON.parse(localStorage.getItem('orders') || '[]');
+        }
+    }
+
+    // API: Save order to server
+    static async saveOrderToServer(order) {
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(order)
+            });
+            if (!response.ok) throw new Error('Failed to save order');
+            return await response.json();
+        } catch (error) {
+            console.error('Error saving order:', error);
+            // Fallback: save to localStorage
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+        }
+    }
+
+    // API: Update order status on server
+    static async updateOrderStatusOnServer(orderId, status) {
+        try {
+            const response = await fetch(`${API_URL}/${orderId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status })
+            });
+            if (!response.ok) throw new Error('Failed to update order status');
+            return await response.json();
+        } catch (error) {
+            console.error('Error updating order status:', error);
+            // Fallback: update localStorage
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const index = orders.findIndex(o => o.id === orderId);
+            if (index !== -1) {
+                orders[index].status = status;
+                localStorage.setItem('orders', JSON.stringify(orders));
+            }
+        }
+    }
+
+    // Export orders to CSV (Updated to fetch from server)
+    static async exportOrdersToCSV() {
+        const orders = await this.fetchOrdersFromServer();
         
         if (orders.length === 0) {
             alert('No orders to export!');
@@ -48,8 +102,8 @@ class DataManager {
     }
 
     // Export all data (combined)
-    static exportAllDataToCSV() {
-        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+    static async exportAllDataToCSV() {
+        const orders = await this.fetchOrdersFromServer();
         const loginHistory = JSON.parse(localStorage.getItem('loginHistory') || '[]');
 
         let csv = '=== ORDERS DATA ===\n';
@@ -74,59 +128,44 @@ class DataManager {
         this.downloadCSV(csv, `all_data_${new Date().toISOString().split('T')[0]}.csv`);
     }
 
-    // Import orders from CSV
+    // Import orders from CSV (Still useful for manual uploads)
     static importOrdersFromCSV(file) {
         const reader = new FileReader();
         
-        reader.onload = function(e) {
+        reader.onload = async (e) => {
             const text = e.target.result;
             const lines = text.split('\n').filter(line => line.trim());
-            
-            // Skip header
             const dataLines = lines.slice(1);
-            const orders = [];
-
-            dataLines.forEach(line => {
-                // Parse CSV line (handle quoted fields)
+            
+            for (const line of dataLines) {
                 const matches = line.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g);
                 if (matches && matches.length >= 7) {
                     const [id, customer, table, total, date, status, items] = matches.map(m => m.replace(/^"|"$/g, '').trim());
                     
-                    // Parse items
                     const parsedItems = items.split(';').map(item => {
                         const itemParts = item.trim().split(' - ');
                         const nameAndLevel = itemParts[0];
                         const price = parseFloat(itemParts[1]?.replace('₺', '') || 0);
-                        
-                        let name = nameAndLevel;
-                        let cookingLevel = null;
-                        
+                        let name = nameAndLevel, cookingLevel = null;
                         const levelMatch = nameAndLevel.match(/(.+?)\s*\((.+?)\)/);
                         if (levelMatch) {
                             name = levelMatch[1].trim();
                             cookingLevel = levelMatch[2].trim();
                         }
-                        
                         return { name, price, cookingLevel };
                     });
 
-                    orders.push({
-                        id,
-                        customer,
+                    const order = {
+                        id, customer,
                         table: table !== 'N/A' ? parseInt(table) : null,
                         total: parseFloat(total.replace('₺', '')),
-                        date,
-                        status,
-                        items: parsedItems
-                    });
+                        date, status, items: parsedItems
+                    };
+                    
+                    await this.saveOrderToServer(order);
                 }
-            });
-
-            // Save to localStorage
-            localStorage.setItem('orders', JSON.stringify(orders));
-            alert(`Successfully imported ${orders.length} orders!`);
-            
-            // Reload page to reflect changes
+            }
+            alert(`Import finished!`);
             window.location.reload();
         };
 
@@ -148,59 +187,35 @@ class DataManager {
         document.body.removeChild(link);
     }
 
-    // Auto-save to CSV (create and download)
+    // Deprecated: Using server-side auto-save now, but keeping for reference
     static autoSaveOrderToCSV(order) {
-        // Append to existing orders in localStorage
-        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-        
-        // Create CSV for the new order
-        let csv = 'Order ID,Customer,Table,Total,Date,Status,Items\n';
-        
-        const items = order.items.map(item => 
-            `${item.name}${item.cookingLevel ? ` (${item.cookingLevel})` : ''} - ${item.price}₺`
-        ).join('; ');
-
-        csv += `${order.id},${order.customer},${order.table || 'N/A'},${order.total}₺,${order.date},${order.status},"${items}"\n`;
-
-        // Note: Auto-download can be annoying, so we'll just log it
-        console.log('Order CSV data:', csv);
-        
-        // Optionally store in sessionStorage for batch download
-        const sessionOrders = JSON.parse(sessionStorage.getItem('sessionOrders') || '[]');
-        sessionOrders.push(order);
-        sessionStorage.setItem('sessionOrders', JSON.stringify(sessionOrders));
+        console.log('Order logged locally (deprecated):', order.id);
     }
 
-    // Log login activity
+    // Log login activity (Still uses localStorage for now as per plan)
     static logLogin(username, userType) {
         const loginHistory = JSON.parse(localStorage.getItem('loginHistory') || '[]');
-        
         const loginEntry = {
             username,
             type: userType,
             loginTime: new Date().toISOString(),
-            ipAddress: 'Local' // In a real app, you'd get this from backend
+            ipAddress: 'Local'
         };
-
         loginHistory.push(loginEntry);
         localStorage.setItem('loginHistory', JSON.stringify(loginHistory));
-
-        console.log('Login logged:', loginEntry);
     }
 
-    // Clear all data
+    // Clear all data (Admin action - could be expanded to server)
     static clearAllData() {
         if (confirm('Are you sure you want to clear all data? This cannot be undone!')) {
             localStorage.removeItem('orders');
             localStorage.removeItem('loginHistory');
-            sessionStorage.removeItem('sessionOrders');
-            alert('All data cleared!');
+            alert('Local data cleared! Server data (order.csv) remains.');
             window.location.reload();
         }
     }
 }
 
-// Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = DataManager;
 }
