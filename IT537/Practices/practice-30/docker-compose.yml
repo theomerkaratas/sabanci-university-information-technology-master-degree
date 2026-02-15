@@ -1,9 +1,0 @@
-version: '3.8'
-services:
-  practice-30:
-    build: .
-    ports:
-      - "8030:80"
-    volumes:
-      - .:/usr/share/nginx/html
-    container_name: practice-30

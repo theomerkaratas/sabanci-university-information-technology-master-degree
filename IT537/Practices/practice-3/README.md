@@ -1,24 +1,24 @@
-# Practice 3: Twelve-Factor App
+# Practice 14: CSS Flag Project
 
-This practice focuses on modern software methodology and multi-page HTML structure.
+A complex layout project using absolute positioning, circles, and nested elements to create a flag.
 
 ## Topics Covered
 
-- **Twelve-Factor App:** 12 fundamental principles for SaaS applications.
-- **Relative Links:** Linking to other files in different folders (e.g., `public/`).
-- **Project Organization:** Structuring HTML files across multiple directories.
+- **Absolute Placement:** Using absolute positions to overlap elements.
+- **Creating Shapes:** Using `border-radius: 200px` to turn a square into a circle.
+- **Z-Value Concept:** Understanding the stack order (background vs. foreground).
+- **Hierarchical Selectors:** Styling direct children specifically (e.g., `div.flag > p`).
 
-## File Linking Parameters
+## Shape and Position Settings
 
-| Scenario                     | Example Path       | Description                 |
-| :--------------------------- | :----------------- | :-------------------------- |
-| Same Directory               | `./file.html`      | File in the current folder. |
-| Navigate to Subdirectory     | `public/file.html` | File in a subfolder.        |
-| Navigate to Parent Directory | `../file.html`     | File in the parent folder.  |
+| Feature       | Property             | Result                            |
+| :------------ | :------------------- | :-------------------------------- |
+| **Circle**    | `border-radius: 50%` | Rounds corners completely.        |
+| **Layering**  | `position: absolute` | Allows overlaps.                  |
+| **Centering** | `left` / `top`       | Manual placement on the "canvas". |
 
-## Key Factors
+## Visual Structure
 
-1.  **Codebase:** One codebase tracked in revision control, many deploys.
-2.  **Dependencies:** Explicitly declare and isolate dependencies.
-3.  **Config:** Store config in the environment.
-4.  **Dev/Prod Parity:** Keep development, staging, and production as similar as possible.
+- Container (`.flag`): The overall canvas.
+- Stripe: An absolute div nested inside the flag.
+- Circle: A rounded div nested inside the stripe.

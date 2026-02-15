@@ -1,21 +1,24 @@
-# Practice 2: Recipe Page
+# Practice 3: Twelve-Factor App
 
-This practice details HTML list structures and text formatting.
+This practice focuses on modern software methodology and multi-page HTML structure.
 
 ## Topics Covered
 
-- **List Types:**
-  - `ul` (Unordered List): Bullet point lists (for Ingredients).
-  - `ol` (Ordered List): Numbered lists (for Steps).
-  - `li` (List Item): Individual list element.
-- **Text Formatting:**
-  - `strong`: Bold text (for important emphasis).
-- **Structural Tags:**
-  - Heading hierarchy (`h1`, `h2`, `h3`).
+- **Twelve-Factor App:** 12 fundamental principles for SaaS applications.
+- **Relative Links:** Linking to other files in different folders (e.g., `public/`).
+- **Project Organization:** Structuring HTML files across multiple directories.
 
-## List Parameters (Type Options)
+## File Linking Parameters
 
-| Tag  | Parameter | Options                    | Description                                                     |
-| :--- | :-------- | :------------------------- | :-------------------------------------------------------------- |
-| `ol` | `type`    | `1`, `A`, `a`, `I`, `i`    | Number, Uppercase letter, Lowercase letter, Roman numeral, etc. |
-| `ul` | `style`   | `disc`, `circle`, `square` | Bullet point type (usually set via CSS).                        |
+| Scenario                     | Example Path       | Description                 |
+| :--------------------------- | :----------------- | :-------------------------- |
+| Same Directory               | `./file.html`      | File in the current folder. |
+| Navigate to Subdirectory     | `public/file.html` | File in a subfolder.        |
+| Navigate to Parent Directory | `../file.html`     | File in the parent folder.  |
+
+## Key Factors
+
+1.  **Codebase:** One codebase tracked in revision control, many deploys.
+2.  **Dependencies:** Explicitly declare and isolate dependencies.
+3.  **Config:** Store config in the environment.
+4.  **Dev/Prod Parity:** Keep development, staging, and production as similar as possible.

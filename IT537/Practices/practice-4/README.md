@@ -1,23 +1,23 @@
-# Practice 4: Portfolio Project
+# Practice 16: Responsiveness Overview
 
-This practice involves building a multi-page portfolio that links to previous projects.
+This practice provides an overview of different methods used to make web pages responsive across different devices.
 
 ## Topics Covered
 
-- **Project Integration:** Linking to separate projects within the same repository.
-- **Image Management:** Organizing project screenshots in an `assets` folder.
-- **Anchor Tags for Navigation:** Using `<a>` tags with headings for clear navigation.
+- **Media Queries:** Traditional CSS approach for different screen sizes.
+- **CSS Grid:** Two-dimensional layout system.
+- **Flexbox:** One-dimensional flexible box layout.
+- **Bootstrap:** A popular CSS framework for rapid responsive development.
 
-## Navigation and Assets
+## Responsiveness Methods Comparison
 
-| Item    | Usage                 | Description                               |
-| :------ | :-------------------- | :---------------------------------------- |
-| `<a>`   | Link to Resume/Recipe | Navigating between project modules.       |
-| `<img>` | `src="./assets/..."`  | Displaying project previews.              |
-| `width` | `600`                 | Standardizing image size for consistency. |
+| Method            | Dimension       | Description                                   |
+| :---------------- | :-------------- | :-------------------------------------------- |
+| **Media Queries** | Screen Width    | Updates styles based on `@media` breakpoints. |
+| **Grid**          | 2D (Rows/Cols)  | Handles complex layout structures.            |
+| **Flexbox**       | 1D (Row or Col) | Aligns items within a container flexibly.     |
+| **Bootstrap**     | Grid System     | Uses pre-defined classes for layout.          |
 
-## Structure
+## Files
 
-- `index.html`: Main portfolio landing page.
-- `assets/`: Folder containing project images.
-- `public/`: Folder containing linked project HTML files.
+- `media-query.html`, `grid.html`, `flexbox.html`, `bootstrap.html`: Individual examples for each method.

@@ -1,42 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Spanish Vocabulary</title>
-    <link rel="stylesheet" href="./style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox Learning Hub</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: black;
+        padding: 40px;
+      }
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .menu-section {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        margin: 10px 0;
+      }
+      li a {
+        color: #4834d4;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      li a:hover {
+        text-decoration: underline;
+      }
+    </style>
   </head>
-
   <body>
-    <h1>Colors</h1>
-    <h2>Learn the colors in Spanish!</h2>
-    <h2 class="color-title" id="red">Rojo</h2>
-    <img src="./assets/images/red.png" alt="red" />
+    <h1 style="text-align: center">Flexbox Visual Guide</h1>
 
-    <h2 class="color-title" id="blue">Azul</h2>
-    <img src="./assets/images/blue.png" alt="blue" />
+    <div class="menu-grid">
+      <div class="menu-section">
+        <h2>Flex Wrap</h2>
+        <ul>
+          <li><a href="pages/flex-wrap-no-wrap.html">No-Wrap</a></li>
+          <li><a href="pages/flex-wrap-wrap.html">Wrap</a></li>
+          <li><a href="pages/flex-wrap-wrap-reverse.html">Wrap-Reverse</a></li>
+        </ul>
+      </div>
 
-    <h2 class="color-title" id="orange">Anaranjado</h2>
-    <img src="./assets/images/orange.png" alt="orange" />
+      <div class="menu-section">
+        <h2>Align Items</h2>
+        <ul>
+          <li><a href="pages/align-items-flex-start.html">Flex Start</a></li>
+          <li><a href="pages/align-items-flex-end.html">Flex End</a></li>
+          <li><a href="pages/align-items-center.html">Center</a></li>
+          <li><a href="pages/align-items-baseline.html">Baseline</a></li>
+          <li><a href="pages/align-items-stretch.html">Stretch</a></li>
+        </ul>
+      </div>
 
-    <h2 class="color-title" id="green">Verde</h2>
-    <img src="./assets/images/green.png" alt="green" />
+      <div class="menu-section">
+        <h2>Align Content</h2>
+        <ul>
+          <li><a href="pages/align-content-flex-start.html">Flex Start</a></li>
+          <li><a href="pages/align-content-flex-end.html">Flex End</a></li>
+          <li><a href="pages/align-content-center.html">Center</a></li>
+          <li>
+            <a href="pages/align-content-space-between.html">Space Between</a>
+          </li>
+          <li>
+            <a href="pages/align-content-space-around.html">Space Around</a>
+          </li>
+          <li>
+            <a href="pages/align-content-space-evenly.html">Space Evenly</a>
+          </li>
+          <li><a href="pages/align-content-stretch.html">Stretch</a></li>
+        </ul>
+      </div>
 
-    <h2 class="color-title" id="yellow">Amarillo</h2>
-    <img src="./assets/images/yellow.png" alt="yellow" />
+      <div class="menu-section">
+        <h2>Justify Content</h2>
+        <ul>
+          <li>
+            <a href="pages/justify-content-flex-start.html">Flex Start</a>
+          </li>
+          <li><a href="pages/justify-content-flex-end.html">Flex End</a></li>
+          <li><a href="pages/justify-content-center.html">Center</a></li>
+          <li>
+            <a href="pages/justify-content-space-between.html">Space Between</a>
+          </li>
+          <li>
+            <a href="pages/justify-content-space-around.html">Space Around</a>
+          </li>
+          <li>
+            <a href="pages/justify-content-space-evenly.html">Space Evenly</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
-
-<!-- 
-TODOs
-IMPORTANT: You should not need to make ANY CHANGES to index.html
-All code should be written in your CSS file.
-
-1. Create a CSS file and incorporate it as an external stylesheet.
-2. Use CSS to style each of the color titles to meaning. 
-Hint: Use the id to help if you don't know the words in spanish.
-3. Use CSS to change all the color titles to have "font-weight: normal;"
-4. Use CSS (not HTML) to make all the images 200px heigh and 200px wide. 
-Hint: 
-https://developer.mozilla.org/en-US/docs/Web/CSS/height
-https://developer.mozilla.org/en-US/docs/Web/CSS/width
--->

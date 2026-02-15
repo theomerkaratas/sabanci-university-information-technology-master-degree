@@ -1,26 +1,16 @@
-ol {
-  margin-left: -40px;
-  margin-top: -20px;
-  list-style-position: inside;
-}
-
-/* Write your CSS below, don't change the rules above. */
 p {
-  color: red;
+    padding: 0;
+    margin: 0;
+    font-weight: 700;
 }
 
-.note {
-  font-size: 20px
+li {
+    list-style: none;
 }
 
-#id-selector-demo {
-  color: green
-}
-
-li[value="4"] {
-  color: blue
-}
-
-* {
-  text-align: center;
+.container {
+    padding: 10px;
+    background-color: gold;
+    display: flex;
+    gap: 10px
 }
