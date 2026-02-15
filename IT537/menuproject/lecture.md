@@ -1,0 +1,948 @@
+<div style="background-color: white; color: #1a1a1a; padding: 30px; border-radius: 10px;" markdown="1">
+# AGILE PROJECT MANAGEMENT METHODOLOGY
+
+## Introduction to Agile Software Development
+
+### What is Agile Software Development?
+
+Agile Software Development is a category of software development methodologies that gained widespread popularity after the late 1990s. It is not a single rigid method but rather a collection of methods built upon common principles. Importantly, Agile represents a combination of old, new, and transformed ideas about how to build software effectively.
+
+### Core Principles and Characteristics of Agile Methods
+
+While there are different specific Agile methods (like Scrum and XP), they all share a set of common principles and practices. These include:
+
+- Close collaboration with business experts or customers throughout the project, rather than just at the beginning.
+- A strong preference for face-to-face communication within the team and with stakeholders to ensure clarity and rapid feedback.
+- Frequent delivery of new, deployable business value in small, working increments, allowing for early and continuous feedback.
+- The use of tight, self-organizing teams where members manage their own work and collaborate closely.
+- A relentless focus on technical excellence and good design to maintain flexibility and quality over time.
+
+### Goals of Agile Software Development
+
+The overarching goal of Agile is to achieve iterative and incremental development of reliable software. This means building software in repeated cycles (iterations) that each add a small piece of functionality (increments). This approach aims to make the software resilient to changes and uncertainties in requirements, technology, or the market, which are inevitable in complex projects.
+
+## Software Development Process and Quality
+
+### The Fundamental Challenge
+
+Building high-quality software is challenging due to two primary, often conflicting, factors:
+
+1. Increasing size and complexity of software systems.
+2. Strict constraints, such as limited budget (cost) and the pressure to release quickly (time-to-market).
+
+These challenges directly impact key software quality attributes, which are the measurable characteristics of a good software product. The slides specifically highlight:
+
+- **Reliability**: The software operates correctly and without failure.
+- **Performance**: The software is efficient and responsive.
+- **Maintainability**: The software is easy to modify, fix, and enhance over time.
+
+### Improving Software Quality: Activities within the Process
+
+To address these challenges and improve quality, several core activities are employed as part of the **software development process**:
+
+- **Testing**: Executing the software to find defects.
+- **Code and Design Reviews**: Systematic examination of code/design by peers to find errors and improve quality.
+- **Quality Assurance (QA)**: A broader set of activities aimed at ensuring processes are followed and quality standards are met.
+- **Monitor, Evaluate, and Take Corrective Actions**: Continuously tracking project metrics and making adjustments.
+- **Defect Prevention**: Proactively changing the process to stop defects from being created in the first place.
+- **Eliminating Root Causes of Defects**: Analyzing found defects to fix the underlying process issue that allowed them to happen.
+
+Crucially, all these quality-focused activities are integrated parts of the overall software development process, not separate or afterthoughts.
+
+### The Relationship Between Process and Product
+
+There is a critical, though not absolute, relationship between how we build software (the process) and what we build (the product).
+
+- A high-quality process does _not guarantee_ a high-quality product, but it is an extremely important factor. Other elements like people, technology, cost, and schedule also play a role.
+- As noted by the CMMI (Capability Maturity Model Integration) framework from the SEI (Software Engineering Institute): **"the quality of a system or product is highly influenced by the quality of the process used to develop and maintain it."**
+
+```
+               Goals
+                 |
+                 v
+           +-----------+      +-----------+
+Needs ---->|  Process  |----> |  Product  |
+           +-----------+      +-----------+
+                 ^
+                 |
+             Resources
+```
+
+This leads to a fundamental hypothesis or assumption in software engineering: By improving the development process, **we can improve the quality of the final software product**.
+
+### Modeling and Improving the Process
+
+To understand and improve a process, we first need to describe it.
+
+- A Process is the set of activities involved in software development.
+- Process Models are abstract representations of these processes. They help us visualize and understand the activities and the information flow between them. These models do not need to be overly formal or completely detailed to be useful.
+
+### The Need for Customization and Continuous Improvement
+
+A key insight is that no single, ideal, or standard process exists that fits all situations. The right process depends on:
+
+- The organization's size and culture.
+- The background and skills of the staff.
+- The type of software product being built.
+- Specific customer or market requirements.
+
+Therefore, processes must be customized and are always candidates for improvement.
+
+### What to Improve and How to Improve It
+
+The improvement effort should target process activities that influence product quality. Examples include:
+
+- Core activities like Testing and Reviews.
+- Support activities like Version control and maintenance.
+- The process itself, measured by attributes like development time or project visibility.
+
+The cycle for process improvement follows a systematic approach:
+
+1. **Measure**: Monitor key attributes of the current process (e.g., defect rates, cycle time).
+2. **Analyze**: Evaluate the measurements to identify bottlenecks, weaknesses, or inefficiencies.
+3. **Change**: Based on the analysis, identify and apply the necessary changes to the process.
+
+This Measure-Analyze-Change cycle is a cornerstone of both traditional process improvement (like CMMI) and Agile's emphasis on adaptation and retrospectives.
+
+### Process Measurement: The Foundation of Control
+
+To improve a process, you must first understand it quantitatively. This is the principle behind process measurement.
+
+- It involves measuring the process itself, the products it creates, and the resources it uses (like time and people).
+- The adage "You can't control what you can't measure" underscores its importance. Without quantitative data, improvement is based on guesswork.
+- To collect meaningful data, the process must be clearly defined beforehand. You need to know what you are measuring.
+
+```
++----------------------------------+
+|                Constraints       |
+|                     |            |
+|                     v            |
+|               +-----------+      |
+|   Goals ----> |  Product  |      |
+|               +-----------+      |
+|                   ^   |          |
+|      Measurement  |   | Action   |
+|                   |   v          |
++----------------------------------+
+
+             +-----------+       +-----------+
+Needs ---->  |  Process  |       |  Product  |
+             +-----------+       +-----------+
+               ^     |                 |
+               |     |                 |
+               |     +-----------------+
+           Resources     Measurement
+```
+
+### Process Analysis and Change: The Improvement Cycle
+
+Once measurements are collected, the next steps are analysis and change. This involves:
+
+- Improvement identification and prioritization: Deciding which process problems are most important to fix.
+- Introducing changes, which can be of different types:
+  - Adopting new practices, methods, or processes (e.g., introducing daily stand-up meetings).
+  - (Re)ordering of activities (e.g., writing tests before code).
+  - Adding or removing deliverables (e.g., reducing mandatory documentation).
+  - Adding or removing roles and responsibilities (e.g., creating a dedicated Scrum Master role).
+- Training and tuning: Ensuring the team understands the changes and refining them based on initial results.
+
+### Overview of Software Development Approaches
+
+The course focuses on three primary approaches to structuring the software development process:
+
+1. **Waterfall Approach**: A traditional, plan-driven method.
+2. **Spiral Development**: An incremental, risk-driven approach.
+3. **Agile Software Development**: An iterative, flexible, and collaborative approach (the main focus of this course).
+
+### The Waterfall Approach: A Plan-Driven Cascade
+
+The Waterfall model is characterized by:
+
+```
++----------+          +--------+          +----------------+          +---------+
+| Analysis |  ----->  | Design |  ----->  | Implementation |  ----->  | Testing |
++----------+          +--------+          +----------------+          +---------+
+```
+
+- Being derived from system engineering processes and is plan-driven.
+- All activities are scheduled beforehand in separated, cascaded phases that flow one into the next, like a waterfall.
+- Each phase (e.g., Requirements Analysis, Design, Implementation, Testing, Maintenance) produces specific documentation as its primary output before the next phase begins.
+- The process is made visible and manageable through this documentation. It is applicable if requirements are well understood and unlikely to change radically.
+- Iteration (going back to a previous phase) is possible but is typically seen as a costly exception for fixing errors or handling change requests.
+
+```
+       Requirements            Architecture
+      specification,              design,                Source               Unit/System
+      use case model          detailed design             code                 test docs
+             |                      |                      |                      |
+    +-----------------+       +------------+       +----------------+        +-----------+       +-------------+
+    |  Requirements   |-----> |   Design   |-----> | Implementation |----->  |  Testing  |-----> | Maintenance |
+    |    analysis     |       |            |       |                |        |           |       |             |
+    +-----------------+       +------------+       +----------------+        +-----------+       +-------------+
+             ▲                      ▲                       ▲                      ▲                     ▲
+             │                      │                       │                      │                     │
+             +----------------------+-----------------------+----------------------+---------------------+
+                                           (Faults, change requests)
+```
+
+### Spiral Development: An Incremental, Prototype-Based Approach
+
+Spiral Development addresses some Waterfall limitations by being incremental.
+
+- It involves interleaved specification, development, and validation activities, not strictly sequential phases.
+- It emphasizes feedback across activities.
+- The core of the approach is the development and evaluation of a series of prototypes or increments, with each cycle (spiral) building upon the previous one.
+
+### Advantages and Disadvantages of Spiral Development
+
++/ Well-suited for uncertain or changing requirements because feedback is gathered early from each prototype.
+–/ Requires a stable software architecture from early on to support the incremental builds.
++/ Suitable for large projects with long development cycles (e.g., releasing a new major prototype every year).
+
+> **Important Note**: Agile software development suggests even shorter development cycles and more rapid feedback than the traditional Spiral model.
+
+### The Motivation for Agile Software Development
+
+The key motivation is the reality of incomplete, imprecise, uncertain, and changing requirements.
+
+- Traditional "plan-driven" approaches (like pure Waterfall) fall short in a fast-moving business environment where change is constant.
+- While a complete, up-front analysis (as used in safety-critical systems) has its place, it has drawbacks for general commercial software:
+  - It assumes you can define a complete set of requirements at the start, which is often impossible.
+  - It is therefore unsuitable for rapid software development where learning and adaptation are needed.
+
+### The Solution Approach
+
+The final slide, "Solution Approach," is left blank, serving as a conceptual bridge. The implied solution to the problems of rigid, plan-driven methods is Agile Software Development itself. Agile provides the framework for embracing change, delivering value frequently, and improving the process continuously through short cycles and tight feedback loops—directly addressing the motivations listed.
+
+## Agile Software Development, Success, and the Manifesto
+
+### Redefining Project Success
+
+Traditionally, a successful project was defined by being on time, on budget, and fulfilling the specification. However, Agile encourages us to look beyond deadlines and budgets to deeper, more meaningful dimensions of success:
+
+- **Personal Rewards**: Team satisfaction, learning, and growth.
+- **Technical Excellence**: Building software well.
+- **Elegant, Maintainable Code**: Creating an asset, not just a deliverable.
+- **Delivering Value**: The ultimate goal for the customer.
+
+Success has multiple dimensions:
+
+- Organizational Success
+- Technical Success
+- Personal Success
+
+A truly successful project delivers value across all these dimensions.
+
+### Organizational Success
+
+This focuses on business outcomes and efficiency:
+
+- Focusing on delivering value to the customer and the business.
+- Releasing the most valuable features first and releasing frequently to get feedback and ROI early.
+- Being able to change direction to match business needs as they evolve.
+- Reducing costs by eliminating waste and inefficiency.
+- Achieving technical excellence to ensure long-term sustainability.
+- Setting expectations early and maintaining fast communication and steady progress.
+
+### Technical Success
+
+This focuses on the quality and sustainability of the software product itself. Key practices that lead to technical success include:
+
+- **Pair Programming**: Ensures at least two people review every part of the code, improving quality and spreading knowledge.
+- **Continuous Integration**: Frequently integrating code to detect problems early.
+- Finishing each feature completely before starting the next (the "Definition of Done").
+- **Test-Driven Development (TDD)**: Writing tests before code to drive simple, evolvable designs.
+- Maintaining simple, evolvable designs that are easy to change.
+
+### Personal Success
+
+This focuses on the human element—the satisfaction and growth of the team:
+
+- The pride in delivery of useful and valuable software.
+- Improved technical quality of their work.
+- Team autonomy and the ability to self-manage.
+- Achieving stakeholder satisfaction through collaboration.
+
+### Changing the Game: A New Way of Working
+
+Agile represents a fundamental shift—developing and delivering software in a new way. This new approach:
+
+- Requires consistency and rigorousness in applying its practices; it is not a loose or undisciplined method.
+- Aims to ship valuable software and demonstrate progress on a regular basis (e.g., every iteration).
+
+### What are Agile Methods?
+
+- A method or process is simply a way of working.
+- Agile Methods (like Extreme Programming and Scrum) are specific processes that support the agile philosophy.
+- These methods consist of individual elements called practices. Examples of practices include:
+  - Using version control
+  - Setting coding standards
+  - Holding weekly demos
+
+### The Core: The Agile Manifesto and Its Principles
+
+The Agile Manifesto is the foundational document. It states that while there is value in the items on the right, we give more value to the items on the left:
+
+1. Individuals and interactions over processes and tools
+2. Working software over comprehensive documentation
+3. Customer collaboration over contract negotiation
+4. Responding to change over following a plan
+
+### The Twelve Basic Principles
+
+The Manifesto is supported by twelve principles. Your slides highlight the following key subset:
+
+**Principles related to delivery and customer focus:**
+
+- Our highest priority is to satisfy the customer through early and continuous delivery of valuable software. (Focus on value and customer satisfaction).
+- Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage.
+- Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.
+- Business people and developers must work together daily throughout the project.
+- Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.
+- The most efficient and effective method of conveying information is face-to-face conversation.
+- Working software is the primary measure of progress.
+
+**Principles related to team, technical, and process excellence:**
+
+- Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely.
+- Continuous attention to technical excellence and good design enhances agility.
+- Simplicity—the art of maximizing the amount of work not done—is essential.
+- The best architectures, requirements, and designs emerge from self-organizing teams.
+- At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.
+
+### Common Philosophies and Approaches
+
+The final slide serves as a heading, indicating that the various Agile methods (Scrum, XP, etc.) all share these **common philosophies and approaches** rooted in the Manifesto and its principles. They represent different implementations of the same core values.
+
+## Scrum
+
+### What is Scrum?
+
+Scrum is one of the most popular Agile methods. It is specifically designed for dealing with uncertainty and complexity in product development. Its foundation is Empirical Process Control theory, meaning it is based on observation, inspection, and adaptation rather than detailed upfront planning. A key benefit is that it provides high visibility into the project's progress and health.
+
+### Empirical Process Control: The Scrum Foundation
+
+Empirical Process Control is about guiding a process step by step, learning from each step, and converging to an acceptable solution. It is built on three pillars:
+
+- **Visibility**: All aspects of the process must be visible to those responsible for the outcome.
+- **Inspection**: The artifacts and progress toward the goal must be inspected frequently.
+- **Adaptation**: If inspection reveals the process is deviating or the outcome is unacceptable, adjustments must be made immediately.
+
+Scrum implements this through a 24-hour inspection cycle (the Daily Scrum) and a regular, iterative cadence.
+
+### Scrum Overview: The Basic Cycle
+
+Scrum is an iterative and incremental framework.
+
+- It features a daily inspection of activities (the Daily Scrum).
+- The project is broken into fixed-length cycles called Sprints (or Iterations).
+- This cycle continues until the project is no longer funded or the goal is achieved.
+
+### The Scrum Steps in an Iteration (Sprint)
+
+Each Sprint follows a pattern:
+
+- Review requirements from the prioritized backlog.
+- Select a shippable functionality (a set of backlog items) to commit to for the Sprint.
+- The team makes its best effort during the iteration to complete that functionality.
+- At the end, there is an inspection of the functionality by stakeholders (the Sprint Review).
+- Based on the inspection, the team makes timely adaptations to the product (backlog updates) and process (in the Sprint Retrospective).
+
+During an iteration, the team figures out what needs to be done and selects the best way to do it, repeatedly.
+
+- They evaluate requirements, available technology, skills, and capabilities and collectively determine what and how to build.
+- They modify their approach daily based on emerging complexities, difficulties, and surprises.
+
+### The Three Core Scrum Roles
+
+Scrum defines three specific roles with distinct responsibilities:
+
+#### A. The Product Owner:
+
+- Responsible for clarifying requirements and defining release plans.
+- Ensures that the most valuable functionality is produced first.
+- Manages the Product Backlog, which is the list of frequently prioritized requirements.
+
+#### B. The Team:
+
+- A self-managing, self-organizing, and cross-functional group of professionals.
+- They decide how to turn the Product Backlog items into a potentially shippable product increment. No one tells the team how to do their work.
+
+#### C. The ScrumMaster:
+
+- This is not a traditional project manager.
+- The ScrumMaster is a servant-leader for the team, responsible for:
+  - Making sure that all decisions, problems, and progress are visible to everyone.
+  - Ensuring that the team follows the Scrum rules and practices.
+  - Preventing external interrupts from disrupting the team during a Sprint.
+
+Distinction: The slides mention the classic "pigs and chickens" metaphor. The "pigs" (the Product Owner, ScrumMaster, and Team) are fully committed and accountable for the project's success. The "chickens" (stakeholders, managers, customers) are involved but not accountable for delivery.
+
+### Scrum Ceremonies (Meetings)
+
+Scrum replaces extensive documentation with frequent, structured communication through meetings. These are the core empirical inspection and adaptation points:
+
+- **Sprint Planning Meeting**: At the start of a Sprint. The product owner and the team discuss and select the most valuable and releasable functionality to focus on for the upcoming Sprint.
+- **Daily Scrum**: A 15-minute daily meeting for the Team (and ScrumMaster) to synchronize by discussing progress, plans for the day, and any impediments.
+- **Sprint Review**: Held at the end of the Sprint. The team presents the results (the working increment) to the stakeholders for feedback.
+- **Sprint Retrospective**: Also held after the Sprint. The team meets to revise their development process, discussing what went well and what could be improved for the next Sprint.
+
+The philosophy is more meetings, less documentation, with the meetings ensuring alignment, transparency, and rapid adaptation.
+
+## Scrum Artifacts – Product Backlog, Sprint Backlog, and Burndown Chart
+
+### The Product Backlog: The "What"
+
+The Product Backlog is the single, authoritative source for everything that might be needed in the product. It is a dynamic, prioritized list of features, functions, enhancements, and fixes.
+
+- **Ownership**: The Product Owner is solely responsible for the backlog's contents, prioritization, and availability. The team may help with estimation, but the PO owns the "what" and "why."
+- **Nature**: It is a dynamic, evolving, and never complete list. As the product and market change, new items are added, and priorities are re-ordered.
+- **Content**: Each item (often called a Product Backlog Item or PBI) should have a description and an initial estimate (often in relative units like story points) to aid in planning. The table in the slide shows a backlog with items like "Create product backlog worksheet" and their estimates.
+- **Visualization**: It is often maintained in a tool (like the worksheet shown) that allows for easy viewing and updating of priorities.
+
+### The Sprint Backlog: The "How" for the Current Sprint
+
+The Sprint Backlog is the set of Product Backlog items selected for the current Sprint, plus a plan for delivering them. It is a real-time picture of the work the Team plans to accomplish during the Sprint.
+
+- **Creation**: It is composed at the second part of the Sprint Planning Meeting. In the first part, the what is decided (which PBIs to do). In the second part, the team figures out the how and breaks those PBIs down into tasks.
+- **Content**: It defines the tasks for completing the selected functionality. The slide's table is a classic Sprint Backlog example. It lists tasks (e.g., "Analyze KEG Data - Title"), their originator, the responsible team member, and their status (Not Started, In Progress, Completed).
+- **Task Granularity**: A good rule is that each task should take 4 to 16 hours to finish. This makes progress easy to track daily.
+- **Ownership & Visibility**: The Sprint Backlog can be modified only by the Team as they learn more during the Sprint. It must be highly visible, typically displayed on a physical or digital task board.
+
+### The Increment: The "Done" Result
+
+The goal of each Sprint is to produce an Increment of potentially shippable product functionality.
+
+- This means the work is "Done" according to a shared team definition, which usually includes being thoroughly tested, well-structured, well-written, and documented (e.g., with usage in help files).
+- Each Increment adds to all previous Increments and must be in a working, integrated state.
+
+### The Burndown Chart: Tracking Progress Visually
+
+The Burndown Chart is a simple, powerful tool for visualizing progress vs. work to be done.
+
+- Purpose: It shows the amount of work remaining across time. The ideal trend is a line that "burns down" to zero by the end of the Sprint.
+- How it works:
+  - The vertical axis represents the Total Work Remaining (usually in hours of task effort, as shown in the slide's example starting at 38h).
+  - The horizontal axis represents time (the days of the Sprint).
+  - Each day, the team updates the chart by summing the remaining effort on all unfinished tasks. If they completed 4 hours of work, the line goes down by 4. If they discover new work, the line may go up.
+
+> **Example**: The text "2h 4h 2 days 4h 8h 4h Total Work Remaining: 38h 44h Day 2" suggests a scenario: perhaps on Day 2, the team finished 6 hours of work (2h+4h), but also added or discovered 12 new hours of work, causing the total remaining to increase from 38h to 44h. This makes impediments and scope change immediately visible.
+
+## Advanced Scrum Concepts and Ceremonies
+
+### Scaling and Adaptation: Scrum of Scrums
+
+When multiple Scrum Teams work on a single, large product, a Scrum of Scrums meeting is used to coordinate.
+
+- It is designed for heavily interdependent teams.
+- Each team sends a part-time shared member (often a representative or the ScrumMaster) to this meeting. This person is responsible for keeping track of the big picture and influencing every team.
+- The rationale is that a pure implementation of Scrum within each team is not always enough for complex projects. Since Scrum is based on empirical control theory, it states: as the degree of complexity rises, the number of inspections must be increased. The Scrum of Scrums is an additional inspection point. As the frequency of inspections increases, the opportunity for adaptation also increases.
+
+### The Core Strengths of Scrum
+
+#### A. The Power of Timebox:
+
+The fixed-length Sprint (timebox) creates focus and reduces complexity.
+
+- It forces a focus on what is possible within a limited time.
+- It encourages team collaboration to solve a real problem.
+- It aids in reducing complexity by breaking down problems into manageable chunks.
+- It becomes the art of what is possible.
+
+#### B. The Power of Communication:
+
+Scrum maximizes communication through structured and informal channels.
+
+- Daily Scrums and informal meetings ensure everyone knows about progress and problems.
+- This open communication means people might know solutions for problems of others, fostering collective problem-solving.
+
+#### C. Customer Collaboration:
+
+Scrum directly addresses a common failure of traditional methods.
+
+- Claim 1: Introducing many formal software engineering practices can widen the gap between stakeholders and developers.
+- Claim 2: Heavy reliance on documentation replaced face-to-face communication.
+- The Scrum solution: The team and the Product Owner have to communicate frequently. Furthermore, the team should talk in terms of business needs and objectives, not just technical details.
+
+### Terminology and the Sprint Planning Meeting
+
+The use of terms is not so important; what matters is the essence. A Product Backlog is just a prioritized list of requirements, and a Sprint is just a period (e.g., one month) between meetings.
+
+The Sprint Planning Meeting is an 8-hour, timeboxed event that kicks off the Sprint.
+
+- **First 4 hours**: The Product Owner and Team collaborate on selecting Product Backlog items for the Sprint. The Product Owner must prepare the Product Backlog before the meeting.
+- **Second 4 hours**: The Team alone prepares the Sprint Backlog. They break down the selected PBIs into tasks, create task estimates, and make assignments. The goal is to make the plan complete enough for a confident commitment.
+- **Outcome**: A set of selected Product Backlog items committed by the team to be turned into an increment of shippable functionality.
+- **Clarification**: The Product Owner takes part in the second part just to clarify Product Backlog items further, if necessary.
+- **Embracing Uncertainty**: The timebox is strict although the Product Backlog items and the time estimates are imprecise. The team accepts that the rest must be resolved during the Sprint through daily adaptation.
+
+### The Daily Scrum: The 15-Minute Sync
+
+A strict **15-minute** meeting held at the same place and same time every day. Everybody on the Team must attend promptly.
+
+- **Format**: Each team member answers just three questions:
+  1. What have I done for the project since the last daily scrum meeting?
+  2. What will I do until the next daily scrum meeting?
+  3. What impedes me from performing my work as effectively as possible?
+- **Rules**: One person at a time, discussion is kept in the scope of the three questions, and nobody outside the team interferes.
+
+### The Sprint: Rules and "Done"
+
+A Sprint is 30 calendar days (or less). During the Sprint:
+
+- The Team can seek outside advice, help, and information.
+- The Product Backlog is frozen (i.e., no new goals are added by the PO mid-Sprint).
+- Team responsibilities include: attending Daily Scrums and keeping the Sprint Backlog up-to-date and visible to everyone (e.g., updating day-to-day estimated hours for each task).
+- Problems: The ScrumMaster can abnormally terminate the Sprint if it becomes non-viable due to major business/technological changes or severe interference.
+
+#### Definition of "Done":
+
+For an increment to be considered "Done," it must be more than just coded. The slide's checklist includes:
+
+- Feature complete
+- Code complete
+- Approved by the Product Owner
+- No known defects
+- Production Ready
+
+### The Sprint Review: Inspecting the Product
+
+A 4-hour meeting at the end of the Sprint.
+
+- **Preparation**: At most 1 hour for preparation.
+- **Content**: The team should present no artifacts, only functionality that is ‘done’. They discuss initial plans, what went well, and what did not.
+- **Interaction**: There is an Answers & Questions session with stakeholders to get their impressions and desires.
+- **Outcome**: This leads to a reconsideration of the Product Backlog and its prioritization for future Sprints.
+- **Facilitation**: The ScrumMaster organizes the meeting.
+
+### The Sprint Retrospective: Inspecting the Process
+
+A 3-hour meeting for the Team, the ScrumMaster, and the Product Owner after the Sprint Review.
+
+- The team reflects: What went well, what did not?
+- The Team prioritizes possible improvements to their process.
+- The ScrumMaster is responsible for the arrangements.
+- Actionable items from the retrospective can be formulated as high-priority non-functional Product Backlog items for the next Sprint, ensuring process improvements are acted upon.
+
+## Scrum Principles, Artifacts, and Metrics
+
+### The Scrum Lifecycle (Big Picture)
+
+The Scrum Lifecycle is a structured process designed to deliver value quickly and reliably. At the center of this cycle is the Iteration (also known as a Sprint), which is a time-boxed period of work typically lasting 2 to 4 weeks.
+
+Key components of this lifecycle include:
+
+- Backlog Management: Work begins with the Product Backlog, from which specific items are selected to create the Sprint Backlog for the current iteration.
+- Daily Synchronization: Every 24 hours, the team holds a Daily Scrum Meeting to coordinate their efforts.  
+- Outcome: The goal of every iteration is to produce a Potentially Shippable Product Increment—a functional piece of software that provides immediate value.
+
+### Core Terminology and Hierarchy
+
+- Understanding the specific terminology used in Scrum is essential for effective project management:
+- Product: The piece of software being developed under the company.
+- Project: Refers to the major releases of the product.
+- Backlog: A comprehensive list of stories and tasks associated with an entity.
+- Iteration (Sprint): A time-boxed work period, often on a weekly or bi-weekly basis.
+- Typical Product Hierarchy: In practice, a New Product is broken down into multiple Releases (e.g., Release 1, Release 2), each containing a series of Sprints (e.g., Sprints 1–4) .
+
+### Understanding Backlogs, Stories, and Tasks
+
+Scrum organizes work through a clear hierarchy of items that represent different levels of detail and value:
+
+- **Product Backlog:** Represents the entire planned scope of the product.
+- **Project Backlog:** Contains parts of the product backlog chosen and allocated for a specific major release.
+- **Iteration Backlog:** The most granular level, containing the specific work allocated for a single sprint.
+
+### Typical Product Hierarchy
+
+The work in Scrum is often structured in a Typical Product Hierarchy. This hierarchy helps break down large, complex pieces of work into manageable units. It typically flows from large themes or epics, down to smaller stories (descriptions of desired functionality from a user's perspective), and further into specific tasks.
+
+### Tracking Progress: Burn-up and Burn-down Charts
+
+Two primary charts are used to visualize progress and ensure the team is on track:
+
+- **Project Burn-up:** This chart tracks the overall progress of the project in terms of story points. It visually depicts the accumulation of completed story points (the "Done" area, often in green) plotted against the total scope of the project over time. It shows how much work has been completed and how the total scope may change.
+
+- **Iteration Burn-down:** This chart tracks the progress of tasks within a single iteration (Sprint) as a function of time. It typically shows the amount of work remaining (often in hours) on the vertical axis against the days of the Sprint on the horizontal axis. The ideal trend is a downward slope to zero, showing the team "burning down" their remaining work.
+
+### Distinguishing Stories and Tasks
+
+In a typical use case, stories are clearly separated from tasks.
+
+- Stories represent units of customer or user value. They describe what needs to be built and why, from a user's perspective. A story has value when completed (e.g., "As a user, I can log in so I can access my account").
+- Tasks are the concrete, technical steps required to implement a story. They describe how the work will be done. Tasks might not have direct user value on their own (e.g., "Design login UI mockup," "Set up authentication API endpoint").
+
+> This separation enables prioritization to be done at the story level (based on business value), while tasks are added to a story for detailed planning and tracking of the activities needed to complete it. A story can contain one or more tasks.
+
+### Estimating Stories and Tasks
+
+Effort estimation is applied differently to stories and tasks:
+
+- Stories are typically estimated in story points, which are relative units of size/complexity.
+- Tasks are estimated in man-hours, representing a more concrete effort forecast. A key metric for tasks is Effort Left, which is the team's current estimate of the work still required to complete the task.
+
+### Story and Task States
+
+Stories (and tasks) move through a series of pre-defined states during their lifecycle. These states provide clarity on the current status of any work item:
+
+- **Not Started:** No work has yet been put into realizing this story/task.
+- **In Progress:** Work is ongoing and some effort has already been invested.
+- **Blocked:** The work cannot proceed. Most likely, some action must be taken by the team ('us') or an external party before work can continue.
+- **Pending:** The work is waiting for something external that can reasonably be expected to happen without the team taking any further immediate action.
+- **Ready:** The core work is otherwise done, but some relatively minor "definition of done" criteria are yet to be met (e.g., the story must be demoed to the product owner, released to production, or discussed in a stand-up meeting).
+  Deferred: The story/task has been decided to be skipped in the current project or iteration. Its effort/points are omitted from all progress metrics. This allows teams to quickly scope out items without moving them to a different backlog.
+- **Done:** The final state of a task/story after it has been fully completed according to all criteria. Reaching "Done" affects the project's progress metrics (e.g., burn-up chart).
+
+### Organizing Work with Labels
+
+To improve organization and tracking, stories can be labeled according to various categories such as:
+
+- Bugs (defects to be fixed).
+- Usability improvements (enhancements to the user experience).
+- New features (new functionality).
+- Planned for a specific release.
+
+This labeling system provides a simple issue tracking mechanism within the backlog, allowing teams to filter and manage work by type or purpose easily.
+
+### The Concept of Effort Estimation
+
+A core Agile practice is Effort Estimation, which is the process of evaluating the relative size and complexity of work items. The relative size of stories is estimated in so-called story points. Story points are abstract units that measure effort, complexity, and risk combined, rather than pure time. While story points are common, one can use other measures like person-days for estimation.
+
+### Using an Exponential Scale for Estimation
+
+It is recommended to use an exponential scale when estimating story points. The reason for this is that as the size of a story gets bigger, it becomes increasingly harder to precisely distinguish the difference between N and N-1 points. An exponential scale acknowledges this uncertainty for larger items.
+
+- The Fibonacci Scale: One popular option is to use the Fibonacci scale (1, 2, 3, 5, 8, 13, ...). This non-linear sequence naturally creates larger gaps between numbers as they increase, which aligns with the increasing uncertainty in estimating larger stories.
+
+### Interpreting Story Points
+
+Story points can be loosely associated with timeframes to help teams calibrate their estimates, but this is a guideline, not a direct conversion. For example:
+
+- 1 point: A story that can be done in one sitting without a break.
+- 2 points: Requires about a half-day of work.
+- 3 points: Requires about a day of work.
+- 5 points: Requires about two days.
+- 8 points: Requires about a week.
+
+A critical rule is: If a story is estimated to require more than 8 points, it should be broken down into smaller stories. This ensures work items are manageable within a short iteration.
+Most importantly: Do not use or map the story points to engineering hours directly! The purpose of story points is to measure relative complexity and enable velocity tracking, not to create fixed time commitments.
+
+### The Estimation Process
+
+The slides outline a general flow for estimation and planning, which can be summarized as:
+
+1. Quick analysis of the story.
+2. Reviewing the project or iteration overview.
+3. Estimating in terms of story points.
+4. Finalizing the effort estimation.
+
+### Jira Issue Categories and Hierarchy
+
+In tools like Jira, work is categorized into a hierarchy that helps manage scope:
+
+- **Stories (User Stories):** Short requirements or requests written from the perspective of an end user. They are the primary unit of work discussed in estimation.
+- **Epics:** Large bodies of work that can be broken down into a number of smaller stories. Epics represent significant feature areas or initiatives.
+- **Initiatives:** Collections of related epics that drive toward a common, high-level goal.
+- **Themes:** Large focus areas that span across the organization, grouping multiple initiatives.
+
+### Jira Examples of Agile Stories
+
+Examples help illustrate what a well-formed story looks like in a real context. For instance, if a company was improving a rocket launch streaming service, stories might be:
+
+- "iPhone users need access to a vertical view of the live feed when using the mobile app."
+- "Desktop users need a 'view full screen' button in the lower right-hand corner of the video player."
+
+These examples show stories are user-centric and describe a specific need.
+
+### Comprehensive Jira Issue Statuses
+
+Jira uses a detailed workflow managed through issue statuses. Understanding these states is key for tracking progress in a tool:
+
+- **Open / To Do**: The issue is reported and ready to be worked on.
+- **In Progress**: The issue is being actively worked on.
+- **In Review / Under Review**: Work is complete and is awaiting or undergoing peer review.
+- **Approved**: A reviewer has approved the work.
+- **Resolved**: A resolution has been applied, awaiting final verification.
+- **Done / Closed**: The issue is considered finished correctly. Closed issues can be reopened.
+- **Reopened**: A previously resolved issue was incorrect and needs more work.
+- **Rejected**: A reviewer has rejected the completed work.
+- **Cancelled**: Work has stopped on the issue.
+- **Building / Build Broken**: Statuses related to the integration and build process after code is committed.
+- **Backlog / Selected for Development**: Planning statuses indicating the issue is waiting for a future sprint or has been chosen for upcoming work.
+
+## Lean Software Development
+
+### Introduction to Lean Software Development
+
+Lean Software Development is an Agile approach that applies principles from lean manufacturing to the process of creating software. Its core philosophy is to maximize customer value while minimizing waste.
+
+### Defining "Lean"
+
+The term "Lean" describes a production practice that considers the expenditure of resources for any goal other than the creation of value for the end customer to be wasteful. Consequently, any such expenditure becomes a target for elimination.
+
+> Therefore, Lean implementation is focused on getting the right things to the right place at the right time in the right quantity to achieve perfect workflow. This pursuit aims to minimize waste while remaining flexible and able to change. (Source: Wikipedia)
+
+### The Origins of Lean Development
+
+Lean Software Development does not originate in software. It borrows principles from the theory of lean manufacturing, which itself comes from the Japanese manufacturing industry, specifically the Toyota Production System (TPS). Lean Software Development is, therefore, the application of lean principles to software development, involving the translation of widely accepted lean principles into agile practices.
+
+### Historical Context: The Automotive Industry in the 1980s
+
+The power of lean thinking was demonstrated in the late 1980s automotive industry. Consider two competing cars:
+
+- The GM Cutlass took 7 years to go from concept to market.
+- The Honda Accord took only 3 years.
+
+> Despite the much shorter development time, the Honda Accord also achieved better quality. This result was counter-intuitive to traditional thinking, which assumed that shorter development time would lead to increased cost and potentially lower quality.
+
+### The Traditional vs. The Japanese (Lean) Approach
+
+| **The Traditional Approach (@ Detroit)**                                                                                                                                                                                                                                         | **The Japanese/Lean Approach (@ Toyota and Honda)**                                                                                                      |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| - Operated on the belief that late changes are extremely costly.<br>- Mandated a sequential development process (like Waterfall).<br>- Adopted a lengthy development cycle to try to get everything right upfront.<br>- Allowed no adaptation in the later stages of production. | - Employed rapid, concurrent development where different phases overlapped.<br>- Designed to accommodate and make changes late in the development cycle. |
+
+### The Core Difference: Managing the Cost of Change
+
+The two approaches were founded on opposite strategies for handling change:
+
+- **Traditional Strategy (Detroit):** The goal was to make the right design decision in the first place to avoid the need to change later on, precisely because changes were believed to be prohibitively expensive during production.
+- **Lean Strategy (Toyota/Honda):** The goal was to avoid irreversible design decisions in the first place. Instead, they sought to delay design decisions as much as possible in order to make design decisions with the best available information later in the process.
+
+### Just-In-Time (JIT) Manufacturing
+
+A key lean principle is Just-In-Time Manufacturing, pioneered by Toyota. The idea is: "Don't decide what to manufacture until you have a customer order; then make it as fast as possible." This eliminates waste from overproduction and inventory, tying production directly to demand.
+
+### Beyond Late Decisions: Organizational and Process Differences
+
+The differences extended beyond timing into organizational structure and process:
+
+| Traditional Model                                                                                                       | Lean Model                                                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pushed critical decisions up to a few high-level authorities.                                                           | Emerged decisions from detailed, engineering-level discussions.                                                                                                                     |
+| Used sequential processes.                                                                                              | Used concurrent processes; integrating making, testing, and maintenance considerations into the design phase itself.                                                                |
+| Resulted in designs subject to modification by both marketing and managers, often far removed from engineering reality. | Was often guided by a single leader who envisioned what the car should be and continually kept the vision in front of the engineers doing the work, ensuring alignment and purpose. |
+
+### Adaptation to Software Development
+
+The success of Lean development was later adapted by many automobile companies in the 1990s and was understood and proven by managers in many other disciplines, including those with design environments as complex as software development. This naturally led to the question: "Why not borrow lean development principles for software development?"
+
+### A Word of Caution: Translation is Key
+
+However, lean principles have not always been successfully applied in new domains. The slides emphasize that:
+
+- The essence of lean thinking must be understood. It's a mindset, not just a set of steps.
+- Principles are essential and universal, but practices are applied just to carry out principles.
+- There are no "best practices" applicable in all domains.
+- Principles must be translated to practices for a particular domain (like software), and this translation is not always easy. A direct copy of manufacturing practices without understanding the underlying principle will likely fail.
+
+### The Seven Core Principles
+
+Lean Software Development is built upon seven fundamental principles that guide its practices and mindset. These principles are a direct translation of lean manufacturing thinking to the software domain:
+
+1. **Eliminate Waste:** The foundational principle. Anything in the development process that does not add value to the product from the customer's perspective should be avoided.
+2. **Amplify Learning:** Recognizes that software development is an exercise in discovery. Processes should be designed to maximize feedback and learning through short cycles, testing, and experimentation.
+3. **Decide as Late as Possible:** In the face of uncertainty, it is often better to delay decisions until the last responsible moment when the most information is available, allowing for more informed and flexible choices.
+4. **Deliver as Fast as Possible:** Short, rapid delivery cycles create more frequent and reliable feedback from customers, which in turn fuels learning and reduces the risk of building the wrong thing.
+5. **Empower the Team:** The people doing the work are best positioned to make decisions about it. This principle advocates to let people decide, not the process. Managers should support and enable the team.
+6. **Build Integrity In:** The goal is to create products with conceptual and perceived integrity—products that are maintainable, adaptable, and extensible. Quality and good design are not afterthoughts but are built into the process from the start.
+7. **See the Whole:** Avoid sub-optimizing individual parts of the system or process at the expense of the overall value stream. Focus on the whole product and process, not getting trapped in local optimizations that create waste elsewhere.
+
+### The Origins in the Toyota Production System (TPS)
+
+These principles originate from the Toyota Production System (TPS), developed in the 1940s. Toyota faced a unique challenge: a need for cheap cars but a market not big enough for mass production economies of scale. This forced them to invent a new way of working for manufacturing, logistics, and product development. The fundamental principle articulated by Taiichi Ohno, the key architect of TPS, was to Eliminate Waste.
+
+### How to See Waste in Software Development
+
+To identify waste, one must critically examine everything in the software development process that is not direct analysis and coding. For each activity, ask:
+
+- Does it really add value for customers?
+- Is there a way to do without it?
+
+This approach is inspired by Shigeo Shingo, who identified seven classic types of manufacturing waste.
+
+### Translating the Seven Wastes to Software
+
+The seven manufacturing wastes have direct parallels in software development:
+
+| Manufacturing Waste | Software Development Waste                                             |
+| ------------------- | ---------------------------------------------------------------------- |
+| Inventory           | Partially done work (e.g., untested code, undelivered features)        |
+| Extra Processing    | Extra Processes (e.g., unnecessary documentation, excessive approvals) |
+| Overproduction      | Extra Features (features not actually needed by the user)              |
+| Transportation      | Task Switching (context switching between different tasks or projects) |
+| Waiting             | Waiting (for decisions, approvals, builds, or other team members)      |
+| Motion              | Motion (hunting for information, navigating cumbersome tools)          |
+| Defects             | Defects (bugs and errors that require rework)                          |
+
+### The Role of Management Activities
+
+In the Lean view, management activities do not directly add customer value, but their proper function is to help in eliminating the wastes listed above. Therefore, complicated project tracking is itself a sign of waste. Effective management should focus on enabling flow by:
+
+- Minimizing the amount of unfinished work in the pipeline (limiting Work-in-Progress).
+- Helping teams prioritize and release work as soon as possible to get feedback and deliver value.
+
+### Identifying Waste with Value Stream Mapping
+
+A key tool for implementing the "See the Whole" and "Eliminate Waste" principles is Value Stream Mapping. This involves analyzing the entire process end-to-end, from a customer request until the final release of the product or feature. The central question this mapping seeks to answer is: "How much time and effort is actually spent on adding value to the product, versus time spent on waiting, moving, or reworking?"
+
+### A Manufacturing Example: The Cola Can
+
+A classic example illustrates the staggering amount of waste that can exist in a process. For a cola can:
+
+- Total lead time from raw material to store shelf: 319 days (about 10 and a half months).
+- Time where value is actually being added (e.g., shaping, filling, sealing): Only 3 hours.
+- This means value-adding activity constitutes just 0.04% of the total time. The rest (99.96%) is waste—inventory, transportation, waiting, etc.
+
+### Value Stream Mapping in Traditional vs. Agile Software Development
+
+The same analysis can be applied to software processes:
+
+**Traditional Software Development Example:** The map might reveal long periods of waiting, such as:
+
+- A project waiting ~6 weeks before starting.
+- A design review taking 3 weeks to schedule.
+- Coding delayed for 3 weeks due to resource conflicts with other projects.
+- 6 weeks allocated for testing and deployment.
+
+**Agile Software Development:** In contrast, an Agile value stream map would aim to show a much tighter, faster flow with minimal waiting between steps, emphasizing continuous movement of small batches of work from idea to deployment.
+
+### A Critical Distinction: Development vs. Production
+
+While Lean principles are overall applicable to both, it is crucial to understand that Lean production practices cannot be directly applied to software development. This is because they address two fundamentally different activities:
+
+- Software Development is like designing a recipe. It is a creative, problem-solving, knowledge-generating activity.
+- Production (Manufacturing) is like following a recipe to produce a dish. It is a repetitive, predictable, physical execution activity.
+
+### Key Differences Between Development and Production
+
+The slides highlight the opposing characteristics of these two domains:
+
+| Characteristic        | Development (Designing the Recipe)                                                   | Production (Producing the Dish)                                            |
+| --------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| Quality Definition    | Quality is "fitness for use." Does it solve the user's problem well?                 | Quality is "conformance to requirements." Does it match the spec?          |
+| Variability           | Variable results are good. Experimentation leads to innovation and better solutions. | Variable results are bad. Consistency and predictability are paramount.    |
+| The Role of Iteration | Iteration generates value. Each cycle provides learning that improves the design.    | Iteration generates waste (called rework). Going back is a costly mistake. |
+
+### The Nature of Design: Iterative Cycles
+
+Research into how experienced designers work reveals an important truth: when facing ill-defined problems (which have no single right answer or obvious best solution), they do not follow a rigid top-down design process. Instead, they cycle between high-level design and detailed solution exploration. This back-and-forth allows them to learn more about the problem and progressively structure it effectively.
+
+### Applying This to Software Development
+
+Software development is also a problem-solving activity, often dealing with ill-defined requirements and novel challenges. Therefore, effective software development mirrors the designer's approach: Problem solving involves cycles of investigation, experimentation, and checking the results. This iterative, learning-focused cycle is the essence of Agile and Lean Software Development, aligning with the principles of Amplify Learning and Decide as Late as Possible.
+
+### The Critical Role of Feedback
+
+Lean and Agile development emphasize fast, concrete feedback over speculation. Several practical examples illustrate this principle:
+
+| **Topic**                  | **Lean/Agile Feedback Approach**                                              | **Speculation/Traditional Approach**                                          |
+| :------------------------- | :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------- |
+| **Quality**                | Run tests as soon as code is written for immediate feedback on correctness.   | Let defects accumulate to be fixed later at a higher cost.                    |
+| **Design & Understanding** | Check out ideas by writing code (spikes/prototypes) for tangible insights.    | Add more documentation or detailed planning based on untested assumptions.    |
+| **Requirements**           | Show potential user screens (demos/mockups) for early user feedback.          | Gather more written requirements which are often misinterpreted.              |
+| **Tool Selection**         | Test top three tool candidates with a small pilot.                            | Study more carefully through lengthy analysis and comparison documents.       |
+| **Large-Scale Changes**    | Try the new idea out as a small, integrated experiment (e.g., Web front end). | Try to figure out how to convert an entire system in a single massive effort. |
+
+### Making Progress Visible
+
+Feedback requires visibility. Tools like burn-down charts and tracking tests written & passed provide visible progress throughout iterations. These artifacts make the current state of the project transparent to the entire team, enabling informed decisions and timely adjustments.
+
+### The Predictive vs. Adaptive Paradigm
+
+The slides contrast two opposing views of the development process:
+
+- The Traditional (Predictive) Paradigm: Believes software development should be specified in detail prior to implementation. This stems from the core belief that if you don't get the requirements nailed down and the design right upfront, it will surely cost a lot to make changes later. This paradigm tries to eliminate uncertainty through extensive early planning.
+
+### The Case for Deciding as Late as Possible
+
+The "Decide as Late as Possible" principle directly challenges the predictive paradigm by asking: "What if...?"
+
+- What if there is uncertainty?
+- What if customer needs are not clear at the start?
+- What if customer needs are subject to change?
+- What if technology is moving?
+
+In such an environment—which describes most software projects—then an adaptive approach is a better bet than a rigid, predictive one.
+
+### Agile Planning: Flexibility Through Options
+
+It is crucial to understand that Agile approaches are NOT unplanned. Instead, they use planning differently:
+
+- Plans enhance flexibility to respond to change, rather than locking the team into a single path.
+- Planning involves designing experiments and learning to reduce uncertainty.
+- A key planning activity is creating options to delay a decision. An analogy is to reserve a hotel room (keeping your option open) rather than booking it (making a final, costly commitment) far in advance.
+
+### The Nature of Informed, Adaptive Plans
+
+Therefore, a Lean/Agile plan has a specific character:
+
+- A plan should not pre-specify detailed actions based on speculation about an uncertain future.
+- A plan should adapt based on reality and the feedback received as the project unfolds.
+
+### Tactics for the "Last Responsible Moment"
+
+The principle "Decide as Late as Possible" is operationalized by aiming to make decisions at the last responsible moment. This is defined as the moment at which failing to make a decision eliminates an important alternative. To safely delay decisions without creating chaos, teams use specific technical and procedural tactics:
+
+- Use modularization and separation of concerns in the codebase.
+- Rely on interfaces to define contracts between components.
+- Avoid extra features and future capabilities (YAGNI - "You Ain't Gonna Need It").
+- Avoid repetition (follow the DRY principle - "Don't Repeat Yourself").
+
+> These tactics keep the system flexible, allowing important decisions about implementation details to be made later when more information is available.
+
+### Delivering Fast with Kanban Systems
+
+The principle Deliver as fast as possible is often implemented using a Kanban System. Kanban is a pull system, where customer needs pull the work through the development process. This is in contrast to a push system, where a predetermined schedule pushes work onto the team regardless of current capacity or immediate demand.
+
+### The Core of a Software Kanban System
+
+A Software Kanban System visualizes the workflow and limits work-in-progress to optimize flow.
+
+- **Visualization:** Work items are represented as cards on a board with columns representing different phases (e.g., To Do, In Progress, Done). These phases can be anything; they can be as simple as New, In Progress, Done.
+- **WIP (Work in Progress) Limit:** This is the critical rule. Each phase (or the entire system) has a strict limit on how many items can be in progress at once. This limit prevents overloading the team, exposes bottlenecks, and ensures work flows to completion quickly.
+
+### Kanban vs. Scrum
+
+While both are Agile, Kanban has a distinct focus:
+
+- Kanban focuses on continuous progress, maintaining a steady flow, and strict limitation on work in progress (WIP). It does not prescribe fixed-length iterations (sprints); work is pulled continuously as capacity allows.
+- The Kanban system complements other process models like Scrum; many teams use a "Scrumban" hybrid, applying WIP limits and flow optimization within the Scrum framework.
+
+### Empowering the Team
+
+The principle Empower the team stands in contrast to traditional process improvement models.
+
+- Frameworks like CMM/CMMI often introduce central control, centralized decision-making, and top-down process design.
+- Agile and Lean methods aim at moving decisions to the lowest possible level—to the people doing the work. This requires developing the capacity of people for wise decision making and placing an emphasis on experimentation and feedback as the primary mechanism for control and improvement, rather than on bureaucratic oversight.
+
+### Building Integrity In
+
+The principle Build integrity in means quality and coherence are designed into the product from the start, not inspected in later. Key practices that support this include:
+
+- **Refactoring:** Continuously improving the design of existing code without changing its external behavior to maintain flexibility and clarity.
+- **Testing:** Using practices like Test-Driven Development (TDD) to ensure correctness and drive good design.
+- **Integrated Problem Solving:** Involving the whole team (developers, testers, etc.) collaboratively to solve problems, ensuring that all perspectives (technical, quality, user) are considered from the beginning.
+
+### Seeing the Whole
+
+The principle See the whole applies systems thinking to software development. It warns against local optimizations that harm the overall system. Key concepts include:
+
+- Considering limits to growth (e.g., a team can only handle so much WIP).
+- Shifting the burden from addressing root causes to applying quick fixes that create bigger problems later.
+- Attacking root causes rather than symptoms of problems.
+
+The overarching directive: **Do not sub-optimize one part of the process or system if it damages the overall flow or product value.**
+
+### Summary of the Seven Lean Principles
+
+The slides provide a concise summary of each principle and its practical implication:
+
+1. **Eliminate waste:** Spend time only on what adds real customer value.
+2. **Amplify learning:** When you have tough problems, increase feedback.
+3. **Decide as late as possible:** Keep your options open as long as practical, but no longer.
+4. **Deliver as fast as possible:** Deliver value to customers as soon as they ask for it.
+5. **Empower the team:** Let the people who add value use their full potential.
+6. **Build integrity in:** Don't try to tack on integrity after the fact—build it in.
+7. **See the whole:** Beware of the temptation to optimize parts at the expense of the whole.
+
+</div>
