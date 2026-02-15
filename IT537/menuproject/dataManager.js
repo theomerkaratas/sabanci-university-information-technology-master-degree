@@ -1,7 +1,39 @@
 const API_URL = '/api/orders';
+const AUTH_URL = '/api';
 
 class DataManager {
-    // API: Fetch all orders from server
+    static async registerUser(userData) {
+        try {
+            const response = await fetch(`${AUTH_URL}/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || 'Registration failed');
+            return data;
+        } catch (error) {
+            console.error('Registration error:', error);
+            throw error;
+        }
+    }
+
+    static async loginUser(credentials) {
+        try {
+            const response = await fetch(`${AUTH_URL}/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(credentials)
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || 'Login failed');
+            return data;
+        } catch (error) {
+            console.error('Login error:', error);
+            throw error;
+        }
+    }
+
     static async fetchOrdersFromServer() {
         try {
             const response = await fetch(API_URL);
@@ -9,12 +41,10 @@ class DataManager {
             return await response.json();
         } catch (error) {
             console.error('Error fetching orders:', error);
-            // Fallback to localStorage if server fails
             return JSON.parse(localStorage.getItem('orders') || '[]');
         }
     }
 
-    // API: Save order to server
     static async saveOrderToServer(order) {
         try {
             const response = await fetch(API_URL, {
@@ -26,14 +56,12 @@ class DataManager {
             return await response.json();
         } catch (error) {
             console.error('Error saving order:', error);
-            // Fallback: save to localStorage
             const orders = JSON.parse(localStorage.getItem('orders') || '[]');
             orders.push(order);
             localStorage.setItem('orders', JSON.stringify(orders));
         }
     }
 
-    // API: Update order status on server
     static async updateOrderStatusOnServer(orderId, status) {
         try {
             const response = await fetch(`${API_URL}/${orderId}`, {
@@ -45,7 +73,6 @@ class DataManager {
             return await response.json();
         } catch (error) {
             console.error('Error updating order status:', error);
-            // Fallback: update localStorage
             const orders = JSON.parse(localStorage.getItem('orders') || '[]');
             const index = orders.findIndex(o => o.id === orderId);
             if (index !== -1) {
@@ -55,7 +82,6 @@ class DataManager {
         }
     }
 
-    // Export orders to CSV (Updated to fetch from server)
     static async exportOrdersToCSV() {
         const orders = await this.fetchOrdersFromServer();
         
@@ -64,10 +90,8 @@ class DataManager {
             return;
         }
 
-        // CSV Header
         let csv = 'Order ID,Customer,Table,Total,Date,Status,Items\n';
 
-        // CSV Rows
         orders.forEach(order => {
             const items = order.items.map(item => 
                 `${item.name}${item.cookingLevel ? ` (${item.cookingLevel})` : ''} - ${item.price}₺`
@@ -76,11 +100,9 @@ class DataManager {
             csv += `${order.id},${order.customer},${order.table || 'N/A'},${order.total}₺,${order.date},${order.status},"${items}"\n`;
         });
 
-        // Download CSV
         this.downloadCSV(csv, `orders_${new Date().toISOString().split('T')[0]}.csv`);
     }
 
-    // Export login activity to CSV
     static exportLoginActivityToCSV() {
         const loginHistory = JSON.parse(localStorage.getItem('loginHistory') || '[]');
         
@@ -89,19 +111,15 @@ class DataManager {
             return;
         }
 
-        // CSV Header
         let csv = 'Username,User Type,Login Time,IP Address\n';
 
-        // CSV Rows
         loginHistory.forEach(login => {
             csv += `${login.username},${login.type},${login.loginTime},${login.ipAddress || 'N/A'}\n`;
         });
 
-        // Download CSV
         this.downloadCSV(csv, `login_activity_${new Date().toISOString().split('T')[0]}.csv`);
     }
 
-    // Export all data (combined)
     static async exportAllDataToCSV() {
         const orders = await this.fetchOrdersFromServer();
         const loginHistory = JSON.parse(localStorage.getItem('loginHistory') || '[]');
@@ -124,11 +142,9 @@ class DataManager {
             csv += `${login.username},${login.type},${login.loginTime},${login.ipAddress || 'N/A'}\n`;
         });
 
-        // Download CSV
         this.downloadCSV(csv, `all_data_${new Date().toISOString().split('T')[0]}.csv`);
     }
 
-    // Import orders from CSV (Still useful for manual uploads)
     static importOrdersFromCSV(file) {
         const reader = new FileReader();
         
@@ -172,7 +188,6 @@ class DataManager {
         reader.readAsText(file);
     }
 
-    // Download CSV helper
     static downloadCSV(csvContent, filename) {
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
@@ -187,12 +202,10 @@ class DataManager {
         document.body.removeChild(link);
     }
 
-    // Deprecated: Using server-side auto-save now, but keeping for reference
     static autoSaveOrderToCSV(order) {
         console.log('Order logged locally (deprecated):', order.id);
     }
 
-    // Log login activity (Still uses localStorage for now as per plan)
     static logLogin(username, userType) {
         const loginHistory = JSON.parse(localStorage.getItem('loginHistory') || '[]');
         const loginEntry = {
@@ -205,7 +218,6 @@ class DataManager {
         localStorage.setItem('loginHistory', JSON.stringify(loginHistory));
     }
 
-    // Clear all data (Admin action - could be expanded to server)
     static clearAllData() {
         if (confirm('Are you sure you want to clear all data? This cannot be undone!')) {
             localStorage.removeItem('orders');
