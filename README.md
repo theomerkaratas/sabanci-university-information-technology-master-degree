@@ -3,7 +3,7 @@
 Welcome to my **Sabancı University Master’s Degree** repository!
 
 > [!TIP]
-> You can also access this project via your browser at: [theomerkaratas.github.io](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/)
+> You can also access this project via your browser at: [theomerkaratas.github.io/sabanci-university-information-technology-master-degree](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/)
 
 This repository contains the projects, assignments, course materials, and practical exercises completed during my **Master of Science in Information Technology** at **Sabancı University**.
 
