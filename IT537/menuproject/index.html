@@ -3,643 +3,314 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IT-526 FINE DINING Terminal Menu</title>
+    <title>Login - IT-537 FINE DINING</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      .login-container {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .login-box {
+        background-color: var(--card-bg);
+        padding: 40px;
+        border-radius: var(--border-radius);
+        max-width: 400px;
+        width: 100%;
+        border: 1px solid #333;
+      }
+
+      .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .login-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+
+      .login-header p {
+        color: var(--text-secondary);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--text-color);
+        font-weight: 600;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px;
+        background-color: #333;
+        border: 1px solid #555;
+        border-radius: 8px;
+        color: var(--text-color);
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+
+      .form-group input:focus {
+        border-color: var(--primary-color);
+      }
+
+      .login-btn {
+        width: 100%;
+        padding: 15px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .login-btn:hover {
+        background-color: #ff8533;
+      }
+
+      .login-footer {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .login-footer a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .login-footer a:hover {
+        text-decoration: underline;
+      }
+
+      .error-message {
+        background-color: #d32f2f;
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      .user-type {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .user-type button {
+        flex: 1;
+        padding: 10px;
+        background-color: #333;
+        border: 2px solid #555;
+        color: var(--text-color);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .user-type button.active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <h1>IT-526 <span>FIne DINING</span></h1>
-      <div style="display: flex; gap: 15px; align-items: center">
-        <span
-          id="userWelcome"
-          style="color: var(--text-secondary); font-size: 0.9rem"
-        ></span>
-        <button class="cart-btn" id="cartBtn">
-          🛒 Cart (<span id="cartCount">0</span>)
-        </button>
-        <button class="logout-btn" id="logoutBtn" style="display: none">
-          Logout
-        </button>
-      </div>
-    </header>
-
-    <nav class="category-nav">
-      <button class="cat-btn active" data-category="all">All</button>
-      <button class="cat-btn" data-category="baslangic">Appetizers</button>
-      <button class="cat-btn" data-category="ana-yemek">Main Courses</button>
-      <button class="cat-btn" data-category="pizza">Pizza</button>
-      <button class="cat-btn" data-category="tatli">Desserts</button>
-      <button class="cat-btn" data-category="icecek">Beverages</button>
-    </nav>
-
-    <div class="menu-container">
-      <!-- Appetizers -->
-      <section class="category-section" data-category="baslangic">
-        <h2 class="category-title">Appetizers</h2>
-        <div class="grid">
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Crispy Onion Rings</span>
-                <span class="item-price">85₺</span>
-              </div>
-              <p class="item-desc">Fried onion rings with special sauce</p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Mozzarella Sticks</span>
-                <span class="item-price">95₺</span>
-              </div>
-              <p class="item-desc">
-                Crispy breaded mozzarella with marinara sauce
-              </p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Buffalo Wings</span>
-                <span class="item-price">120₺</span>
-              </div>
-              <p class="item-desc">Spicy chicken wings with ranch sauce</p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
+    <div class="login-container">
+      <div class="login-box">
+        <div class="login-header">
+          <h1 id="brandHeader">IT-537 <span>FINE DINING</span></h1>
+          <p id="modeDescription">Please login to continue</p>
         </div>
-      </section>
 
-      <!-- Main Courses -->
-      <section class="category-section" data-category="ana-yemek">
-        <h2 class="category-title">Main Courses</h2>
-        <div class="grid">
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Classic Burger</span>
-                <span class="item-price">180₺</span>
-              </div>
-              <p class="item-desc">
-                200g beef, lettuce, tomato, onion, pickle, special sauce
-              </p>
-              <div class="cooking-level">
-                <label for="classic-burger-level">Cooking Level:</label>
-                <select id="classic-burger-level" class="level-select">
-                  <option value="rare">Rare</option>
-                  <option value="medium-rare">Medium Rare</option>
-                  <option value="medium" selected>Medium</option>
-                  <option value="medium-well">Medium Well</option>
-                  <option value="well-done">Well Done</option>
-                </select>
-              </div>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
+        <div
+          class="error-message"
+          id="errorMessage"
+          style="
+            background-color: #d32f2f;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+          "
+        ></div>
+        <div
+          class="success-message"
+          id="successMessage"
+          style="
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+          "
+        ></div>
 
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">BBQ Burger</span>
-                <span class="item-price">210₺</span>
-              </div>
-              <p class="item-desc">
-                Beef, BBQ sauce, cheddar cheese, onion rings
-              </p>
-              <div class="cooking-level">
-                <label for="bbq-burger-level">Cooking Level:</label>
-                <select id="bbq-burger-level" class="level-select">
-                  <option value="rare">Rare</option>
-                  <option value="medium-rare">Medium Rare</option>
-                  <option value="medium" selected>Medium</option>
-                  <option value="medium-well">Medium Well</option>
-                  <option value="well-done">Well Done</option>
-                </select>
-              </div>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Chicken Schnitzel</span>
-                <span class="item-price">195₺</span>
-              </div>
-              <p class="item-desc">
-                Crispy chicken schnitzel, french fries, salad
-              </p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Grilled Steak</span>
-                <span class="item-price">350₺</span>
-              </div>
-              <p class="item-desc">
-                250g beef tenderloin, garnish, special sauce
-              </p>
-              <div class="cooking-level">
-                <label for="steak-level">Cooking Level:</label>
-                <select id="steak-level" class="level-select">
-                  <option value="rare">Rare</option>
-                  <option value="medium-rare">Medium Rare</option>
-                  <option value="medium" selected>Medium</option>
-                  <option value="medium-well">Medium Well</option>
-                  <option value="well-done">Well Done</option>
-                </select>
-              </div>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
+        <div class="user-type" id="userTypeContainer">
+          <button type="button" class="active" id="customerBtn">
+            Customer
+          </button>
+          <button type="button" id="adminBtn">Admin</button>
         </div>
-      </section>
 
-      <!-- Pizza -->
-      <section class="category-section" data-category="pizza">
-        <h2 class="category-title">Pizza</h2>
-        <div class="grid">
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Margherita</span>
-                <span class="item-price">160₺</span>
-              </div>
-              <p class="item-desc">Mozzarella, tomato sauce, basil</p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              required
+              placeholder="Enter username"
+            />
           </div>
 
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Pepperoni</span>
-                <span class="item-price">185₺</span>
-              </div>
-              <p class="item-desc">
-                Pepperoni salami, mozzarella, tomato sauce
-              </p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              required
+              placeholder="Enter password"
+            />
           </div>
 
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Quattro Formaggi</span>
-                <span class="item-price">200₺</span>
-              </div>
-              <p class="item-desc">Mozzarella, gorgonzola, parmesan, ricotta</p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
+          <button type="submit" class="login-btn" id="submitBtn">Login</button>
+        </form>
 
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Meat Lovers</span>
-                <span class="item-price">220₺</span>
-              </div>
-              <p class="item-desc">
-                Sausage, salami, pepperoni, meatballs, mozzarella
-              </p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Desserts -->
-      <section class="category-section" data-category="tatli">
-        <h2 class="category-title">Desserts</h2>
-        <div class="grid">
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Chocolate Soufflé</span>
-                <span class="item-price">90₺</span>
-              </div>
-              <p class="item-desc">
-                Warm chocolate soufflé with vanilla ice cream
-              </p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Cheesecake</span>
-                <span class="item-price">85₺</span>
-              </div>
-              <p class="item-desc">
-                Classic New York cheesecake with fruit sauce
-              </p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Tiramisu</span>
-                <span class="item-price">95₺</span>
-              </div>
-              <p class="item-desc">Italian tiramisu, espresso, mascarpone</p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Beverages -->
-      <section class="category-section" data-category="icecek">
-        <h2 class="category-title">Beverages</h2>
-        <div class="grid">
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Coca Cola</span>
-                <span class="item-price">35₺</span>
-              </div>
-              <p class="item-desc">330ml can</p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Freshly Squeezed Lemonade</span>
-                <span class="item-price">50₺</span>
-              </div>
-              <p class="item-desc">Homemade lemonade with mint</p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Filter Coffee</span>
-                <span class="item-price">45₺</span>
-              </div>
-              <p class="item-desc">Specially blended coffee</p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <div class="item-header">
-                <span class="item-name">Milkshake</span>
-                <span class="item-price">70₺</span>
-              </div>
-              <p class="item-desc">Chocolate, vanilla or strawberry</p>
-              <button class="add-btn">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Cart Sidebar -->
-    <div class="cart-sidebar" id="cartSidebar">
-      <div class="cart-header">
-        <h2>Your Cart</h2>
-        <button class="close-cart" id="closeCart">✕</button>
-      </div>
-      <div class="cart-items" id="cartItems">
-        <p class="empty-cart">Your cart is empty</p>
-      </div>
-      <div class="cart-footer">
-        <div class="cart-total">
-          <span>Total:</span>
-          <span id="cartTotal">0₺</span>
-        </div>
-        <button class="checkout-btn" id="checkoutBtn">Checkout</button>
-      </div>
-    </div>
-    <div class="cart-overlay" id="cartOverlay"></div>
-
-    <!-- Table Selection Modal -->
-    <div class="table-modal" id="tableModal">
-      <div class="table-modal-content">
-        <div class="table-modal-header">
-          <h2>Select Your Table</h2>
-          <button class="close-modal" id="closeTableModal">✕</button>
-        </div>
-        <div class="table-grid" id="tableGrid">
-          <!-- Tables will be generated here -->
+        <div class="login-footer">
+          <p style="margin-top: 15px; color: var(--text-secondary)">
+            <span id="toggleMsg">Don't have an account?</span>
+            <a
+              href="#"
+              id="toggleMode"
+              style="
+                color: var(--primary-color);
+                text-decoration: none;
+                font-weight: bold;
+              "
+              >Create Account</a
+            >
+          </p>
+          <p style="color: var(--text-secondary); margin-top: 20px">
+            Demo: customer/customer123 or admin/admin123
+          </p>
         </div>
       </div>
     </div>
-    <div class="table-overlay" id="tableOverlay"></div>
 
     <script src="dataManager.js"></script>
     <script>
-      // Check if user is logged in
-      const user = JSON.parse(localStorage.getItem("user"));
-      if (!user || user.type !== "customer") {
-        window.location.href = "login.html";
-      }
+      let userType = "customer";
+      let isRegisterMode = false;
 
-      // Display user info
-      document.getElementById("userWelcome").textContent =
-        `Welcome, ${user.username}`;
-      document.getElementById("logoutBtn").style.display = "block";
+      const customerBtn = document.getElementById("customerBtn");
+      const adminBtn = document.getElementById("adminBtn");
+      const errorMessage = document.getElementById("errorMessage");
+      const successMessage = document.getElementById("successMessage");
+      const loginForm = document.getElementById("loginForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const toggleMode = document.getElementById("toggleMode");
+      const toggleMsg = document.getElementById("toggleMsg");
+      const modeDescription = document.getElementById("modeDescription");
+      const userTypeContainer = document.getElementById("userTypeContainer");
 
-      // Logout functionality
-      document.getElementById("logoutBtn").addEventListener("click", () => {
-        localStorage.removeItem("user");
-        window.location.href = "login.html";
+      customerBtn.addEventListener("click", () => {
+        userType = "customer";
+        customerBtn.classList.add("active");
+        adminBtn.classList.remove("active");
       });
 
-      // Cart system
-      let cart = [];
-      const cartBtn = document.getElementById("cartBtn");
-      const cartSidebar = document.getElementById("cartSidebar");
-      const cartOverlay = document.getElementById("cartOverlay");
-      const closeCart = document.getElementById("closeCart");
-      const cartItems = document.getElementById("cartItems");
-      const cartCount = document.getElementById("cartCount");
-      const cartTotal = document.getElementById("cartTotal");
-
-      // Open/Close cart
-      cartBtn.addEventListener("click", () => {
-        cartSidebar.classList.add("active");
-        cartOverlay.classList.add("active");
+      adminBtn.addEventListener("click", () => {
+        userType = "admin";
+        adminBtn.classList.add("active");
+        customerBtn.classList.remove("active");
       });
 
-      closeCart.addEventListener("click", () => {
-        cartSidebar.classList.remove("active");
-        cartOverlay.classList.remove("active");
-      });
+      function handleToggle(e) {
+        if (e) e.preventDefault();
+        isRegisterMode = !isRegisterMode;
 
-      cartOverlay.addEventListener("click", () => {
-        cartSidebar.classList.remove("active");
-        cartOverlay.classList.remove("active");
-      });
-
-      // Update cart display
-      function updateCart() {
-        cartCount.textContent = cart.length;
-
-        if (cart.length === 0) {
-          cartItems.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
-          cartTotal.textContent = "0₺";
-          return;
+        if (isRegisterMode) {
+          modeDescription.textContent = "Create a new customer account";
+          submitBtn.textContent = "Register";
+          toggleMsg.textContent = "Already have an account?";
+          toggleMode.textContent = "Login";
+          userTypeContainer.style.display = "none";
+          userType = "customer";
+        } else {
+          modeDescription.textContent = "Please login to continue";
+          submitBtn.textContent = "Login";
+          toggleMsg.textContent = "Don't have an account?";
+          toggleMode.textContent = "Create Account";
+          userTypeContainer.style.display = "flex";
         }
-
-        let total = 0;
-        let html = "";
-
-        cart.forEach((item, index) => {
-          total += item.price;
-          const cookingLevel = item.cookingLevel
-            ? ` (${item.cookingLevel})`
-            : "";
-
-          html += `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <div class="cart-item-name">${item.name}${cookingLevel}</div>
-                            <div class="cart-item-price">${item.price}₺</div>
-                        </div>
-                        <button class="remove-item" onclick="removeFromCart(${index})">Remove</button>
-                    </div>
-                `;
-        });
-
-        cartItems.innerHTML = html;
-        cartTotal.textContent = total + "₺";
       }
 
-      // Add to cart
-      function addToCart(name, price, cookingLevel = null) {
-        cart.push({ name, price, cookingLevel });
-        updateCart();
+      toggleMode.addEventListener("click", handleToggle);
 
-        // Show notification
-        const message = cookingLevel
-          ? `${name} (${cookingLevel}) added to cart!`
-          : `${name} added to cart!`;
-
-        // Could replace alert with a toast notification
-        showToast(message);
-      }
-
-      // Remove from cart
-      function removeFromCart(index) {
-        cart.splice(index, 1);
-        updateCart();
-      }
-
-      // Simple toast notification
-      function showToast(message) {
-        const toast = document.createElement("div");
-        toast.className = "toast";
-        toast.textContent = message;
-        document.body.appendChild(toast);
-
+      function showMessage(msg, isError = true) {
+        const target = isError ? errorMessage : successMessage;
+        target.textContent = msg;
+        target.style.display = "block";
         setTimeout(() => {
-          toast.classList.add("show");
-        }, 100);
-
-        setTimeout(() => {
-          toast.classList.remove("show");
-          setTimeout(() => toast.remove(), 300);
-        }, 2000);
+          target.style.display = "none";
+        }, 3000);
       }
 
-      // Category filtering
-      const categoryButtons = document.querySelectorAll(".cat-btn");
-      const sections = document.querySelectorAll(".category-section");
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      categoryButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          // Update active class
-          categoryButtons.forEach((btn) => btn.classList.remove("active"));
-          button.classList.add("active");
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
 
-          // Selected category
-          const selectedCategory = button.getAttribute("data-category");
+        try {
+          if (isRegisterMode) {
+            await DataManager.registerUser({
+              username,
+              password,
+              type: "customer",
+            });
+            showMessage("Account created! You can now login.", false);
+            loginForm.reset();
+            isRegisterMode = false;
+            toggleMode.click();
+          } else {
+            const userData = await DataManager.loginUser({
+              username,
+              password,
+            });
 
-          // Show/hide sections
-          sections.forEach((section) => {
-            if (selectedCategory === "all") {
-              section.classList.remove("hidden");
-            } else {
-              if (section.getAttribute("data-category") === selectedCategory) {
-                section.classList.remove("hidden");
-              } else {
-                section.classList.add("hidden");
-              }
-            }
-          });
-        });
-      });
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                username: userData.username,
+                type: userData.type,
+                loginTime: new Date().toISOString(),
+              }),
+            );
 
-      // Add to cart buttons
-      const addButtons = document.querySelectorAll(".add-btn");
-      addButtons.forEach((button) => {
-        button.addEventListener("click", function () {
-          const cardBody = this.closest(".card-body");
-          const itemName = cardBody.querySelector(".item-name").textContent;
-          const itemPrice = parseFloat(
-            cardBody.querySelector(".item-price").textContent.replace("₺", ""),
-          );
-          const levelSelect = cardBody.querySelector(".level-select");
+            DataManager.logLogin(userData.username, userData.type);
 
-          let cookingLevel = null;
-          if (levelSelect) {
-            cookingLevel = levelSelect.options[levelSelect.selectedIndex].text;
+            window.location.href =
+              userData.type === "admin" ? "admin.html" : "/main";
           }
-
-          addToCart(itemName, itemPrice, cookingLevel);
-
-          // Button animation
-          this.textContent = "✓ Added";
-          this.style.backgroundColor = "var(--primary-color)";
-
-          setTimeout(() => {
-            this.textContent = "Add to Cart";
-            this.style.backgroundColor = "";
-          }, 1500);
-        });
-      });
-
-      // Table selection system
-      const tableModal = document.getElementById("tableModal");
-      const tableOverlay = document.getElementById("tableOverlay");
-      const closeTableModal = document.getElementById("closeTableModal");
-      const tableGrid = document.getElementById("tableGrid");
-      let selectedTable = null;
-
-      // Initialize tables (10 tables)
-      const tables = Array.from({ length: 10 }, (_, i) => ({
-        number: i + 1,
-        occupied: false,
-      }));
-
-      // Load table occupancy from orders
-      function updateTableOccupancy() {
-        const orders = JSON.parse(localStorage.getItem("orders") || "[]");
-        const occupiedTables = orders
-          .filter((order) => order.status !== "completed")
-          .map((order) => order.table);
-
-        tables.forEach((table) => {
-          table.occupied = occupiedTables.includes(table.number);
-        });
-      }
-
-      // Render tables
-      function renderTables() {
-        updateTableOccupancy();
-
-        tableGrid.innerHTML = tables
-          .map(
-            (table) => `
-                <div class="table-card ${table.occupied ? "occupied" : ""}" 
-                     data-table="${table.number}"
-                     onclick="selectTable(${table.number}, ${table.occupied})">
-                    <div class="table-icon">🪑</div>
-                    <div class="table-number">Table ${table.number}</div>
-                    <div class="table-status">${table.occupied ? "Occupied" : "Available"}</div>
-                </div>
-            `,
-          )
-          .join("");
-      }
-
-      // Select table
-      window.selectTable = function (tableNumber, isOccupied) {
-        if (isOccupied) {
-          showToast("This table is already occupied!");
-          return;
+        } catch (error) {
+          showMessage(error.message);
         }
-
-        selectedTable = tableNumber;
-
-        // Highlight selected table
-        document.querySelectorAll(".table-card").forEach((card) => {
-          card.classList.remove("selected");
-        });
-        document
-          .querySelector(`[data-table="${tableNumber}"]`)
-          .classList.add("selected");
-
-        // Complete order after a short delay
-        setTimeout(() => {
-          completeOrder(tableNumber);
-        }, 500);
-      };
-
-      // Complete order with table
-      async function completeOrder(tableNumber) {
-        const order = {
-          id: Date.now().toString(),
-          customer: user.username,
-          table: tableNumber,
-          items: cart,
-          total: cart.reduce((sum, item) => sum + item.price, 0),
-          date: new Date().toISOString(),
-          status: "pending",
-        };
-
-        // Save to server (CSV storage)
-        await DataManager.saveOrderToServer(order);
-
-        // Clear cart
-        cart = [];
-        updateCart();
-
-        // Close modals
-        tableModal.classList.remove("active");
-        tableOverlay.classList.remove("active");
-        cartSidebar.classList.remove("active");
-        cartOverlay.classList.remove("active");
-
-        // Show success message
-        showToast(
-          `Order #${order.id} placed for Table ${tableNumber}! Total: ${order.total}₺`,
-        );
-      }
-
-      // Close table modal
-      closeTableModal.addEventListener("click", () => {
-        tableModal.classList.remove("active");
-        tableOverlay.classList.remove("active");
-      });
-
-      tableOverlay.addEventListener("click", () => {
-        tableModal.classList.remove("active");
-        tableOverlay.classList.remove("active");
-      });
-
-      // Checkout functionality - Open table selection
-      document.getElementById("checkoutBtn").addEventListener("click", () => {
-        if (cart.length === 0) {
-          showToast("Your cart is empty!");
-          return;
-        }
-
-        // Close cart sidebar
-        cartSidebar.classList.remove("active");
-        cartOverlay.classList.remove("active");
-
-        // Open table selection
-        renderTables();
-        tableModal.classList.add("active");
-        tableOverlay.classList.add("active");
       });
     </script>
   </body>
