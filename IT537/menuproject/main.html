@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main Page - IT-537 FINE DINING</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>IT-537 <span>Fine DINING</span></h1>
+      <div style="display: flex; gap: 15px; align-items: center">
+        <span
+          id="userWelcome"
+          style="color: var(--text-secondary); font-size: 0.9rem"
+        ></span>
+        <button class="cart-btn" id="cartBtn">
+          🛒 Cart (<span id="cartCount">0</span>)
+        </button>
+        <button class="logout-btn" id="logoutBtn" style="display: none">
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <nav class="category-nav">
+      <button class="cat-btn active" data-category="all">All</button>
+      <button class="cat-btn" data-category="baslangic">Appetizers</button>
+      <button class="cat-btn" data-category="ana-yemek">Main Courses</button>
+      <button class="cat-btn" data-category="pizza">Pizza</button>
+      <button class="cat-btn" data-category="tatli">Desserts</button>
+      <button class="cat-btn" data-category="icecek">Beverages</button>
+    </nav>
+
+    <div class="menu-container">
+      <section class="category-section" data-category="baslangic">
+        <h2 class="category-title">Appetizers</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Crispy Onion Rings</span>
+                <span class="item-price">85₺</span>
+              </div>
+              <p class="item-desc">Fried onion rings with special sauce</p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Mozzarella Sticks</span>
+                <span class="item-price">95₺</span>
+              </div>
+              <p class="item-desc">
+                Crispy breaded mozzarella with marinara sauce
+              </p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Buffalo Wings</span>
+                <span class="item-price">120₺</span>
+              </div>
+              <p class="item-desc">Spicy chicken wings with ranch sauce</p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-section" data-category="ana-yemek">
+        <h2 class="category-title">Main Courses</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Classic Burger</span>
+                <span class="item-price">180₺</span>
+              </div>
+              <p class="item-desc">
+                200g beef, lettuce, tomato, onion, pickle, special sauce
+              </p>
+              <div class="cooking-level">
+                <label for="classic-burger-level">Cooking Level:</label>
+                <select id="classic-burger-level" class="level-select">
+                  <option value="rare">Rare</option>
+                  <option value="medium-rare">Medium Rare</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="medium-well">Medium Well</option>
+                  <option value="well-done">Well Done</option>
+                </select>
+              </div>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">BBQ Burger</span>
+                <span class="item-price">210₺</span>
+              </div>
+              <p class="item-desc">
+                Beef, BBQ sauce, cheddar cheese, onion rings
+              </p>
+              <div class="cooking-level">
+                <label for="bbq-burger-level">Cooking Level:</label>
+                <select id="bbq-burger-level" class="level-select">
+                  <option value="rare">Rare</option>
+                  <option value="medium-rare">Medium Rare</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="medium-well">Medium Well</option>
+                  <option value="well-done">Well Done</option>
+                </select>
+              </div>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Chicken Schnitzel</span>
+                <span class="item-price">195₺</span>
+              </div>
+              <p class="item-desc">
+                Crispy chicken schnitzel, french fries, salad
+              </p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Grilled Steak</span>
+                <span class="item-price">350₺</span>
+              </div>
+              <p class="item-desc">
+                250g beef tenderloin, garnish, special sauce
+              </p>
+              <div class="cooking-level">
+                <label for="steak-level">Cooking Level:</label>
+                <select id="steak-level" class="level-select">
+                  <option value="rare">Rare</option>
+                  <option value="medium-rare">Medium Rare</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="medium-well">Medium Well</option>
+                  <option value="well-done">Well Done</option>
+                </select>
+              </div>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-section" data-category="pizza">
+        <h2 class="category-title">Pizza</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Margherita</span>
+                <span class="item-price">160₺</span>
+              </div>
+              <p class="item-desc">Mozzarella, tomato sauce, basil</p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Pepperoni</span>
+                <span class="item-price">185₺</span>
+              </div>
+              <p class="item-desc">
+                Pepperoni salami, mozzarella, tomato sauce
+              </p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Quattro Formaggi</span>
+                <span class="item-price">200₺</span>
+              </div>
+              <p class="item-desc">Mozzarella, gorgonzola, parmesan, ricotta</p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Meat Lovers</span>
+                <span class="item-price">220₺</span>
+              </div>
+              <p class="item-desc">
+                Sausage, salami, pepperoni, meatballs, mozzarella
+              </p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-section" data-category="tatli">
+        <h2 class="category-title">Desserts</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Chocolate Soufflé</span>
+                <span class="item-price">90₺</span>
+              </div>
+              <p class="item-desc">
+                Warm chocolate soufflé with vanilla ice cream
+              </p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Cheesecake</span>
+                <span class="item-price">85₺</span>
+              </div>
+              <p class="item-desc">
+                Classic New York cheesecake with fruit sauce
+              </p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Tiramisu</span>
+                <span class="item-price">95₺</span>
+              </div>
+              <p class="item-desc">Italian tiramisu, espresso, mascarpone</p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-section" data-category="icecek">
+        <h2 class="category-title">Beverages</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Coca Cola</span>
+                <span class="item-price">35₺</span>
+              </div>
+              <p class="item-desc">330ml can</p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Freshly Squeezed Lemonade</span>
+                <span class="item-price">50₺</span>
+              </div>
+              <p class="item-desc">Homemade lemonade with mint</p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Filter Coffee</span>
+                <span class="item-price">45₺</span>
+              </div>
+              <p class="item-desc">Specially blended coffee</p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="item-header">
+                <span class="item-name">Milkshake</span>
+                <span class="item-price">70₺</span>
+              </div>
+              <p class="item-desc">Chocolate, vanilla or strawberry</p>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="cart-sidebar" id="cartSidebar">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button class="close-cart" id="closeCart">✕</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <p class="empty-cart">Your cart is empty</p>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="cartTotal">0₺</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">Checkout</button>
+      </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <div class="table-modal" id="tableModal">
+      <div class="table-modal-content">
+        <div class="table-modal-header">
+          <h2>Select Your Table</h2>
+          <button class="close-modal" id="closeTableModal">✕</button>
+        </div>
+        <div class="table-grid" id="tableGrid"></div>
+      </div>
+    </div>
+    <div class="table-overlay" id="tableOverlay"></div>
+
+    <script src="dataManager.js"></script>
+    <script>
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user || user.type !== "customer") {
+        window.location.href = "/";
+      }
+
+      document.getElementById("userWelcome").textContent =
+        `Welcome, ${user.username}`;
+      document.getElementById("logoutBtn").style.display = "block";
+
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("user");
+        window.location.href = "/";
+      });
+
+      let cart = [];
+      const cartBtn = document.getElementById("cartBtn");
+      const cartSidebar = document.getElementById("cartSidebar");
+      const cartOverlay = document.getElementById("cartOverlay");
+      const closeCart = document.getElementById("closeCart");
+      const cartItems = document.getElementById("cartItems");
+      const cartCount = document.getElementById("cartCount");
+      const cartTotal = document.getElementById("cartTotal");
+
+      cartBtn.addEventListener("click", () => {
+        cartSidebar.classList.add("active");
+        cartOverlay.classList.add("active");
+      });
+
+      closeCart.addEventListener("click", () => {
+        cartSidebar.classList.remove("active");
+        cartOverlay.classList.remove("active");
+      });
+
+      cartOverlay.addEventListener("click", () => {
+        cartSidebar.classList.remove("active");
+        cartOverlay.classList.remove("active");
+      });
+
+      function updateCart() {
+        cartCount.textContent = cart.length;
+
+        if (cart.length === 0) {
+          cartItems.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+          cartTotal.textContent = "0₺";
+          return;
+        }
+
+        let total = 0;
+        let html = "";
+
+        cart.forEach((item, index) => {
+          total += item.price;
+          const cookingLevel = item.cookingLevel
+            ? ` (${item.cookingLevel})`
+            : "";
+
+          html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}${cookingLevel}</div>
+                            <div class="cart-item-price">${item.price}₺</div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+        });
+
+        cartItems.innerHTML = html;
+        cartTotal.textContent = total + "₺";
+      }
+
+      function addToCart(name, price, cookingLevel = null) {
+        cart.push({ name, price, cookingLevel });
+        updateCart();
+
+        const message = cookingLevel
+          ? `${name} (${cookingLevel}) added to cart!`
+          : `${name} added to cart!`;
+
+        showToast(message);
+      }
+
+      function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCart();
+      }
+
+      function showToast(message) {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+          toast.classList.add("show");
+        }, 100);
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+          setTimeout(() => toast.remove(), 300);
+        }, 2000);
+      }
+
+      const categoryButtons = document.querySelectorAll(".cat-btn");
+      const sections = document.querySelectorAll(".category-section");
+
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          categoryButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          const selectedCategory = button.getAttribute("data-category");
+
+          sections.forEach((section) => {
+            if (selectedCategory === "all") {
+              section.classList.remove("hidden");
+            } else {
+              if (section.getAttribute("data-category") === selectedCategory) {
+                section.classList.remove("hidden");
+              } else {
+                section.classList.add("hidden");
+              }
+            }
+          });
+        });
+      });
+
+      const addButtons = document.querySelectorAll(".add-btn");
+      addButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const cardBody = this.closest(".card-body");
+          const itemName = cardBody.querySelector(".item-name").textContent;
+          const itemPrice = parseFloat(
+            cardBody.querySelector(".item-price").textContent.replace("₺", ""),
+          );
+          const levelSelect = cardBody.querySelector(".level-select");
+
+          let cookingLevel = null;
+          if (levelSelect) {
+            cookingLevel = levelSelect.options[levelSelect.selectedIndex].text;
+          }
+
+          addToCart(itemName, itemPrice, cookingLevel);
+
+          this.textContent = "✓ Added";
+          this.style.backgroundColor = "var(--primary-color)";
+
+          setTimeout(() => {
+            this.textContent = "Add to Cart";
+            this.style.backgroundColor = "";
+          }, 1500);
+        });
+      });
+
+      const tableModal = document.getElementById("tableModal");
+      const tableOverlay = document.getElementById("tableOverlay");
+      const closeTableModal = document.getElementById("closeTableModal");
+      const tableGrid = document.getElementById("tableGrid");
+      let selectedTable = null;
+
+      const tables = Array.from({ length: 10 }, (_, i) => ({
+        number: i + 1,
+        occupied: false,
+      }));
+
+      async function updateTableOccupancy() {
+        try {
+          const orders = await DataManager.fetchOrdersFromServer();
+          const occupiedTables = orders
+            .filter(
+              (order) =>
+                order.status !== "completed" && order.status !== "cancelled",
+            )
+            .map((order) => parseInt(order.table));
+
+          tables.forEach((table) => {
+            table.occupied = occupiedTables.includes(table.number);
+          });
+        } catch (error) {
+          console.error("Error updating table occupancy:", error);
+          showToast("Could not fetch live table status.");
+        }
+      }
+
+      async function renderTables() {
+        tableGrid.innerHTML =
+          '<div style="grid-column: 1/-1; text-align: center; padding: 20px;">Checking table availability...</div>';
+
+        await updateTableOccupancy();
+
+        tableGrid.innerHTML = tables
+          .map(
+            (table) => `
+                <div class="table-card ${table.occupied ? "occupied" : ""}" 
+                     data-table="${table.number}"
+                     onclick="selectTable(${table.number}, ${table.occupied})">
+                    <div class="table-icon">🪑</div>
+                    <div class="table-number">Table ${table.number}</div>
+                    <div class="table-status">${table.occupied ? "Occupied" : "Available"}</div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      window.selectTable = function (tableNumber, isOccupied) {
+        if (isOccupied) {
+          showToast("This table is already occupied!");
+          return;
+        }
+
+        selectedTable = tableNumber;
+
+        document.querySelectorAll(".table-card").forEach((card) => {
+          card.classList.remove("selected");
+        });
+        document
+          .querySelector(`[data-table="${tableNumber}"]`)
+          .classList.add("selected");
+
+        setTimeout(() => {
+          completeOrder(tableNumber);
+        }, 500);
+      };
+
+      async function completeOrder(tableNumber) {
+        const order = {
+          id: Date.now().toString(),
+          customer: user.username,
+          table: tableNumber,
+          items: cart,
+          total: cart.reduce((sum, item) => sum + item.price, 0),
+          date: new Date().toISOString(),
+          status: "pending",
+        };
+
+        await DataManager.saveOrderToServer(order);
+
+        cart = [];
+        updateCart();
+
+        tableModal.classList.remove("active");
+        tableOverlay.classList.remove("active");
+        cartSidebar.classList.remove("active");
+        cartOverlay.classList.remove("active");
+
+        showToast(
+          `Order #${order.id} placed for Table ${tableNumber}! Total: ${order.total}₺`,
+        );
+      }
+
+      closeTableModal.addEventListener("click", () => {
+        tableModal.classList.remove("active");
+        tableOverlay.classList.remove("active");
+      });
+
+      tableOverlay.addEventListener("click", () => {
+        tableModal.classList.remove("active");
+        tableOverlay.classList.remove("active");
+      });
+
+      document.getElementById("checkoutBtn").addEventListener("click", () => {
+        if (cart.length === 0) {
+          showToast("Your cart is empty!");
+          return;
+        }
+
+        cartSidebar.classList.remove("active");
+        cartOverlay.classList.remove("active");
+
+        renderTables();
+        tableModal.classList.add("active");
+        tableOverlay.classList.add("active");
+      });
+    </script>
+  </body>
+</html>
