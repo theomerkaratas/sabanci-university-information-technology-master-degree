@@ -1,21 +1,60 @@
-# Practice 8: Important CSS Properties
+# Flexbox Pricing Table - Practice 21
 
-This practice explores essential CSS properties for controlling text appearance and layout.
+This project demonstrates how to transform a simple pricing table into a modern, responsive, and perfectly centered layout using CSS Flexbox.
 
-## Topics Covered
+## Improvements Made
 
-- **Color Control:** Using named colors (e.g., `coral`).
-- **Font Sizing:** Understanding units like `rem` (relative to the root/html size).
-- **Font Weight:** Setting numerical weights (e.g., `400` for regular, `900` for extra bold).
-- **Text Alignment:** Aligning content horizontally (`left`, `right`, `center`).
-- **Root Styling:** Modifying the `html` element to affect global sizing.
+1.  **Perfect Centering:** The main container is centered both horizontally and vertically within the `body`.
+2.  **Flexible Grid:** Pricing plans are arranged in a row and automatically wrap to a new line on smaller screens using `flex-wrap`.
+3.  **Internal Alignment:** Content inside each card (title, price, features, button) is aligned vertically using a column-based Flexbox layout.
+4.  **Modern Styling:** Implemented a dark theme background, card shadows, rounded corners, and interactive hover effects for buttons.
 
-## Common Properties
+## Key Flexbox Concepts Explained
 
-| Property      | Example Value | Description                         |
-| :------------ | :------------ | :---------------------------------- |
-| `color`       | `coral`       | Sets the text color.                |
-| `font-size`   | `2rem`        | Multiplies the root font size by 2. |
-| `font-weight` | `900`         | Sets the thickness of the text.     |
-| `text-align`  | `right`       | Aligns text to the right side.      |
-| `font-family` | `"Bungee"`    | Sets the font typeface.             |
+Here are the primary Flexbox properties used in this project:
+
+### 1. `display: flex;`
+
+This turns an element into a "flex container," making all its direct children "flex items."
+
+- **Used on:** `body` and `.pricing-container`.
+
+### 2. `justify-content: center;`
+
+Aligns items along the **main axis** (horizontal by default).
+
+- **center:** Packs items toward the center of the line.
+
+### 3. `align-items: center;`
+
+Aligns items along the **cross axis** (vertical by default).
+
+- Used on the `body` to pull the entire container into the vertical center of the screen.
+
+### 4. `flex-direction: column;`
+
+Changes the direction of the main axis.
+
+- **row (default):** Items are placed side-by-side.
+- **column:** Items are stacked on top of each other.
+- **Used on:** Each `.pricing-plan` card to stack content vertically.
+
+### 5. `gap: 2rem;`
+
+Sets the spacing between flex items. It provides a cleaner alternative to using margins on individual elements.
+
+### 6. `min-height: 100vh;`
+
+For vertical centering to work, the `body` must have a height. `100vh` ensures the body takes up at least 100% of the viewport height.
+
+---
+
+### How to Run
+
+You can view this project by opening `index.html` in any browser or using Docker:
+
+```bash
+docker-compose up
+```
+
+Check `index.html` and `style.css` to see the implementation details.

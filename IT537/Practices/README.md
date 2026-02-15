@@ -6,48 +6,25 @@ This directory contains various practice projects for the IT537 course. Each pro
 
 ## Content Overview
 
-| Practice                         | Description                             | Port |
-| :------------------------------- | :-------------------------------------- | :--- |
-| [**Practice 1**](./practice-1)   | Personal CV / Resume of Omer Karatas    | 8001 |
-| [**Practice 2**](./practice-2)   | A creative "Space Sandwich Recipe" page | 8002 |
-| [**Practice 3**](./practice-3)   | The Twelve-Factor App                   | 8003 |
-| [**Practice 4**](./practice-4)   | Portfolio                               | 8004 |
-| [**Practice 5**](./practice-5)   | Three Methods of Adding CSS             | 8005 |
-| [**Practice 6**](./practice-6)   | CSS Selectors                           | 8006 |
-| [**Practice 7**](./practice-7)   | Spanish Vocabulary                      | 8007 |
-| [**Practice 8**](./practice-8)   | CSS Properties                          | 8008 |
-| [**Practice 9**](./practice-9)   | CSS Box Model                           | 8009 |
-| [**Practice 10**](./practice-10) | Motivational Poster                     | 8010 |
-| [**Practice 11**](./practice-11) | CSS Cascade                             | 8011 |
-| [**Practice 12**](./practice-12) | Combining CSS Selectors                 | 8012 |
-| [**Practice 13**](./practice-13) | CSS Positioning Exercise                | 8013 |
-| [**Practice 14**](./practice-14) | CSS Flag Project                        | 8014 |
-| [**Practice 15**](./practice-15) | CSS Float                               | 8015 |
-| [**Practice 16**](./practice-16) | Responsiveness                          | 8016 |
-| [**Practice 17**](./practice-17) | Media Query                             | 8017 |
-| [**Practice 18**](./practice-18) | Agency                                  | 8018 |
-| [**Practice 19**](./practice-19) | CSS Layout Techniques (Float, Flex...)  | 8019 |
-| [**Practice 20**](./practice-20) | Flexbox Layout Examples                 | 8020 |
-| [**Practice 21**](./practice-21) | Flexbox Pricing Table                   | 8021 |
-| [**Practice 22**](./practice-22) | Chessboard with CSS Grid                | 8022 |
-| [**Practice 23**](./practice-23) | Grid Sizing Fundamentals                | 8023 |
-| [**Practice 24**](./practice-24) | CSS Layout Demos and Exercises          | 8024 |
-| [**Practice 25**](./practice-25) | Mondrian Project                        | 8025 |
-| [**Practice 26**](./practice-26) | CSS Practice Exercises (1-10)           | 8026 |
-| [**Practice 27**](./practice-27) | Modern Resume with Tailwind CSS         | 8027 |
-| [**Practice 28**](./practice-28) | Project Template                        | 8028 |
-| [**Practice 29**](./practice-29) | Project Template                        | 8029 |
-| [**Practice 30**](./practice-30) | Project Template                        | 8030 |
-| [**Practice 31**](./practice-31) | Project Template                        | 8031 |
-| [**Practice 32**](./practice-32) | Project Template                        | 8032 |
-| [**Practice 33**](./practice-33) | Project Template                        | 8033 |
-| [**Practice 34**](./practice-34) | Project Template                        | 8034 |
-| [**Practice 35**](./practice-35) | Project Template                        | 8035 |
-| [**Practice 36**](./practice-36) | Project Template                        | 8036 |
-| [**Practice 37**](./practice-37) | Project Template                        | 8037 |
-| [**Practice 38**](./practice-38) | Project Template                        | 8038 |
-| [**Practice 39**](./practice-39) | Project Template                        | 8039 |
-| [**Practice 40**](./practice-40) | Project Template                        | 8040 |
+| Practice                         | Description                            | Port |
+| :------------------------------- | :------------------------------------- | :--- |
+| [**Practice 1**](./practice-1)   | Personal CV / Resume of Omer Karatas   | 8001 |
+| [**Practice 2**](./practice-2)   | The Twelve-Factor App                  | 8002 |
+| [**Practice 3**](./practice-3)   | CSS Flag Project                       | 8003 |
+| [**Practice 4**](./practice-4)   | Responsiveness                         | 8004 |
+| [**Practice 5**](./practice-5)   | Agency                                 | 8005 |
+| [**Practice 6**](./practice-6)   | CSS Layout Techniques (Float, Flex...) | 8006 |
+| [**Practice 7**](./practice-7)   | Flexbox Layout Examples                | 8007 |
+| [**Practice 8**](./practice-8)   | Flexbox Pricing Table                  | 8008 |
+| [**Practice 9**](./practice-9)   | Grid Sizing Fundamentals               | 8009 |
+| [**Practice 10**](./practice-10) | Mondrian Project                       | 8010 |
+| [**Practice 11**](./practice-11) | Modern Resume with Tailwind CSS        | 8011 |
+| [**Practice 12**](./practice-12) | Project Template                       | 8012 |
+| [**Practice 13**](./practice-13) | Project Template                       | 8013 |
+| [**Practice 14**](./practice-14) | Project Template                       | 8014 |
+| [**Practice 15**](./practice-15) | Project Template                       | 8015 |
+| [**Practice 16**](./practice-16) | Project Template                       | 8016 |
+| [**Practice 17**](./practice-17) | Project Template                       | 8017 |
 
 ---
 

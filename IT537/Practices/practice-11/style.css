@@ -1,24 +1,5 @@
-/* Don't change the existing CSS. */
+@import "tailwindcss";
 
-#outer-box {
-  background-color: purple;
-}
-
-.box {
-  background-color: blue;
-  padding: 10px;
-}
-
-.inner-box {
-  background-color: red;
-}
-
-p {
-  color: yellow;
-  margin: 0;
-  padding: 0;
-}
-
-.white-text {
-  color: white
-}
+/*
+tailwind css directives
+*/

@@ -1,73 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
-    <title>CSS Properties</title>
-    <style>
-      html {
-        font-size: 30px;
-      }
-
-      body {
-        background-color: black;
-        color: white;
-        font-size: 18px;
-      }
-
-      h1 {
-        font-family: "Bungee", sans-serif;
-        font-weight: 400;
-      }
-
-      p {
-        font-family: "Rubik Storm", system-ui;
-        font-weight: 400;
-        font-style: normal;
-      }
-
-      .coral {
-        color: coral;
-      }
-
-      #size {
-        font-size: 2rem;
-      }
-
-      #weight {
-        font-weight: 900;
-      }
-
-      p[font-type="fjalla-one"] #right {
-        font-family: "Fjalla One", sans-serif;
-      }
-
-      #align {
-        text-align: right;
-      }
-    </style>
+    <title>Flexbox Pricing Table</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Bungee&family=Fjalla+One&family=Rubik+Storm&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sono:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./style.css" />
   </head>
 
   <body>
-    <h1>Important CSS Properties</h1>
-    <p class="coral">Color</p>
-    <p id="size">Font Size</p>
-    <p id="weight">Font Weight</p>
-    <p font-type="fjalla-one">Font Family</p>
-    <p id="align">Text Align</p>
-
-    <!-- TODOs
-  1. Change the color of <p>Color</p> to "coral" color.
-  2. Change the font size of <p>Font Size</p> to 2X the size of the root font size.
-  3. Change the font weight of <p>Font Weight</p> to 900.
-  4. Change the font family of <p>Font Family</p> to the Google font Caveat with regular (400) font weight.
-  Link: https://fonts.google.com/specimen/Caveat
-  5. Change the <p>Text Align</p> to right align.
-  6. Change the the root (html element) font size to 30px -->
+    <div class="pricing-container">
+      <div class="pricing-plan">
+        <div class="plan-title">Basic</div>
+        <div class="plan-price">$9.99/month</div>
+        <ul class="plan-features">
+          <li>✅ 10GB Storage</li>
+          <li>✅ 1 User</li>
+          <li>🚫 Support</li>
+        </ul>
+        <button class="plan-button">Sign Up</button>
+      </div>
+      <div class="pricing-plan">
+        <div class="plan-title">Standard</div>
+        <div class="plan-price">$19.99/month</div>
+        <ul class="plan-features">
+          <li>✅ 50GB Storage</li>
+          <li>✅ 5 Users</li>
+          <li>✅ Phone &amp; Email Support</li>
+        </ul>
+        <button class="plan-button">Sign Up</button>
+      </div>
+      <div class="pricing-plan">
+        <div class="plan-title">Premium</div>
+        <div class="plan-price">$49.99/month</div>
+        <ul class="plan-features">
+          <li>✅ 100GB Storage</li>
+          <li>✅ 10 Users</li>
+          <li>✅ 24/7 Support</li>
+        </ul>
+        <button class="plan-button">Sign Up</button>
+      </div>
+    </div>
   </body>
 </html>
