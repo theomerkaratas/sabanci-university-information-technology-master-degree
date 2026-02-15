@@ -340,26 +340,22 @@
       </div>
     </div>
 
-    <!-- Hidden file input for import -->
     <input type="file" id="fileInput" accept=".csv" style="display: none" />
 
     <script src="dataManager.js"></script>
     <script>
-      // Check if user is logged in as admin
       const user = JSON.parse(localStorage.getItem("user"));
       if (!user || user.type !== "admin") {
-        window.location.href = "login.html";
+        window.location.href = "/";
       }
 
       document.getElementById("adminUsername").textContent = user.username;
 
-      // Logout
       document.getElementById("logoutBtn").addEventListener("click", () => {
         localStorage.removeItem("user");
-        window.location.href = "login.html";
+        window.location.href = "/";
       });
 
-      // CSV Export/Import functionality
       document
         .getElementById("exportOrdersBtn")
         .addEventListener("click", () => {
@@ -389,14 +385,12 @@
 
       let currentFilter = "all";
 
-      // Load orders
       async function loadOrders() {
         const orders = await DataManager.fetchOrdersFromServer();
         updateStats(orders);
         displayOrders(orders, currentFilter);
       }
 
-      // Update statistics
       function updateStats(orders) {
         const today = new Date().toDateString();
         const todayOrders = orders.filter(
@@ -418,7 +412,6 @@
         document.getElementById("todayOrders").textContent = todayOrders.length;
       }
 
-      // Display orders
       function displayOrders(orders, filter) {
         const tbody = document.getElementById("ordersTableBody");
 
@@ -433,7 +426,6 @@
           return;
         }
 
-        // Sort by date (newest first)
         filteredOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         tbody.innerHTML = filteredOrders
@@ -469,18 +461,15 @@
           .join("");
       }
 
-      // Update order status
       window.updateOrderStatus = async function (orderId, newStatus) {
         if (!newStatus) return;
 
         await DataManager.updateOrderStatusOnServer(orderId, newStatus);
         loadOrders();
 
-        // Show notification
         showToast(`Order #${orderId} status updated to ${newStatus}`);
       };
 
-      // Filter buttons
       document.querySelectorAll(".filter-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
           document
@@ -492,13 +481,11 @@
         });
       });
 
-      // Refresh button
       document.getElementById("refreshBtn").addEventListener("click", () => {
         loadOrders();
         showToast("Orders refreshed");
       });
 
-      // Toast notification
       function showToast(message) {
         const toast = document.createElement("div");
         toast.className = "toast";
@@ -529,10 +516,8 @@
         }, 2000);
       }
 
-      // Initial load
       loadOrders();
 
-      // Auto-refresh every 30 seconds
       setInterval(loadOrders, 30000);
     </script>
   </body>

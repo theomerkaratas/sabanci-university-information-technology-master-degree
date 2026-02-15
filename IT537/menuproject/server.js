@@ -7,40 +7,109 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const CSV_FILE = path.join(__dirname, 'order.csv');
+const USER_FILE = path.join(__dirname, 'user.csv');
+const ADMIN_FILE = path.join(__dirname, 'admin.csv');
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
-// Helper to ensure CSV exists and has header
-function ensureCsvFile() {
+ensureFiles();
+
+function ensureFiles() {
     if (!fs.existsSync(CSV_FILE) || fs.statSync(CSV_FILE).size === 0) {
         fs.writeFileSync(CSV_FILE, 'Order ID,Customer,Table,Total,Date,Status,Items\n');
     }
+
+    if (!fs.existsSync(ADMIN_FILE) || fs.statSync(ADMIN_FILE).size === 0) {
+        fs.writeFileSync(ADMIN_FILE, 'Username,Password,Type\n');
+        
+        let adminFound = false;
+        if (fs.existsSync(USER_FILE)) {
+            const userContent = fs.readFileSync(USER_FILE, 'utf8');
+            const lines = userContent.split('\n');
+            const adminLine = lines.find(l => l.startsWith('admin,'));
+            if (adminLine) {
+                fs.appendFileSync(ADMIN_FILE, adminLine + '\n');
+                adminFound = true;
+                const newUserContent = lines.filter(l => !l.startsWith('admin,')).join('\n');
+                fs.writeFileSync(USER_FILE, newUserContent);
+            }
+        }
+        
+        if (!adminFound) {
+            fs.appendFileSync(ADMIN_FILE, 'admin,admin123,admin\n');
+        }
+    }
+
+    if (!fs.existsSync(USER_FILE) || fs.statSync(USER_FILE).size === 0) {
+        fs.writeFileSync(USER_FILE, 'Username,Password,Type\n');
+        fs.appendFileSync(USER_FILE, 'customer,customer123,customer\n');
+    }
 }
 
-// Helper to parse complex CSV lines (handle quoted fields)
+function checkCredentials(filePath, username, password) {
+    if (!fs.existsSync(filePath)) return null;
+    const content = fs.readFileSync(filePath, 'utf8');
+    const lines = content.split('\n').filter(line => line.trim());
+    for (let i = 1; i < lines.length; i++) {
+        const [u, p, t] = lines[i].split(',');
+        if (u === username && p === password) {
+            return { username: u, type: t };
+        }
+    }
+    return null;
+}
+
 function parseCsvLine(line) {
     const matches = line.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g);
     if (!matches) return null;
     return matches.map(m => m.replace(/^"|"$/g, '').trim());
 }
 
-// API: Get all orders from CSV
+app.post('/api/register', (req, res) => {
+    ensureFiles();
+    const { username, password } = req.body;
+    
+    const contentUser = fs.readFileSync(USER_FILE, 'utf8');
+    const contentAdmin = fs.readFileSync(ADMIN_FILE, 'utf8');
+    
+    const existsInUser = contentUser.split('\n').some(l => l.split(',')[0] === username);
+    const existsInAdmin = contentAdmin.split('\n').some(l => l.split(',')[0] === username);
+
+    if (existsInUser || existsInAdmin) {
+        return res.status(400).json({ message: 'Username already exists' });
+    }
+
+    const newUserLine = `${username},${password},customer\n`;
+    fs.appendFileSync(USER_FILE, newUserLine);
+    res.status(201).json({ message: 'User registered successfully' });
+});
+
+app.post('/api/login', (req, res) => {
+    ensureFiles();
+    const { username, password } = req.body;
+    
+    const admin = checkCredentials(ADMIN_FILE, username, password);
+    if (admin) return res.json(admin);
+
+    const customer = checkCredentials(USER_FILE, username, password);
+    if (customer) return res.json(customer);
+
+    res.status(401).json({ message: 'Invalid username or password' });
+});
+
 app.get('/api/orders', (req, res) => {
-    ensureCsvFile();
+    ensureFiles();
     const content = fs.readFileSync(CSV_FILE, 'utf8');
     const lines = content.split('\n').filter(line => line.trim());
     const orders = [];
 
-    // Skip header
     for (let i = 1; i < lines.length; i++) {
         const parts = parseCsvLine(lines[i]);
         if (parts && parts.length >= 7) {
             const [id, customer, table, total, date, status, itemsStr] = parts;
             
-            // Parse items string
             const items = itemsStr.split(';').map(item => {
                 const itemParts = item.trim().split(' - ');
                 const nameAndLevel = itemParts[0];
@@ -71,9 +140,8 @@ app.get('/api/orders', (req, res) => {
     res.json(orders);
 });
 
-// API: Save new order to CSV
 app.post('/api/orders', (req, res) => {
-    ensureCsvFile();
+    ensureFiles();
     const order = req.body;
     
     const itemsStr = order.items.map(item => 
@@ -86,12 +154,11 @@ app.post('/api/orders', (req, res) => {
     res.status(201).json({ message: 'Order saved', order });
 });
 
-// API: Update order status in CSV
 app.put('/api/orders/:id', (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
     
-    ensureCsvFile();
+    ensureFiles();
     const content = fs.readFileSync(CSV_FILE, 'utf8');
     const lines = content.split('\n');
     let found = false;
@@ -99,9 +166,8 @@ app.put('/api/orders/:id', (req, res) => {
     const newLines = lines.map(line => {
         const parts = parseCsvLine(line);
         if (parts && parts[0] === id) {
-            parts[5] = status; // Update status field
+            parts[5] = status;
             found = true;
-            // Re-wrap items in quotes if they contain commas/semicolons
             const items = parts[6].includes('"') ? parts[6] : `"${parts[6]}"`;
             return `${parts[0]},${parts[1]},${parts[2]},${parts[3]},${parts[4]},${parts[5]},${items}`;
         }
@@ -116,22 +182,17 @@ app.put('/api/orders/:id', (req, res) => {
     }
 });
 
-// Routes for specific HTML files
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'login.html'));
+app.get('/main', (req, res) => {
+    res.sendFile(path.join(__dirname, 'main.html'));
 });
 
 app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'admin.html'));
 });
-
-// CSV handling routes (optional enhancement)
-// Currently project uses client-side localStorage and downloads
-// We can add server-side persistence later if needed
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
