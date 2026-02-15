@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  menuproject:
+    build: .
+    ports:
+      - "9999:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: always
