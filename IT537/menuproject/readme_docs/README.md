@@ -36,9 +36,9 @@ _Customers can also register new accounts directly from the login page._
 
 ## 📁 Project Structure
 
-- `index.html`: Main customer terminal menu.
+- `index.html`: Unified authentication portal (Login/Register).
+- `main.html`: Main customer terminal menu.
 - `admin.html`: Administrative order tracking dashboard.
-- `login.html`: Unified authentication portal.
 - `server.js`: Express.js backend handling API requests and CSV I/O.
 - `dataManager.js`: Client-side API wrapper with local storage fallbacks.
 - `style.css`: Modern, dark-themed responsive design.
