@@ -22,4 +22,7 @@ The course covers essential web development technologies including:
 [**📄 Interactive Resume**](./Resume)  
  A professional, mobile-responsive interactive resume featuring dark mode, typing animations, and LinkedIn integration.
 
+[**🍽️ Fine Dining Menu**](./menuproject)  
+ A modern, Dockerized menu management system with real-time table tracking, CSV-based persistence, and dedicated customer/admin portals.
+
 </div>
