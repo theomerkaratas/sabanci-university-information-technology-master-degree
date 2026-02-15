@@ -9,7 +9,7 @@ The course covers essential web development technologies including:
 - 🌐 **HTML5 & Semantic Web**
 - 🎨 **CSS3 & Modern Layouts (Flexbox, Grid)**
 - 🦄 **JavaScript (ES6+)**
-- ⚡ **Bootstrap & Utility Frameworks**
+- ⚡ **Tailwind & Utility Frameworks**
 - ⚛️ **React.js & Component-Based Design**
 
 ---
