@@ -2,7 +2,7 @@
 
 Bu belge, menü projesi için 10 temel kullanıcı hikayesini ve Sprint 1 için planlanan özel görevleri özetlemektedir.
 
-## 10 Kullanıcı Hikayesi
+## 11 Kullanıcı Hikayesi
 
 1.  **Menü Kategorilerini & Ürünleri Görüntüleme**
     - **Bir** Müşteri **olarak**,
