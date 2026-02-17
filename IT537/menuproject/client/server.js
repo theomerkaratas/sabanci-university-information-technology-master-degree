@@ -1,18 +1,22 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const fs = require('fs');
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const CSV_FILE = path.join(__dirname, 'order.csv');
-const USER_FILE = path.join(__dirname, 'user.csv');
-const ADMIN_FILE = path.join(__dirname, 'admin.csv');
+const CSV_FILE = path.join(__dirname, 'database', 'order.csv');
+const USER_FILE = path.join(__dirname, 'database', 'user.csv');
+const ADMIN_FILE = path.join(__dirname, 'database', 'admin.csv');
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 ensureFiles();
 
@@ -183,16 +187,16 @@ app.put('/api/orders/:id', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.send('API Server is running. Frontend is served separately (e.g. port 5173 or 7070).');
 });
 
-app.get('/main', (req, res) => {
-    res.sendFile(path.join(__dirname, 'main.html'));
-});
+// app.get('/main', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'main.html'));
+// });
 
-app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin.html'));
-});
+// app.get('/admin', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'admin.html'));
+// });
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
