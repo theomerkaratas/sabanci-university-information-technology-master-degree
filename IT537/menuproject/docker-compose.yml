@@ -1,13 +1,73 @@
 version: '3.8'
 
 services:
-  menuproject:
-    build: .
+  # === SPRINT 1 (Static UI) ===
+  sprint1-frontend:
+    build:
+      context: ./sprint1
+      dockerfile: Dockerfile
     ports:
-      - "9999:3000"
+      - "5171:80"
+
+  # === SPRINT 2 (Functional Demo) ===
+  sprint2-backend:
+    build:
+      context: ./sprint2
+      dockerfile: Dockerfile.server
+    ports:
+      - "3002:3000"
     volumes:
-      - .:/app
-      - /app/node_modules
-    environment:
-      - NODE_ENV=development
-    restart: always
+      - ./sprint2/database/order.csv:/app/database/order.csv
+      - ./sprint2/database/user.csv:/app/database/user.csv
+      - ./sprint2/database/admin.csv:/app/database/admin.csv
+
+  sprint2-frontend:
+    build:
+      context: ./sprint2
+      dockerfile: Dockerfile
+    ports:
+      - "5172:80"
+    depends_on:
+      - sprint2-backend
+
+  # === SPRINT 3 (Final Version) ===
+  sprint3-backend:
+    build:
+      context: ./sprint3
+      dockerfile: Dockerfile.server
+    ports:
+      - "3003:3000"
+    volumes:
+      - ./sprint3/database/order.csv:/app/database/order.csv
+      - ./sprint3/database/user.csv:/app/database/user.csv
+      - ./sprint3/database/admin.csv:/app/database/admin.csv
+
+  sprint3-frontend:
+    build:
+      context: ./sprint3
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - sprint3-backend
+
+  # === MAIN PROJECT (Docker Default) ===
+  backend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.server
+    ports:
+      - "7700:3000"
+    volumes:
+      - ./client/database/order.csv:/app/database/order.csv
+      - ./client/database/user.csv:/app/database/user.csv
+      - ./client/database/admin.csv:/app/database/admin.csv
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "7070:80"
+    depends_on:
+      - backend
