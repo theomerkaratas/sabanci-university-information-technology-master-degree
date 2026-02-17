@@ -2,7 +2,7 @@
 
 This document outlines the 10 core user stories for the menu project and the specific tasks planned for Sprint 1.
 
-## 10 User Stories
+## 11 User Stories
 
 1.  **View Menu Categories & Items**
     - **As a** Customer,
