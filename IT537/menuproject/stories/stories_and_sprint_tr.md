@@ -1,6 +1,6 @@
 # Kullanıcı Hikayeleri & Sprint Görevleri
 
-Bu belge, menü projesi için 10 temel kullanıcı hikayesini ve Sprint 1 için planlanan özel görevleri özetlemektedir.
+Bu belge, menü projesi için 11 temel kullanıcı hikayesini ve Sprintler için planlanan özel görevleri özetlemektedir.
 
 ## 11 Kullanıcı Hikayesi
 
