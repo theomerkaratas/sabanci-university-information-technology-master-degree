@@ -1,9 +1,14 @@
 :root {
-  --primary-color: #ff6b00;
-  --bg-color: #1a1a1a;
-  --card-bg: #2d2d2d;
-  --text-color: #ffffff;
-  --text-secondary: #b0b0b0;
+  --primary-color: #4A6B4A;
+  --primary-hover: #3A5A3A;
+  --bg-color: #F5F0E8;
+  --card-bg: #FFFFFF;
+  --text-color: #2C2C2C;
+  --text-secondary: #7A7062;
+  --border-color: #E0D8CC;
+  --header-bg: #F8F5F0;
+  --danger-color: #C0392B;
+  --danger-hover: #A93226;
   --border-radius: 12px;
 }
 
@@ -11,7 +16,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Georgia', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -21,16 +26,22 @@ body {
 }
 
 header {
-  background-color: #000;
-  padding: 20px;
+  background-color: var(--header-bg);
+  padding: 10px 20px;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   text-align: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.header-logo {
+  height: 70px;
+  width: auto;
+  flex-shrink: 0;
 }
 
 h1 {
@@ -59,12 +70,12 @@ h1 span {
 }
 
 .cart-btn:hover {
-  background-color: #ff8533;
+  background-color: var(--primary-hover);
   transform: scale(1.05);
 }
 
 .logout-btn {
-  background-color: #d32f2f;
+  background-color: var(--danger-color);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -76,8 +87,27 @@ h1 span {
 }
 
 .logout-btn:hover {
-  background-color: #b71c1c;
+  background-color: var(--danger-hover);
   transform: scale(1.05);
+}
+
+.points-btn {
+  background: rgba(74, 107, 74, 0.12);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.points-btn:hover {
+  background: rgba(74, 107, 74, 0.2);
 }
 
 .category-nav {
@@ -87,7 +117,7 @@ h1 span {
   gap: 10px;
   background-color: var(--bg-color);
   position: sticky;
-  top: 70px;
+  top: 90px;
   z-index: 90;
   scrollbar-width: none;
 }
@@ -99,7 +129,7 @@ h1 span {
 .cat-btn {
   background-color: var(--card-bg);
   color: var(--text-color);
-  border: 1px solid #444;
+  border: 1px solid var(--border-color);
   padding: 10px 20px;
   border-radius: 25px;
   white-space: nowrap;
@@ -143,13 +173,47 @@ h1 span {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid #333;
-  transition: transform 0.2s;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 
 .card:hover {
   transform: translateY(-5px);
   border-color: var(--primary-color);
+  box-shadow: 0 6px 20px rgba(74, 107, 74, 0.15);
+}
+
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-image {
+  transform: scale(1.05);
+}
+
+.card-price-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: var(--primary-color);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .card-body {
@@ -201,9 +265,9 @@ h1 span {
 }
 
 .level-select {
-  background-color: #333;
+  background-color: var(--bg-color);
   color: var(--text-color);
-  border: 1px solid #555;
+  border: 1px solid var(--border-color);
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 0.9rem;
@@ -218,12 +282,12 @@ h1 span {
 
 .level-select:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
+  box-shadow: 0 0 0 2px rgba(74, 107, 74, 0.2);
 }
 
 .add-btn {
   margin-top: 15px;
-  background-color: #444;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   padding: 10px;
@@ -235,7 +299,7 @@ h1 span {
 }
 
 .add-btn:hover {
-  background-color: var(--primary-color);
+  background-color: var(--primary-hover);
 }
 
 @media (max-width: 768px) {
@@ -255,7 +319,7 @@ h1 span {
   width: 400px;
   height: 100vh;
   background-color: var(--card-bg);
-  box-shadow: -4px 0 12px rgba(0,0,0,0.5);
+  box-shadow: -4px 0 12px rgba(0,0,0,0.1);
   z-index: 1000;
   transition: right 0.3s ease;
   display: flex;
@@ -268,7 +332,7 @@ h1 span {
 
 .cart-header {
   padding: 20px;
-  background-color: #000;
+  background-color: var(--header-bg);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -311,7 +375,7 @@ h1 span {
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 15px;
-  border: 1px solid #333;
+  border: 1px solid var(--border-color);
 }
 
 .cart-item-info {
@@ -334,7 +398,7 @@ h1 span {
 }
 
 .remove-item {
-  background-color: #d32f2f;
+  background-color: var(--danger-color);
   color: white;
   border: none;
   padding: 6px 12px;
@@ -346,13 +410,106 @@ h1 span {
 }
 
 .remove-item:hover {
-  background-color: #b71c1c;
+  background-color: var(--danger-hover);
 }
 
 .cart-footer {
   padding: 20px;
-  background-color: #000;
+  background-color: var(--header-bg);
   border-top: 2px solid var(--primary-color);
+}
+
+/* Points Payment Section */
+.points-payment-section {
+  background: linear-gradient(135deg, #f0f7f0, #e8f0e0);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 15px;
+}
+
+.points-payment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.points-balance {
+  margin-left: auto;
+  background: var(--primary-color);
+  color: white;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.points-payment-option {
+  margin-top: 6px;
+}
+
+.points-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  user-select: none;
+}
+
+.points-toggle input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: #ccc;
+  border-radius: 12px;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+
+.toggle-slider::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.points-toggle input:checked + .toggle-slider {
+  background: var(--primary-color);
+}
+
+.points-toggle input:checked + .toggle-slider::after {
+  transform: translateX(20px);
+}
+
+.toggle-label {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.points-payment-warning {
+  background: #FFF3CD;
+  border: 1px solid #FFCC02;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  color: #856404;
+  line-height: 1.4;
 }
 
 .cart-total {
@@ -382,7 +539,7 @@ h1 span {
 }
 
 .checkout-btn:hover {
-  background-color: #ff8533;
+  background-color: var(--primary-hover);
 }
 
 .cart-overlay {
@@ -391,7 +548,7 @@ h1 span {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
@@ -417,7 +574,7 @@ h1 span {
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
 }
 
 .table-modal.active {
@@ -434,7 +591,7 @@ h1 span {
 
 .table-modal-header {
   padding: 20px;
-  background-color: #000;
+  background-color: var(--header-bg);
   border-bottom: 2px solid var(--primary-color);
   display: flex;
   justify-content: space-between;
@@ -470,8 +627,8 @@ h1 span {
 }
 
 .table-card {
-  background-color: var(--bg-color);
-  border: 2px solid #4caf50;
+  background-color: var(--card-bg);
+  border: 2px solid var(--primary-color);
   border-radius: 12px;
   padding: 20px;
   text-align: center;
@@ -482,27 +639,27 @@ h1 span {
 
 .table-card:hover {
   transform: translateY(-5px);
-  border-color: var(--primary-color);
-  box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+  border-color: var(--primary-hover);
+  box-shadow: 0 5px 15px rgba(74, 107, 74, 0.25);
 }
 
 .table-card.occupied {
-  border-color: #d32f2f;
-  background-color: rgba(211, 47, 47, 0.1);
+  border-color: var(--danger-color);
+  background-color: rgba(192, 57, 43, 0.06);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .table-card.occupied:hover {
   transform: none;
-  border-color: #d32f2f;
+  border-color: var(--danger-color);
   box-shadow: none;
 }
 
 .table-card.selected {
   border-color: var(--primary-color);
-  background-color: rgba(255, 107, 0, 0.2);
-  box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+  background-color: rgba(74, 107, 74, 0.1);
+  box-shadow: 0 0 20px rgba(74, 107, 74, 0.3);
 }
 
 .table-icon {
@@ -526,13 +683,13 @@ h1 span {
 }
 
 .table-card:not(.occupied) .table-status {
-  background-color: rgba(76, 175, 80, 0.2);
-  color: #4caf50;
+  background-color: rgba(74, 107, 74, 0.15);
+  color: var(--primary-color);
 }
 
 .table-card.occupied .table-status {
-  background-color: rgba(211, 47, 47, 0.2);
-  color: #d32f2f;
+  background-color: rgba(192, 57, 43, 0.15);
+  color: var(--danger-color);
 }
 
 .table-overlay {
@@ -541,7 +698,7 @@ h1 span {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
@@ -561,7 +718,7 @@ h1 span {
   color: white;
   padding: 15px 25px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   z-index: 10000;
   opacity: 0;
   transform: translateX(400px);
@@ -587,13 +744,19 @@ h1 span {
     border-radius: var(--border-radius);
     width: 100%;
     max-width: 450px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    border: 1px solid #333;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
 }
 
 .login-header {
     text-align: center;
     margin-bottom: 30px;
+}
+
+.login-logo {
+    height: 100px;
+    width: auto;
+    margin-bottom: 15px;
 }
 
 .login-header h1 {
@@ -619,10 +782,10 @@ h1 span {
 .form-group input {
     width: 100%;
     padding: 12px;
-    background-color: #1a1a1a;
-    border: 1px solid #444;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    color: white;
+    color: var(--text-color);
     font-size: 1rem;
     transition: border-color 0.3s;
 }
@@ -647,7 +810,7 @@ h1 span {
 }
 
 .login-btn:hover {
-    background-color: #ff8533;
+    background-color: var(--primary-hover);
 }
 
 .user-type {
@@ -659,8 +822,8 @@ h1 span {
 .user-type button {
     flex: 1;
     padding: 10px;
-    background-color: #1a1a1a;
-    border: 1px solid #444;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
     color: var(--text-secondary);
     border-radius: 8px;
     cursor: pointer;
@@ -682,7 +845,46 @@ h1 span {
   
   header {
       flex-direction: column;
-      gap: 15px;
+      gap: 10px;
+      padding: 10px 12px;
+  }
+
+  .header-logo {
+      height: 55px;
+  }
+
+  header > div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+  }
+
+  .cart-btn,
+  .logout-btn {
+      padding: 7px 14px;
+      font-size: 0.8rem;
+  }
+
+  .points-btn {
+      padding: 5px 10px;
+      font-size: 0.75rem;
+  }
+
+  #userWelcome {
+      font-size: 0.8rem !important;
+      width: 100%;
+      text-align: center;
+  }
+
+  .active-table-badge {
+      padding: 4px 8px !important;
+      font-size: 0.8rem;
+  }
+
+  .category-nav {
+      position: static;
   }
   
   h1 {
@@ -725,6 +927,11 @@ h1 span {
   border-radius: var(--border-radius);
 }
 
+.admin-logo {
+  height: 50px;
+  width: auto;
+}
+
 .admin-header h1 {
   font-size: 1.8rem;
 }
@@ -743,7 +950,7 @@ h1 span {
 }
 
 .export-btn:hover {
-  background-color: #ff8533;
+  background-color: var(--primary-hover);
   transform: translateY(-2px);
 }
 
@@ -758,7 +965,7 @@ h1 span {
   background-color: var(--card-bg);
   padding: 25px;
   border-radius: var(--border-radius);
-  border: 1px solid #333;
+  border: 1px solid var(--border-color);
   text-align: center;
 }
 
@@ -778,7 +985,7 @@ h1 span {
   background-color: var(--card-bg);
   padding: 20px;
   border-radius: var(--border-radius);
-  border: 1px solid #333;
+  border: 1px solid var(--border-color);
 }
 
 .orders-header {
@@ -799,9 +1006,9 @@ h1 span {
 
 .filter-btn {
   padding: 8px 16px;
-  background-color: #333;
+  background-color: var(--bg-color);
   color: var(--text-color);
-  border: 1px solid #555;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s;
@@ -818,7 +1025,7 @@ h1 span {
 }
 
 .orders-table th {
-  background-color: #000;
+  background-color: var(--header-bg);
   padding: 15px;
   text-align: left;
   font-weight: 600;
@@ -827,11 +1034,11 @@ h1 span {
 
 .orders-table td {
   padding: 15px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .orders-table tr:hover {
-  background-color: rgba(255, 107, 0, 0.1);
+  background-color: rgba(74, 107, 74, 0.06);
 }
 
 .order-items {
@@ -847,30 +1054,30 @@ h1 span {
 }
 
 .status-pending {
-  background-color: #ff9800;
+  background-color: #E67E22;
   color: white;
 }
 
 .status-preparing {
-  background-color: #2196f3;
+  background-color: #2980B9;
   color: white;
 }
 
 .status-ready {
-  background-color: #4caf50;
+  background-color: var(--primary-color);
   color: white;
 }
 
 .status-completed {
-  background-color: #9e9e9e;
+  background-color: #95A5A6;
   color: white;
 }
 
 .action-select {
   padding: 6px 10px;
-  background-color: #333;
+  background-color: var(--bg-color);
   color: var(--text-color);
-  border: 1px solid #555;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   cursor: pointer;
 }
@@ -893,7 +1100,7 @@ h1 span {
 }
 
 .refresh-btn:hover {
-  background-color: #ff8533;
+  background-color: var(--primary-hover);
 }
 
 @media (max-width: 768px) {

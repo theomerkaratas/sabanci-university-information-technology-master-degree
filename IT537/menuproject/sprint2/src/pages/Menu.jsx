@@ -85,7 +85,7 @@ export default function Menu() {
   return (
     <>
       <header>
-        <h1>IT-537 <span>Fine DINING</span></h1>
+        <img src="/veranda_logo.svg" alt="Veranda Cafe & Brasserie" className="header-logo" />
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
           <span id="userWelcome" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
             Welcome, {user?.username}
