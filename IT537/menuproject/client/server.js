@@ -47,8 +47,8 @@ function ensureFiles() {
     }
 
     if (!fs.existsSync(USER_FILE) || fs.statSync(USER_FILE).size === 0) {
-        fs.writeFileSync(USER_FILE, 'Username,Password,Type\n');
-        fs.appendFileSync(USER_FILE, 'customer,customer123,customer\n');
+        fs.writeFileSync(USER_FILE, 'Username,Password,Type,ActiveTable\n');
+        fs.appendFileSync(USER_FILE, 'customer,customer123,customer,\n');
     }
 }
 
@@ -57,9 +57,13 @@ function checkCredentials(filePath, username, password) {
     const content = fs.readFileSync(filePath, 'utf8');
     const lines = content.split('\n').filter(line => line.trim());
     for (let i = 1; i < lines.length; i++) {
-        const [u, p, t] = lines[i].split(',');
+        const parts = lines[i].split(',');
+        const u = parts[0];
+        const p = parts[1];
+        const t = parts[2];
+        const at = parts[3] || null;
         if (u === username && p === password) {
-            return { username: u, type: t };
+            return { username: u, type: t, activeTable: at || null };
         }
     }
     return null;
@@ -85,7 +89,7 @@ app.post('/api/register', (req, res) => {
         return res.status(400).json({ message: 'Username already exists' });
     }
 
-    const newUserLine = `${username},${password},customer\n`;
+    const newUserLine = `${username},${password},customer,\n`;
     fs.appendFileSync(USER_FILE, newUserLine);
     res.status(201).json({ message: 'User registered successfully' });
 });
@@ -101,6 +105,64 @@ app.post('/api/login', (req, res) => {
     if (customer) return res.json(customer);
 
     res.status(401).json({ message: 'Invalid username or password' });
+});
+
+// Table Management
+app.post('/api/tables/occupy', (req, res) => {
+    const { username, table } = req.body;
+    ensureFiles();
+
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+    
+    // Check if table is already occupied by another user
+    for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',');
+        if (parts[0] !== username && parts[3] === String(table)) {
+             return res.status(400).json({ message: `Table ${table} is already occupied.` });
+        }
+    }
+
+    // Update user's active table
+    let found = false;
+    const newLines = lines.map((line, index) => {
+        if (index === 0) return line;
+        const parts = line.split(',');
+        if (parts[0] === username) {
+            found = true;
+            return `${parts[0]},${parts[1]},${parts[2]},${table}`;
+        }
+        return line;
+    });
+
+    if (!found) return res.status(404).json({ message: 'User not found' });
+
+    fs.writeFileSync(USER_FILE, newLines.join('\n') + '\n');
+    res.json({ success: true, activeTable: table });
+});
+
+app.post('/api/tables/release', (req, res) => {
+    const { username } = req.body;
+    ensureFiles();
+
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+    
+    let found = false;
+    const newLines = lines.map((line, index) => {
+        if (index === 0) return line;
+        const parts = line.split(',');
+        if (parts[0] === username) {
+            found = true;
+            return `${parts[0]},${parts[1]},${parts[2]},`;
+        }
+        return line;
+    });
+
+    if (!found) return res.status(404).json({ message: 'User not found' });
+
+    fs.writeFileSync(USER_FILE, newLines.join('\n') + '\n');
+    res.json({ success: true });
 });
 
 app.get('/api/orders', (req, res) => {
@@ -190,14 +252,7 @@ app.get('/', (req, res) => {
     res.send('API Server is running. Frontend is served separately (e.g. port 5173 or 7070).');
 });
 
-// app.get('/main', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'main.html'));
-// });
-
-// app.get('/admin', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'admin.html'));
-// });
-
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+

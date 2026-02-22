@@ -47,8 +47,8 @@ function ensureFiles() {
     }
 
     if (!fs.existsSync(USER_FILE) || fs.statSync(USER_FILE).size === 0) {
-        fs.writeFileSync(USER_FILE, 'Username,Password,Type\n');
-        fs.appendFileSync(USER_FILE, 'customer,customer123,customer\n');
+        fs.writeFileSync(USER_FILE, 'Username,Password,Type,ActiveTable\n');
+        fs.appendFileSync(USER_FILE, 'customer,customer123,customer,\n');
     }
 }
 
@@ -57,9 +57,9 @@ function checkCredentials(filePath, username, password) {
     const content = fs.readFileSync(filePath, 'utf8');
     const lines = content.split('\n').filter(line => line.trim());
     for (let i = 1; i < lines.length; i++) {
-        const [u, p, t] = lines[i].split(',');
+        const [u, p, t, at] = lines[i].split(',');
         if (u === username && p === password) {
-            return { username: u, type: t };
+            return { username: u, type: t, activeTable: at || null };
         }
     }
     return null;
@@ -85,7 +85,7 @@ app.post('/api/register', (req, res) => {
         return res.status(400).json({ message: 'Username already exists' });
     }
 
-    const newUserLine = `${username},${password},customer\n`;
+    const newUserLine = `${username},${password},customer,\n`;
     fs.appendFileSync(USER_FILE, newUserLine);
     res.status(201).json({ message: 'User registered successfully' });
 });
@@ -102,6 +102,65 @@ app.post('/api/login', (req, res) => {
 
     res.status(401).json({ message: 'Invalid username or password' });
 });
+
+// Table Management
+app.post('/api/tables/occupy', (req, res) => {
+    const { username, table } = req.body;
+    ensureFiles();
+
+    // Check if table is occupied by someone else
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+    
+    for (let i = 1; i < lines.length; i++) {
+        const [u, p, t, at] = lines[i].split(',');
+        if (u !== username && at === String(table)) {
+             return res.status(400).json({ message: `Table ${table} is already occupied.` });
+        }
+    }
+
+    // Update user's active table
+    let found = false;
+    const newLines = lines.map((line, index) => {
+        if (index === 0) return line; // Header
+        const [u, p, t, at] = line.split(',');
+        if (u === username) {
+            found = true;
+            return `${u},${p},${t},${table}`;
+        }
+        return line;
+    });
+
+    if (!found) return res.status(404).json({ message: 'User not found' });
+
+    fs.writeFileSync(USER_FILE, newLines.join('\n') + '\n');
+    res.json({ success: true, activeTable: table });
+});
+
+app.post('/api/tables/release', (req, res) => {
+    const { username } = req.body;
+    ensureFiles();
+
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+    
+    let found = false;
+    const newLines = lines.map((line, index) => {
+        if (index === 0) return line;
+        const [u, p, t, at] = line.split(',');
+        if (u === username) {
+            found = true;
+            return `${u},${p},${t},`; // Clear active table
+        }
+        return line;
+    });
+
+    if (!found) return res.status(404).json({ message: 'User not found' });
+
+    fs.writeFileSync(USER_FILE, newLines.join('\n') + '\n');
+    res.json({ success: true });
+});
+
 
 app.get('/api/orders', (req, res) => {
     ensureFiles();
