@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
 import StatsDashboard from '../components/StatsDashboard';
 import OrdersTable from '../components/OrdersTable';
+import Leaderboard from '../components/Leaderboard';
 import { LogOut, Download, Upload } from 'lucide-react';
 
 export default function Admin() {
@@ -64,11 +65,14 @@ export default function Admin() {
   return (
     <div className="admin-container">
       <div className="admin-header">
-        <div>
-          <h1>IT-526 <span>FINE DINING</span> - Admin Panel</h1>
-          <p style={{ color: 'var(--text-secondary)', marginTop: '5px' }}>
-            Welcome, <span id="adminUsername">{user?.username}</span>
-          </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <img src="/veranda_logo.svg" alt="Veranda Cafe & Brasserie" className="admin-logo" />
+          <div>
+            <h1 style={{ fontSize: '1.2rem' }}>Admin Panel</h1>
+            <p style={{ color: 'var(--text-secondary)', marginTop: '5px' }}>
+              Welcome, <span id="adminUsername">{user?.username}</span>
+            </p>
+          </div>
         </div>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
           <button className="export-btn" onClick={handleExportOrders} title="Export Orders">
@@ -84,6 +88,10 @@ export default function Admin() {
       </div>
 
       <StatsDashboard orders={orders} />
+
+      <div style={{ maxWidth: '600px', margin: '20px auto' }}>
+        <Leaderboard />
+      </div>
       
       <OrdersTable 
         orders={orders} 

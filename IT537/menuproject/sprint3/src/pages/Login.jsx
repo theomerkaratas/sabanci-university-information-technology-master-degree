@@ -58,7 +58,7 @@ export default function Login() {
     <div className="login-container">
       <div className="login-box">
         <div className="login-header">
-          <h1 id="brandHeader">IT-537 <span>FINE DINING</span></h1>
+          <img src="/veranda_logo.svg" alt="Veranda Cafe & Brasserie" className="login-logo" />
           <p id="modeDescription">
             {isRegisterMode ? 'Create a new customer account' : 'Please login to continue'}
           </p>
@@ -68,7 +68,7 @@ export default function Login() {
           <div
             className={message.type === 'error' ? 'error-message' : 'success-message'}
             style={{
-              backgroundColor: message.type === 'error' ? '#d32f2f' : '#2e7d32',
+              backgroundColor: message.type === 'error' ? '#C0392B' : '#4A6B4A',
               color: 'white',
               padding: '10px',
               borderRadius: '8px',

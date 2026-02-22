@@ -9,7 +9,7 @@ export default function Admin() {
   // Mock data for UI demo
   const [orders] = useState([
     { id: '101', customer: 'testuser', table: '5', total: 150, date: new Date().toISOString(), status: 'pending', items: [] },
-    { id: '102', customer: 'demo', table: '3', total: 85, date: new Date().toISOString(), status: 'prepared', items: [] }
+    { id: '102', customer: 'demo', table: '3', total: 85, date: new Date().toISOString(), status: 'preparing', items: [] }
   ]);
 
   const handleStatusUpdate = (orderId, newStatus) => {
@@ -24,7 +24,8 @@ export default function Admin() {
     <div className="admin-container">
       <div className="admin-header">
         <div>
-          <h1>IT-526 <span>FINE DINING</span> - Admin Panel</h1>
+          <img src="/veranda_logo.svg" alt="Veranda Cafe & Brasserie" className="admin-logo" />
+          <h1>Admin Panel</h1>
           <p style={{ color: 'var(--text-secondary)', marginTop: '5px' }}>
             Welcome, <span id="adminUsername">{user?.username}</span>
           </p>

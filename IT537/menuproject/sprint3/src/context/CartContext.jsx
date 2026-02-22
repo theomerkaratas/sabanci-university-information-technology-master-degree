@@ -19,8 +19,8 @@ export function CartProvider({ children }) {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product, codingLevel = null) => {
-    setCart((prev) => [...prev, { ...product, codingLevel }]);
+  const addToCart = (product, codingLevel = null, variant = null) => {
+    setCart((prev) => [...prev, { ...product, codingLevel, variant }]);
   };
 
   const removeFromCart = (index) => {

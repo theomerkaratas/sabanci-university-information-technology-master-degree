@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { api } from '../services/api';
@@ -6,7 +6,8 @@ import { products, categories } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import CartSidebar from '../components/CartSidebar';
 import TableSelectionModal from '../components/TableSelectionModal';
-import { LogOut, ShoppingCart, UtensilsCrossed, XCircle } from 'lucide-react';
+import Leaderboard from '../components/Leaderboard';
+import { LogOut, ShoppingCart, UtensilsCrossed, XCircle, Trophy } from 'lucide-react';
 
 export default function Menu() {
   const { user, logout, activeTable, occupyTable, leaveTable } = useAuth();
@@ -15,6 +16,17 @@ export default function Menu() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isTableModalOpen, setIsTableModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
+  const [userPoints, setUserPoints] = useState(user?.points || 0);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [pendingPointsToSpend, setPendingPointsToSpend] = useState(0);
+
+  useEffect(() => {
+    if (user?.username) {
+      api.fetchUserPoints(user.username)
+        .then(data => setUserPoints(data.points))
+        .catch(() => {});
+    }
+  }, [user?.username]);
 
   const filteredProducts = selectedCategory === 'all'
     ? products
@@ -30,7 +42,7 @@ export default function Menu() {
     ? categories.filter(c => c.id !== 'all')
     : categories.filter(c => c.id === selectedCategory);
 
-  const handleCheckout = () => {
+  const handleCheckout = (pointsToSpend = 0) => {
     if (cart.length === 0) {
       showToast('Your cart is empty!');
       return;
@@ -39,8 +51,9 @@ export default function Menu() {
     setIsCartOpen(false);
 
     if (activeTable) {
-        completeOrder(activeTable);
+        completeOrder(activeTable, pointsToSpend);
     } else {
+        setPendingPointsToSpend(pointsToSpend);
         setIsTableModalOpen(true);
     }
   };
@@ -49,28 +62,47 @@ export default function Menu() {
     try {
         await occupyTable(tableNumber);
         setIsTableModalOpen(false);
-        completeOrder(tableNumber);
+        completeOrder(tableNumber, pendingPointsToSpend);
+        setPendingPointsToSpend(0);
     } catch (error) {
         showToast(error.message);
     }
   };
 
-  const completeOrder = async (tableNumber) => {
-    // Logic from main.js completeOrder
+  const completeOrder = async (tableNumber, pointsToSpend = 0) => {
+    const POINT_VALUE = 10;
+    const discount = pointsToSpend * POINT_VALUE;
+    const finalTotal = Math.max(0, cartTotal - discount);
+
     const order = {
         id: Date.now().toString(),
         customer: user.username,
         table: tableNumber,
         items: cart,
-        total: cartTotal,
+        total: finalTotal,
         date: new Date().toISOString(),
         status: 'pending'
     };
 
     try {
-        await api.saveOrder(order);
+        // Spend points first if applicable
+        if (pointsToSpend > 0) {
+            const spendResult = await api.spendPoints(user.username, pointsToSpend);
+            setUserPoints(spendResult.remainingPoints);
+        }
+
+        const result = await api.saveOrder(order);
         clearCart();
-        showToast(`Order #${order.id} placed for Table ${tableNumber}! Total: ${order.total}₺`);
+        const earned = result.earnedPoints || 0;
+        if (earned > 0) {
+            setUserPoints(prev => prev + earned);
+        }
+
+        let msg = `Order placed for Table ${tableNumber}! `;
+        if (discount > 0) msg += `Discount: -${discount}₺ | `;
+        msg += `Total: ${finalTotal}₺`;
+        if (earned > 0) msg += ` (+${earned} pts)`;
+        showToast(msg);
     } catch (error) {
         console.error('Order failed', error);
         showToast('Failed to place order. Please try again.');
@@ -85,24 +117,32 @@ export default function Menu() {
   return (
     <>
       <header>
-        <h1>IT-537 <span>Fine DINING</span></h1>
+        <img src="/veranda_logo.svg" alt="Veranda Cafe & Brasserie" className="header-logo" />
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-          <span id="userWelcome" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+          <span id="userWelcome" style={{ color: '#4A6B4A', fontSize: '0.9rem', fontWeight: 500 }}>
             Welcome, {user?.username}
           </span>
+
+          <button
+            className="points-btn"
+            onClick={() => setShowLeaderboard(!showLeaderboard)}
+          >
+            <Trophy size={15} />
+            {userPoints} pts
+          </button>
           
           {activeTable && (
              <div className="active-table-badge" style={{ 
                  display: 'flex', 
                  alignItems: 'center', 
                  gap: '8px',
-                 background: 'rgba(255, 255, 255, 0.1)',
+                 background: 'rgba(74, 107, 74, 0.08)',
                  padding: '5px 10px',
                  borderRadius: '20px',
-                 border: '1px solid var(--accent-color)'
+                 border: '1px solid #4A6B4A'
              }}>
-                <UtensilsCrossed size={16} color="var(--accent-color)" />
-                <span style={{color: 'var(--accent-color)', fontWeight: 'bold'}}>Table {activeTable}</span>
+                <UtensilsCrossed size={16} color="#4A6B4A" />
+                <span style={{color: '#4A6B4A', fontWeight: 'bold'}}>Table {activeTable}</span>
                 <button 
                     onClick={leaveTable}
                     style={{
@@ -131,6 +171,12 @@ export default function Menu() {
           </button>
         </div>
       </header>
+
+      {showLeaderboard && (
+        <div style={{ maxWidth: '600px', margin: '20px auto', padding: '0 20px' }}>
+          <Leaderboard compact={true} />
+        </div>
+      )}
 
       <nav className="category-nav">
         {categories.map(cat => (
@@ -167,6 +213,7 @@ export default function Menu() {
         onClose={() => setIsCartOpen(false)} 
         onCheckout={handleCheckout} 
         activeTable={activeTable}
+        userPoints={userPoints}
       />
 
       <TableSelectionModal 
