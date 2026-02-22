@@ -36,8 +36,32 @@ export function AuthProvider({ children }) {
     window.location.href = '/';
   };
 
+  const occupyTable = async (tableId) => {
+    try {
+        await api.occupyTable(user.username, tableId);
+        const updatedUser = { ...user, activeTable: tableId };
+        setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+    } catch (error) {
+        console.error("Failed to occupy table", error);
+        throw error;
+    }
+  };
+
+  const leaveTable = async () => {
+    try {
+        await api.releaseTable(user.username);
+        const updatedUser = { ...user, activeTable: null };
+        setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+    } catch (error) {
+        console.error("Failed to release table", error);
+        throw error;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, register }}>
+    <AuthContext.Provider value={{ user, login, logout, register, activeTable: user?.activeTable, occupyTable, leaveTable }}>
       {children}
     </AuthContext.Provider>
   );

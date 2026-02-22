@@ -16,6 +16,8 @@ services:
       dockerfile: Dockerfile.server
     ports:
       - "3002:3000"
+    environment:
+      - PORT=3000
     volumes:
       - ./sprint2/database/order.csv:/app/database/order.csv
       - ./sprint2/database/user.csv:/app/database/user.csv
@@ -37,6 +39,8 @@ services:
       dockerfile: Dockerfile.server
     ports:
       - "3003:3000"
+    environment:
+      - PORT=3000
     volumes:
       - ./sprint3/database/order.csv:/app/database/order.csv
       - ./sprint3/database/user.csv:/app/database/user.csv

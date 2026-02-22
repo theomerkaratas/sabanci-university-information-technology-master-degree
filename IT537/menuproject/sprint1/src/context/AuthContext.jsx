@@ -4,6 +4,9 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({ username: 'Demo User', type: 'demo' });
+  const [activeTable, setActiveTable] = useState(() => {
+     return localStorage.getItem('activeTable') || null;
+  });
 
   // Mock login for UI demo
   const login = (username, password) => {
@@ -25,8 +28,18 @@ export const AuthProvider = ({ children }) => {
     return { success: true };
   };
 
+  const occupyTable = (tableId) => {
+    setActiveTable(tableId);
+    localStorage.setItem('activeTable', tableId);
+  };
+
+  const leaveTable = () => {
+    setActiveTable(null);
+    localStorage.removeItem('activeTable');
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, register }}>
+    <AuthContext.Provider value={{ user, login, logout, register, activeTable, occupyTable, leaveTable }}>
       {children}
     </AuthContext.Provider>
   );
