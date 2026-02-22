@@ -72,5 +72,29 @@ export const api = {
     const data = await response.json();
     if (!response.ok) throw new Error(data.message || 'Failed to release table');
     return data;
+  },
+
+  // Leaderboard
+  async fetchLeaderboard() {
+    const response = await fetch(`${API_URL}/leaderboard`);
+    if (!response.ok) throw new Error('Failed to fetch leaderboard');
+    return await response.json();
+  },
+
+  async fetchUserPoints(username) {
+    const response = await fetch(`${API_URL}/users/${username}/points`);
+    if (!response.ok) throw new Error('Failed to fetch points');
+    return await response.json();
+  },
+
+  async spendPoints(username, pointsToSpend) {
+    const response = await fetch(`${API_URL}/users/${username}/spend-points`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pointsToSpend }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Failed to spend points');
+    return data;
   }
 };

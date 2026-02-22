@@ -2,17 +2,6 @@ const API_URL = '/api';
 
 export const api = {
   // Auth
-  async register(userData) {
-    const response = await fetch(`${API_URL}/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData),
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.message || 'Registration failed');
-    return data;
-  },
-
   async login(credentials) {
     const response = await fetch(`${API_URL}/login`, {
       method: 'POST',
@@ -54,9 +43,9 @@ export const api = {
   // Table Management
   async occupyTable(username, table) {
     const response = await fetch(`${API_URL}/tables/occupy`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, table }),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, table }),
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.message || 'Failed to occupy table');
@@ -65,9 +54,9 @@ export const api = {
 
   async releaseTable(username) {
     const response = await fetch(`${API_URL}/tables/release`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username }),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username }),
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.message || 'Failed to release table');

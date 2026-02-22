@@ -47,8 +47,21 @@ function ensureFiles() {
     }
 
     if (!fs.existsSync(USER_FILE) || fs.statSync(USER_FILE).size === 0) {
-        fs.writeFileSync(USER_FILE, 'Username,Password,Type,ActiveTable\n');
-        fs.appendFileSync(USER_FILE, 'customer,customer123,customer,\n');
+        fs.writeFileSync(USER_FILE, 'Username,Password,Type,ActiveTable,Points\n');
+        fs.appendFileSync(USER_FILE, 'customer,customer123,customer,,0\n');
+    } else {
+        // Migrate: add Points column if missing
+        const content = fs.readFileSync(USER_FILE, 'utf8');
+        const firstLine = content.split('\n')[0];
+        if (!firstLine.includes('Points')) {
+            const lines = content.split('\n');
+            const newLines = lines.map((line, i) => {
+                if (i === 0) return line.trim() + ',Points';
+                if (line.trim()) return line.trim() + ',0';
+                return line;
+            });
+            fs.writeFileSync(USER_FILE, newLines.join('\n'));
+        }
     }
 }
 
@@ -57,9 +70,10 @@ function checkCredentials(filePath, username, password) {
     const content = fs.readFileSync(filePath, 'utf8');
     const lines = content.split('\n').filter(line => line.trim());
     for (let i = 1; i < lines.length; i++) {
-        const [u, p, t, at] = lines[i].split(',');
+        const parts = lines[i].split(',').map(s => s.trim());
+        const [u, p, t, at, pts] = parts;
         if (u === username && p === password) {
-            return { username: u, type: t, activeTable: at || null };
+            return { username: u, type: t, activeTable: at || null, points: parseInt(pts) || 0 };
         }
     }
     return null;
@@ -85,7 +99,7 @@ app.post('/api/register', (req, res) => {
         return res.status(400).json({ message: 'Username already exists' });
     }
 
-    const newUserLine = `${username},${password},customer,\n`;
+    const newUserLine = `${username},${password},customer,,0\n`;
     fs.appendFileSync(USER_FILE, newUserLine);
     res.status(201).json({ message: 'User registered successfully' });
 });
@@ -123,10 +137,11 @@ app.post('/api/tables/occupy', (req, res) => {
     let found = false;
     const newLines = lines.map((line, index) => {
         if (index === 0) return line; // Header
-        const [u, p, t, at] = line.split(',');
+        const parts = line.split(',');
+        const [u, p, t, at, pts] = parts;
         if (u === username) {
             found = true;
-            return `${u},${p},${t},${table}`;
+            return `${u},${p},${t},${table},${pts || 0}`;
         }
         return line;
     });
@@ -147,10 +162,11 @@ app.post('/api/tables/release', (req, res) => {
     let found = false;
     const newLines = lines.map((line, index) => {
         if (index === 0) return line;
-        const [u, p, t, at] = line.split(',');
+        const parts = line.split(',');
+        const [u, p, t, at, pts] = parts;
         if (u === username) {
             found = true;
-            return `${u},${p},${t},`; // Clear active table
+            return `${u},${p},${t},,${pts || 0}`; // Clear active table, keep points
         }
         return line;
     });
@@ -214,7 +230,30 @@ app.post('/api/orders', (req, res) => {
     const csvLine = `${order.id},${order.customer},${order.table || 'N/A'},${order.total}₺,${order.date},${order.status},"${itemsStr}"\n`;
     
     fs.appendFileSync(CSV_FILE, csvLine);
-    res.status(201).json({ message: 'Order saved', order });
+
+    // Add loyalty points: total / 100 (floored)
+    const earnedPoints = Math.floor(order.total / 100);
+    if (earnedPoints > 0 && order.customer) {
+        const userContent = fs.readFileSync(USER_FILE, 'utf8');
+        const userLines = userContent.split('\n').filter(l => l.trim());
+        let updated = false;
+        const newUserLines = userLines.map((line, index) => {
+            if (index === 0) return line;
+            const parts = line.split(',').map(s => s.trim());
+            const [u, p, t, at, pts] = parts;
+            if (u === order.customer) {
+                updated = true;
+                const newPts = (parseInt(pts) || 0) + earnedPoints;
+                return `${u},${p},${t},${at || ''},${newPts}`;
+            }
+            return line;
+        });
+        if (updated) {
+            fs.writeFileSync(USER_FILE, newUserLines.join('\n') + '\n');
+        }
+    }
+
+    res.status(201).json({ message: 'Order saved', order, earnedPoints });
 });
 
 app.put('/api/orders/:id', (req, res) => {
@@ -243,6 +282,78 @@ app.put('/api/orders/:id', (req, res) => {
     } else {
         res.status(404).json({ message: 'Order not found' });
     }
+});
+
+// Leaderboard - get all users sorted by points
+app.get('/api/leaderboard', (req, res) => {
+    ensureFiles();
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+    const users = [];
+    for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',').map(s => s.trim());
+        const [u, p, t, at, pts] = parts;
+        users.push({ username: u, points: parseInt(pts) || 0 });
+    }
+    users.sort((a, b) => b.points - a.points);
+    res.json(users);
+});
+
+// Get points for a specific user
+app.get('/api/users/:username/points', (req, res) => {
+    ensureFiles();
+    const { username } = req.params;
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+    for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',').map(s => s.trim());
+        const [u, p, t, at, pts] = parts;
+        if (u === username) {
+            return res.json({ username: u, points: parseInt(pts) || 0 });
+        }
+    }
+    res.status(404).json({ message: 'User not found' });
+});
+
+// Spend points (1 point = 10₺)
+app.post('/api/users/:username/spend-points', (req, res) => {
+    ensureFiles();
+    const { username } = req.params;
+    const { pointsToSpend } = req.body;
+
+    if (!pointsToSpend || pointsToSpend <= 0) {
+        return res.status(400).json({ message: 'Invalid points amount' });
+    }
+
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+    let found = false;
+    let currentPoints = 0;
+
+    const newLines = lines.map((line, index) => {
+        if (index === 0) return line;
+        const parts = line.split(',').map(s => s.trim());
+        const [u, p, t, at, pts] = parts;
+        if (u === username) {
+            found = true;
+            currentPoints = parseInt(pts) || 0;
+            if (currentPoints < pointsToSpend) return line; // not enough
+            const newPts = currentPoints - pointsToSpend;
+            return `${u},${p},${t},${at || ''},${newPts}`;
+        }
+        return line;
+    });
+
+    if (!found) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (currentPoints < pointsToSpend) {
+        return res.status(400).json({ message: 'Not enough points', currentPoints });
+    }
+
+    fs.writeFileSync(USER_FILE, newLines.join('\n') + '\n');
+    res.json({ message: 'Points spent', remainingPoints: currentPoints - pointsToSpend, discount: pointsToSpend * 10 });
 });
 
 app.get('/', (req, res) => {

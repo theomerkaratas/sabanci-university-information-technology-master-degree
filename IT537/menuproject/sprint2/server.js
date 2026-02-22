@@ -27,7 +27,7 @@ function ensureFiles() {
 
     if (!fs.existsSync(ADMIN_FILE) || fs.statSync(ADMIN_FILE).size === 0) {
         fs.writeFileSync(ADMIN_FILE, 'Username,Password,Type\n');
-        
+
         let adminFound = false;
         if (fs.existsSync(USER_FILE)) {
             const userContent = fs.readFileSync(USER_FILE, 'utf8');
@@ -40,16 +40,21 @@ function ensureFiles() {
                 fs.writeFileSync(USER_FILE, newUserContent);
             }
         }
-        
+
         if (!adminFound) {
             fs.appendFileSync(ADMIN_FILE, 'admin,admin123,admin\n');
         }
     }
 
     if (!fs.existsSync(USER_FILE) || fs.statSync(USER_FILE).size === 0) {
-        // Added ActiveTable column
         fs.writeFileSync(USER_FILE, 'Username,Password,Type,ActiveTable\n');
         fs.appendFileSync(USER_FILE, 'customer,customer123,customer,\n');
+    } else {
+        // Ensure demo customer account exists
+        const content = fs.readFileSync(USER_FILE, 'utf8');
+        if (!content.includes('customer,customer123,customer')) {
+            fs.appendFileSync(USER_FILE, 'customer,customer123,customer,\n');
+        }
     }
 }
 
@@ -58,7 +63,8 @@ function checkCredentials(filePath, username, password) {
     const content = fs.readFileSync(filePath, 'utf8');
     const lines = content.split('\n').filter(line => line.trim());
     for (let i = 1; i < lines.length; i++) {
-        const [u, p, t, at] = lines[i].split(',');
+        const parts = lines[i].split(',').map(s => s.trim());
+        const [u, p, t, at] = parts;
         if (u === username && p === password) {
             return { username: u, type: t, activeTable: at || null };
         }
@@ -72,29 +78,10 @@ function parseCsvLine(line) {
     return matches.map(m => m.replace(/^"|"$/g, '').trim());
 }
 
-app.post('/api/register', (req, res) => {
-    ensureFiles();
-    const { username, password } = req.body;
-    
-    const contentUser = fs.readFileSync(USER_FILE, 'utf8');
-    const contentAdmin = fs.readFileSync(ADMIN_FILE, 'utf8');
-    
-    const existsInUser = contentUser.split('\n').some(l => l.split(',')[0] === username);
-    const existsInAdmin = contentAdmin.split('\n').some(l => l.split(',')[0] === username);
-
-    if (existsInUser || existsInAdmin) {
-        return res.status(400).json({ message: 'Username already exists' });
-    }
-
-    const newUserLine = `${username},${password},customer,\n`;
-    fs.appendFileSync(USER_FILE, newUserLine);
-    res.status(201).json({ message: 'User registered successfully' });
-});
-
 app.post('/api/login', (req, res) => {
     ensureFiles();
     const { username, password } = req.body;
-    
+
     const admin = checkCredentials(ADMIN_FILE, username, password);
     if (admin) return res.json(admin);
 
@@ -112,11 +99,11 @@ app.post('/api/tables/occupy', (req, res) => {
     // Check if table is occupied by someone else
     const content = fs.readFileSync(USER_FILE, 'utf8');
     const lines = content.split('\n').filter(l => l.trim());
-    
+
     for (let i = 1; i < lines.length; i++) {
         const [u, p, t, at] = lines[i].split(',');
         if (u !== username && at === String(table)) {
-             return res.status(400).json({ message: `Table ${table} is already occupied.` });
+            return res.status(400).json({ message: `Table ${table} is already occupied.` });
         }
     }
 
@@ -144,7 +131,7 @@ app.post('/api/tables/release', (req, res) => {
 
     const content = fs.readFileSync(USER_FILE, 'utf8');
     const lines = content.split('\n').filter(l => l.trim());
-    
+
     let found = false;
     const newLines = lines.map((line, index) => {
         if (index === 0) return line;
@@ -173,13 +160,13 @@ app.get('/api/orders', (req, res) => {
         const parts = parseCsvLine(lines[i]);
         if (parts && parts.length >= 7) {
             const [id, customer, table, total, date, status, itemsStr] = parts;
-            
+
             const items = itemsStr.split(';').map(item => {
                 const itemParts = item.trim().split(' - ');
                 const nameAndLevel = itemParts[0];
                 const priceMatch = itemParts[1]?.match(/(\d+)₺/);
                 const price = priceMatch ? parseFloat(priceMatch[1]) : 0;
-                
+
                 let name = nameAndLevel;
                 let cookingLevel = null;
                 const levelMatch = nameAndLevel.match(/(.+?)\s*\((.+?)\)/);
@@ -207,13 +194,13 @@ app.get('/api/orders', (req, res) => {
 app.post('/api/orders', (req, res) => {
     ensureFiles();
     const order = req.body;
-    
-    const itemsStr = order.items.map(item => 
+
+    const itemsStr = order.items.map(item =>
         `${item.name}${item.cookingLevel ? ` (${item.cookingLevel})` : ''} - ${item.price}₺`
     ).join('; ');
 
     const csvLine = `${order.id},${order.customer},${order.table || 'N/A'},${order.total}₺,${order.date},${order.status},"${itemsStr}"\n`;
-    
+
     fs.appendFileSync(CSV_FILE, csvLine);
     res.status(201).json({ message: 'Order saved', order });
 });
@@ -221,7 +208,7 @@ app.post('/api/orders', (req, res) => {
 app.put('/api/orders/:id', (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
-    
+
     ensureFiles();
     const content = fs.readFileSync(CSV_FILE, 'utf8');
     const lines = content.split('\n');
