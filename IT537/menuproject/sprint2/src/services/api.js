@@ -50,4 +50,27 @@ export const api = {
     if (!response.ok) throw new Error('Failed to update order status');
     return await response.json();
   },
+
+  // Table Management
+  async occupyTable(username, table) {
+    const response = await fetch(`${API_URL}/tables/occupy`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, table }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Failed to occupy table');
+    return data;
+  },
+
+  async releaseTable(username) {
+    const response = await fetch(`${API_URL}/tables/release`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Failed to release table');
+    return data;
+  }
 };
