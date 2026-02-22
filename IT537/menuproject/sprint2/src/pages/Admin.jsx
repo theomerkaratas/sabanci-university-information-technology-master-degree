@@ -65,7 +65,8 @@ export default function Admin() {
     <div className="admin-container">
       <div className="admin-header">
         <div>
-          <h1>IT-526 <span>FINE DINING</span> - Admin Panel</h1>
+          <img src="/veranda_logo.svg" alt="Veranda Cafe & Brasserie" className="admin-logo" />
+          <h1>Admin Panel</h1>
           <p style={{ color: 'var(--text-secondary)', marginTop: '5px' }}>
             Welcome, <span id="adminUsername">{user?.username}</span>
           </p>

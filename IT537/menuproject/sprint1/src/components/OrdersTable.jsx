@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { api } from '../services/api';
 
 export default function OrdersTable({ orders, onStatusUpdate, onRefresh }) {
   const [filter, setFilter] = useState('all');
@@ -11,15 +10,10 @@ export default function OrdersTable({ orders, onStatusUpdate, onRefresh }) {
   // Sort by date descending
   const sortedOrders = [...filteredOrders].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  const handleStatusChange = async (orderId, newStatus) => {
+  // Mock status change — no backend in Sprint 1
+  const handleStatusChange = (orderId, newStatus) => {
     if (!newStatus) return;
-    try {
-        await api.updateOrderStatus(orderId, newStatus);
-        onStatusUpdate(orderId, newStatus);
-    } catch (error) {
-        console.error('Failed to update status', error);
-        alert('Failed to update status');
-    }
+    onStatusUpdate(orderId, newStatus);
   };
 
   return (

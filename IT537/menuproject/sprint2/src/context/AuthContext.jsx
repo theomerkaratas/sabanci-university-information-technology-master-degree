@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
     }
     return null;
   });
-  
+
   /* const [activeTable, setActiveTable] = useState(null);
 
   useEffect(() => {
@@ -34,11 +34,6 @@ export function AuthProvider({ children }) {
     return data;
   };
 
-  const register = async (username, password) => {
-    await api.register({ username, password });
-    return true;
-  };
-
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
@@ -47,30 +42,30 @@ export function AuthProvider({ children }) {
 
   const occupyTable = async (tableId) => {
     try {
-        await api.occupyTable(user.username, tableId);
-        const updatedUser = { ...user, activeTable: tableId };
-        setUser(updatedUser);
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+      await api.occupyTable(user.username, tableId);
+      const updatedUser = { ...user, activeTable: tableId };
+      setUser(updatedUser);
+      localStorage.setItem('user', JSON.stringify(updatedUser));
     } catch (error) {
-        console.error("Failed to occupy table", error);
-        throw error;
+      console.error("Failed to occupy table", error);
+      throw error;
     }
   };
 
   const leaveTable = async () => {
     try {
-        await api.releaseTable(user.username);
-        const updatedUser = { ...user, activeTable: null };
-        setUser(updatedUser);
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+      await api.releaseTable(user.username);
+      const updatedUser = { ...user, activeTable: null };
+      setUser(updatedUser);
+      localStorage.setItem('user', JSON.stringify(updatedUser));
     } catch (error) {
-        console.error("Failed to release table", error);
-        throw error;
+      console.error("Failed to release table", error);
+      throw error;
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, register, activeTable: user?.activeTable, occupyTable, leaveTable }}>
+    <AuthContext.Provider value={{ user, login, logout, activeTable: user?.activeTable, occupyTable, leaveTable }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { api } from '../services/api';
 import { X } from 'lucide-react';
 
 export default function TableSelectionModal({ isOpen, onClose, onSelectTable }) {
@@ -11,42 +10,15 @@ export default function TableSelectionModal({ isOpen, onClose, onSelectTable }) 
 
   useEffect(() => {
     if (isOpen) {
-      updateTableOccupancy();
+      // No backend in Sprint 1 — tables are always available
+      setLoading(false);
     }
   }, [isOpen]);
 
-  const updateTableOccupancy = async () => {
-    setLoading(true);
-    try {
-      const orders = await api.fetchOrders();
-      const occupiedTables = orders
-        .filter(
-          (order) =>
-            order.status !== 'completed' && order.status !== 'cancelled'
-        )
-        .map((order) => parseInt(order.table));
-
-      setTables((prev) =>
-        prev.map((table) => ({
-          ...table,
-          occupied: occupiedTables.includes(table.number),
-        }))
-      );
-    } catch (error) {
-      console.error('Error fetching table occupancy:', error);
-      // Ensure we don't block the UI if fetch fails
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleTableClick = (table) => {
-    if (table.occupied) return; // Toast handled by parent or verify here?
+    if (table.occupied) return;
     
     setSelectedTable(table.number);
-    // Auto confirm selection after brief delay or wait for button?
-    // Original UX was clicking selects it and moves on.
-    // "setTimeout(() => completeOrder(tableNumber), 500);"
     onSelectTable(table.number);
   };
 

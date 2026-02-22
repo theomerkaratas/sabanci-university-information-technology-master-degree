@@ -1,56 +1,29 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { User, Shield, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { User, Shield, AlertCircle, Coffee } from 'lucide-react';
 
 export default function Login() {
-  const [isRegisterMode, setIsRegisterMode] = useState(false);
-  const [userType, setUserType] = useState('customer');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState(null); // { text, type: 'error' | 'success' }
-  const { login, register } = useAuth();
+  const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleToggle = (e) => {
-    e.preventDefault();
-    setIsRegisterMode(!isRegisterMode);
+  const handleDemoLogin = async (type) => {
     setMessage(null);
-    setUsername('');
-    setPassword('');
-    // Default to customer when switching to register mode logic from original app:
-    if (!isRegisterMode) {
-      setUserType('customer');
-    }
-  };
+    setLoading(true);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage(null);
+    const credentials = type === 'customer'
+      ? { username: 'customer', password: 'customer123' }
+      : { username: 'admin', password: 'admin123' };
 
     try {
-      if (isRegisterMode) {
-        await register(username, password);
-        setMessage({ text: 'Account created! You can now login.', type: 'success' });
-        setIsRegisterMode(false);
-        setUsername('');
-        setPassword('');
-      } else {
-        const userData = await login(username, password);
-        
-        if (userData.type !== userType) {
-           // We might need to logout if the type doesn't match what they selected?
-           // The API returns the user with their real type.
-           // Original app: check if userData.type === userType.
-           if (userData.type !== userType) {
-               throw new Error(`Invalid credentials for ${userType} login.`);
-           }
-        }
-        
-        navigate(userData.type === 'admin' ? '/admin' : '/menu');
-      }
+      const userData = await login(credentials.username, credentials.password);
+      navigate(userData.type === 'admin' ? '/admin' : '/menu');
     } catch (error) {
       setMessage({ text: error.message, type: 'error' });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,17 +31,15 @@ export default function Login() {
     <div className="login-container">
       <div className="login-box">
         <div className="login-header">
-          <h1 id="brandHeader">IT-537 <span>FINE DINING</span></h1>
-          <p id="modeDescription">
-            {isRegisterMode ? 'Create a new customer account' : 'Please login to continue'}
-          </p>
+          <img src="/veranda_logo.svg" alt="Veranda Cafe & Brasserie" className="login-logo" />
+          <p id="modeDescription">Select a demo account to continue</p>
         </div>
 
         {message && (
           <div
-            className={message.type === 'error' ? 'error-message' : 'success-message'}
+            className="error-message"
             style={{
-              backgroundColor: message.type === 'error' ? '#d32f2f' : '#2e7d32',
+              backgroundColor: '#C0392B',
               color: 'white',
               padding: '10px',
               borderRadius: '8px',
@@ -78,84 +49,76 @@ export default function Login() {
               gap: '10px'
             }}
           >
-             {message.type === 'error' ? <AlertCircle size={20}/> : <CheckCircle2 size={20}/>}
-             {message.text}
+            <AlertCircle size={20} />
+            {message.text}
           </div>
         )}
 
-        {!isRegisterMode && (
-          <div className="user-type" id="userTypeContainer">
-            <button
-              type="button"
-              className={userType === 'customer' ? 'active' : ''}
-              onClick={() => setUserType('customer')}
-            >
-              <User size={18} style={{marginRight: '8px', verticalAlign: 'middle'}}/>
-              Customer
-            </button>
-            <button
-              type="button"
-              className={userType === 'admin' ? 'active' : ''}
-              onClick={() => setUserType('admin')}
-            >
-              <Shield size={18} style={{marginRight: '8px', verticalAlign: 'middle'}}/>
-              Admin
-            </button>
-          </div>
-        )}
-
-        <form id="loginForm" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              required
-              placeholder="Enter username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              required
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
-          <button type="submit" className="login-btn" id="submitBtn">
-            {isRegisterMode ? 'Register' : 'Login'}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <button
+            type="button"
+            id="demoCustomerBtn"
+            onClick={() => handleDemoLogin('customer')}
+            disabled={loading}
+            style={{
+              padding: '20px',
+              borderRadius: '12px',
+              border: '2px solid var(--primary-color)',
+              background: 'var(--card-bg)',
+              color: 'var(--text-color)',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              fontWeight: 600,
+              fontSize: '1.05rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              transition: 'all 0.2s',
+              opacity: loading ? 0.6 : 1
+            }}
+          >
+            <User size={22} />
+            Customer Login
+            <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)', marginLeft: '4px' }}>
+              (customer / customer123)
+            </span>
           </button>
-        </form>
+
+          <button
+            type="button"
+            id="demoAdminBtn"
+            onClick={() => handleDemoLogin('admin')}
+            disabled={loading}
+            style={{
+              padding: '20px',
+              borderRadius: '12px',
+              border: '2px solid var(--primary-color)',
+              background: 'var(--card-bg)',
+              color: 'var(--text-color)',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              fontWeight: 600,
+              fontSize: '1.05rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              transition: 'all 0.2s',
+              opacity: loading ? 0.6 : 1
+            }}
+          >
+            <Shield size={22} />
+            Admin Login
+            <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)', marginLeft: '4px' }}>
+              (admin / admin123)
+            </span>
+          </button>
+        </div>
 
         <div className="login-footer">
-          <p style={{ marginTop: '15px', color: 'var(--text-secondary)' }}>
-            <span id="toggleMsg">
-              {isRegisterMode ? 'Already have an account?' : "Don't have an account?"}
-            </span>{' '}
-            <a
-              href="#"
-              onClick={handleToggle}
-              style={{
-                color: 'var(--primary-color)',
-                textDecoration: 'none',
-                fontWeight: 'bold',
-              }}
-            >
-              {isRegisterMode ? 'Login' : 'Create Account'}
-            </a>
+          <p style={{ color: 'var(--text-secondary)', marginTop: '20px', fontSize: '0.85rem', textAlign: 'center' }}>
+            <Coffee size={14} style={{ verticalAlign: 'middle', marginRight: '4px' }} />
+            Click a button above to sign in with a demo account.
           </p>
-          {!isRegisterMode && (
-            <p style={{ color: 'var(--text-secondary)', marginTop: '20px', fontSize: '0.9rem' }}>
-              Demo: customer/customer123 or admin/admin123
-            </p>
-          )}
         </div>
       </div>
     </div>
