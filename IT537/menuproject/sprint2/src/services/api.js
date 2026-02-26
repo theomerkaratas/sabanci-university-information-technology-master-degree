@@ -40,6 +40,16 @@ export const api = {
     return await response.json();
   },
 
+  async updateOrderTable(orderId, table) {
+    const response = await fetch(`${API_URL}/orders/${orderId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ table }),
+    });
+    if (!response.ok) throw new Error('Failed to update order table');
+    return await response.json();
+  },
+
   // Table Management
   async occupyTable(username, table) {
     const response = await fetch(`${API_URL}/tables/occupy`, {
@@ -60,6 +70,24 @@ export const api = {
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.message || 'Failed to release table');
+    return data;
+  },
+
+  // Admin: Customer Table Management
+  async fetchCustomers() {
+    const response = await fetch(`${API_URL}/customers`);
+    if (!response.ok) throw new Error('Failed to fetch customers');
+    return await response.json();
+  },
+
+  async adminChangeTable(username, newTable) {
+    const response = await fetch(`${API_URL}/admin/change-table`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, newTable }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Failed to change table');
     return data;
   }
 };

@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
 import StatsDashboard from '../components/StatsDashboard';
 import OrdersTable from '../components/OrdersTable';
+import CustomerTables from '../components/CustomerTables';
 import Leaderboard from '../components/Leaderboard';
 import { LogOut, Download, Upload } from 'lucide-react';
 
@@ -31,6 +32,12 @@ export default function Admin() {
   const handleStatusUpdate = (orderId, newStatus) => {
     setOrders(prev => prev.map(order => 
         order.id === orderId ? { ...order, status: newStatus } : order
+    ));
+  };
+
+  const handleTableUpdate = (orderId, newTable) => {
+    setOrders(prev => prev.map(order => 
+        order.id === orderId ? { ...order, table: newTable } : order
     ));
   };
 
@@ -89,6 +96,8 @@ export default function Admin() {
 
       <StatsDashboard orders={orders} />
 
+      <CustomerTables onTableChanged={fetchOrders} />
+
       <div style={{ maxWidth: '600px', margin: '20px auto' }}>
         <Leaderboard />
       </div>
@@ -96,6 +105,7 @@ export default function Admin() {
       <OrdersTable 
         orders={orders} 
         onStatusUpdate={handleStatusUpdate} 
+        onTableUpdate={handleTableUpdate}
         onRefresh={fetchOrders} 
       />
     </div>
