@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { api } from '../services/api';
 
-export default function OrdersTable({ orders, onStatusUpdate, onRefresh }) {
+export default function OrdersTable({ orders, onStatusUpdate, onTableUpdate, onRefresh }) {
   const [filter, setFilter] = useState('all');
 
   const filteredOrders = filter === 'all'
@@ -19,6 +19,18 @@ export default function OrdersTable({ orders, onStatusUpdate, onRefresh }) {
     } catch (error) {
         console.error('Failed to update status', error);
         alert('Failed to update status');
+    }
+  };
+
+  const handleTableChange = async (orderId, newTable) => {
+    const tableNum = parseInt(newTable);
+    if (isNaN(tableNum)) return;
+    try {
+        await api.updateOrderTable(orderId, tableNum);
+        if (onTableUpdate) onTableUpdate(orderId, tableNum);
+    } catch (error) {
+        console.error('Failed to update table', error);
+        alert('Failed to update table');
     }
   };
 
@@ -72,9 +84,17 @@ export default function OrdersTable({ orders, onStatusUpdate, onRefresh }) {
                     <strong>#{order.id}</strong>
                   </td>
                   <td>
-                    <strong style={{ color: 'var(--primary-color)' }}>
-                      Table {order.table || 'N/A'}
-                    </strong>
+                    <select
+                      className="action-select"
+                      value={order.table || ''}
+                      onChange={(e) => handleTableChange(order.id, e.target.value)}
+                      style={{ fontWeight: 'bold', color: 'var(--primary-color)' }}
+                    >
+                      {!order.table && <option value="">N/A</option>}
+                      {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
+                        <option key={num} value={num}>Table {num}</option>
+                      ))}
+                    </select>
                   </td>
                   <td>{order.customer}</td>
                   <td className="order-items">
@@ -87,7 +107,7 @@ export default function OrdersTable({ orders, onStatusUpdate, onRefresh }) {
                     ))}
                   </td>
                   <td>
-                    <strong>{order.total}₺</strong>
+                    <strong>{order.total.toFixed(2)}₺</strong>
                   </td>
                   <td>{new Date(order.date).toLocaleString()}</td>
                   <td>

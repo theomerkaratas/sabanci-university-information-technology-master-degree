@@ -29,14 +29,14 @@ export default function ProductCard({ product }) {
             loading="lazy"
             onError={() => setImgError(true)}
           />
-          <div className="card-price-badge">{product.price}₺</div>
+          <div className="card-price-badge">{product.price.toFixed(2)}₺</div>
         </div>
       )}
       <div className="card-body">
         <div className="item-header">
           <span className="item-name">{product.name}</span>
           {(!product.image || imgError) && (
-            <span className="item-price">{product.price}₺</span>
+            <span className="item-price">{product.price.toFixed(2)}₺</span>
           )}
         </div>
         <p className="item-desc">{product.description}</p>

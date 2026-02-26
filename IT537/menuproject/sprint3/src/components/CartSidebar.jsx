@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useCart } from '../context/CartContext';
-import { X, Trash2, Award } from 'lucide-react';
+import { X, Trash2, Award, ChevronUp, ChevronDown } from 'lucide-react';
 
 export default function CartSidebar({ isOpen, onClose, onCheckout, userPoints = 0 }) {
-  const { cart, removeFromCart, cartTotal } = useCart();
+  const { cart, removeFromCart, removeOneByType, addOneMore, cartTotal } = useCart();
   const [usePointsPayment, setUsePointsPayment] = useState(false);
 
   const POINT_VALUE = 10; // 1 point = 10₺
@@ -12,6 +12,20 @@ export default function CartSidebar({ isOpen, onClose, onCheckout, userPoints = 
   const hasEnoughPoints = userPoints >= pointsNeeded;
   const pointsToSpend = Math.ceil(maxDiscount / POINT_VALUE);
   const finalTotal = usePointsPayment ? cartTotal - maxDiscount : cartTotal;
+
+  // Group identical items
+  const groupedCart = useMemo(() => {
+    const groups = {};
+    cart.forEach((item, index) => {
+      const key = `${item.name}-${item.codingLevel || ''}-${item.variant || ''}`;
+      if (!groups[key]) {
+        groups[key] = { ...item, quantity: 0, indices: [], key };
+      }
+      groups[key].quantity++;
+      groups[key].indices.push(index);
+    });
+    return Object.values(groups);
+  }, [cart]);
 
   const handleCheckout = () => {
     onCheckout(usePointsPayment ? pointsToSpend : 0);
@@ -32,25 +46,70 @@ export default function CartSidebar({ isOpen, onClose, onCheckout, userPoints = 
           {cart.length === 0 ? (
             <p className="empty-cart">Your cart is empty</p>
           ) : (
-            cart.map((item, index) => (
-              <div key={index} className="cart-item">
-                <div className="cart-item-info">
-                  <div className="cart-item-name">
-                    {item.name}
-                    {item.codingLevel && ` (${item.codingLevel})`}
-                    {item.variant && item.variant !== 'classic' && ` (${item.variant})`}
+            groupedCart.map((group) =>
+              group.quantity > 3 ? (
+                /* Grouped view for items with quantity > 3 */
+                <div key={group.key} className="cart-item cart-item-grouped">
+                  <div className="cart-item-info">
+                    <div className="cart-item-name">
+                      {group.name}
+                      {group.codingLevel && ` (${group.codingLevel})`}
+                      {group.variant && group.variant !== 'classic' && ` (${group.variant})`}
+                    </div>
+                    <div className="cart-item-price">{(group.price * group.quantity).toFixed(2)}₺</div>
                   </div>
-                  <div className="cart-item-price">{item.price}₺</div>
+                  <div className="cart-item-quantity-row">
+                    <div className="quantity-box">
+                      <button
+                        className="quantity-btn"
+                        onClick={() => removeOneByType(group.name, group.codingLevel, group.variant)}
+                        title="Decrease"
+                      >
+                        <ChevronDown size={16} />
+                      </button>
+                      <span className="quantity-value">x {group.quantity}</span>
+                      <button
+                        className="quantity-btn"
+                        onClick={() => addOneMore(group)}
+                        title="Increase"
+                      >
+                        <ChevronUp size={16} />
+                      </button>
+                    </div>
+                    <button
+                      className="remove-item"
+                      onClick={() => {
+                        group.indices.sort((a, b) => b - a).forEach(i => removeFromCart(i));
+                      }}
+                    >
+                      <Trash2 size={16} style={{marginRight: '5px', verticalAlign: 'text-bottom'}}/>
+                      Remove All
+                    </button>
+                  </div>
                 </div>
-                <button
-                  className="remove-item"
-                  onClick={() => removeFromCart(index)}
-                >
-                  <Trash2 size={16} style={{marginRight: '5px', verticalAlign: 'text-bottom'}}/>
-                  Remove
-                </button>
-              </div>
-            ))
+              ) : (
+                /* Individual view for items with quantity <= 3 */
+                group.indices.map((idx) => (
+                  <div key={idx} className="cart-item">
+                    <div className="cart-item-info">
+                      <div className="cart-item-name">
+                        {cart[idx].name}
+                        {cart[idx].codingLevel && ` (${cart[idx].codingLevel})`}
+                        {cart[idx].variant && cart[idx].variant !== 'classic' && ` (${cart[idx].variant})`}
+                      </div>
+                      <div className="cart-item-price">{cart[idx].price.toFixed(2)}₺</div>
+                    </div>
+                    <button
+                      className="remove-item"
+                      onClick={() => removeFromCart(idx)}
+                    >
+                      <Trash2 size={16} style={{marginRight: '5px', verticalAlign: 'text-bottom'}}/>
+                      Remove
+                    </button>
+                  </div>
+                ))
+              )
+            )
           )}
         </div>
 
@@ -73,7 +132,7 @@ export default function CartSidebar({ isOpen, onClose, onCheckout, userPoints = 
                     />
                     <span className="toggle-slider"></span>
                     <span className="toggle-label">
-                      Use {pointsToSpend} pts (-{maxDiscount}₺)
+                      Use {pointsToSpend} pts (-{maxDiscount.toFixed(2)}₺)
                     </span>
                   </label>
                 </div>
@@ -91,14 +150,14 @@ export default function CartSidebar({ isOpen, onClose, onCheckout, userPoints = 
             <div style={{ textAlign: 'right' }}>
               {usePointsPayment && maxDiscount > 0 && (
                 <div style={{ fontSize: '0.8rem', textDecoration: 'line-through', color: 'var(--text-secondary)' }}>
-                  {cartTotal}₺
+                  {cartTotal.toFixed(2)}₺
                 </div>
               )}
-              <span>{finalTotal}₺</span>
+              <span>{finalTotal.toFixed(2)}₺</span>
             </div>
           </div>
           <button className="checkout-btn" onClick={handleCheckout}>
-            {usePointsPayment ? `Checkout (${pointsToSpend} pts + ${finalTotal}₺)` : 'Checkout'}
+            {usePointsPayment ? `Checkout (${pointsToSpend} pts + ${finalTotal.toFixed(2)}₺)` : 'Checkout'}
           </button>
         </div>
       </div>

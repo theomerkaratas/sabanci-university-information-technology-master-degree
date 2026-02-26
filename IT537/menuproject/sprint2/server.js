@@ -207,7 +207,7 @@ app.post('/api/orders', (req, res) => {
 
 app.put('/api/orders/:id', (req, res) => {
     const { id } = req.params;
-    const { status } = req.body;
+    const { status, table } = req.body;
 
     ensureFiles();
     const content = fs.readFileSync(CSV_FILE, 'utf8');
@@ -217,7 +217,8 @@ app.put('/api/orders/:id', (req, res) => {
     const newLines = lines.map(line => {
         const parts = parseCsvLine(line);
         if (parts && parts[0] === id) {
-            parts[5] = status;
+            if (status) parts[5] = status;
+            if (table !== undefined) parts[2] = table !== null ? String(table) : 'N/A';
             found = true;
             const items = parts[6].includes('"') ? parts[6] : `"${parts[6]}"`;
             return `${parts[0]},${parts[1]},${parts[2]},${parts[3]},${parts[4]},${parts[5]},${items}`;
@@ -227,10 +228,76 @@ app.put('/api/orders/:id', (req, res) => {
 
     if (found) {
         fs.writeFileSync(CSV_FILE, newLines.join('\n'));
-        res.json({ message: 'Order status updated' });
+        res.json({ message: 'Order updated' });
     } else {
         res.status(404).json({ message: 'Order not found' });
     }
+});
+
+// Admin: list all customers with their active tables
+app.get('/api/customers', (req, res) => {
+    ensureFiles();
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+    const customers = [];
+    for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',').map(s => s.trim());
+        const [u, p, t, at] = parts;
+        customers.push({ username: u, type: t, activeTable: at ? parseInt(at) : null });
+    }
+    res.json(customers);
+});
+
+// Admin: change a customer's active table
+app.put('/api/admin/change-table', (req, res) => {
+    const { username, newTable } = req.body;
+    ensureFiles();
+
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+
+    // Check if newTable is occupied by another user
+    if (newTable) {
+        for (let i = 1; i < lines.length; i++) {
+            const [u, p, t, at] = lines[i].split(',');
+            if (u !== username && at === String(newTable)) {
+                return res.status(400).json({ message: `Table ${newTable} is already occupied by ${u}.` });
+            }
+        }
+    }
+
+    let found = false;
+    const newLines = lines.map((line, index) => {
+        if (index === 0) return line;
+        const [u, p, t, at] = line.split(',');
+        if (u === username) {
+            found = true;
+            return `${u},${p},${t},${newTable || ''}`;
+        }
+        return line;
+    });
+
+    if (!found) return res.status(404).json({ message: 'Customer not found' });
+
+    fs.writeFileSync(USER_FILE, newLines.join('\n') + '\n');
+
+    // Also update all pending/preparing orders for this customer
+    if (newTable) {
+        const orderContent = fs.readFileSync(CSV_FILE, 'utf8');
+        const orderLines = orderContent.split('\n');
+        const updatedOrderLines = orderLines.map(line => {
+            const parts = parseCsvLine(line);
+            if (parts && parts[1] === username && (parts[5] === 'pending' || parts[5] === 'preparing')) {
+                parts[2] = String(newTable);
+                const items = parts[6].includes('"') ? parts[6] : `"${parts[6]}"`;
+                return `${parts[0]},${parts[1]},${parts[2]},${parts[3]},${parts[4]},${parts[5]},${items}`;
+            }
+            return line;
+        });
+        fs.writeFileSync(CSV_FILE, updatedOrderLines.join('\n'));
+    }
+
+    res.json({ success: true, message: `Table changed to ${newTable || 'none'} for ${username}` });
 });
 
 app.get('/', (req, res) => {
