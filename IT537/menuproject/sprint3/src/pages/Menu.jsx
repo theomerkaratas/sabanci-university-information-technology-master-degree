@@ -6,6 +6,7 @@ import { products, categories } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import CartSidebar from '../components/CartSidebar';
 import TableSelectionModal from '../components/TableSelectionModal';
+import OrderStatusTracker from '../components/OrderStatusTracker';
 import Leaderboard from '../components/Leaderboard';
 import { LogOut, ShoppingCart, UtensilsCrossed, XCircle, Trophy } from 'lucide-react';
 
@@ -99,8 +100,8 @@ export default function Menu() {
         }
 
         let msg = `Order placed for Table ${tableNumber}! `;
-        if (discount > 0) msg += `Discount: -${discount}₺ | `;
-        msg += `Total: ${finalTotal}₺`;
+        if (discount > 0) msg += `Discount: -${discount.toFixed(2)}₺ | `;
+        msg += `Total: ${finalTotal.toFixed(2)}₺`;
         if (earned > 0) msg += ` (+${earned} pts)`;
         showToast(msg);
     } catch (error) {
@@ -165,6 +166,7 @@ export default function Menu() {
             <ShoppingCart size={18} style={{marginRight: '5px', verticalAlign: 'middle'}}/>
             Cart ({cart.length})
           </button>
+          <OrderStatusTracker username={user?.username} />
           <button className="logout-btn" onClick={logout}>
             <LogOut size={18} style={{marginRight: '5px', verticalAlign: 'middle'}}/>
             Logout

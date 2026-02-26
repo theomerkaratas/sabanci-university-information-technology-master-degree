@@ -18,7 +18,7 @@ export default function StatsDashboard({ orders }) {
       </div>
       <div className="stat-card">
         <h3>Total Revenue</h3>
-        <div className="stat-value">{totalRevenue}₺</div>
+        <div className="stat-value">{totalRevenue.toFixed(2)}₺</div>
       </div>
       <div className="stat-card">
         <h3>Today's Orders</h3>

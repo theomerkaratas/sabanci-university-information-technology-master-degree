@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
       <div className="card-body">
         <div className="item-header">
           <span className="item-name">{product.name}</span>
-          <span className="item-price">{product.price}₺</span>
+          <span className="item-price">{product.price.toFixed(2)}₺</span>
         </div>
         <p className="item-desc">{product.description}</p>
         
