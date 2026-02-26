@@ -27,6 +27,18 @@ export function CartProvider({ children }) {
     setCart((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const removeOneByType = (name, codingLevel) => {
+    setCart((prev) => {
+      const idx = prev.findIndex(item => item.name === name && (item.codingLevel || null) === (codingLevel || null));
+      if (idx === -1) return prev;
+      return prev.filter((_, i) => i !== idx);
+    });
+  };
+
+  const addOneMore = (item) => {
+    setCart((prev) => [...prev, { ...item }]);
+  };
+
   const clearCart = () => {
     setCart([]);
   };
@@ -34,7 +46,7 @@ export function CartProvider({ children }) {
   const cartTotal = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, cartTotal }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, removeOneByType, addOneMore, clearCart, cartTotal }}>
       {children}
     </CartContext.Provider>
   );

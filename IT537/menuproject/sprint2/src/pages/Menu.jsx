@@ -6,6 +6,7 @@ import { products, categories } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import CartSidebar from '../components/CartSidebar';
 import TableSelectionModal from '../components/TableSelectionModal';
+import OrderStatusTracker from '../components/OrderStatusTracker';
 import { LogOut, ShoppingCart, UtensilsCrossed, XCircle } from 'lucide-react';
 
 export default function Menu() {
@@ -70,7 +71,7 @@ export default function Menu() {
     try {
         await api.saveOrder(order);
         clearCart();
-        showToast(`Order #${order.id} placed for Table ${tableNumber}! Total: ${order.total}₺`);
+        showToast(`Order #${order.id} placed for Table ${tableNumber}! Total: ${order.total.toFixed(2)}₺`);
     } catch (error) {
         console.error('Order failed', error);
         showToast('Failed to place order. Please try again.');
@@ -125,6 +126,7 @@ export default function Menu() {
             <ShoppingCart size={18} style={{marginRight: '5px', verticalAlign: 'middle'}}/>
             Cart ({cart.length})
           </button>
+          <OrderStatusTracker username={user?.username} />
           <button className="logout-btn" onClick={logout}>
             <LogOut size={18} style={{marginRight: '5px', verticalAlign: 'middle'}}/>
             Logout
