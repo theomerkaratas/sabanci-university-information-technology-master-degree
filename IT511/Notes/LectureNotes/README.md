@@ -1,10 +1,13 @@
 ## Application Layer
+
 This is the top layer of the network protocol stack. It is where network applications and their application-layer protocol reside. Protocols at this layer define the format, order, and meaning of messages exchanged between applications, as well as the action taken on message transmission and receipt.
 
 #### Creating Network App
+
 Application development focuses on end systems, not the network core (routers, switchers). Developers write programs that run on different end systems and communicate over the network.
 
 #### Client-Server Paradigm
+
 In the client-server architecture, there is an always-on host called the server, which provides a permanent service. Clients are hosts that contact the server to communicate and consume the service.
 
 **Server:** has a permanent IP address and is always on, ready to receive requests. often in data centers, for scaling
@@ -16,6 +19,7 @@ This model centralizes management and data storage on the server. It can become 
 **Example:** HTTP (Web), IMAP (email retrieval), FTP (file transfer)
 
 #### Peer-to-Peer (P2P) Architecture
+
 In a peer-to-peer architecture, there is no dedicated, always-on server. Instead, peers (end systems) communicate directly with each other. Each peer acts as both a client and a server.
 
 **Key Advantage:** Self scalability
@@ -23,6 +27,7 @@ In a peer-to-peer architecture, there is no dedicated, always-on server. Instead
 **Key Challenges:** Peers are often intermittently connected (`churn`) and change IP addresses. This makes management complex, requiring protocols to locate resources and maintain connectivity in a dynamic environment.
 
 ## Sockets
+
 A socket is an interface between an application process and the transport layer protocol within an end system. It acts as a local "door" through which a process sends and receives network messages
 
 **Analogy:** The sending process pushes a message out through its socket (the door). The underlying operating system's transport infrastructure (like TCP or UDP) takes over on the other side of the door to deliver the message to the destination process's socket. Communication requires a pair of sockets: one at the sender, one at the receiver.
@@ -30,6 +35,7 @@ A socket is an interface between an application process and the transport layer 
 **Control:** The application developer controls what is sent into and received from the socket. The operating system controls the complex transport protocols and network interface on the other side of the socket.
 
 #### Addressing Processes
+
 **Process Identifier:** To receive messages, a process needs a unique identifier.
 
 **IP Address Limitation:** A host's IP address alone is insufficient because many processes (applications) can run on the same host.
@@ -37,11 +43,14 @@ A socket is an interface between an application process and the transport layer 
 **Complete Address:** A process is uniquely identified by the combination of the **host's IP address** and a **port number**. The port number specifies the specific process (application) on that host.
 
 **Port Examples:**
+
 - HTTP server typically uses port **80**.
 - SMTP mail server typically uses port **25**.
 
 #### Application-Layer Protocol Definition
+
 An application-layer protocol defines the rules for communication between application processes, including:
+
 - **Types of Messages:** The kind of messages exchanged (e.g., request, response).
 - **Message Syntax:** The structure and format of the messages (how fields are arranged and delimited).
 - **Message Semantics:** The meaning of the information within each field (what a request or response signifies).
@@ -49,13 +58,16 @@ An application-layer protocol defines the rules for communication between applic
 - **Open vs. Proprietary:** Protocols like HTTP and SMTP are **open** (defined in public RFCs for interoperability), while protocols like Zoom are often **proprietary**.
 
 #### Transfer Service for Application
+
 Applications have different requirements from the underlying transport layer service:
+
 - **Data Integrity/Reliability:** Does the app require all data to be received correctly (e.g., file transfer) or can it tolerate some loss (e.g., real-time audio)?
 - **Timing/Latency:** Does the app require low delay to be functional (e.g., online gaming, VoIP)?
 - **Throughput/Bandwidth:** Does the app require a minimum guaranteed bandwidth (e.g., video streaming) or is it "elastic" and can work with whatever is available (e.g., email)?
 - **Security:** Does the app need encryption, data integrity, and authentication?
 
 #### Transport Service Requirements
+
 - **No Loss, Elastic, Not Time-Sensitive:** File transfer, email, web documents. These use reliable, connection-oriented protocols.
 - **Loss-Tolerant, Time-Sensitive, Specific Bandwidth Needs:** Real-time audio/video, interactive games. These can tolerate some packet loss but require low delay.
 - **Mixed Requirements:** Text messaging requires no loss, is elastic in bandwidth, and has some timing constraints (should be fast, but not real-time like gaming).
@@ -63,25 +75,30 @@ Applications have different requirements from the underlying transport layer ser
 #### Internet Transport Protocol
 
 **TCP (Transmission Control Protocol) Service:**
+
 - **Reliable, in-order data delivery.**
-- *Flow Control** (prevents overwhelming the receiver).
+- \*Flow Control\*\* (prevents overwhelming the receiver).
 - **Congestion Control** (prevents overwhelming the network).
 - **Connection-oriented** (requires handshake setup).
 - **Does not provide:** Timing guarantees, minimum throughput, or built-in security.
 
 **UDP (User Datagram Protocol) Service:**
+
 - **Unreliable data transfer.** No guarantees of delivery, order, or non-duplication.
 - **Connectionless.** No setup delay.
 - **Does not provide:** Reliability, flow control, congestion control, timing, throughput guarantees, security.
 
 #### Internet Applications and Transport Protocols
+
 - **TCP for Reliability:** FTP (file transfer), SMTP (email), HTTP (web) use TCP for its reliable data transfer.
 - **UDP or TCP for Multimedia:** Internet telephony and streaming often use RTP over UDP for low latency, though some streaming uses HTTP/TCP. Interactive games often use UDP for speed.
 
 #### Securing TCP
-Problem is standard ("Vanilla") TCP and UDP sockets send data in cleartext, including sensitive information like passwords, which is a major security risk. 
+
+Problem is standard ("Vanilla") TCP and UDP sockets send data in cleartext, including sensitive information like passwords, which is a major security risk.
 
 Solution is Transport Layer Security (TLS):
+
 - It provides **encryption** for TCP connections.
 - It ensures **data integrity** (data is not altered in transit).
 - It provides **end-point authentication** (verifying the server's identity).
@@ -89,6 +106,7 @@ Solution is Transport Layer Security (TLS):
 TLS is implemented at the application layer. Applications use TLS libraries (like OpenSSL) that, in turn, use TCP sockets. Data sent into a TLS-enabled "socket" is encrypted before traversing the network.
 
 #### Web and HTTP
+
 **Web Page Composition:** A web page is not a single file. It is a composite of multiple **objects**, each of which can be stored on different web servers.
 
 **Objects:** These can be an HTML file, images (JPEG, PNG), scripts (JavaScript), applets (Java), audio/video files, etc.
@@ -98,29 +116,36 @@ TLS is implemented at the application layer. Applications use TLS libraries (lik
 **URL (Uniform Resource Locator):** Each object is addressable by a URL. The URL format: `http://host_name/path_name`. For example, in `www.someschool.edu/someDept/pic.gif`, `www.someschool.edu` is the **host name** and `/someDept/pic.gif` is the **path name** to the object on that host.
 
 #### Hypertext Transfer Protocol (HTTP)
+
 It is the application-layer protocol of the World Wide Web. It defines how messages are formatted and transmitted between web clients and servers.
 
 **Client/Server Model:**
+
 - **Client:** A web browser (e.g., Firefox, Safari) that requests objects via HTTP messages.
 - **Server:** A web server (e.g., Apache, Nginx) that sends objects in HTTP response messages.
 
 **Basic Interaction:** The browser (client) sends an **HTTP request** for an object. The web server sends back an **HTTP response** containing the requested object.
 
 HTTP relies on TCP as its underlying transport protocol for reliable data transfer. The typical process:
+
 1. Client initiates a TCP connection to the server on port 80 (the default HTTP port).
 2. Server accepts the TCP connection.
 3. HTTP messages are exchanged over this established connection.
 4. The TCP connection is closed.
 
 ##### HTTP is Stateless:
+
 A fundamental characteristic of the basic HTTP protocol. The server does not retain any information ("state") about past client requests. Each request is processed independently, without knowledge of previous interactions. This simplifies server design but makes complex transactions (like shopping carts) impossible without additional mechanisms.
 
 #### HTTP Connections: Two Types
+
 - **Non-persistent HTTP (HTTP/1.0 default):** For each object transfer, a separate TCP connection is opened, used, and then closed. If a page has 10 images, 11 separate TCP connections are required (1 for the base HTML + 10 for the images).
 - **Persistent HTTP (HTTP/1.1 default):** A single TCP connection is opened and left open. Multiple objects (the base HTML and all its referenced objects) can be sent over this single connection between the same client and server. The connection is closed after a period of inactivity or by explicit instruction.
 
 #### Non-persistent HTTP: Example
+
 This two-slide sequence illustrates the steps for fetching a page (`home.index`) with 10 embedded images using non-persistent HTTP:
+
 1. Client initiates a TCP connection to the server.
 2. Client sends an HTTP `GET` request for the `home.index` file.
 3. Server receives the request, fetches the file, and sends it back in an HTTP response.
@@ -129,20 +154,23 @@ This two-slide sequence illustrates the steps for fetching a page (`home.index`)
 6. **Steps 1-4 are repeated 10 more times**, once for each JPEG image. This leads to significant overhead.
 
 #### Non-persistent HTTP: Response Time
+
 **RTT (Round-Trip Time):** The time it takes for a small packet to travel from client to server and back.
 **Response Time Calculation (per object):**
+
 - **1 RTT** to initiate the TCP connection (SYN, SYN-ACK).
 - **1 RTT** for the HTTP request and the beginning of the HTTP response to return.
 - **File transmission time** for the actual object data.
-**Total:** `2 RTT + file transmission time` per object.
+  **Total:** `2 RTT + file transmission time` per object.
 
 #### Persistent HTTP (HTTP 1.1)
 
 **Problems with Non-persistent HTTP:**
+
 - High latency: 2 RTTs per object.
 - High OS overhead for managing many TCP connections.
 - Browsers work around it by opening multiple parallel connections, which strains servers.
-**Solution - Persistent HTTP:**
+  **Solution - Persistent HTTP:**
 - The server keeps the TCP connection open after sending the initial response.
 - The client can send subsequent requests for referenced objects immediately over this existing connection.
 - **Major Benefit:** Dramatically reduces response time. After the initial page fetch (2 RTTs), referenced objects can be fetched with as little as **1 RTT each** (just the request/response cycle, no new connection setup).
@@ -152,21 +180,25 @@ This two-slide sequence illustrates the steps for fetching a page (`home.index`)
 **Message Types:** HTTP defines **request** and **response** messages. They are in human-readable ASCII format.
 
 **Request Message Format:**
+
 - **Request Line:** The first line. Contains the **method** (e.g., GET, POST), the **URL** of the requested object, and the **HTTP version** (e.g., HTTP/1.1).
 - **Header Lines:** Provide additional information about the request (e.g., `Host:`, `User-Agent:`, `Connection:`).
 - A blank line (carriage return + line feed) marks the end of the headers.
 - **Entity Body:** Optional. Used with methods like POST to send data to the server.
 
 #### Other HTTP Request Messages
-- **POST:** Used to send data _to_ the server, typically from web forms. The user's input is placed in the **entity body** of the request.
-- **HEAD:** Asks the server to send only the _headers_ of the response for a given URL, not the actual object. Useful for checking metadata or links.
-- **PUT:** Used to _upload_ a new file/object to the server. The content in the entity body replaces the file at the specified URL.
+
+- **POST:** Used to send data *to* the server, typically from web forms. The user's input is placed in the **entity body** of the request.
+- **HEAD:** Asks the server to send only the *headers* of the response for a given URL, not the actual object. Useful for checking metadata or links.
+- **PUT:** Used to *upload* a new file/object to the server. The content in the entity body replaces the file at the specified URL.
 - **GET (with Query String):** Although primarily for retrieval, GET can also send limited data to the server by appending it to the URL after a `?` (e.g., `.../search?term=monkeys`). This data is part of the URL in the request line.
 
 #### HTTP Response Status Codes
+
 A 3-digit code in the first line (status line) of the server's response indicates the result of the request.
 
 Key examples:
+
 - **200 OK:** Request succeeded. The requested object follows.
 - **301 Moved Permanently:** The object has a new permanent URL, provided in the `Location:` header.
 - **400 Bad Request:** The server could not understand the request (malformed syntax).
@@ -178,6 +210,7 @@ Key examples:
 HTTP is stateless, but many web applications need to track user activity across multiple page requests ("maintain state"). HTTP cookies enable us to do this. A cookie is a small piece of data created by the server and stored on the client's browser.
 
 **Four Components:**
+
 1. A `Set-Cookie:` header in the server's **HTTP response** (sends a unique ID to the client).
 2. A `Cookie:` header in the client's subsequent **HTTP requests** (sends the ID back to the server).
 3. A **cookie file** on the user's host, managed by the browser.
@@ -186,45 +219,55 @@ HTTP is stateless, but many web applications need to track user activity across 
 On first visit, the server assigns a cookie ID (e.g., 1678). The browser stores it. On every future visit to that site, the browser automatically includes the cookie ID in its requests, allowing the server to "recognize" the user.
 
 #### **HTTP Cookies: Comments**
+
 Uses for Cookies:
+
 - **Authorization:** Keeping users logged in across pages.
 - **Shopping Carts:** Remembering items a user has selected.
 - **Recommendations:** Tracking user preferences and browsing history on a site.
 - **User Session State:** Maintaining settings for web applications like email.
 
-**How State is Maintained:** State is kept **at protocol endpoints** (server database 
+**How State is Maintained:** State is kept **at protocol endpoints** (server database
 and client's cookie file) and carried **in messages** (the cookie header lines).
 
-**Privacy Concern:** Cookies allow sites to track a user's activity _on their site_. **Third-party persistent cookies** (often from advertisers) can be used to track a user's identity and behavior _across multiple, different websites_, raising significant privacy issues.
+**Privacy Concern:** Cookies allow sites to track a user's activity *on their site*. **Third-party persistent cookies** (often from advertisers) can be used to track a user's identity and behavior *across multiple, different websites*, raising significant privacy issues.
 
 #### GDPR (EU General Data Protection Regulation) and Cookies
+
 - GDPR Stance: The European Union's GDPR recognizes that cookies, especially when combined with other data, can be used to create profiles and identify individuals.
 - Legal Classification: Therefore, such cookies are considered personal data.
 - User Consent Requirement: Under GDPR, websites must obtain the user's explicit, informed consent before placing non-essential cookies (especially tracking cookies) on their device. This is why you see "cookie consent" banners on EU websites.
 - User Control: The regulation gives users explicit control over whether their personal data (including cookies) can be collected and processed.
 
 ## Web Caches
+
 A web cache (or proxy server) is an intermediate network entity that stores copies of recently requested web objects. Its primary goal is to satisfy client requests without needing to contact the distant origin server every time.
 
 How It Works:
+
 1. A user configures their browser to send all HTTP requests to a local web cache.
 2. For each request:
-  - Cache Hit: If the requested object is stored in the cache and is fresh, the cache returns it directly to the client.
-  - Cache Miss: If the object is not in the cache (or is stale), the cache acts as a client, requests the object from the origin server, stores a copy, and then forwards it to the original client.
+
+- Cache Hit: If the requested object is stored in the cache and is fresh, the cache returns it directly to the client.
+- Cache Miss: If the object is not in the cache (or is stale), the cache acts as a client, requests the object from the origin server, stores a copy, and then forwards it to the original client.
 
 A web cache acts as both a server (to the requesting client) and a client (to the origin server).
 
 **Cache Control:** The origin server controls how its content is cached using HTTP response headers like:
+
 - `Cache-Control: max-age=<seconds>`: Tells the cache how long it can serve the object without checking for updates.
 - `Cache-Control: no-cache:` Tells the cache it must validate with the origin server before serving a cached copy.
 
 **Benefits of Caching:**
-1. Reduced Response Time: The cache is geographically or network-topologically closer to the client than the origin server. 
+
+1. Reduced Response Time: The cache is geographically or network-topologically closer to the client than the origin server.
 2. Reduced Bandwidth: Decreases traffic on an institution's expensive access link to the wider internet.
 3. Content Delivery Leveling: Allows smaller content providers to handle high demand more effectively by offloading traffic to distributed caches.
 
 #### Caching Example and Calculation
+
 There are a couple of quantitative comparison of solutions to a network bottleneck problem.
+
 1. **Buy a Faster Link:** Increase the access link capacity.
 2. **Install a Web Cache:** Install a cheap web cache inside the institutional network.
 
@@ -233,16 +276,19 @@ There are a couple of quantitative comparison of solutions to a network bottlene
 The goal is to avoid transferring an object the browser already has if it hasn't changed on the server. This saves bandwidth and time.
 
 **Mechanism:**
+
 1. The browser stores cached objects along with the date it received them from the server.
 2. When the object might be stale, the browser sends a conditional GET request with an `If-modified-since: <date>` header.
 
 **Server Response:**
+
 - `304 Not Modified`: If the object hasn't changed since that date, the server sends this empty response. The browser uses its cached copy.
 - `200 OK` with new data: If the object has changed, the server sends the full new object.
 
 > This protocol ensures cached data is kept fresh without the overhead of transmitting unchanged objects repeatedly.
 
 #### HTTP/2
+
 - **Primary Goal:** Decrease delay when loading web pages that require multiple objects (HTML, CSS, images, scripts).
 - HTTP/1.1 Limitation: While it allowed multiple requests over a single persistent TCP connection (pipelining), it mandated First-Come-First-Served (FCFS) order for server responses.
 - The Problem – Head-of-Line (HOL) Blocking:
@@ -251,23 +297,30 @@ The goal is to avoid transferring an object the browser already has if it hasn't
 - HTTP/2 Approach: Increases server flexibility in sending objects. While core protocol semantics (methods, status codes) remain the same as HTTP/1.1, it introduces major changes to how data is framed and delivered over the connection.
 
 #### HTTP/2: Mitigating HOL Blocking
+
 ##### Problem:
+
 - Scenario: A client requests one large object (O₁) and three smaller objects (O₂, O₃, O₄) over an HTTP/1.1 pipelined connection.
 - HTTP/1.1 Behavior: The server sends the objects back in the exact order they were requested (FCFS). Even though O₂, O₃, and O₄ are ready and small, they are stuck behind the large O₁ file.
 - Result: The browser cannot process/display O₂, O₃, O₄ until the transmission of O₁ is complete, increasing page load time.
+
 ##### Solution:
+
 - Core Mechanism: Multiplexing. Objects are broken down into smaller frames.
 - HTTP/2 Behavior: The server can interleave frames from different objects on the single TCP connection.
 - Result in the Scenario: Frames from the smaller objects (O₂, O₃, O₄) can be sent between frames of the large object (O₁). This allows the browser to receive, process, and display the smaller objects much sooner. O₁ is delivered only slightly later.
 - Benefit: Significantly reduces HOL blocking and improves page load performance.
 
 #### HTTP/2 to HTTP/3
+
 Remaining Problems with HTTP/2 over TCP:
+
 1. Packet Loss Recovery: Since all multiplexed streams share a single TCP connection, the loss of any single TCP packet causes the entire connection to stall for retransmission, blocking all objects (streams). This reintroduces a form of HOL blocking at the transport layer.
 2. Incentive for Parallel Connections: To work around this, browsers often open multiple parallel TCP connections (as they did with HTTP/1.1), defeating part of HTTP/2's efficiency goal.
 3. No Built-in Security: Runs over plain TCP, requiring a separate TLS handshake for encryption (HTTPS).
 
 #### HTTP/3
+
 - Transport Change: Abandons TCP. Instead, it runs over QUIC, a modern transport protocol built on UDP.
 - Key Benefits:
   - Per-Object/Stream Control: QUIC implements loss recovery and congestion control per stream, not per connection. The loss of a packet in one stream does not stall others.
@@ -299,6 +352,7 @@ Remaining Problems with HTTP/2 over TCP:
 QUIC (Quick UDP Internet Connections) is an application-layer protocol that runs on top of UDP (instead of TCP). It was designed primarily to improve the performance of HTTP traffic.
 
 **Architecture Comparison:**
+
 - Traditional Stack (HTTP/2 over TCP): `HTTP/2 -> TLS (for security) -> TCP -> IP`
 - QUIC Stack: `HTTP/3 -> QUIC -> UDP -> IP`
 
@@ -307,12 +361,14 @@ QUIC (Quick UDP Internet Connections) is an application-layer protocol that runs
 #### QUIC's Core Functionality
 
 QUIC re-implements key transport-layer mechanisms within its own design:
+
 - Error and Congestion Control: QUIC incorporates algorithms for reliable data transfer and network congestion management that are conceptually similar to TCP's well-known mechanisms. However, they are implemented in user-space (as part of QUIC) rather than in the operating system's kernel (like TCP).
 - Connection Establishment: A major goal is to reduce setup time. QUIC aims to combine the establishment of reliability, congestion control state, authentication, and encryption into a single, integrated handshake.
 
 #### QUIC Connection Establishment (1-RTT)
 
 **The Problem with TCP+TLS (HTTP/2):**
+
 - It requires two sequential handshakes:
   1. TCP Handshake: 1 RTT to establish the reliable transport connection.
   2. TLS Handshake: Requires at least 1 more RTT (ClientHello, ServerHello, etc.) to establish a secure, encrypted channel.
@@ -330,6 +386,7 @@ Total: At least 2 RTTs of delay before application data (HTTP) can be sent.
 For even faster subsequent connections to the same server, QUIC implements 0-RTT.
 
 **How it Works:**
+
 1. First Connection: At the end of the initial QUIC connection, the server provides the client with a session ticket (cryptographic material) that is cached by the client.
 2. Subsequent Connection: When the client reconnects, it can immediately use this cached session ticket to encrypt and authenticate data in its very first packet.
 
@@ -340,6 +397,7 @@ Benefit: This allows the client to send application data immediately (0 RTT) alo
 The email system is a major network application built on a client-server architecture with three core components.
 
 **Components:**
+
 1. User Agents (UA): Also known as "mail readers" or clients (e.g., Outlook, Apple Mail, webmail interfaces). They allow users to compose, edit, read, and manage email messages. They typically store messages on a central mail server.
 2. Mail Servers: The infrastructure's backbone. They maintain mailboxes (incoming messages) for each user and manage message queues for outgoing mail.
 3. SMTP (Simple Mail Transfer Protocol): The application-layer protocol used for transferring email messages between mail servers and from a user agent to its outgoing mail server.
@@ -347,16 +405,19 @@ The email system is a major network application built on a client-server archite
 #### E-mail: Mail Servers
 
 **Mail Server Functions:**
+
 - Mailbox: Storage for incoming messages destined for a specific user.
 - Message Queue: A holding area for outgoing messages that are waiting to be sent to other mail servers.
 
 **SMTP's Role:** SMTP operates between mail servers. The server initiating the transfer acts as an SMTP client, and the receiving server acts as an SMTP server. This is a push protocol—the sender proactively delivers the message.
 
 #### SMTP RFC (5321)
+
 - SMTP uses TCP on port 25 for reliable delivery.
 - **Direct Transfer:** It involves a direct connection from the sending mail server (client role) to the receiving mail server (server role).
 
 Three Transfer Phases:
+
 1. Handshaking (Greeting): Exchange of greetings and server capabilities.
 2. Message Transfer: The actual sending of the email message.
 3. Closure: Terminating the connection.
@@ -374,17 +435,19 @@ Protocol Style: Like HTTP, it is a text-based, command/response protocol. Comman
 3. Server-to-Server Connection: The SMTP client running on Emma’s mail server opens a TCP connection to David’s mail server (university.edu).
 4. Message Relay: Emma’s mail server transfers the email to David’s mail server using SMTP over this direct TCP connection.
 5. Delivery to Mailbox: David’s mail server receives the message and stores it in David’s mailbox.
-7. Retrieval: Later, David uses his User Agent (e.g., Outlook or a mobile mail app) to retrieve the message from his mailbox using a mail access protocol such as IMAP or POP3 (not SMTP).
+6. Retrieval: Later, David uses his User Agent (e.g., Outlook or a mobile mail app) to retrieve the message from his mailbox using a mail access protocol such as IMAP or POP3 (not SMTP).
 
 #### SMTP: Observations & Comparison with HTTP
 
 **Fundamental Difference:**
+
 - HTTP is a pull protocol: The client (browser) initiates requests to pull data from a server.
 - SMTP is a push protocol: The sending server pushes data to the receiving server.
 
 **Similarities:** Both are text-based, use status codes, and can use persistent connections.
 
 **Key SMTP Characteristics:**
+
 - Can bundle multiple objects (e.g., text and attachments) into a single multipart message.
 - Historically required message content (header and body) to be in 7-bit ASCII, which is why non-text attachments need encoding (like Base64).
 - Uses the sequence CRLF.CRLF (a single dot on a line by itself) to mark the end of the message body.
@@ -394,6 +457,7 @@ Protocol Style: Like HTTP, it is a text-based, command/response protocol. Comman
 The Internet uses IP addresses (32/128-bit numbers) for routing, but we use domain names (e.g., cs.umass.edu). A system is needed to map between these two identifiers.
 
 **DNS is:**
+
 - A distributed, hierarchical database implemented across many name servers.
 - An application-layer protocol used by hosts and DNS servers to resolve (translate) names into addresses and vice versa.
 
@@ -402,6 +466,7 @@ It is a core Internet function, yet it is implemented at the application layer. 
 #### DNS Services & Why a Distributed Design?
 
 **DNS Services:**
+
 - Primary: Hostname to IP address translation.
 - Host Aliasing: Mapping a simple alias (e.g., www.google.com) to a complex canonical hostname.
 - Mail Server Aliasing: Mapping a domain's mail address (e.g., @gmail.com) to its actual mail server cluster.
@@ -426,11 +491,13 @@ DNS servers   DNS servers  DNS servers            DNS servers  DNS servers
 ```
 
 **Hierarchical Structure:**
+
 - Root DNS Servers: The top of the hierarchy (.).
 - Top-Level Domain (TLD) Servers: Responsible for domains like `.com`, `.org`, `.edu`, and country codes (`.uk`, `.jp`).
 - Authoritative DNS Servers: Owned by organizations or their providers. Hold the definitive ("authoritative") mappings for their hosts.
 
 **Resolution Process (Simplified): To find www.amazon.com:**
+
 1. Client asks Root: "Where is .com?"
 2. Root replies: "Ask this .com TLD server."
 3. Client asks .com TLD: "Where is amazon.com?"
@@ -459,12 +526,14 @@ DNS servers   DNS servers  DNS servers            DNS servers  DNS servers
 #### DNS Name Resolution: Iterated vs. Recursive Query
 
 ##### Iterative Query
+
 - The contacted server replies with the best answer it has, which is often the address of another server to ask next.
 - Example Flow: `Local Server -> Root (reply: "ask .com") -> Local Server -> .com TLD (reply: "ask amazon.com") -> Local Server -> amazon.com (reply: IP)`
 
 **Burden:** The querying server (local DNS) does most of the work.
 
 ##### Recursive Query
+
 - The contacted server must obtain the mapping on behalf of the requester and return the final answer.
 - Example Flow: `Local Server (asks Root) -> Root (asks .com) -> .com (asks amazon.com) -> amazon.com (replies to .com) -> .com (replies to Root) -> Root (replies to Local Server)`
 
@@ -482,6 +551,7 @@ DNS servers   DNS servers  DNS servers            DNS servers  DNS servers
 - Resource Records (RRs): The fundamental data units stored in DNS. Format: (Name, Value, Type, TTL).
 
 **Key Record Types:**
+
 - **Type A**: `Name` = Hostname, `Value` = IPv4 Address.
 - **Type NS**: `Name` = Domain (e.g., ibm.com), `Value` = Hostname of the authoritative name server for that domain.
 - **Type CNAME**: `Name` = Alias (e.g., www.ibm.com), `Value` = Canonical (real) hostname.
@@ -492,11 +562,13 @@ DNS servers   DNS servers  DNS servers            DNS servers  DNS servers
 - DNS uses a single message format for both queries and replies.
 
 **Message Header Fields:**
+
 - **Identification**: A 16-bit ID to match queries with their replies.
 - **Flags**: Indicate if it's a query/reply, if recursion is desired/available, and if the reply is authoritative.
 - **Counters**: Number of questions, answer RRs, authority RRs, and additional RRs in the message.
 
 **Message Sections:**
+
 - **Question Section**: Contains the query (name, type of record requested).
 - **Answer Section**: Contains the Resource Records (RRs) that answer the question.
 - **Authority Section**: Contains RRs that point to authoritative name servers.
@@ -531,10 +603,12 @@ DNS servers   DNS servers  DNS servers            DNS servers  DNS servers
 # Socket Programming
 
 Two Fundamental Transport Services:
+
 - UDP Sockets: Provide an interface to unreliable, connectionless datagram service. Messages have boundaries.
 - TCP Sockets: Provide an interface to reliable, connection-oriented, byte-stream service. Data is a continuous stream without inherent message boundaries.
 
 Demonstration Application: A simple client-server echo application with modification.
+
 1. Client: Reads a line of text from the user (keyboard) and sends it to the server.
 2. Server: Receives the data, converts all characters to uppercase.
 3. Server: Sends the modified (uppercase) data back to the client.
@@ -552,24 +626,28 @@ Demonstration Application: A simple client-server echo application with modifica
 # Transportation Layer
 
 #### Transport Services and Protocols
+
 - **Primary Role**: To provide logical communication between application processes (not just hosts) running on different end systems.
 - **Sender Actions**: At the sender, the transport layer takes application-layer messages, breaks them into smaller chunks called segments, adds a transport-layer header, and passes these segments down to the network layer.
 - **Receiver Actions**: At the receiver, the transport layer reassembles the received segments back into the original messages and delivers them to the correct application process.
 - The Internet offers two primary transport protocols: TCP (reliable) and UDP (unreliable).
 
 #### Transport vs. Network Layer Services
+
 - **Network Layer (IP)**: Provides logical communication between hosts. It is responsible for delivering packets from the source host to the destination host.
 - **Transport Layer (TCP/UDP)**: Provides logical communication between processes (applications) within those hosts. It extends the host-to-host delivery service of the network layer to a process-to-process delivery service.
 
 #### Transport Layer Actions (Sender & Receiver)
 
 ##### Sender Side
+
 1. Receives an application-layer message from the application process above.
 2. Determines the values for the segment header fields (e.g., source/destination port numbers, sequence numbers for TCP, length for UDP).
 3. Creates a transport-layer segment by encapsulating the application message with this header.
 4. Passes the segment down to the network (IP) layer for delivery.
 
 ##### Receiver Side
+
 1. Receives the segment from the network (IP) layer below.
 2. Checks header values (for error detection, demultiplexing, etc.).
 3. Extracts the application-layer message from the segment.
@@ -578,6 +656,7 @@ Demonstration Application: A simple client-server echo application with modifica
 #### Two Principal Internet Transport Protocols
 
 **TCP (Transmission Control Protocol):**
+
 - More precise demultiplexing using the 4-tuple (source & destination IP and port).
 - Reliable, in-order byte-stream delivery.
 - Congestion Control: Throttles the sender to prevent network overload.
@@ -585,6 +664,7 @@ Demonstration Application: A simple client-server echo application with modifica
 - Connection-oriented: Requires a handshake to establish state before data exchange.
 
 **UDP (User Datagram Protocol):**
+
 - Simple demultiplexing using destination port number only.
 - "Best-effort" service: Unreliable, unordered delivery. It is essentially a minimal extension of the IP datagram service to the application layer.
 - No frills: No connection setup, no reliability, no congestion control, no flow control.
@@ -615,10 +695,15 @@ Demonstration Application: A simple client-server echo application with modifica
 - **Demultiplexing (at receiver)**: The job of delivering the data in received transport-layer segments to the correct application process (socket) by examining the header fields in the segment. One network path, many sockets.
 
 ##### Question
+
 When the server receives a segment, how does it know which local process (e.g., an HTTP response) should go to a waiting Firefox process vs. another service?
+
 ##### Demultiplexing at Receiver
+
 Shows incoming segments being directed to different sockets/processes on the server based on header information.
+
 ##### Multiplexing at Sender
+
 Shows the client's transport layer gathering data from multiple application sockets and sending them out as segments.
 
 #### How Demultiplexing Works – The Gist
@@ -638,7 +723,7 @@ Shows the client's transport layer gathering data from multiple application sock
 ```
 
 - A host uses a combination of IP addresses (network layer) and port numbers (transport layer) to direct an incoming segment to the right socket.
-- The critical fields for demultiplexing are the source port number and destination port number, contained in the transport-layer segment header. 
+- The critical fields for demultiplexing are the source port number and destination port number, contained in the transport-layer segment header.
 
 #### Connectionless Demultiplexing (UDP)
 
@@ -660,7 +745,7 @@ Shows the client's transport layer gathering data from multiple application sock
    │     P3       │◄─────────────────────────►│      P1      │◄─────────────────────────►│      P4      │
    ├──────────────┤                           ├──────────────┤                           ├──────────────┤
    │   Transport  │    source port: -> 9157   │   Transport  │    <- source port: ....   │   Transport  │
-   │              │    dest port: ->  6428    │              │    <- dest port: ....     │              │ 
+   │              │    dest port: ->  6428    │              │    <- dest port: ....     │              │
    │   (Socket)   │◄─────────────────────────►│   (Socket)   │◄─────────────────────────►│   (Socket)   │
    ├──────────────┤                           ├──────────────┤                           ├──────────────┤
    │   Network    │                           │   Network    │                           │   Network    │
@@ -675,6 +760,7 @@ Shows the client's transport layer gathering data from multiple application sock
 #### Connection-Oriented Demultiplexing (TCP)
 
 Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
+
 1. Source IP address
 2. Source port number
 3. Destination IP address
@@ -685,13 +771,13 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
 
 ```
         address A                                address B                                  address C
-        host: IP                                 server: IP                                 host: IP 
+        host: IP                                 server: IP                                 host: IP
    ┌──────────────┐  <- source IP, port: B,80 ┌──────────────┐ source ip, port: -> C,5775┌──────────────┐
    │  Application │  <- dest IP, port: A,9157 │  Application │ dest port: ->  B,80       │  Application │
    │     P1       │◄─────────────────────────►│  P4  P5  P6  │◄─────────────────────────►│      P4      │
    ├──────────────┤                           ├──────────────┤                           ├──────────────┤
    │   Transport  │ source IP, port: -> A,9157│   Transport  │  <- source port: C,9157   │   Transport  │
-   │              │ dest IP, port: ->  B80    │              │  <- dest port: B,80       │              │ 
+   │              │ dest IP, port: ->  B80    │              │  <- dest port: B,80       │              │
    │   (Socket)   │◄─────────────────────────►│   (Socket)   │◄─────────────────────────►│   (Socket)   │
    ├──────────────┤                           ├──────────────┤                           ├──────────────┤
    │   Network    │                           │   Network    │                           │   Network    │
@@ -706,6 +792,7 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
 ## UDP: User Datagram Protocol
 
 #### Characteristics
+
 - **Service Model**: UDP is a minimal, "no-frills" transport protocol. It provides "best-effort" service, meaning segments can be lost, duplicated, or delivered out of order to the application.
 - **Connectionless**: There is no handshaking to establish a connection. Each UDP segment is processed independently.
 - **Why Use UDP? Key Advantages:**
@@ -717,6 +804,7 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
 #### UDP Use Cases
 
 **Typical Applications:**
+
 - **Streaming Multimedia**: Loss-tolerant but sensitive to timing and rate (e.g., live video, VoIP).
 - **DNS**: Simple query/response where speed is critical and a retransmission can be sent if needed.
 - **SNMP**: Network management queries.
@@ -725,6 +813,7 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
 > Design Philosophy: If an application needs reliability or congestion control, it must implement these features itself within the application layer, as HTTP/3 does.
 
 #### UDP RFC 768
+
 - **Key Points from the RFC:**
   - UDP provides a datagram mode of communication.
   - It assumes IP is the underlying protocol.
@@ -732,7 +821,7 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
   - It is transaction-oriented and does not guarantee delivery or protection against duplicates.
   - Applications needing reliable, ordered streams should use TCP.
 
-<img src="user_datagram_protocol.png" width="600">
+<img src="assets/user_datagram_protocol.png" width="600">
 
 #### UDP Transport Layer Actions
 
@@ -758,12 +847,14 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
 ```
 
 **UDP Sender Actions**:
+
 - Receives an application-layer message (SNMP msg).
 - Determines UDP header field values (source/dest ports, length, checksum).
 - Creates a UDP segment by adding the header.
 - Passes the segment to the IP layer.
 
 **UDP Receiver Actions**:
+
 - Receives the segment from the IP layer.
 - Checks the UDP checksum for errors.
 - Extracts the application-layer message.
@@ -786,22 +877,25 @@ Socket Identification: A TCP socket is uniquely identified by a 4-tuple:
 ```
 
 Header Fields (8 bytes total):
+
 - Source Port Number (16 bits)
 - Destination Port Number (16 bits)
 - Length (16 bits): Total length of the UDP segment (header + data) in bytes.
 - Checksum (16 bits): Used for error detection.
-Payload: The data from the application layer follows the header.
+  Payload: The data from the application layer follows the header.
 
 #### UDP Checksum & Internet Checksum
 
 **Goal**: To detect errors (flipped bits) in the transmitted segment. It is not for error correction.
 
 **Sender's Job**:
+
 - Treats the entire UDP segment (and parts of the IP pseudo-header) as a sequence of 16-bit integers.
 - Adds them all together using one's complement addition.
 - Takes the one's complement of this sum, which becomes the checksum value placed in the header.
 
 **Receiver's Job**:
+
 - Performs the same calculation on the received segment (including the checksum field).
 - If the result is all 1 bits (one's complement of 0), no error is detected. Otherwise, an error is detected, and the segment is silently discarded.
 
@@ -811,31 +905,32 @@ Payload: The data from the application layer follows the header.
 
 > **Recap**: UDP is a simple, unreliable, connectionless datagram protocol.
 > **Advantages Reiterated**:
+>
 > - Low overhead and latency (no connection setup).
 > - Robustness in impaired network conditions (no forced slowdown from congestion control).
 > - Provides a basic error detection mechanism (checksum).
-> **Final Point**: UDP serves as a flexible substrate. Applications that need more sophisticated services (like HTTP/3) can build them on top of UDP, giving them > more control than TCP allows.
+>   **Final Point**: UDP serves as a flexible substrate. Applications that need more sophisticated services (like HTTP/3) can build them on top of UDP, giving them > more control than TCP allows.
 
 # Reliable Data Transfer (RDT)
 
 ```
          RELIABLE SERVICE (ABSTRACTION)                                      RELIABLE SERVICE (IMPLEMENTATION)
-                                                                                 
-sending process                        receiving process      ->       sending process                        receiving process       
-+---------------+                      +---------------+      ->       +---------------+                      +---------------+      
-|   application |                      |   application |      ->       |   application |                      |   application |        
-|     data      |                      |     data      |      ->       |     data      |                      |     data      |        
-+-------+-------+                      +-------+-------+      ->       +-------+-------+                      +-------+-------+        
-        |                                      ^              ->               |                                      ^       
-        |                                      |              ->               |                                      |      
-        |        reliable channel              |              ->       +-----------------------+        +-----------------------+      
-        +--------------------------------------+              ->       |  sender-side reliable |        | receiver-side reliable|        
-                                                              ->       |   data transfer       |        |   data transfer       |              
-                                                              ->       +-----------------------+        +-----------------------+              
-                                                              ->               |                                      ^           
-                                                                               |                                      |      
-                                                                               +------------ unreliable channel ------+      
-                                                                                             (network)                                  
+
+sending process                        receiving process      ->       sending process                        receiving process
++---------------+                      +---------------+      ->       +---------------+                      +---------------+
+|   application |                      |   application |      ->       |   application |                      |   application |
+|     data      |                      |     data      |      ->       |     data      |                      |     data      |
++-------+-------+                      +-------+-------+      ->       +-------+-------+                      +-------+-------+
+        |                                      ^              ->               |                                      ^
+        |                                      |              ->               |                                      |
+        |        reliable channel              |              ->       +-----------------------+        +-----------------------+
+        +--------------------------------------+              ->       |  sender-side reliable |        | receiver-side reliable|
+                                                              ->       |   data transfer       |        |   data transfer       |
+                                                              ->       +-----------------------+        +-----------------------+
+                                                              ->               |                                      ^
+                                                                               |                                      |
+                                                                               +------------ unreliable channel ------+
+                                                                                             (network)
 ```
 
 #### The Principles
@@ -888,14 +983,16 @@ sending process                        receiving process      ->       sending p
 ```
 
 **Sender Side**:
+
 - `rdt_send()`: Called by the upper-layer application to pass data down for reliable delivery.
 - `udt_send()`: Called by the RDT protocol to send a packet over the underlying unreliable channel.
 
 **Receiver Side**:
+
 - `rdt_rcv()`: Called when a packet arrives from the channel.
 - `deliver_data()`: Called by the RDT protocol to hand delivered data up to the application layer.
 
-#### Reliable Data Transfer: Getting Started Methodology 
+#### Reliable Data Transfer: Getting Started Methodology
 
 - **Approach**: Incremental, layered development of the protocol. We start with a simple perfect channel and add complications one by one.
 - **Scope**: Focus on unidirectional data transfer (one sender, one receiver), but note that control information (ACKs) must flow in the reverse direction.
@@ -909,7 +1006,7 @@ sending process                        receiving process      ->       sending p
   - **Receiver FSM**: Wait for packet from below, extract data, deliver it up.
 - No feedback needed because the channel is perfect.
 
-<img src="rdt1.0_sender_and_receiver.png" width="500">
+<img src="assets/rdt1.0_sender_and_receiver.png" width="500">
 
 #### rdt2.0 – Channel With Bit Errors
 
@@ -925,7 +1022,7 @@ sending process                        receiving process      ->       sending p
 
 #### rdt2.0 – FSM Specification and Corrupted Packet Scenario
 
-<img src="rdt2.0_sender.png" width="500">
+<img src="assets/rdt2.0_sender.png" width="500">
 
 - **Sender Logic**: Has two main states: "Wait for call from above" (ready to send) and "Wait for ACK or NAK" (waiting for feedback). On NAK or corrupted ACK, it retransmits.
 - **Receiver Logic**: Sends ACK for good packets, NAK for corrupted packets.
@@ -939,24 +1036,25 @@ sending process                        receiving process      ->       sending p
 #### rdt2.1 – Handling Garbled ACK/NAKs
 
 **Key Changes:**
+
 - **Sequence Numbers**: Packets are labeled 0 or 1.
 - **Sender States**: Doubled. The sender now has separate states for waiting for ACK/NAK for packet 0 and for packet 1. This allows it to know which packet is being acknowledged.
 - **Receiver Logic**: Checks the sequence number. If it receives the expected packet (0 or 1), it delivers data and sends ACK. If it receives a duplicate (e.g., 0 again), it simply re-ACKs it, telling the sender "I already have 0, send the next one (1)."
 
 **rdt2.1 Sender Handling Garbled**:
 
-<img src="rdt2.1_sender_handling_garbled.png" width="600">
+<img src="assets/rdt2.1_sender_handling_garbled.png" width="600">
 
 **rdt2.1 Receiver Handling Garbled**:
 
-<img src="rdt2.1_receiver_handling_garbled.png" width="700">
+<img src="assets/rdt2.1_receiver_handling_garbled.png" width="700">
 
-- **Sender**: 
+- **Sender**:
   - Needs only 2 sequence numbers (0,1) for a stop-and-wait protocol because only one outstanding packet exists at a time.
   - Must check if received ACK/NAK corrupted.
 - **States**:
   - The number of states doubled to track which packet (0 or 1) is expected or in flight.
-- **Receiver**: 
+- **Receiver**:
   - Must also track the expected sequence number.
 
 **Note**: receiver can not know if its last ACK/NAK received OK at sender
@@ -970,7 +1068,7 @@ sending process                        receiving process      ->       sending p
 
 **rdt2.2 Sender and Receiver Fragments**:
 
-<img src="rdt2.2_sender_receiver_fragments.png" width="700">
+<img src="assets/rdt2.2_sender_receiver_fragments.png" width="700">
 
 #### rdt3.0: Channels with Errors and Loss
 
@@ -993,16 +1091,16 @@ sending process                        receiving process      ->       sending p
   - `timeout event`: A new event that triggers a transition. When it occurs, the sender retransmits the packet and restarts the timer.
 - State Logic: Similar to rdt2.2, but now the sender must also handle the case where nothing happens (the timeout).
 
-<img src="rdt3.0_sender.png" width="700">
+<img src="assets/rdt3.0_sender.png" width="700">
 
 #### rdt3.0 in Action
 
-<img src="rdt3.0_in_action_a_and_b.png" width="600">
+<img src="assets/rdt3.0_in_action_a_and_b.png" width="600">
 
 **(a)** No Loss: Normal operation. Packet sent, ACK received, timer stopped, next packet sent.
 **(b)** Packet Loss: The data packet is lost. Sender's timer expires, it retransmits the packet, and recovery proceeds.
 
-<img src="rdt3.0_in_action_c_and_d.png" width="600">
+<img src="assets/rdt3.0_in_action_c_and_d.png" width="600">
 
 **(c)** ACK Loss: The ACK is lost. Sender's timer expires, it retransmits (causing a duplicate at the receiver). Receiver detects the duplicate via sequence number, re-sends the ACK, and the sender moves on.
 **(d)** Premature Timeout / Delayed ACK: The ACK is delayed, causing a timeout. The sender retransmits, creating a duplicate. The receiver gets the duplicate, discards it, and re-ACKs it. The sender eventually gets an ACK (could be from the first or second transmission) and proceeds. This shows the protocol is robust to timing variations.
@@ -1014,11 +1112,11 @@ sending process                        receiving process      ->       sending p
 - **Transmission Time (L/R)**: Time to push all bits of the packet onto the link -> `8000/10^9 = 8 microseconds`
 - **Total Time per Packet**: The sender sends for 8 µs, then sits idle for the rest of the RTT waiting for the ACK. Total cycle time -> `RTT + L/R ≈ 30.008 ms`
 
-<img src="rdt3.0_stop_and_wait_1.png" width="600">
+<img src="assets/rdt3.0_stop_and_wait_1.png" width="600">
 
 - **Utilization**: U_sender -> `(L/R) / (RTT + L/R) = 0.008 / 30.008 ≈ 0.00027`
 
-<img src="rdt3.0_stop_and_wait_2.png" width="600">
+<img src="assets/rdt3.0_stop_and_wait_2.png" width="600">
 
 - **Conclusion**: The sender is busy only 0.027% of the time! The protocol severely underutilizes the high-capacity link. It limits performance far below what the physical infrastructure can suppor
 
@@ -1032,7 +1130,7 @@ sending process                        receiving process      ->       sending p
 - Dramatically increases sender utilization.
 - **Example**: With a window of 3 packets in flight, utilization increases by a factor of 3 (from ~0.00027 to ~0.0008 in the example—still low due to huge RTT/bandwidth product, but the principle holds).
 
-<img src="increase_utilization.png" width="600">
+<img src="assets/increase_utilization.png" width="600">
 
 # Go-Back-N (GBN)
 
@@ -1044,7 +1142,7 @@ sending process                        receiving process      ->       sending p
   - `nextseqnum`: Sequence number of the next packet to be sent.
   - The window contains packets already sent but not yet ACKed.
 
-<img src="go_back_n_sender.png" width="500">
+<img src="assets/go_back_n_sender.png" width="500">
 
 - **Key Mechanisms:**
   - **Cumulative ACKs**: An ACK with sequence number `n` acknowledges all packets up to and including n. When the sender receives ACK(n), it slides its window forward to begin at `n+1`.
@@ -1059,7 +1157,7 @@ sending process                        receiving process      ->       sending p
   - **Out-of-Order Packets**: If a packet arrives with a sequence number higher than rcv_base (out-of-order), the receiver discards it (or can choose to buffer, but the standard GBN discards). Crucially, it re-sends an ACK for the last correctly received in-order packet (i.e., for sequence number rcv_base - 1). This generates duplicate ACKs.
   - **ACK Policy**: Receiver always sends an ACK for the highest in-order sequence number received so far.
 
-<img src="go_back_n_receiver.png" width="500">
+<img src="assets/go_back_n_receiver.png" width="500">
 
 #### Go-Back-N in Action
 
@@ -1071,7 +1169,7 @@ sending process                        receiving process      ->       sending p
   4. Sender eventually gets multiple duplicate ACK1s (but GBN doesn't act on them specifically). The timer for packet 2 expires.
   5. Sender goes back to N=2 and retransmits packets 2,3,4,5.
 
-<img src="go_back_n_in_action.png" width="600">
+<img src="assets/go_back_n_in_action.png" width="600">
 
 - **Inefficiency**: Even though packets 3,4,5 were received correctly by the network layer at the receiver, they were discarded and must be retransmitted. This wastes bandwidth.
 
@@ -1086,7 +1184,7 @@ sending process                        receiving process      ->       sending p
 
 #### Selective Repeat: Sender & Receiver Windows
 
-<img src="selective_repeat_sender_receiver_windows.png" width="600">
+<img src="assets/selective_repeat_sender_receiver_windows.png" width="600">
 
 - **Sender Window**: Identical in concept to GBN's sender window: defines the range of sequence numbers the sender can use.
 - **Receiver Window**: The receiver also maintains a window of size N. It will accept and buffer any packet whose sequence number falls within this window. The window slides forward when the application delivers in-order data.
@@ -1094,11 +1192,13 @@ sending process                        receiving process      ->       sending p
 #### Selective Repeat: Sender and Receiver Rules
 
 **Sender Rules:**
+
 - Send packet if its sequence number is within the window.
 - Timeout(n): Retransmit only packet n.
 - ACK(n): Mark packet n as received. If n is the send_base (the smallest unACKed packet), slide the window forward to the next smallest unACKed sequence number.
 
 **Receiver Rules:**
+
 - Packet in window [rcvbase, rcvbase+N-1]: Send ACK(n). Buffer if out-of-order. Deliver in-order data (and any buffered, now-in-order data) to the app, then slide the window forward.
 - Packet in [rcvbase-N, rcvbase-1]: This is a duplicate of a packet already ACKed (the receiver's window has already slid past it). Re-send ACK(n) to help the sender.
 - Otherwise (packet outside receiver's window): Ignore it.
@@ -1111,10 +1211,10 @@ sending process                        receiving process      ->       sending p
   2. Receiver gets 0,1 (sends ACK0, ACK1, delivers data). Gets packet 3 out-of-order (2 is lost). It buffers packet 3 and sends ACK3.
   3. Sender gets ACK0, ACK1, slides window and sends packets 4,5.
   4. Receiver gets packets 4,5, buffers them, sends ACK4, ACK5.
-  6. Packet 2's timer expires. Sender retransmits only packet 2.
-  7. When ACK2 finally arrives, the sender slides its window. At the receiver, packet 2 allows delivery of packets 2,3,4,5 in order, and the receiver window slides forward.
+  5. Packet 2's timer expires. Sender retransmits only packet 2.
+  6. When ACK2 finally arrives, the sender slides its window. At the receiver, packet 2 allows delivery of packets 2,3,4,5 in order, and the receiver window slides forward.
 
-<img src="selective_repeat_in_action.png" width="600">
+<img src="assets/selective_repeat_in_action.png" width="600">
 
 - **Efficiency**: Only the lost packet (2) was retransmitted, saving bandwidth compared to GBN.
 
@@ -1123,12 +1223,13 @@ sending process                        receiving process      ->       sending p
 - **The Problem**: With a limited range of sequence numbers (e.g., 0,1,2,3) and a window size (N) that is too large relative to this range, ambiguity can arise.
 - **Scenario (b)**: The receiver's window has slid forward, and it expects packets 3,0,1. An old, delayed packet from a previous cycle with sequence number 0 arrives. The receiver cannot distinguish this old, duplicate packet 0 from a new, valid packet 0 that belongs to the current window. It incorrectly accepts the old duplicate.
 
-<img src="selective_repeat_a_dilemma.png" width="500">
+<img src="assets/selective_repeat_a_dilemma.png" width="500">
 
 - **The Cause**: The receiver's view of the sequence number space overlaps with the sender's view in an ambiguous way because the sequence numbers have wrapped around.
-- **Solution**: To avoid this, the sequence number space must be larger than the window size. More precisely, for SR protocol to work correctly, the number of available sequence numbers must be at least twice the sender window size (`MaxSeqNum` >= 2 * N). This ensures that the receiver's window never overlaps ambiguously with the sender's previous window.
+- **Solution**: To avoid this, the sequence number space must be larger than the window size. More precisely, for SR protocol to work correctly, the number of available sequence numbers must be at least twice the sender window size (`MaxSeqNum` >= 2 \* N). This ensures that the receiver's window never overlaps ambiguously with the sender's previous window.
 
 # TCP
+
 - **Point-to-Point**: A TCP connection is between exactly one sender and one receiver.
 - **Reliable, In-Order Byte Stream**: Provides an unstructured, continuous flow of bytes to the application. It does not preserve "message boundaries" sent by the application.
 - **Full Duplex**: Data can flow in both directions simultaneously on the same connection.
@@ -1170,7 +1271,7 @@ sending process                        receiving process      ->       sending p
   - **URG, PSH**: Less commonly used (urgent data, push function).
 - **Receive Window (16 bits)**: Used for flow control. Number of bytes the receiver is willing to accept.
 - **Checksum (16 bits)**: Internet checksum for error detection.
-- *Urgent Data Pointer (16 bits)*: Used if URG flag is set.
+- _Urgent Data Pointer (16 bits)_: Used if URG flag is set.
 - **Options**: Variable length field for advanced features (e.g., MSS, window scaling).
 
 #### TCP Sequence Numbers and ACKs
@@ -1181,12 +1282,12 @@ sending process                        receiving process      ->       sending p
 
 - **Example** : A telnet session. Host A sends byte 'C' (seq=42, 1 byte). Host B acknowledges it (ACK=43, meaning "I expect byte 43 next") and echoes back the 'C' (seq=79, data='C'). Host A then acknowledges the echo (ACK=80).
 
-<img src="simple_telnet_scenario.png" width="500">
+<img src="assets/simple_telnet_scenario.png" width="500">
 
 #### TCP Round Trip Time (RTT) and Timeout
 
 - **The Challenge**: Setting the retransmission timeout (RTO) value is critical. It must be adaptive because RTT varies.
-- If the timeout value is too short, it may cause premature timeouts and unnecessary retransmissions. 
+- If the timeout value is too short, it may cause premature timeouts and unnecessary retransmissions.
 - If it is too long, it may result in slow reaction to packet loss.
 - **RTT Estimation**: Uses an Exponential Weighted Moving Average (EWMA):
   - `EstimatedRTT = (1-α)*EstimatedRTT + α*SampleRTT`
@@ -1215,7 +1316,7 @@ sending process                        receiving process      ->       sending p
 
 - **Problem**: Waiting for a timeout to detect loss can be slow, especially with long RTTs.
 - **Heuristic**: The receipt of three duplicate ACKs (ACK=100, ACK=100, ACK=100) is a strong indicator that a segment was lost (because later segments arrived, generating the duplicate ACKs).
-- ***Fast Retransmit Action***: Upon receiving three duplicate ACKs, the sender immediately retransmits the oldest unACKed segment (the one presumed lost) without waiting for its timer to expire.
+- **_Fast Retransmit Action_**: Upon receiving three duplicate ACKs, the sender immediately retransmits the oldest unACKed segment (the one presumed lost) without waiting for its timer to expire.
 - **Benefit**: Much faster recovery from single-segment losses within a window, improving performance.
 
 ## TCP Flow Control
@@ -1249,20 +1350,20 @@ sending process                        receiving process      ->       sending p
   1. Client sends: req_conn(x) (with its initial seq # x).
   2. Server replies: acc_conn(x) (acknowledging x).
 
-<img src="2_way_handshake_no_problem.png" width="400">
+<img src="assets/2_way_handshake_no_problem.png" width="400">
 
 - **Why It Fails:**
   - An old, delayed req_conn(x) message from a previous connection could arrive at the server.
   - The server, not knowing it's old, replies with acc_conn(x) and enters ESTAB state.
   - The client might have already terminated that old connection. The server is now left in a "half-open connection" state, wasting resources, believing a non-existent client is connected.
 
-<img src="2_way_handshake_problem.png" width="400">
+<img src="assets/2_way_handshake_problem.png" width="400">
 
 - **Root Cause**: The 2-way handshake cannot distinguish between a new connection request and a delayed duplicate request from an old connection. The server needs a way to confirm the client is currently alive and responding.
 
 #### TCP 3-Way Handshake (The Solution)
 
-<img src="3_way_handshake.png" width="600">
+<img src="assets/3_way_handshake.png" width="600">
 
 - **Step 1: SYN**
   - Client → Server: SYN=1, Seq=x (client picks random initial sequence number x).
@@ -1279,10 +1380,12 @@ sending process                        receiving process      ->       sending p
 
 - **Graceful Teardown**: Each side closes its half of the connection independently using the FIN (finish) flag.
 - **Typical Sequence:**
+
 1. One side (e.g., client) is done sending data. It sends a segment with FIN=1.
 2. The other side (server) acknowledges the FIN with an ACK.
 3. The server can continue sending its own data. When done, it sends its own FIN.
 4. The client ACKs the server's FIN.
+
 - Key Point: A FIN signals "I have no more data to send." The connection is fully closed only after both sides have sent and acknowledged FIN segments. ACKs for FINs can often be combined with the other side's own FIN (piggybacking).
 
 #### Principles of Congestion Control – The Problem
@@ -1296,13 +1399,15 @@ sending process                        receiving process      ->       sending p
   - **Congestion Control**: Prevents the aggregate of many senders from overloading the network's links and routers (a system-wide issue).
 
 ##### Scenario 1: Infinite Buffers, No Retransmissions
+
 - **Setup**: Two flows sharing a link of capacity R. Router has infinite buffers.
 - **Observation**: As the sending rate ($\lambda_{in}$) approaches `R/2` (the fair share), queuing delay increases towards infinity, but throughput eventually reaches `R/2`
 - **Cost**: Extreme delay.
 
-<img src="causes_costs_of_suggestion_scenario_1.png" width="500">
+<img src="assets/causes_costs_of_suggestion_scenario_1.png" width="500">
 
 ##### Scenario 2: Finite Buffers, With Retransmissions
+
 - **Setup**: One router with finite buffers. Senders retransmit lost packets.
 - **Ideal Knowledge**: If senders know exactly when packets are lost, they only retransmit needed packets. The "cost" is that some of the link's capacity (R/2) is wasted on retransmissions instead of new data, reducing goodput.
 - **Realistic Case**: Senders use timeouts, which can cause premature retransmissions and unneeded duplicate packets. This makes the problem worse:
@@ -1310,16 +1415,17 @@ sending process                        receiving process      ->       sending p
   - **Decreased Throughput**: The maximum achievable useful throughput is less than `R/2` because an increasing fraction of the capacity is spent on duplicates.
 - **Key Insight**: Retransmissions due to congestion consume bandwidth themselves, creating a positive feedback loop that can further reduce useful throughput.
 
-<img src="causes_costs_of_suggestion_scenario_2.png" width="600">
+<img src="assets/causes_costs_of_suggestion_scenario_2.png" width="600">
 
-<img src="causes_costs_of_suggestion_scenario_2_graph_1.png" width="400"> <img src="causes_costs_of_suggestion_scenario_2_graph_2.png" width="400">
+<img src="assets/causes_costs_of_suggestion_scenario_2_graph_1.png" width="400"> <img src="assets/causes_costs_of_suggestion_scenario_2_graph_2.png" width="400">
 
 ##### Scenario 3: Multi-Hop Paths, Multiple Flows
+
 - **Setup**: Four senders, multiple hops, shared queues.
 - **Observation**: As red traffic ($\lambda_{in}$) increases and congests a shared queue, it can cause packet drops for unrelated (blue) flows passing through the same queue. This leads to unfairness—blue's throughput can drop to zero.
 - **New Cost**: Wasted Upstream Resources. When a packet is dropped after traveling several hops, all the transmission capacity and buffer space used to move it along the path up to the point of drop is completely wasted. This is a major inefficiency.
 
-<img src="causes_costs_of_suggestion_scenario_3.png" width="600"> <img src="causes_costs_of_suggestion_scenario_3_graph_1.png" width="400">
+<img src="assets/causes_costs_of_suggestion_scenario_3.png" width="600"> <img src="assets/causes_costs_of_suggestion_scenario_3_graph_1.png" width="400">
 
 #### Causes/Costs of Congestion – Insights
 
@@ -1332,11 +1438,13 @@ sending process                        receiving process      ->       sending p
 #### Approaches Towards Congestion Control
 
 **End-to-End Congestion Control:**
+
 - The network provides no explicit information about congestion.
 - End systems (senders) must infer congestion from observable network symptoms: packet loss (via timeout or duplicate ACKs) and increased delay.
 - This is the approach used by standard TCP.
 
 **Network-Assisted Congestion Control:**
+
 - Routers directly participate by providing feedback to end hosts.
 - Feedback can be:
   - A single bit (e.g., ECN - Explicit Congestion Notification in TCP/IP, DECbit) to signal "congestion experienced."
@@ -1387,26 +1495,28 @@ $\text{TCP rate} \approx \frac{\text{cwnd}}{\text{RTT}}\ \text{bytes/sec}$
 - **The Answer**: At the Slow Start Threshold (`ssthresh`).
 - **How ssthresh is Set**: On a loss event, `ssthresh` is set to half the value of cwnd when the loss was detected (`ssthresh = cwnd / 2`).
 
--  **Operation:**
-  - When `cwnd < ssthresh`: Slow Start phase (exponential growth).
-  - When `cwnd >= ssthresh`: Congestion Avoidance phase (additive increase, linear growth).
+- **Operation:**
+- When `cwnd < ssthresh`: Slow Start phase (exponential growth).
+- When `cwnd >= ssthresh`: Congestion Avoidance phase (additive increase, linear growth).
 
 - **Graph**: Shows the exponential rise, the reduction of `ssthresh` on loss, and the subsequent linear growth in the Congestion Avoidance phase.
 
-<img src="tcp_from_slow_start_to_congestion_avoidance.png" width="500">
+<img src="assets/tcp_from_slow_start_to_congestion_avoidance.png" width="500">
 
 #### Summary: TCP Congestion Control (State Machine)
 
 We are gonna summarize standard TCP Reno congestion control via diagram below:
 
-<img src="tcp_congestion_control.png" width="600">
+<img src="assets/tcp_congestion_control.png" width="600">
 
 Three Main States:
-1. **Slow Start**: Exponential increase. Enters on start or timeout. Exits when `cwnd >= ssthresh` or on loss. 
+
+1. **Slow Start**: Exponential increase. Enters on start or timeout. Exits when `cwnd >= ssthresh` or on loss.
 2. **Congestion Avoidance**: Additive Increase. The main steady state. On duplicate ACKs, enters Fast Recovery.
 3. **Fast Recovery**: Triggered by three duplicate ACKs (triple dupACK). Sender retransmits the missing packet, sets `ssthresh = cwnd/2`, and sets `cwnd = ssthresh + 3`. For each additional duplicate ACK, cwnd increases slightly (partial window inflation). On receiving a new ACK, exits to Congestion Avoidance, setting cwnd = ssthresh.
 
 **Loss Responses:**
+
 - **Triple DupACK**: Fast Retransmit and Fast Recovery. cwnd is halved.
 - **Timeout**: Severe response. cwnd is reset to 1 MSS, and Slow Start is re-entered.
 
@@ -1418,7 +1528,7 @@ Three Main States:
   - **Growth Pattern**: It initially grows faster than linear to quickly approach the previous W_max.
   - **Then**: It grows very slowly and cautiously as it nears W_max, "hovering" around that point to maximize utilization without causing frequent losses.
 
-<img src="tcp_cubic.png" width="500">
+<img src="assets/tcp_cubic.png" width="500">
 
 - **Parameter K**: The time point when the cubic function will reach W_max. It's tunable.
 - **Status**: CUBIC is the default congestion control algorithm in Linux and has been widely used on the Internet. It provides higher and more stable throughput than classic TCP Reno, especially on high-bandwidth, long-delay (high BDP) paths.
@@ -1435,9 +1545,9 @@ Three Main States:
 
 - **Router's Critical Function:**
   1. **Examines Header Fields**: Inspects the IP header of every datagram.
-  2.  **Moves Datagrams**: Forwards datagrams from an input port to the appropriate output port to move them along the path from source to destination. 
+  2. **Moves Datagrams**: Forwards datagrams from an input port to the appropriate output port to move them along the path from source to destination.
 
-<img src="network_layer_intro.png" width="500">
+<img src="assets/network_layer_intro.png" width="500">
 
 #### Two Key Network-Layer Functions
 
@@ -1449,16 +1559,19 @@ Three Main States:
 #### Network Layer: Data Plane vs. Control Plane
 
 **Data Plane (Per-router, Local):**
+
 - The forwarding function. It's a local, per-router operation.
 - **Job**: Decide how to handle a datagram arriving on an input port (typically: send it to which output port?).
 - Operates on short timescales (nanoseconds per packet).
 
 **Control Plane (Network-wide):**
+
 - The routing function. Determines the contents of the forwarding tables.
 - **Job**: Compute the paths (routes) that datagrams should take through the network.
 - Operates on longer timescales (seconds, minutes).
 
 **Two Control Plane Approaches:**
+
 - **Traditional (Per-router)**: Routing algorithms run in each router (e.g., OSPF, BGP).
 - **Software-Defined Networking (SDN)**: Routing logic runs in a remote, centralized controller that programs the routers' forwarding tables.
 
@@ -1472,11 +1585,11 @@ Three Main States:
 
 - **Architecture**: Decouples the control and data planes. A remote, centralized controller (logically centralized, often physically distributed for reliability) computes the routes for the entire network.
 - **Process**: The controller communicates with simple forwarding agents in each router (via a protocol like OpenFlow). It computes and installs the forwarding table entries into the routers.
-**Benefit**: Enables more flexible, programmable, and manageable networks compared to the distributed, per-router approach.
+  **Benefit**: Enables more flexible, programmable, and manageable networks compared to the distributed, per-router approach.
 
 #### Router Architecture Overview
 
-<img src="router_control_plane_traditional_approach.png" width="500">
+<img src="assets/router_control_plane_traditional_approach.png" width="500">
 
 - **Input Ports**: Perform physical/link-layer functions, lookup, and forwarding.
 - **Output Ports**: Buffer and transmit packets.
@@ -1487,20 +1600,22 @@ Three Main States:
 #### Input Port Functions
 
 ```
-                                                     +-------------------------+ 
+                                                     +-------------------------+
 +------------------+   +-------------------------+   | decentralized switching |   +------------------+
-|  physical layer  |-->|  link layer protocol    |-->|         lookup          |-->|  switch fabric   |  
-| line termination |-->|        (receive)        |-->|       forwarding        |   +------------------+  
-+------------------+   +-------------------------+   |        queueing         |  
-                                                     +-------------------------+                                                     
+|  physical layer  |-->|  link layer protocol    |-->|         lookup          |-->|  switch fabric   |
+| line termination |-->|        (receive)        |-->|       forwarding        |   +------------------+
++------------------+   +-------------------------+   |        queueing         |
+                                                     +-------------------------+
 ```
 
 **Processing Steps at an Input Port:**
+
 1. **Physical Layer**: Bit-level reception.
 2. **Link Layer**: Frame processing (e.g., Ethernet decapsulation, error check).
 3. **Lookup & Forwarding (Critical Step)**: Examine the network-layer header (e.g., IP destination address) and perform a lookup in the forwarding table to determine the output port for this packet. This must happen at line speed.
 
 **Two Forwarding Paradigms:**
+
 - **Destination-Based Forwarding (Traditional)**: Lookup based only on the destination IP address.
 - **Generalized Forwarding (SDN/OpenFlow)**: Lookup can be based on any combination of header fields (source/dest IP, port, protocol, etc.), enabling more complex policies (e.g., firewalling, load balancing).
 
@@ -1509,33 +1624,33 @@ Three Main States:
 #### Destination-Based Forwarding & Longest Prefix Matching (LPM)
 
 - **The Problem**: IP addresses are not assigned in neat, contiguous blocks that align with table entries. A destination address may match multiple table entries of different lengths.
-- **Solution**: Longest Prefix Matching (LPM). The forwarding table contains entries with IP prefixes (e.g., 11001000 00010111 00010*** ********). When looking up a destination address, the router selects the entry with the longest (most specific) matching prefix.
+- **Solution**: Longest Prefix Matching (LPM). The forwarding table contains entries with IP prefixes (e.g., 11001000 00010111 00010**\* **\*\*****). When looking up a destination address, the router selects the entry with the longest (most specific) matching prefix.
 
 > **Longest Prefix Matching**: when looking for forwarding table entry for given destination address, use longest address prefix that matches destination address.
 
 **Example:**
 
-<img src="longest_prefix_matching_1.png" width="500">
+<img src="assets/longest_prefix_matching_1.png" width="500">
 
 - Address: `11001000 00010111 00010110 10100001`
-  - Matches Prefix 0 (00010***): 21-bit match.
-  - Matches Prefix 2 (00011***): Does NOT match.
+  - Matches Prefix 0 (00010\*\*\*): 21-bit match.
+  - Matches Prefix 2 (00011\*\*\*): Does NOT match.
   - **Result**: Use interface 0 (longest matching prefix).
 
-<img src="longest_prefix_matching_2.png" width="500">
+<img src="assets/longest_prefix_matching_2.png" width="500">
 
 - Address: `11001000 00010111 00011000 10101010`
 - Matches Prefix 1 (00011000): 24-bit match.
-- Matches Prefix 2 (00011***): 21-bit match.
+- Matches Prefix 2 (00011\*\*\*): 21-bit match.
 - **Result**: Use interface 1 (longest matching prefix is 24 bits).
 
-<img src="longest_prefix_matching_3.png" width="500">
+<img src="assets/longest_prefix_matching_3.png" width="500">
 
 **Why LPM?** It allows for hierarchical, aggregated routing. A more specific route (longer prefix) overrides a less specific one (shorter prefix). This is fundamental to how Internet routing scales.
 
 #### Network Layer: Internet Protocol Stack
 
-<img src="internet_protocol_stack.png" width="500">
+<img src="assets/internet_protocol_stack.png" width="500">
 
 - **IP Protocol**: The core. Defines the datagram format, addressing scheme (IP addresses), and packet handling conventions (e.g., forwarding, fragmentation).
 - **Routing Protocols (OSPF, BGP) / SDN Controller**: Implement the control plane. They populate the forwarding table with the information IP needs to forward packets.
@@ -1588,7 +1703,7 @@ Three Main States:
 
 - **Dotted-Decimal Notation**: Human-readable format (e.g., 223.1.1.1), where each number represents 8 bits (an octet) of the 32-bit address.
 
-<img src="ip_addressing_introduction.png" width="400">
+<img src="assets/ip_addressing_introduction.png" width="400">
 
 ## Subnets
 
@@ -1613,10 +1728,12 @@ Three Main States:
 #### How to Get an IP Address? (DHCP)
 
 **Two Questions:**
+
 1. Host gets its IP address: Via manual configuration or, more commonly, DHCP.
 2. Network gets its subnet prefix: Allocated by an ISP from a larger block.
 
 **DHCP (Dynamic Host Configuration Protocol):**
+
 - **Purpose**: Allow a host to dynamically obtain an IP address, subnet mask, default gateway, and DNS server info when joining a network. Enables "plug-and-play" networking.
 - **Process:**
   1. DHCP Discover: Host broadcasts "Is there a DHCP server?"
@@ -1638,18 +1755,21 @@ Three Main States:
 #### Review & Control Plane Approaches
 
 **Review of Key Functions:**
+
 - **Data Plane (Forwarding)**: The local, per-packet action of moving a packet from a router's input port to its output port. This is the "how" of packet movement.
 - **Control Plane (Routing)**: The network-wide process of determining the end-to-end paths that packets should follow. This is the "where" decision that populates forwarding tables.
 
 **Two Architectures for the Control Plane:**
+
 1. **Per-Router Control (Traditional)**: Each router runs its own distributed routing algorithm (e.g., OSPF, BGP) and computes its own forwarding table independently, by communicating with its neighbors.
-2.  **Logically Centralized Control (Software-Defined Networking - SDN)**: The control logic is separated from the routers and runs in a centralized (or logically centralized) remote controller. This controller computes the routes for the entire network and programs the routers' forwarding tables.
+2. **Logically Centralized Control (Software-Defined Networking - SDN)**: The control logic is separated from the routers and runs in a centralized (or logically centralized) remote controller. This controller computes the routes for the entire network and programs the routers' forwarding tables.
 
 #### Per-Router Control Plane (Traditional Architecture)
 
 **Decentralized & Distributed**: The control plane functionality is replicated in every router.
 
 **How it Works:**
+
 1. Each router runs a routing algorithm daemon (e.g., an OSPF process).
 2. These daemons exchange routing protocol messages with each other to learn about network topology and paths.
 3. Based on this distributed information, each router's algorithm independently computes its own forwarding table.
@@ -1662,19 +1782,21 @@ Three Main States:
 **Centralized Intelligence, Simplified Switches**: The core innovation of SDN is the separation of the control plane from the data plane.
 
 **How it Works:**
+
 1. A remote controller (which can be physically distributed for reliability but is logically centralized) holds the "big picture" of the network.
 2. Routers become simple forwarding devices (data plane only) that expose a standardized API (e.g., OpenFlow).
 3. The controller runs the network-wide routing logic and computes all forwarding tables.
 4. The controller installs these table entries into the routers via the southbound API.
 
 **Benefits (Implied):**
+
 - **Programmability**: Network behavior can be changed easily by updating controller software.
 - **Centralized Management**: Easier to implement consistent policies, traffic engineering, and innovation.
 - **Simpler Switches**: Router hardware can be cheaper and less complex.
 
 The graph below illustrates the fundamental architectural difference: many independent, interacting brains (per-router) vs. one central brain controlling many simple devices (SDN).
 
-<img src="differneces_between_per_router_vs_sdn_control_plane.png" width="400">
+<img src="assets/differneces_between_per_router_vs_sdn_control_plane.png" width="400">
 
 ## Routing Fundamentals & Algorithm Classification
 
@@ -1691,7 +1813,7 @@ Modeling the Network: For algorithmic purposes, a network is abstracted as a gra
 
 **Link Cost ($c_{a,b}$)**: Each link has an associated cost. This can be static (e.g., always 1, or inversely related to bandwidth) or dynamic (reflecting current congestion). A cost of ∞ means no direct connection.
 
-<img src="link_cost_graph.png" width="300">
+<img src="assets/link_cost_graph.png" width="300">
 
 #### Routing algorithm classification
 
@@ -1700,24 +1822,28 @@ Routing algorithms can be classified based on **the information they use** and *
 ###### 1. Classification Based on Information Scope:
 
 **Global (Link-State Algorithm)**
+
 - Each router has a **complete view of the entire network topology**.
 - Routers know:
-  - All nodes in the network  
-  - All links between nodes  
-  - The cost of each link  
+  - All nodes in the network
+  - All links between nodes
+  - The cost of each link
 - Routers independently compute the **shortest path** to every destination using **Dijkstra’s algorithm**.
 - Information is distributed using **link-state advertisements (LSAs)**, which are flooded to all routers.
 
 Key Characteristics:
-- Fast convergence  
-- High memory and CPU usage  
-- Accurate and consistent routing tables  
+
+- Fast convergence
+- High memory and CPU usage
+- Accurate and consistent routing tables
 
 Examples:
-- OSPF (Open Shortest Path First)  
-- IS-IS  
+
+- OSPF (Open Shortest Path First)
+- IS-IS
 
 **Decentralized (Distance-Vector Algorithm)**
+
 - Each router knows only:
   - The cost to its **direct neighbors**
   - The distance vectors received from those neighbors
@@ -1725,53 +1851,61 @@ Examples:
 - Paths are calculated using the **Bellman-Ford algorithm**.
 
 Key Characteristics:
-- Slower convergence  
-- Lower computation and memory requirements  
-- Susceptible to routing loops and the *count-to-infinity* problem  
+
+- Slower convergence
+- Lower computation and memory requirements
+- Susceptible to routing loops and the _count-to-infinity_ problem
 
 Example:
+
 - RIP (Routing Information Protocol)
 
 ###### 2. Classification Based on Change Rate:
-  - **Static**: 
+
+- **Static**:
 
 **Static Routing**
+
 - Routes are manually configured by administrators.
 - No automatic updates when topology changes.
 - Suitable for small, stable networks.
 
 Advantages:
-- Low overhead  
-- Predictable behavior  
+
+- Low overhead
+- Predictable behavior
 
 Disadvantages:
+
 - Not scalable
 - Routes change very slowly (e.g., manual configuration).
-- No automatic failure recovery 
+- No automatic failure recovery
 
 **Dynamic Routing**
+
 - Routes are automatically updated in response to network changes such as:
-  - Link failures  
-  - Congestion  
-  - Topology updates  
+  - Link failures
+  - Congestion
+  - Topology updates
 - Uses routing protocols to exchange information.
 - Periodic updates or in response to link cost changes
 
 Advantages:
+
 - Adaptive and fault-tolerant
 - Routers change more quickly
-- Suitable for large and complex networks  
+- Suitable for large and complex networks
 
 Examples:
-- Distance Vector: RIP  
-- Link State: OSPF, IS-IS 
+
+- Distance Vector: RIP
+- Link State: OSPF, IS-IS
 
 ### Summary Table
 
 | Category      | Knowledge Scope | Algorithm       | Update Method       | Examples       |
-|---------------|-----------------|-----------------|---------------------|----------------|
+| ------------- | --------------- | --------------- | ------------------- | -------------- |
 | Global        | Full topology   | Dijkstra        | Link-state flooding | OSPF, IS-IS    |
 | Decentralized | Neighbors only  | Bellman-Ford    | Periodic updates    | RIP            |
 | Static        | Fixed routes    | Manual          | None                | Static routing |
 | Dynamic       | Adaptive        | Algorithm-based | Automatic           | OSPF, RIP      |
-
