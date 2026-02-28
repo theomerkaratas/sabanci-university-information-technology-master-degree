@@ -15,7 +15,7 @@
   <body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center">
 
     <button
-      onclick="toggleMenu()"
+      onclick="toggleMenu(event)"
       class="fixed bottom-6 left-6 md:bottom-auto md:top-6 md:left-8 p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50"
       title="Toggle Menu"
     >
@@ -71,6 +71,7 @@
       <div class="p-6">
         <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Topics</h3>
         <ul class="space-y-2">
+          <li><a href="#" class="font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition" onclick="showAllTopics(event)">All Topics</a></li>
           <li><a href="#topic-1" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Introduction to Agile</a></li>
           <li><a href="#topic-2" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Software Development Process</a></li>
           <li><a href="#topic-3" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Agile Manifesto</a></li>
@@ -498,9 +499,8 @@
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Modern software markets reward speed, adaptability, and customer responsiveness.</span>
           </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Specific customer or market requirements.</li>
         </ul>
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Specific customer or market requirements.</li>
-    </ul>
 
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Therefore, processes must be customized and are always candidates for improvement.</p>
 
@@ -615,7 +615,7 @@
       </section>
 
       <section id="topic-3" class="mb-10 md:mb-14" data-topic="topic-3">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Agile Software Development, Success, and the Manifesto</span></h2>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Agile Software Development, Success, and the Manifesto</h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">Redefining Project Success</h3>
 
@@ -3963,7 +3963,10 @@
       }
 
       // Toggle sidebar menu
-      function toggleMenu() {
+      function toggleMenu(event) {
+        if (event) {
+          event.stopPropagation();
+        }
         const sidebar = document.getElementById('sidebar');
         menuOpen = !menuOpen;
         
@@ -3974,6 +3977,25 @@
           sidebar.classList.remove('translate-x-0');
           sidebar.classList.add('-translate-x-full');
         }
+      }
+
+      // Show all topics at once
+      function showAllTopics(event) {
+        if (event) {
+          event.preventDefault();
+        }
+        
+        // Show all sections
+        document.querySelectorAll('main > section').forEach(section => {
+          section.style.display = 'block';
+          section.style.animation = 'none'; // Disable fade in for "All" to prevent massive simultaneous animations
+        });
+        
+        // Scroll to top smoothly
+        document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+        
+        // Close mobile menu
+        closeMenu();
       }
 
       // Show/hide topics based on menu selection
@@ -4004,11 +4026,9 @@
       // Close sidebar menu on mobile
       function closeMenu() {
         const sidebar = document.getElementById('sidebar');
-        if (window.innerWidth < 768) { // Only on mobile (md breakpoint)
-          menuOpen = false;
-          sidebar.classList.remove('translate-x-0');
-          sidebar.classList.add('-translate-x-full');
-        }
+        menuOpen = false;
+        sidebar.classList.remove('translate-x-0');
+        sidebar.classList.add('-translate-x-full');
       }
 
       document.addEventListener('DOMContentLoaded', function() {
@@ -4017,13 +4037,24 @@
         menuOpen = false;
         sidebar.classList.add('-translate-x-full');
         
-        showTopic('topic-1');
+        showAllTopics();
 
         document.querySelectorAll('.menu-link').forEach(link => {
           link.addEventListener('click', function(e) {
             const topicId = this.getAttribute('href').substring(1);
             showTopic(topicId, e);
           });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+          const sidebar = document.getElementById('sidebar');
+          const toggleBtn = event.target.closest('button[onclick^="toggleMenu"]');
+          const isClickInsideSidebar = sidebar.contains(event.target);
+          
+          if (menuOpen && !isClickInsideSidebar && !toggleBtn) {
+            closeMenu();
+          }
         });
       });
 
