@@ -14,22 +14,6 @@
   <body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center">
 
     <button
-      onclick="toggleMenu()"
-      class="fixed bottom-6 left-6 md:bottom-auto md:top-6 md:left-8 p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50"
-      title="Toggle Menu"
-    >
-      <svg
-        class="w-6 h-6 text-slate-700 dark:text-white"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        stroke-width="2.5"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-
-    <button
       onclick="document.documentElement.classList.toggle('dark')"
       class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
       title="Toggle Dark Mode"
@@ -62,28 +46,6 @@
       </svg>
     </button>
 
-    <!-- Sidebar Navigation -->
-    <nav
-      id="sidebar"
-      class="fixed left-0 top-auto bottom-20 md:bottom-auto md:top-24 w-64 bg-white dark:bg-neutral-900 shadow-lg rounded-r-lg border-r border-slate-200 dark:border-neutral-800 transition-transform duration-300 z-40 overflow-y-auto max-h-96 md:max-h-[calc(100vh-120px)] md:origin-top -translate-x-full"
-    >
-      <div class="p-6">
-        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Courses</h3>
-        <ul class="space-y-2">
-          <li><a href="#it501" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 501</a></li>
-          <li><a href="#it511" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 511</a></li>
-          <li><a href="#it524" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 524</a></li>
-          <li><a href="#it553" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 553</a></li>
-          <li><a href="#it526" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 526</a></li>
-          <li><a href="#it535" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 535</a></li>
-          <li><a href="#it537" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 537</a></li>
-          <li><a href="#sec509" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">SEC 509</a></li>
-          <li><a href="#it563" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 563</a></li>
-          <li><a href="#it592" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 592</a></li>
-        </ul>
-      </div>
-    </nav>
-
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 m-4 md:m-4 border border-slate-200 dark:border-neutral-800">
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3">
@@ -114,19 +76,19 @@
             </thead>
             <tbody>
               <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
-                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it501" class="text-blue-600 dark:text-blue-400 hover:underline">IT 501</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="./IT501" class="text-blue-600 dark:text-blue-400 hover:underline">IT 501</a></td>
                 <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Introduction to Computer Programming</td>
               </tr>
               <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
-                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it511" class="text-blue-600 dark:text-blue-400 hover:underline">IT 511</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="./IT511" class="text-blue-600 dark:text-blue-400 hover:underline">IT 511</a></td>
                 <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Fundamentals of Data Communication and TCP/IP Networks</td>
               </tr>
               <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
-                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it524" class="text-blue-600 dark:text-blue-400 hover:underline">IT 524</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="./IT524" class="text-blue-600 dark:text-blue-400 hover:underline">IT 524</a></td>
                 <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Object-Oriented Programming with Java</td>
               </tr>
               <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
-                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it553" class="text-blue-600 dark:text-blue-400 hover:underline">IT 553</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="./IT553" class="text-blue-600 dark:text-blue-400 hover:underline">IT 553</a></td>
                 <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Database Design and Management</td>
               </tr>
               <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
@@ -138,7 +100,7 @@
                 <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Mobile Programming</td>
               </tr>
               <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
-                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it537" class="text-blue-600 dark:text-blue-400 hover:underline">IT 537</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="./IT537" class="text-blue-600 dark:text-blue-400 hover:underline">IT 537</a></td>
                 <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Interactive Front-End Programming</td>
               </tr>
               <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
@@ -146,7 +108,7 @@
                 <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Secure Coding & Software Security</td>
               </tr>
               <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
-                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it563" class="text-blue-600 dark:text-blue-400 hover:underline">IT 563</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="./IT563" class="text-blue-600 dark:text-blue-400 hover:underline">IT 563</a></td>
                 <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Agile Project Management Methodology</td>
               </tr>
               <tr class="hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
@@ -434,15 +396,6 @@
     </main>
 
     <script>
-      function toggleMenu() {
-        const sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('-translate-x-full');
-      }
-
-      function closeMenu() {
-        const sidebar = document.getElementById('sidebar');
-        sidebar.classList.add('-translate-x-full');
-      }
     </script>
   </body>
 </html>
