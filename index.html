@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sabancı University – IT Master's Degree</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+  </head>
+  <body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center">
+
+    <button
+      onclick="toggleMenu()"
+      class="fixed bottom-6 left-6 md:bottom-auto md:top-6 md:left-8 p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50"
+      title="Toggle Menu"
+    >
+      <svg
+        class="w-6 h-6 text-slate-700 dark:text-white"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <button
+      onclick="document.documentElement.classList.toggle('dark')"
+      class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
+      title="Toggle Dark Mode"
+    >
+      <svg
+        class="hidden dark:block w-6 h-6 text-yellow-400 font-bold"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"
+        ></path>
+      </svg>
+      <svg
+        class="dark:hidden w-6 h-6 text-slate-700 font-bold"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <nav
+      id="sidebar"
+      class="fixed left-0 top-auto bottom-20 md:bottom-auto md:top-24 w-64 bg-white dark:bg-neutral-900 shadow-lg rounded-r-lg border-r border-slate-200 dark:border-neutral-800 transition-transform duration-300 z-40 overflow-y-auto max-h-96 md:max-h-[calc(100vh-120px)] md:origin-top -translate-x-full"
+    >
+      <div class="p-6">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Courses</h3>
+        <ul class="space-y-2">
+          <li><a href="#it501" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 501</a></li>
+          <li><a href="#it511" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 511</a></li>
+          <li><a href="#it524" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 524</a></li>
+          <li><a href="#it553" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 553</a></li>
+          <li><a href="#it526" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 526</a></li>
+          <li><a href="#it535" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 535</a></li>
+          <li><a href="#it537" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 537</a></li>
+          <li><a href="#sec509" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">SEC 509</a></li>
+          <li><a href="#it563" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 563</a></li>
+          <li><a href="#it592" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">IT 592</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 m-4 md:m-4 border border-slate-200 dark:border-neutral-800">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3">
+        <span class="h-8 w-1.5 bg-neutral-500 rounded-full"></span>
+        SABANCI UNIVERSITY MASTER'S DEGREE
+      </h1>
+      <section class="mb-10 md:mb-14">
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6 md:mb-8">
+          This repository contains the projects, assignments, course materials, and practical exercises completed during my <strong>Master of Science in Information Technology</strong> at <strong>Sabancı University</strong>.
+        </p>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6 md:mb-8">
+          📘 Program information: <a href="https://fens.sabanciuniv.edu/en/msit" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">https://fens.sabanciuniv.edu/en/msit</a>
+        </p>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+          It aims to organize and share academic work from graduate-level IT courses so that you can explore the topics, assignments, and practical work completed throughout the program. The folders and materials in this repository are grouped based on the courses.
+        </p>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📘 Course List</h2>
+        <div class="overflow-x-auto border border-slate-200 dark:border-neutral-700 rounded-lg">
+          <table class="w-full">
+            <thead class="bg-neutral-100 dark:bg-neutral-800 border-b border-slate-200 dark:border-neutral-700">
+              <tr>
+                <th class="px-4 py-3 md:px-6 md:py-4 text-left text-sm md:text-base font-bold text-slate-900 dark:text-white">Course Code</th>
+                <th class="px-4 py-3 md:px-6 md:py-4 text-left text-sm md:text-base font-bold text-slate-900 dark:text-white">Course Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it501" class="text-blue-600 dark:text-blue-400 hover:underline">IT 501</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Introduction to Computer Programming</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it511" class="text-blue-600 dark:text-blue-400 hover:underline">IT 511</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Fundamentals of Data Communication and TCP/IP Networks</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it524" class="text-blue-600 dark:text-blue-400 hover:underline">IT 524</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Object-Oriented Programming with Java</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it553" class="text-blue-600 dark:text-blue-400 hover:underline">IT 553</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Database Design and Management</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it526" class="text-blue-600 dark:text-blue-400 hover:underline">IT 526</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Enterprise Java Frameworks and Design Patterns</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it535" class="text-blue-600 dark:text-blue-400 hover:underline">IT 535</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Mobile Programming</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it537" class="text-blue-600 dark:text-blue-400 hover:underline">IT 537</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Interactive Front-End Programming</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#sec509" class="text-blue-600 dark:text-blue-400 hover:underline">SEC 509</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Secure Coding & Software Security</td>
+              </tr>
+              <tr class="border-b border-slate-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it563" class="text-blue-600 dark:text-blue-400 hover:underline">IT 563</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Agile Project Management Methodology</td>
+              </tr>
+              <tr class="hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300 font-semibold"><a href="#it592" class="text-blue-600 dark:text-blue-400 hover:underline">IT 592</a></td>
+                <td class="px-4 py-3 md:px-6 md:py-4 text-sm md:text-base text-slate-700 dark:text-slate-300">Project Course</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="it501" class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>IT 501 - Introduction to Computer Programming</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Introduction to the fundamentals of computer programming including basic Python concepts, data structures, algorithms, and problem-solving techniques.
+        </p>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Blackjack game implementation</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Simple calculator with GUI</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Caesar cipher encryption</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Hangman word game</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Higher-Lower number guessing game</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Coffee machine simulation</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="it511" class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>IT 511 - Fundamentals of Data Communication and TCP/IP Networks</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Deep dive into networking principles, TCP/IP protocols, socket programming, and practical network communication solutions.
+        </p>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Server and client implementation using sockets</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Network protocol analysis and packet inspection</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>TCP/IP implementation and testing</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="it524" class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>IT 524 - Object-Oriented Programming with Java</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Object-oriented design principles, Java programming, design patterns, and enterprise application development.
+        </p>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>FootJoy sports management system</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Bank account management system</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Design pattern implementation</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="it553" class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>IT 553 - Database Design and Management</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Relational database design, SQL, schema optimization, and database management systems implementation.
+        </p>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Cross-platform web interface for database querying</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>SQL query optimization and indexing</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Database schema design and normalization</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="it537" class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>IT 537 - Interactive Front-End Programming</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Modern web development with JavaScript, React, responsive design, and interactive user interface creation.
+        </p>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Multiple web applications and interactive projects</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>HTML5, CSS3, and JavaScript development</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Responsive and mobile-friendly design patterns</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="it526" class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>IT 526 - Enterprise Java Frameworks and Design Patterns</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Advanced Java development using enterprise frameworks, design patterns, and enterprise application architecture.
+        </p>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Spring Framework and Spring Boot applications</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Design patterns implementation and best practices</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Enterprise application development and deployment</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="it535" class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>IT 535 - Mobile Programming</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Mobile application development for iOS and Android platforms using modern frameworks and tools.
+        </p>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>iOS app development with Swift</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Android app development with Kotlin</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Cross-platform mobile development solutions</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="sec509" class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>SEC 509 - Secure Coding & Software Security</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Security-focused software development practices, threat analysis, and vulnerability prevention techniques.
+        </p>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>OWASP Top 10 vulnerabilities and mitigation</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Secure coding practices and code review</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Security testing and vulnerability assessment</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="it563" class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>IT 563 - Agile Project Management Methodology</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Comprehensive study of Agile methodologies, Scrum framework, Lean principles, and iterative development practices.
+        </p>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Agile manifesto and principles exploration</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Scrum ceremonies, roles, and artifacts</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Lean development and XP practices</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><a href="./IT563/website/index.html" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">View detailed notes →</a></span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="it592" class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>IT 592 - Project Course</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Capstone project course integrating knowledge and skills from the master's program into a comprehensive real-world application.
+        </p>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>End-to-end project planning and execution</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Integration of multiple technologies and methodologies</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Team collaboration and project documentation</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🧠 What's Inside</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6 md:mb-8">
+          This repository includes:
+        </p>
+        <ul class="space-y-3 ml-4 md:ml-6 mb-8 md:mb-10">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Projects and assignments from graduate IT courses</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Notes and documentation related to coursework</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Code samples and practical exercises</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Database schemas, reports, and development artifacts</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🎯 Purpose of This Repository</h2>
+        <ul class="space-y-3 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong class="font-bold text-slate-900 dark:text-white">Learning archive</strong> – track progress and outcomes from courses</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong class="font-bold text-slate-900 dark:text-white">Hands-on practice</strong> – apply theory in real projects</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong class="font-bold text-slate-900 dark:text-white">Reusability</strong> – provide templates and solutions for future work</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong class="font-bold text-slate-900 dark:text-white">Showcase</strong> – highlight my technical skills and academic journey</span>
+          </li>
+        </ul>
+      </section>
+
+    </main>
+
+    <script>
+      function toggleMenu() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('-translate-x-full');
+      }
+
+      function closeMenu() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.add('-translate-x-full');
+      }
+    </script>
+  </body>
+</html>
