@@ -33,7 +33,7 @@ The folders and materials in this repository are grouped based on the courses li
 
 ---
 
-## 🧠 What’s Inside
+## 🧠 What’s Inside?
 
 This repository includes:
 
