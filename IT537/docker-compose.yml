@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  it537:
+    build: .
+    ports:
+      - "9539:80"
+    volumes:
+      - .:/usr/share/nginx/html
+    container_name: it537
