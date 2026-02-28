@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  it511-notes:
+    build: .
+    ports:
+      - "9512:80"
+    volumes:
+      - .:/usr/share/nginx/html
+    container_name: it511-notes
