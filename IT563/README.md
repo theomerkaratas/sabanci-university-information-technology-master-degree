@@ -1,5 +1,8 @@
 # AGILE PROJECT MANAGEMENT METHODOLOGY
 
+> [!TIP]
+> 🌐 **View the Interactive Website**: Open [website/index.html](website/index.html) in your browser to explore the content with the dynamic menu system!
+
 ## Introduction to Agile Software Development
 
 ### What is Agile Software Development?

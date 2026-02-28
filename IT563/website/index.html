@@ -12,11 +12,11 @@
       };
     </script>
   </head>
-  <body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center">
+  <body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center">
 
     <button
       onclick="toggleMenu()"
-      class="fixed top-6 left-6 sm:top-6 sm:left-6 md:left-8 p-3 rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50"
+      class="fixed bottom-6 left-6 md:bottom-auto md:top-6 md:left-8 p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50"
       title="Toggle Menu"
     >
       <svg
@@ -32,7 +32,7 @@
 
     <button
       onclick="document.documentElement.classList.toggle('dark')"
-      class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
+      class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
       title="Toggle Dark Mode"
     >
       <svg
@@ -66,36 +66,57 @@
     <!-- Sidebar Navigation -->
     <nav
       id="sidebar"
-      class="fixed left-0 bottom-6 md:bottom-auto md:top-24 w-64 bg-white dark:bg-slate-800 shadow-lg rounded-r-lg border-r border-slate-200 dark:border-slate-700 transition-transform duration-300 z-40 overflow-y-auto max-h-96 md:max-h-[calc(100vh-120px)]"
+      class="fixed left-0 top-auto bottom-20 md:bottom-auto md:top-24 w-64 bg-white dark:bg-neutral-900 shadow-lg rounded-r-lg border-r border-slate-200 dark:border-neutral-800 transition-transform duration-300 z-40 overflow-y-auto max-h-96 md:max-h-[calc(100vh-120px)] md:origin-top -translate-x-full"
     >
       <div class="p-6">
         <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Topics</h3>
         <ul class="space-y-2">
-          <li><a href="#topic-1" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Introduction to Agile</a></li>
-          <li><a href="#topic-2" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Software Development Process</a></li>
-          <li><a href="#topic-3" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Agile Manifesto</a></li>
-          <li><a href="#topic-4" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Scrum</a></li>
-          <li><a href="#topic-5" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Scrum Artifacts</a></li>
-          <li><a href="#topic-6" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Scrum Ceremonies</a></li>
-          <li><a href="#topic-7" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Scrum Principles</a></li>
-          <li><a href="#topic-8" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Lean Development</a></li>
-          <li><a href="#topic-9" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Extreme Programming</a></li>
-          <li><a href="#topic-10" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Feature-Driven Development</a></li>
-          <li><a href="#topic-11" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">Unit Testing</a></li>
-          <li><a href="#topic-12" class="menu-link text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition" onclick="closeMenu()">MVP & Lean Startup</a></li>
+          <li><a href="#topic-1" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Introduction to Agile</a></li>
+          <li><a href="#topic-2" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Software Development Process</a></li>
+          <li><a href="#topic-3" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Agile Manifesto</a></li>
+          <li><a href="#topic-4" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Scrum</a></li>
+          <li><a href="#topic-5" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Scrum Artifacts</a></li>
+          <li><a href="#topic-6" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Scrum Ceremonies</a></li>
+          <li><a href="#topic-7" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Scrum Principles</a></li>
+          <li><a href="#topic-8" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Lean Development</a></li>
+          <li><a href="#topic-9" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Extreme Programming</a></li>
+          <li><a href="#topic-10" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Feature-Driven Development</a></li>
+          <li><a href="#topic-11" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">Unit Testing</a></li>
+          <li><a href="#topic-12" class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" onclick="closeMenu()">MVP & Lean Startup</a></li>
         </ul>
       </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto bg-white dark:bg-slate-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 m-4 md:m-4 border border-slate-200 dark:border-slate-800">
+    <main class="max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 m-4 md:m-4 border border-slate-200 dark:border-neutral-800">
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3">
-        <span class="h-8 w-1.5 bg-blue-500 rounded-full"></span>
+        <span class="h-8 w-1.5 bg-neutral-500 rounded-full"></span>
         AGILE PROJECT MANAGEMENT METHODOLOGY
       </h1>
 
+      <!-- Search Bar -->
+      <div class="mb-8 md:mb-12 flex gap-3">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search topics..."
+          class="flex-1 px-4 py-3 rounded-lg bg-slate-100 dark:bg-neutral-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-neutral-500 transition"
+          onkeyup="handleSearch(event)"
+        />
+        <button
+          onclick="performSearch()"
+          class="px-6 py-3 bg-neutral-600 hover:bg-neutral-700 text-white font-semibold rounded-lg transition-all active:scale-95 hover:shadow-lg"
+          title="Search"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      </div>
+      <div id="searchResults" class="mb-6 text-slate-700 dark:text-slate-300 hidden"></div>
+
       <section id="topic-1" class="mb-10 md:mb-14" data-topic="topic-1">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3">
-          <span class="h-7 w-1 bg-blue-500 rounded-full"></span>
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>
           Introduction to Agile Software Development
         </span></h2>
 
@@ -109,23 +130,23 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Close collaboration with business experts or customers throughout the project, rather than just at the beginning.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>A strong preference for face-to-face communication within the team and with stakeholders to ensure clarity and rapid feedback.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Frequent delivery of new, deployable business value in small, working increments, allowing for early and continuous feedback.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>The use of tight, self-organizing teams where members manage their own work and collaborate closely.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>A relentless focus on technical excellence and good design to maintain flexibility and quality over time.</span>
           </li>
         </ul>
@@ -137,7 +158,7 @@
 
       <section id="topic-2" class="mb-10 md:mb-14" data-topic="topic-2">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3">
-          <span class="h-7 w-1 bg-blue-500 rounded-full"></span>
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>
           Software Development Process and Quality
         </span></h2>
 
@@ -147,11 +168,11 @@
 
         <ol class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0">1.</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0">1.</span>
             <span>Increasing size and complexity of software systems.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0">2.</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0">2.</span>
             <span>Strict constraints, such as limited budget (cost) and the pressure to release quickly (time-to-market).</span>
           </li>
         </ol>
@@ -160,15 +181,15 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Reliability</strong>: The software operates correctly and without failure.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Performance</strong>: The software is efficient and responsive.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Maintainability</strong>: The software is easy to modify, fix, and enhance over time.</span>
           </li>
         </ul>
@@ -179,27 +200,27 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Testing</strong>: Executing the software to find defects.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Code and Design Reviews</strong>: Systematic examination of code/design by peers to find errors and improve quality.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Quality Assurance (QA)</strong>: A broader set of activities aimed at ensuring processes are followed and quality standards are met.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Monitor, Evaluate, and Take Corrective Actions</strong>: Continuously tracking project metrics and making adjustments.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Defect Prevention</strong>: Proactively changing the process to stop defects from being created in the first place.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Eliminating Root Causes of Defects</strong>: Analyzing found defects to fix the underlying process issue that allowed them to happen.</span>
           </li>
         </ul>
@@ -212,11 +233,11 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>A high-quality process does <em>not guarantee</em> a high-quality product, but it is an extremely important factor. Other elements like people, technology, cost, and schedule also play a role.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>As noted by the CMMI (Capability Maturity Model Integration) framework from the SEI (Software Engineering Institute): <strong class="font-bold text-slate-900 dark:text-white">"the quality of a system or product is highly influenced by the quality of the process used to develop and maintain it."</strong></span>
           </li>
         </ul>
@@ -231,11 +252,11 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>A Process is the set of activities involved in software development.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Process Models are abstract representations of these processes. They help us visualize and understand the activities and the information flow between them. These models do not need to be overly formal or completely detailed to be useful.</span>
           </li>
         </ul>
@@ -248,15 +269,15 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>The organization's size and culture.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>The background and skills of the staff.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>The type of software product being built.</span>
           </li>
         </ul>
@@ -269,19 +290,19 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Making testing activities more efficient or effective.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Improving code review practices.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Introducing more rigorous requirements analysis upfront.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Implementing better communication practices.</span>
           </li>
         </ul>
@@ -290,19 +311,19 @@
 
         <ol class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0">1.</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0">1.</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Measure</strong> the current process to establish a baseline.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0">2.</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0">2.</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Analyze</strong> the data to identify problems and root causes.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0">3.</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0">3.</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Change</strong> the process to address the root causes identified.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0">4.</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0">4.</span>
             <span>Repeat the cycle to further improve.</span>
           </li>
         </ol>
@@ -315,19 +336,19 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Metrics</strong> are quantitative measures of the process or product. They are the hard data that allow objective analysis.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Examples</strong> include number of defects found per test cycle, code compilation time, test coverage percentage, etc.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Good metrics allow teams to track performance objectively, spot trends, and identify when specific assistance is needed.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Without these hard numbers, management discussions are speculative; with them, they're grounded in data.</span>
           </li>
         </ul>
@@ -338,27 +359,27 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Analysis</strong>: Look at the collected metrics to identify patterns, bottlenecks, and root causes of issues. This is where the data tells the story.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Root Cause Analysis</strong>: Not all problems are obvious from the data. Digging deeper to understand why defects occur, why tests take long, etc., leads to better solutions.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Piloting Changes</strong>: Don't overhaul the entire process at once. Propose and test changes in a limited scope first to see if they work.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Measuring Impact</strong>: After changes are made, re-measure to see if the problem has improved. This closes the loop and validates the improvement.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Continuous Improvement</strong>: Once one improvement is in place and proven, start the cycle again for the next problem area.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>This approach turns process improvement from a one-time event into a permanent, ongoing practice.</span>
           </li>
         </ul>
@@ -369,15 +390,15 @@
 
         <ol class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0">1.</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0">1.</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Waterfall</strong>: A sequential, plan-driven approach where each phase is completed before the next begins.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0">2.</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0">2.</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Spiral</strong>: An iterative, risk-driven approach that cycles through planning, designing, building, and evaluating.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0">3.</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0">3.</span>
             <span><strong class="font-bold text-slate-900 dark:text-white">Agile</strong>: A highly iterative, customer-focused approach that prioritizes flexibility and frequent delivery.</span>
           </li>
         </ol>
@@ -386,23 +407,23 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Requirements, design, implementation, testing, and deployment happen sequentially, like water cascading down a waterfall.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Emphasis is placed on detailed upfront planning and documentation. You must get requirements right at the start.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Changes to requirements late in the project are heavily resisted and costly.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Works best for projects with well-understood, stable requirements and low market risk.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Challenge: In reality, requirements are rarely complete and precise at the start.</span>
           </li>
         </ul>
@@ -413,19 +434,19 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Work progresses in repeating cycles (spirals), where each cycle produces a prototype.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Risk is actively managed; each spiral focuses on identifying and mitigating risks.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Feedback from prototypes refines requirements, so understanding evolves incrementally.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Each iteration delivers a working (though incomplete) increment of the system.</span>
           </li>
         </ul>
@@ -440,7 +461,7 @@
           <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><span class="text-green-600 dark:text-green-400 font-bold">+</span> Suitable for large projects with long development cycles (e.g., releasing a new major prototype every year).</p>
         </div>
 
-        <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+        <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
           <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">"Each cycle delivers actual business value, not just a promise of future value."</p>
         </blockquote>
 
@@ -450,31 +471,31 @@
 
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Customers often don't know exactly what they want until they see something concrete.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Market conditions, business priorities, and technologies change rapidly, invalidating earlier requirements.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Traditional approaches (Waterfall) struggle when requirements are not well-defined upfront.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Plan-driven methods create lengthy, static documentation that becomes outdated.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>By the time a project is delivered using traditional methods, the business landscape may have shifted significantly.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>There's an increasing demand to release business value faster and more frequently.</span>
           </li>
           <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-            <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
             <span>Modern software markets reward speed, adaptability, and customer responsiveness.</span>
           </li>
         </ul>
@@ -568,7 +589,7 @@
     –/ Requires a stable software architecture from early on to support the incremental builds.<br>
     +/ Suitable for large projects with long development cycles (e.g., releasing a new major prototype every year).</p>
 
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong>Important Note</strong>: Agile software development suggests even shorter development cycles and more rapid feedback than the traditional Spiral model.</p>
     </blockquote>
 
@@ -594,17 +615,17 @@
       </section>
 
       <section id="topic-3" class="mb-10 md:mb-14" data-topic="topic-3">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-blue-500 rounded-full"></span>Agile Software Development, Success, and the Manifesto</span></h2>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Agile Software Development, Success, and the Manifesto</span></h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">Redefining Project Success</h3>
 
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Traditionally, a successful project was defined by being on time, on budget, and fulfilling the specification. However, Agile encourages us to look beyond deadlines and budgets to deeper, more meaningful dimensions of success:</p>
 
     <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span> <span><strong class="font-bold text-slate-900 dark:text-white">Personal Rewards</strong>: Team satisfaction, learning, and growth.</span></li>
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span> <span><strong class="font-bold text-slate-900 dark:text-white">Technical Excellence</strong>: Building software well.</span></li>
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span> <span><strong class="font-bold text-slate-900 dark:text-white">Elegant, Maintainable Code</strong>: Creating an asset, not just a deliverable.</span></li>
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span> <span><strong class="font-bold text-slate-900 dark:text-white">Delivering Value</strong>: The ultimate goal for the customer.</span></li>
+      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span> <span><strong class="font-bold text-slate-900 dark:text-white">Personal Rewards</strong>: Team satisfaction, learning, and growth.</span></li>
+      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span> <span><strong class="font-bold text-slate-900 dark:text-white">Technical Excellence</strong>: Building software well.</span></li>
+      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span> <span><strong class="font-bold text-slate-900 dark:text-white">Elegant, Maintainable Code</strong>: Creating an asset, not just a deliverable.</span></li>
+      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span> <span><strong class="font-bold text-slate-900 dark:text-white">Delivering Value</strong>: The ultimate goal for the customer.</span></li>
     </ul>
 
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Success has multiple dimensions:</p>
@@ -624,12 +645,12 @@
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">This focuses on business outcomes and efficiency:</p>
 
     <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span> <span>Focusing on delivering value to the customer and the business.</span></li>
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span> <span>Releasing the most valuable features first and releasing frequently to get feedback and ROI early.</span></li>
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span> <span>Being able to change direction to match business needs as they evolve.</span></li>
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span> <span>Reducing costs by eliminating waste and inefficiency.</span></li>
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span> <span>Achieving technical excellence to ensure long-term sustainability.</span></li>
-      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span> <span>Setting expectations early and maintaining fast communication and steady progress.</span></li>
+      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span> <span>Focusing on delivering value to the customer and the business.</span></li>
+      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span> <span>Releasing the most valuable features first and releasing frequently to get feedback and ROI early.</span></li>
+      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span> <span>Being able to change direction to match business needs as they evolve.</span></li>
+      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span> <span>Reducing costs by eliminating waste and inefficiency.</span></li>
+      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span> <span>Achieving technical excellence to ensure long-term sustainability.</span></li>
+      <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"><span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span> <span>Setting expectations early and maintaining fast communication and steady progress.</span></li>
     </ul>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">Technical Success</h3>
@@ -722,7 +743,7 @@
       </section>
 
       <section id="topic-4" class="mb-10 md:mb-14" data-topic="topic-4">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-blue-500 rounded-full"></span>Scrum</span></h2>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Scrum</span></h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">What is Scrum?</h3>
 
@@ -821,7 +842,7 @@
       </section>
 
       <section id="topic-5" class="mb-10 md:mb-14" data-topic="topic-5">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-blue-500 rounded-full"></span>Scrum Artifacts – Product Backlog, Sprint Backlog, and Burndown Chart</span></h2>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Scrum Artifacts – Product Backlog, Sprint Backlog, and Burndown Chart</span></h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">The Product Backlog: The "What"</h3>
 
@@ -879,7 +900,7 @@
 
     <img src="assets/burndown_chart_2.png" alt="Burndown Chart Example 2" class="max-w-full h-auto rounded-lg shadow-md my-6 md:my-8 border border-slate-200 dark:border-slate-700">
 
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong>Example</strong>: The text "2h 4h 2 days 4h 8h 4h Total Work Remaining: 38h 44h Day 2" suggests a scenario: perhaps on Day 2, the team finished 6 hours of work (2h+4h), but also added or discovered 12 new hours of work, causing the total remaining to increase from 38h to 44h. This makes impediments and scope change immediately visible.</p>
     </blockquote>
 
@@ -890,7 +911,7 @@
       </section>
 
       <section id="topic-6" class="mb-10 md:mb-14" data-topic="topic-6">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-blue-500 rounded-full"></span>Advanced Scrum Concepts and Ceremonies</span></h2>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Advanced Scrum Concepts and Ceremonies</span></h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">Scaling and Adaptation: Scrum of Scrums</h3>
 
@@ -1012,7 +1033,7 @@
       </section>
 
       <section id="topic-7" class="mb-10 md:mb-14" data-topic="topic-7">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-blue-500 rounded-full"></span>Scrum Principles, Artifacts, and Metrics</span></h2>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Scrum Principles, Artifacts, and Metrics</span></h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">The Scrum Lifecycle (Big Picture)</h3>
 
@@ -1080,7 +1101,7 @@
       <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Tasks are the concrete, technical steps required to implement a story. They describe how the work will be done. Tasks might not have direct user value on their own (e.g., "Design login UI mockup," "Set up authentication API endpoint").</li>
     </ul>
 
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">This separation enables prioritization to be done at the story level (based on business value), while tasks are added to a story for detailed planning and tracking of the activities needed to complete it. A story can contain one or more tasks.</p>
     </blockquote>
 
@@ -1204,7 +1225,7 @@
       </section>
 
       <section id="topic-8" class="mb-10 md:mb-14" data-topic="topic-8">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-blue-500 rounded-full"></span>Lean Software Development</span></h2>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Lean Software Development</span></h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">Introduction to Lean Software Development</h3>
 
@@ -1214,7 +1235,7 @@
 
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">The term "Lean" describes a production practice that considers the expenditure of resources for any goal other than the creation of value for the end customer to be wasteful. Consequently, any such expenditure becomes a target for elimination.</p>
 
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Therefore, Lean implementation is focused on getting the right things to the right place at the right time in the right quantity to achieve perfect workflow. This pursuit aims to minimize waste while remaining flexible and able to change. (Source: Wikipedia)</p>
     </blockquote>
 
@@ -1231,7 +1252,7 @@
       <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">The Honda Accord took only 3 years.</li>
     </ul>
 
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Despite the much shorter development time, the Honda Accord also achieved better quality. This result was counter-intuitive to traditional thinking, which assumed that shorter development time would lead to increased cost and potentially lower quality.</p>
     </blockquote>
 
@@ -1579,7 +1600,7 @@
       <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Avoid repetition (follow the DRY principle - "Don't Repeat Yourself").</li>
     </ul>
 
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">These tactics keep the system flexible, allowing important decisions about implementation details to be made later when more information is available.</p>
     </blockquote>
 
@@ -1653,7 +1674,7 @@
       </section>
 
       <section id="topic-9" class="mb-10 md:mb-14" data-topic="topic-9">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-blue-500 rounded-full"></span>Extreme Programming (XP)</span></h2>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Extreme Programming (XP)</span></h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">Introduction to Extreme Programming (XP)</h3>
 
@@ -2437,7 +2458,7 @@
 
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">A quote from Ron Jeffries captures the essence of XP design:</p>
 
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">"Design is so important in XP that we do it all the time"</p>
     </blockquote>
 
@@ -2592,7 +2613,7 @@
 
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Every retrospective should begin with this principle:</p>
 
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">"Regardless of what we discover today, we understand and truly believe that everyone did the best job they could, given what they knew at the time, their skills and abilities, the resources available, and the situation at hand"</p>
     </blockquote>
 
@@ -2739,7 +2760,7 @@
       </section>
 
       <section id="topic-10" class="mb-10 md:mb-14" data-topic="topic-10">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-blue-500 rounded-full"></span>Feature-Driven Development (FDD)</span></h2>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Feature-Driven Development (FDD)</span></h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">Yet Another Agile Method?</h3>
 
@@ -3263,7 +3284,7 @@
       </section>
 
       <section id="topic-11" class="mb-10 md:mb-14" data-topic="topic-11">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-blue-500 rounded-full"></span>Unit Testing</span></h2>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Unit Testing</span></h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">What Is Unit Testing?</h3>
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Unit testing is a foundational practice in software development that focuses on verifying the smallest pieces of code:</p>
@@ -3499,11 +3520,11 @@
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Test-Driven Development is a disciplined practice that reverses the traditional order of writing code and tests:</p>
     <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
       <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-        <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+        <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
         <span><strong class="font-bold text-slate-900 dark:text-white">In TDD, you write failing unit tests first, then write production code until that unit test no longer fails.</strong> This means tests are written before the code they test, not after.</span>
       </li>
       <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-        <span class="text-blue-500 font-bold flex-shrink-0 mt-1">•</span>
+        <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
         <span><strong class="font-bold text-slate-900 dark:text-white">This approach ensures that every line of production code has tests that verify its behavior.</strong></span>
       </li>
       <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">TDD is governed by three fundamental laws that must be followed strictly:</strong>
@@ -3553,7 +3574,7 @@
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">The Problem of Complexity</h3>
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">A quote from Ryan Singer captures why testable code matters:</p>
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">"So much complexity in software comes from trying to make one thing do two things."</p>
     </blockquote>
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">When a single function or class tries to do multiple things, it becomes:</p>
@@ -3753,7 +3774,7 @@
       </section>
 
       <section id="topic-12" class="mb-10 md:mb-14" data-topic="topic-12">
-    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-blue-500 rounded-full"></span>Minimum Viable Product (MVP) and Lean Startup</span></h2>
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Minimum Viable Product (MVP) and Lean Startup</span></h2>
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">Introduction to Minimum Viable Product</h3>
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">The Minimum Viable Product, or MVP, is a core concept in modern product development that focuses on delivering value with minimal effort:</p>
@@ -3763,7 +3784,7 @@
     </ul>
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Defining the Minimum Viable Product</p>
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Wikipedia provides a formal definition:</p>
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">"In product development, the Minimum Viable Product (MVP) is a product with just enough features to gather validated learning about the product and its continued development."</p>
     </blockquote>
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">This definition emphasizes that the purpose of an MVP is not to generate revenue or achieve market dominance, but to learn—specifically, to gather validated learning that informs future development decisions.</p>
@@ -3779,7 +3800,7 @@
 
     <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6">Eric Ries on MVP</h3>
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Eric Ries, who pioneered the Lean Startup movement, offers another perspective:</p>
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">"MVP actually is that version of a new product which allows a team to collect the maximum amount of validated learning with the least effort."</p>
     </blockquote>
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">This definition highlights the efficiency aspect—you want the most learning possible for the least effort invested. The MVP is not about building a cheap product; it is about building a learning vehicle efficiently.</p>
@@ -3830,7 +3851,7 @@
 
     <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Lean Startup is a methodology that extends MVP concepts to the entire business development process:</p>
 
-    <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/30 rounded">
+    <blockquote class="border-l-4 border-neutral-500 dark:border-neutral-400 pl-4 md:pl-6 py-2 md:py-4 my-6 md:my-8 text-base sm:text-lg italic text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-neutral-900/30 rounded">
       <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
         "Lean startup is a methodology for developing businesses and products, which aims to shorten product development cycles by adopting a combination of business-hypothesis-driven experimentation, iterative product releases, and validated learning." — Wikipedia
       </p>
@@ -3879,6 +3900,67 @@
     <script>
       // Menu state
       let menuOpen = true;
+
+      // Search functionality
+      function performSearch() {
+        const searchInput = document.getElementById('searchInput');
+        const query = searchInput.value.trim().toLowerCase();
+        
+        if (!query) {
+          alert('Please enter a search term');
+          return;
+        }
+        
+        searchTopics(query);
+      }
+
+      function handleSearch(event) {
+        if (event.key === 'Enter') {
+          performSearch();
+        }
+      }
+
+      function searchTopics(query) {
+        const sections = document.querySelectorAll('main > section[id^="topic-"]');
+        const results = [];
+        
+        sections.forEach(section => {
+          const h2 = section.querySelector('h2');
+          if (h2) {
+            const title = h2.textContent.toLowerCase();
+            const content = section.textContent.toLowerCase();
+            
+            if (title.includes(query) || content.includes(query)) {
+              results.push({
+                id: section.id,
+                title: h2.textContent.trim()
+              });
+            }
+          }
+        });
+        
+        displaySearchResults(results, query);
+      }
+
+      function displaySearchResults(results, query) {
+        const resultsDiv = document.getElementById('searchResults');
+        
+        if (results.length === 0) {
+          resultsDiv.innerHTML = `<p class="text-base italic text-slate-600 dark:text-slate-400">No results found for "${query}"</p>`;
+          resultsDiv.classList.remove('hidden');
+          return;
+        }
+        
+        let html = `<div class="mb-4"><p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Found ${results.length} result${results.length > 1 ? 's' : ''} for "${query}":</p><ul class="space-y-2 mt-3">`;
+        
+        results.forEach(result => {
+          html += `<li><button onclick="showTopic('${result.id}')" class="text-neutral-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline text-left text-base transition">→ ${result.title}</button></li>`;
+        });
+        
+        html += '</ul></div>';
+        resultsDiv.innerHTML = html;
+        resultsDiv.classList.remove('hidden');
+      }
 
       // Toggle sidebar menu
       function toggleMenu() {
@@ -3929,25 +4011,14 @@
         }
       }
 
-      // Initialize: show first topic and setup menu links
       document.addEventListener('DOMContentLoaded', function() {
-        // Initialize sidebar position
+
         const sidebar = document.getElementById('sidebar');
-        if (window.innerWidth < 768) {
-          // Mobile: start closed
-          menuOpen = false;
-          sidebar.classList.add('-translate-x-full');
-        } else {
-          // Desktop: start open
-          menuOpen = true;
-          sidebar.classList.remove('-translate-x-full');
-          sidebar.classList.add('translate-x-0');
-        }
+        menuOpen = false;
+        sidebar.classList.add('-translate-x-full');
         
-        // Show first topic on load
         showTopic('topic-1');
-        
-        // Add click handlers to menu links
+
         document.querySelectorAll('.menu-link').forEach(link => {
           link.addEventListener('click', function(e) {
             const topicId = this.getAttribute('href').substring(1);
@@ -3956,7 +4027,6 @@
         });
       });
 
-      // Add CSS animation
       const style = document.createElement('style');
       style.textContent = `
         @keyframes fadeIn {
