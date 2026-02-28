@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IT 524 – Object-Oriented Programming with Java</title>
+    <title>IT524 – Object-Oriented Programming with Java</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -11,15 +11,16 @@
       };
     </script>
   </head>
-  <body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center">
-
+  <body
+    class="bg-slate-50 dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center min-h-screen"
+  >
     <button
       onclick="document.documentElement.classList.toggle('dark')"
       class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
       title="Toggle Dark Mode"
     >
       <svg
-        class="hidden dark:block w-6 h-6 text-yellow-400 font-bold"
+        class="hidden dark:block w-6 h-6 text-yellow-400"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -32,7 +33,7 @@
         ></path>
       </svg>
       <svg
-        class="dark:hidden w-6 h-6 text-slate-700 font-bold"
+        class="dark:hidden w-6 h-6 text-slate-700"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -46,333 +47,119 @@
       </svg>
     </button>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 m-4 md:m-4 border border-slate-200 dark:border-neutral-800">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3">
-        <span class="h-8 w-1.5 bg-neutral-500 rounded-full"></span>
-        IT 524 – OBJECT-ORIENTED PROGRAMMING WITH JAVA
-      </h1>
-
-      <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Course Overview</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6 md:mb-8">
-          This folder contains the coursework and projects completed for <strong>IT 524: Object-Oriented Programming with Java</strong>, a core course in the <strong>Master of Science in Information Technology</strong> program at <strong>Sabancı University</strong>. The course emphasizes practical development using Java and object-oriented design principles.
+    <main
+      class="max-w-4xl w-full mx-auto bg-white dark:bg-neutral-900 shadow-xl rounded-2xl overflow-hidden p-6 sm:p-10 m-4 md:mt-12 border border-slate-200 dark:border-neutral-800"
+    >
+      <header
+        class="mb-10 pb-8 border-b border-slate-100 dark:border-neutral-800"
+      >
+        <h1
+          class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 flex items-center gap-4"
+        >
+          <div
+            class="flex flex-col h-10 sm:h-12 w-2 rounded-full overflow-hidden flex-shrink-0"
+          >
+            <span class="h-1/2 w-full bg-orange-500"></span>
+            <span class="h-1/2 w-full bg-blue-600"></span>
+          </div>
+          <span class="leading-tight"
+            >IT524 — Object-Oriented Programming with Java</span
+          >
+        </h1>
+        <p class="text-slate-700 dark:text-slate-300 text-lg leading-relaxed">
+          This folder contains the coursework and projects completed for
+          <strong>IT524: Object-Oriented Programming with Java</strong>, a core
+          course in the
+          <strong>Master of Science in Information Technology</strong> program
+          at <strong>Sabancı University</strong>. The course emphasizes
+          practical development using Java and object-oriented design
+          principles. You can also learn more about the program here:
+          <a
+            href="https://fens.sabanciuniv.edu/en/msit"
+            target="_blank"
+            class="text-blue-600 dark:text-blue-400 hover:underline font-medium break-all"
+          >
+            https://fens.sabanciuniv.edu/en/msit
+          </a>
         </p>
-        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-          <strong>IT524</strong> focuses on software development using Java and object-oriented programming (OOP). Topics include classes and objects, inheritance, polymorphism, exception handling, collections, file I/O, and design patterns. Projects demonstrate applied OOP concepts through real application development.
-        </p>
-      </section>
+      </header>
 
-      <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🎓 Core Topics</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          <div class="border-l-4 border-blue-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">🏗️ Object-Oriented Fundamentals</h3>
-            <p class="text-base text-slate-700 dark:text-slate-300">Classes, objects, encapsulation, and information hiding principles.</p>
-          </div>
-          
-          <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">🔄 Inheritance & Polymorphism</h3>
-            <p class="text-base text-slate-700 dark:text-slate-300">Class hierarchies, method overriding, and dynamic dispatch.</p>
-          </div>
-          
-          <div class="border-l-4 border-yellow-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">⚠️ Exception Handling</h3>
-            <p class="text-base text-slate-700 dark:text-slate-300">Try-catch blocks, custom exceptions, and error management.</p>
-          </div>
-          
-          <div class="border-l-4 border-cyan-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">📦 Collections Framework</h3>
-            <p class="text-base text-slate-700 dark:text-slate-300">Lists, Sets, Maps, and data structure implementations.</p>
-          </div>
-          
-          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">📁 File I/O & Streams</h3>
-            <p class="text-base text-slate-700 dark:text-slate-300">File operations, byte/character streams, and serialization.</p>
-          </div>
-          
-          <div class="border-l-4 border-pink-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">🎨 Design Patterns</h3>
-            <p class="text-base text-slate-700 dark:text-slate-300">Creational, structural, and behavioral design patterns.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📂 Projects</h2>
-        
-        <div class="space-y-8">
-          <!-- Bank Account Project -->
-          <div class="border-l-4 border-indigo-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">🏦 BankAccountProject</h3>
-            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
-              A comprehensive banking application demonstrating core OOP principles through practical implementation of account management and financial operations.
-            </p>
-            <ul class="space-y-2 ml-4">
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Account Management</strong>: Create and manage bank accounts with multiple types</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Transaction Processing</strong>: Deposit, withdrawal, and transfer operations</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Inheritance Hierarchy</strong>: Different account types with specialized behaviors</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Exception Handling</strong>: Comprehensive error handling for invalid operations</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Data Persistence</strong>: CSV-based account storage and retrieval</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>User Interface</strong>: Command-line or GUI-based interaction</span>
-              </li>
-            </ul>
-            <div class="mt-4 p-3 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded">
-              <p class="text-sm text-slate-700 dark:text-slate-300">Key Concepts: Encapsulation, Inheritance, Polymorphism, Exception Handling, File I/O</p>
-            </div>
-          </div>
-
-          <!-- FootJoy Project -->
-          <div class="border-l-4 border-amber-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">⚽ FootJoy</h3>
-            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
-              A sports management system simulating football match coordination, demonstrating advanced OOP concepts through team and player management.
-            </p>
-            <ul class="space-y-2 ml-4">
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Match Management</strong>: Organize and track football matches</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Player Hierarchy</strong>: Home and away players with different behaviors</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Ball Management</strong>: Ball state and possession tracking</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Custom Exceptions</strong>: Ball access controls and game rules</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Game Simulation</strong>: Real-time match simulation and scoring</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Statistics Tracking</strong>: Match statistics and player performance</span>
-              </li>
-            </ul>
-            <div class="mt-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">
-              <p class="text-sm text-slate-700 dark:text-slate-300">Key Concepts: Polymorphism, Interface Implementation, Custom Exceptions, Collections</p>
-            </div>
-          </div>
-
-          <!-- Lecture Notes -->
-          <div class="border-l-4 border-rose-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">📓 Lecture Notes</h3>
-            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
-              Comprehensive lecture notes and study materials covering all course topics and concepts.
-            </p>
-            <ul class="space-y-2 ml-4">
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Class and object fundamentals</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Inheritance and polymorphism patterns</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Exception handling best practices</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Collections framework documentation</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>File I/O operations and examples</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Design patterns analysis and implementation</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🚀 Getting Started</h2>
-        
-        <div class="space-y-6">
-          <div class="border-l-4 border-blue-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Prerequisites</h3>
-            <ul class="space-y-2 ml-4">
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Java Development Kit (JDK)</strong>: Version 11 or higher</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>IDE</strong>: IntelliJ IDEA, Eclipse, or VS Code with Java extensions</span>
-              </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span><strong>Maven or Gradle</strong> (optional): For build management</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Running Projects</h3>
-            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">To compile and run Java programs:</p>
-            <div class="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-x-auto mb-4">
-              <code class="text-slate-900 dark:text-slate-100 font-mono text-sm md:text-base">javac *.java<br/>java ClassName</code>
-            </div>
-            
-            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">For projects with build files:</p>
-            <div class="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-x-auto">
-              <code class="text-slate-900 dark:text-slate-100 font-mono text-sm md:text-base">mvn clean compile<br/>mvn exec:java</code>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📚 Learning Path</h2>
-        
-        <div class="space-y-6">
-          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-700 p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Foundational Concepts</h3>
-            <p class="text-base text-slate-700 dark:text-slate-300 mb-3">Start with Java basics and OOP fundamentals:</p>
-            <ul class="space-y-2 ml-4">
-              <li class="text-base text-slate-700 dark:text-slate-300">• Java syntax and primitive data types</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• Classes, objects, and constructors</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• Encapsulation and access modifiers</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• Methods and method overloading</li>
-            </ul>
-          </div>
-
-          <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200 dark:border-purple-700 p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Intermediate OOP Concepts</h3>
-            <p class="text-base text-slate-700 dark:text-slate-300 mb-3">Build upon fundamentals with advanced OOP patterns:</p>
-            <ul class="space-y-2 ml-4">
-              <li class="text-base text-slate-700 dark:text-slate-300">• Inheritance and the super keyword</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• Polymorphism and method overriding</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• Abstract classes and interfaces</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• Exception handling and custom exceptions</li>
-            </ul>
-          </div>
-
-          <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-700 p-4 md:p-6 rounded-lg">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Advanced Topics</h3>
-            <p class="text-base text-slate-700 dark:text-slate-300 mb-3">Master advanced programming concepts:</p>
-            <ul class="space-y-2 ml-4">
-              <li class="text-base text-slate-700 dark:text-slate-300">• Collections framework (Lists, Sets, Maps)</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• File I/O and stream operations</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• Design patterns (Singleton, Factory, Observer, etc.)</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• Generics and type safety</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>💡 Key OOP Principles</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="border-l-4 border-cyan-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Encapsulation</h4>
-            <p class="text-base text-slate-700 dark:text-slate-300">Bundle data and methods together, hiding internal implementation details from the outside world.</p>
-          </div>
-
-          <div class="border-l-4 border-yellow-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Inheritance</h4>
-            <p class="text-base text-slate-700 dark:text-slate-300">Create class hierarchies to promote code reuse and establish relationships between classes.</p>
-          </div>
-
-          <div class="border-l-4 border-pink-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Polymorphism</h4>
-            <p class="text-base text-slate-700 dark:text-slate-300">Allow objects to take multiple forms and be treated uniformly through a common interface.</p>
-          </div>
-
-          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Abstraction</h4>
-            <p class="text-base text-slate-700 dark:text-slate-300">Define abstract concepts and contracts, reducing complexity by hiding unnecessary details.</p>
-          </div>
-
-          <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Single Responsibility</h4>
-            <p class="text-base text-slate-700 dark:text-slate-300">Each class should have one reason to change, promoting maintainability and clarity.</p>
-          </div>
-
-          <div class="border-l-4 border-orange-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">DRY Principle</h4>
-            <p class="text-base text-slate-700 dark:text-slate-300">Don't Repeat Yourself - avoid code duplication through inheritance and composition.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📖 Resources</h2>
-        
-        <div class="space-y-4">
-          <div class="border-l-4 border-blue-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Official Java Documentation</h4>
-            <ul class="space-y-1 ml-4">
-              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://docs.oracle.com/en/java/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Oracle Java Documentation</a></li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://docs.oracle.com/en/java/javase/index.html" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Java SE Reference</a></li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://docs.oracle.com/javase/tutorial/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Java Tutorials</a></li>
-            </ul>
-          </div>
-
-          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Learning Platforms</h4>
-            <ul class="space-y-1 ml-4">
-              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Java SE Support Roadmap</a></li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.udacity.com/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Udacity</a> - Java development courses</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.coursera.org/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Coursera</a> - University-level Java courses</li>
-            </ul>
-          </div>
-
-          <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Design Patterns Reference</h4>
-            <ul class="space-y-1 ml-4">
-              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://refactoring.guru/design-patterns" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Design Patterns Encyclopedia</a></li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.baeldung.com/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Baeldung</a> - Java tutorials and guides</li>
-              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://refactoring.guru/design-patterns/java" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Java Design Patterns</a></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🎯 Program Information</h2>
-        
-        <div class="border-l-4 border-indigo-500 pl-4 md:pl-6 py-2">
-          <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
-            This course is part of the <strong>Master of Science in Information Technology</strong> program offered by the <strong>Faculty of Engineering and Natural Sciences (FENS)</strong> at <strong>Sabancı University</strong>.
-          </p>
-          <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
-            For more information about the program, visit: <a href="https://fens.sabanciuniv.edu/en/msit" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">MSIT Program Page</a>
+      <section class="mb-12">
+        <h2
+          class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2"
+        >
+          📘 Course Overview
+        </h2>
+        <div
+          class="bg-slate-50 dark:bg-neutral-800/40 border border-slate-200 dark:border-neutral-700 rounded-xl p-6 text-slate-700 dark:text-slate-300 text-lg leading-relaxed"
+        >
+          <p>
+            <strong>IT524</strong> focuses on software development using Java
+            and object-oriented programming (OOP). Topics include classes and
+            objects, inheritance, polymorphism, exception handling, collections,
+            file I/O, and design patterns. Projects demonstrate applied OOP
+            concepts through real application development.
           </p>
         </div>
       </section>
 
+      <section>
+        <h2
+          class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2"
+        >
+          📂 Projects in This Folder
+        </h2>
+        <p class="text-slate-700 dark:text-slate-300 text-lg mb-6">
+          This directory contains
+          <strong>two separate Java projects</strong> developed as part of this
+          course. Each project helps you practice key object-oriented
+          programming techniques.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <a
+            href="./BankAccountProject"
+            class="group block p-5 bg-white dark:bg-neutral-800/50 border-l-4 border-emerald-500 rounded-r-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border-y border-r border-slate-200 dark:border-neutral-700"
+          >
+            <div class="flex flex-col h-full">
+              <span class="text-2xl mb-2">🏦</span>
+              <h3
+                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors"
+              >
+                BankAccountProject
+              </h3>
+            </div>
+          </a>
+
+          <a
+            href="./FootJoy"
+            class="group block p-5 bg-white dark:bg-neutral-800/50 border-l-4 border-blue-500 rounded-r-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border-y border-r border-slate-200 dark:border-neutral-700"
+          >
+            <div class="flex flex-col h-full">
+              <span class="text-2xl mb-2">⚽</span>
+              <h3
+                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+              >
+                FootJoy
+              </h3>
+            </div>
+          </a>
+
+          <a
+            href="./LectureNotes"
+            class="group block p-5 bg-white dark:bg-neutral-800/50 border-l-4 border-purple-500 rounded-r-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border-y border-r border-slate-200 dark:border-neutral-700"
+          >
+            <div class="flex flex-col h-full">
+              <span class="text-2xl mb-2">📓</span>
+              <h3
+                class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors"
+              >
+                Lecture Notes
+              </h3>
+            </div>
+          </a>
+        </div>
+      </section>
     </main>
-
-    <script>
-    </script>
   </body>
 </html>
