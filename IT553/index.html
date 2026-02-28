@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IT 553 – Database Design and Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+  </head>
+  <body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center">
+
+    <button
+      onclick="document.documentElement.classList.toggle('dark')"
+      class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
+      title="Toggle Dark Mode"
+    >
+      <svg
+        class="hidden dark:block w-6 h-6 text-yellow-400 font-bold"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"
+        ></path>
+      </svg>
+      <svg
+        class="dark:hidden w-6 h-6 text-slate-700 font-bold"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 m-4 md:m-4 border border-slate-200 dark:border-neutral-800">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3">
+        <span class="h-8 w-1.5 bg-neutral-500 rounded-full"></span>
+        IT 553 – DATABASE DESIGN AND MANAGEMENT
+      </h1>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>MySQL Person Database with Docker Compose</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6 md:mb-8">
+          This project sets up a <strong>MySQL database</strong> with a predefined schema and sample tables using <strong>Docker Compose</strong>. It also includes <strong>phpMyAdmin</strong> for easy database exploration and running SQL queries.
+        </p>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🚀 Project Structure</h2>
+        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">docker-compose.yml</code>: Defines MySQL and phpMyAdmin services.</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">data/</code>: Contains <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">.sql</code> files to create database tables automatically.</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">README.md</code>: Project documentation.</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📦 Services</h2>
+        
+        <div class="space-y-6 md:space-y-8">
+          <div class="border-l-4 border-blue-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">1. MySQL (mysql-container)</h3>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Image: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">mysql:8.0</code></span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Port: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">3306</code></span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Default database: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">person</code></span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>User: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">dbeaver</code></span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Password: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">StrongPass!123</code></span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Root Password: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">güçlü_bir_parola</code></span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">2. phpMyAdmin</h3>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Image: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">phpmyadmin</code></span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Port: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">8080</code></span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Provides a web interface for managing MySQL databases.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">3. CloudBeaver</h3>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Image: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">dbeaver/cloudbeaver:latest</code></span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Port: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">8978</code></span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span>Web-based database manager supporting multiple databases.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ How to Run</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4">Start the project with:</p>
+        <div class="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-x-auto mb-6">
+          <code class="text-slate-900 dark:text-slate-100 font-mono text-sm md:text-base">docker-compose up -d</code>
+        </div>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ Access phpMyAdmin</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4">Access phpMyAdmin at: <a href="http://localhost:8080" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">http://localhost:8080</a></p>
+        <ul class="space-y-2 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong>User</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">root</code></span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong>Password</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">güçlü_bir_parola</code></span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ Access CloudBeaver</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4">Access CloudBeaver at: <a href="http://localhost:8978" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">http://localhost:8978</a></p>
+        <ul class="space-y-2 ml-4 md:ml-6 mb-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong>Server/Host</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">mysql</code></span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong>Port</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">3306</code></span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong>Database</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">person</code> (optional)</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong>Username</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">dbeaver</code></span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong>Password</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">StrongPass!123</code></span>
+          </li>
+        </ul>
+        <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-4 rounded">
+          <p class="text-base text-slate-700 dark:text-slate-300 mb-2"><strong>🔧 Driver Properties</strong>:</p>
+          <ul class="space-y-1 ml-4">
+            <li class="text-base text-slate-700 dark:text-slate-300 flex gap-2">
+              <span class="text-neutral-500">▸</span>
+              <span><code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">allowPublicKeyRetrieval = true</code></span>
+            </li>
+            <li class="text-base text-slate-700 dark:text-slate-300 flex gap-2">
+              <span class="text-neutral-500">▸</span>
+              <span><code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">useSSL = false</code></span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ Apache + PHP</h2>
+        <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 mb-6 rounded">
+          <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
+            <strong>Build</strong>: from local <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">Dockerfile</code><br/>
+            <strong>Base image</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">php:8.2-apache</code><br/>
+            <strong>Port</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">8000</code> (host) → <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">80</code> (container)
+          </p>
+        </div>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4">Access the web app in your browser via:</p>
+        <ul class="space-y-2 ml-4 md:ml-6 mb-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><a href="http://localhost:8000" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">http://localhost:8000</a></span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span>Example PHP endpoint: <a href="http://localhost:8000/query.php" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">http://localhost:8000/query.php</a></span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📊 Database Schema</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6">
+          This project contains two database schemas:
+        </p>
+        <ul class="space-y-3 ml-4 md:ml-6">
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong>person</strong>: Holds information about people, addresses, business entities, and related attributes.</span>
+          </li>
+          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+            <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+            <span><strong>reservations_system</strong>: Manages sailors, boats, and their reservation records.</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🗂️ Schema: person</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6">
+          The <strong>person</strong> schema contains 13 interconnected tables managing business entities, people, contact information, and address details.
+        </p>
+        
+        <div class="space-y-6">
+          <!-- Table 1 -->
+          <div class="border-l-4 border-indigo-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">1. AddressType</h4>
+            <div class="overflow-x-auto mb-4">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-neutral-100 dark:bg-neutral-800">
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">AddressTypeID</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the address type (PK)</td>
+                  </tr>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name of the address type</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Table 2 -->
+          <div class="border-l-4 border-cyan-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">2. CountryRegion</h4>
+            <div class="overflow-x-auto mb-4">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-neutral-100 dark:bg-neutral-800">
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">CountryRegionCode</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(3)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Country code (PK)</td>
+                  </tr>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Country name</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Table 3 -->
+          <div class="border-l-4 border-pink-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">3. BusinessEntity</h4>
+            <div class="overflow-x-auto mb-4">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-neutral-100 dark:bg-neutral-800">
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityID</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT (AUTO_INCREMENT)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the entity (PK)</td>
+                  </tr>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityCode</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">CHAR(36)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Business entity code</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Table 4 -->
+          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">4. Person</h4>
+            <div class="overflow-x-auto mb-4">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-neutral-100 dark:bg-neutral-800">
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityID</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the person (PK)</td>
+                  </tr>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">FirstName</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">First name</td>
+                  </tr>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">LastName</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Last name</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Table 5 -->
+          <div class="border-l-4 border-orange-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">5. EmailAddress</h4>
+            <div class="overflow-x-auto mb-4">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-neutral-100 dark:bg-neutral-800">
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityID</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Person identifier (PK, composite)</td>
+                  </tr>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">EmailAddress</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(50)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Email address</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Table 6 -->
+          <div class="border-l-4 border-red-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">6. Address</h4>
+            <div class="overflow-x-auto mb-4">
+              <table class="w-full text-sm border-collapse">
+                <thead>
+                  <tr class="bg-neutral-100 dark:bg-neutral-800">
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
+                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">AddressID</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the address (PK)</td>
+                  </tr>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">AddressLine</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(60)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Street address</td>
+                  </tr>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">City</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(30)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">City name</td>
+                  </tr>
+                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">PostalCode</td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(15)</code></td>
+                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Postal code</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🗂️ Schema: reservations_system</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6">
+          The <strong>reservations_system</strong> schema manages a simple reservation system with three main tables.
+        </p>
+        <div class="space-y-4">
+          <div class="border-l-4 border-amber-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Sailors</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">Stores information about sailors including their ID, name, rating, and age.</p>
+          </div>
+          <div class="border-l-4 border-amber-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Boats</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">Contains boat information including ID, name, and color.</p>
+          </div>
+          <div class="border-l-4 border-amber-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Reserves</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">Manages reservations linking sailors to boats with reservation dates.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <script>
+    </script>
+  </body>
+</html>
