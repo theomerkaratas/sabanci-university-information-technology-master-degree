@@ -52,7 +52,6 @@ The "Software Crisis" refers to the long-standing problems in the industry regar
 - The process of solving customers’ problems by the systematic development and evolution of large, high-quality software systems within cost, time and other constraints
 
 - Other definitions:
-
   - IEEE: (1) the application of a systematic, disciplined, quantifiable approach to the development, operation, maintenance of software; that is, the application of engineering to software. (2) The study of approaches as in (1).
   - The Canadian Standards Association: The systematic activities involved in the design, implementation and testing of software to optimize its production and support.
 
@@ -145,7 +144,7 @@ In the professional world, you rarely start with a blank page. Most work involve
 
 Java is an OOP language. This paradigm brings together data and behavior (methods) in a single location called an Object.
 
-<img src="oop.png" width="600">
+<img src="assets/oop.png" width="600">
 
 ## OBJECT
 
@@ -958,7 +957,7 @@ Think of a software designer as someone solving a puzzle.
 
 The **Design Space** represents the total range of all possible designs you could create by picking different sets of alternatives. Your job is to navigate this space to find the most efficient path.
 
-<img src="design_space.png" width="600">
+<img src="assets/design_space.png" width="600">
 
 #### How are decisions made?
 
@@ -999,7 +998,7 @@ A Subsystem is simply a "system within a system." It has a definite interface so
 
 ### UML diagram of system parts
 
-<img src="uml_diagram.png" width="600">
+<img src="assets/uml_diagram.png" width="600">
 
 ### Top-Down and Bottom-Up Design
 
@@ -1072,7 +1071,7 @@ This organizes the system into a hierarchy.
 
 ##### Example of The Use of Layers
 
-<img src="example_of_the_use_of_layers.png" width="600">
+<img src="assets/example_of_the_use_of_layers.png" width="600">
 
 ### c. Communicational Cohesion
 
@@ -1371,7 +1370,7 @@ If a program is hard to test, it will have bugs. You must design the software sp
 | Inter-Module | Minimize Coupling, Law of Demeter, Composition over Inheritance, Robustness Principle, Inversion of Control                                      |
 | Module       | SOLID (SRP, OCP, LSP, ISP, DIP), Maximize Cohesion, Hide Implementation Details, Curly’s Law, Encapsulate What Changes, Command Query Separation |
 
-<img src="solid.png" width="300">
+<img src="assets/solid.png" width="300">
 
 ### Keep It Simple Stupid (KISS)
 
