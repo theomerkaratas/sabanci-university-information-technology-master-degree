@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  it524:
+    build: .
+    ports:
+      - "9524:80"
+    volumes:
+      - .:/usr/share/nginx/html
+    container_name: it524

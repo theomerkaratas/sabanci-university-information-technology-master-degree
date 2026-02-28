@@ -1,9 +1,9 @@
 version: '3.8'
 services:
-  website:
+  it501:
     build: .
     ports:
-      - "9090:80"
+      - "9501:80"
     volumes:
       - .:/usr/share/nginx/html
-    container_name: website
+    container_name: it501

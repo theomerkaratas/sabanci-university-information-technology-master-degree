@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IT 501 – Python Fundamentals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+  </head>
+  <body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center">
+
+    <button
+      onclick="document.documentElement.classList.toggle('dark')"
+      class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
+      title="Toggle Dark Mode"
+    >
+      <svg
+        class="hidden dark:block w-6 h-6 text-yellow-400 font-bold"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"
+        ></path>
+      </svg>
+      <svg
+        class="dark:hidden w-6 h-6 text-slate-700 font-bold"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 m-4 md:m-4 border border-slate-200 dark:border-neutral-800">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3">
+        <span class="h-8 w-1.5 bg-neutral-500 rounded-full"></span>
+        IT 501 – PYTHON FUNDAMENTALS
+      </h1>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>Course Overview</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6 md:mb-8">
+          This repository contains various Python projects developed and optimized as part of the <strong>IT501 course</strong>. All projects have undergone comprehensive debugging, have been made resilient to invalid user inputs, and are fully compatible with local development environments.
+        </p>
+        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+          The IT501 Python Fundamentals course focuses on core Python concepts through practical, engaging projects. Students develop critical thinking and problem-solving skills while building real-world applications.
+        </p>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🐍 Python Topics Covered</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div class="border-l-4 border-blue-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Variables & Data Types</h3>
+            <p class="text-base text-slate-700 dark:text-slate-300">Strings, integers, floats, and complex data structures.</p>
+          </div>
+          
+          <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Control Flow</h3>
+            <p class="text-base text-slate-700 dark:text-slate-300">Conditionals (if/else) and loops (for/while).</p>
+          </div>
+          
+          <div class="border-l-4 border-yellow-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Functions</h3>
+            <p class="text-base text-slate-700 dark:text-slate-300">Function definition, parameters, return values, and scope.</p>
+          </div>
+          
+          <div class="border-l-4 border-cyan-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Lists & Collections</h3>
+            <p class="text-base text-slate-700 dark:text-slate-300">Lists, tuples, sets, and dictionary operations.</p>
+          </div>
+          
+          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Error Handling</h3>
+            <p class="text-base text-slate-700 dark:text-slate-300">Try-except blocks and input validation.</p>
+          </div>
+          
+          <div class="border-l-4 border-pink-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Module Organization</h3>
+            <p class="text-base text-slate-700 dark:text-slate-300">Modular code structure and file organization.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🎮 Projects</h2>
+        
+        <div class="space-y-8">
+          <!-- Blackjack -->
+          <div class="border-l-4 border-red-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">♠️ Blackjack</h3>
+            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
+              A classic card game implementation following standard Blackjack rules with an intelligent scoring system.
+            </p>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Card Deck Management</strong>: Proper deck shuffling and card distribution</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Scoring Logic</strong>: Hand evaluation with Ace flexibility (1 or 11)</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Player vs Dealer</strong>: Complete game flow with turn-based mechanics</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>ASCII Art</strong>: Visual card representation and game status display</span>
+              </li>
+            </ul>
+            <div class="mt-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded">
+              <p class="text-sm text-slate-700 dark:text-slate-300">Key Concepts: Lists, Functions, Conditionals, Loops</p>
+            </div>
+          </div>
+
+          <!-- Calculator -->
+          <div class="border-l-4 border-indigo-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">🧮 Calculator</h3>
+            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
+              A robust arithmetic calculator with comprehensive invalid input protection and division-by-zero prevention.
+            </p>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Basic Operations</strong>: Addition, subtraction, multiplication, division</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Error Handling</strong>: Division by zero, non-numeric inputs, invalid operations</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Input Validation</strong>: Type checking and operation verification</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>User-friendly Interface</strong>: Clear prompts and result display</span>
+              </li>
+            </ul>
+            <div class="mt-4 p-3 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded">
+              <p class="text-sm text-slate-700 dark:text-slate-300">Key Concepts: Functions, Error Handling, Input Validation</p>
+            </div>
+          </div>
+
+          <!-- Caesar Cipher -->
+          <div class="border-l-4 border-yellow-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">🔐 Caesar Cipher</h3>
+            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
+              A security tool that encrypts and decrypts text using the classic alphabet shift method.
+            </p>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Encryption/Decryption</strong>: Shift cipher with configurable offset</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Character Handling</strong>: Preserves spaces and special characters</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Case Sensitivity</strong>: Maintains uppercase/lowercase distinction</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Brute Force Capability</strong>: Optional all-shift decryption</span>
+              </li>
+            </ul>
+            <div class="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded">
+              <p class="text-sm text-slate-700 dark:text-slate-300">Key Concepts: String Manipulation, ASCII Values, Loops</p>
+            </div>
+          </div>
+
+          <!-- Coffee Machine -->
+          <div class="border-l-4 border-amber-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">☕ Coffee Machine</h3>
+            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
+              A simulated vending machine application with sophisticated resource management and coin validation.
+            </p>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Menu Selection</strong>: Multiple beverage options with pricing</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Resource Management</strong>: Track water, coffee, milk inventory</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Payment Processing</strong>: Coin validation and change calculation</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Maintenance Reports</strong>: Check resources and refill notifications</span>
+              </li>
+            </ul>
+            <div class="mt-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded">
+              <p class="text-sm text-slate-700 dark:text-slate-300">Key Concepts: Dictionaries, Conditionals, Math Operations, State Management</p>
+            </div>
+          </div>
+
+          <!-- Hangman -->
+          <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">🎯 Hangman</h3>
+            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
+              The classic hangman game with an extensive word list and visual progression stages.
+            </p>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Word Selection</strong>: Random word picking from comprehensive word list</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Game Mechanics</strong>: Letter guessing with attempt tracking</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Visual Feedback</strong>: ASCII art hangman progression stages</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Win/Loss Conditions</strong>: Proper game state detection and messaging</span>
+              </li>
+            </ul>
+            <div class="mt-4 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded">
+              <p class="text-sm text-slate-700 dark:text-slate-300">Key Concepts: Lists, Loops, String Operations, Game Logic</p>
+            </div>
+          </div>
+
+          <!-- Higher-Lower -->
+          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">📊 Higher-Lower</h3>
+            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
+              A trivia game based on comparing follower counts of famous accounts with comprehensive score tracking.
+            </p>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Celebrity Database</strong>: Extensive list of famous accounts and followers</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Comparison Logic</strong>: Higher/lower guessing with validation</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Score Calculation</strong>: Progressive scoring with streak multiplier</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Game State Management</strong>: Replay functionality and score preservation</span>
+              </li>
+            </ul>
+            <div class="mt-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded">
+              <p class="text-sm text-slate-700 dark:text-slate-300">Key Concepts: Dictionaries, Random Selection, Data Comparison, Conditionals</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>✨ General Features</h2>
+        
+        <div class="space-y-4">
+          <div class="border-l-4 border-blue-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">🛡️ Error Handling</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">
+              Invalid inputs (letters instead of numbers, etc.) do not crash the programs. Comprehensive try-except blocks and input validation ensure robust operation.
+            </p>
+          </div>
+
+          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">📦 Modular Structure</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">
+              Data, ASCII art, and core logic are organized into separate files for clarity, maintainability, and code reusability.
+            </p>
+          </div>
+
+          <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">💻 Local Compatibility</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">
+              Platform-specific dependencies (like replit libraries) have been replaced to ensure functionality across all systems and development environments.
+            </p>
+          </div>
+
+          <div class="border-l-4 border-yellow-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">🎨 User Experience</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">
+              Clear instructions, visual feedback, and intuitive interfaces make all projects accessible to users of all skill levels.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🚀 Getting Started</h2>
+        
+        <div class="space-y-6">
+          <div class="border-l-4 border-blue-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Prerequisites</h3>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Python</strong>: Version 3.7 or higher</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Terminal/Command Prompt</strong>: For running scripts</span>
+              </li>
+              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
+                <span><strong>Text Editor or IDE</strong>: VS Code, PyCharm, or similar</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Running a Project</h3>
+            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">Navigate to project directory and run:</p>
+            <div class="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-x-auto">
+              <code class="text-slate-900 dark:text-slate-100 font-mono text-sm md:text-base">cd [project-name]<br/>python main.py</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📚 Learning Path</h2>
+        
+        <div class="space-y-6">
+          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-700 p-4 md:p-6 rounded-lg">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Beginner Level</h3>
+            <p class="text-base text-slate-700 dark:text-slate-300 mb-3">Start with foundational Python concepts:</p>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base text-slate-700 dark:text-slate-300">Start with <strong>Calculator</strong> - Learn basic operations and input/output</li>
+              <li class="text-base text-slate-700 dark:text-slate-300">Move to <strong>Caesar Cipher</strong> - Explore strings and character manipulation</li>
+              <li class="text-base text-slate-700 dark:text-slate-300">Try <strong>Hangman</strong> - Practice loops and conditional logic</li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200 dark:border-purple-700 p-4 md:p-6 rounded-lg">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Intermediate Level</h3>
+            <p class="text-base text-slate-700 dark:text-slate-300 mb-3">Progress to more complex applications:</p>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base text-slate-700 dark:text-slate-300">Start with <strong>Coffee Machine</strong> - Master dictionaries and state management</li>
+              <li class="text-base text-slate-700 dark:text-slate-300">Continue with <strong>Higher-Lower</strong> - Learn data structures and game logic</li>
+            </ul>
+          </div>
+
+          <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-700 p-4 md:p-6 rounded-lg">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Advanced Level</h3>
+            <p class="text-base text-slate-700 dark:text-slate-300 mb-3">Master complex game logic:</p>
+            <ul class="space-y-2 ml-4">
+              <li class="text-base text-slate-700 dark:text-slate-300">Tackle <strong>Blackjack</strong> - Understand advanced game mechanics and algorithm design</li>
+              <li class="text-base text-slate-700 dark:text-slate-300">Explore code improvements and optimizations across all projects</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>💡 Key Programming Concepts</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="border-l-4 border-cyan-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Variables & Data Types</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">Understanding strings, integers, floats, and complex data structures.</p>
+          </div>
+
+          <div class="border-l-4 border-yellow-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Control Structures</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">Mastering conditionals and loops for program flow control.</p>
+          </div>
+
+          <div class="border-l-4 border-pink-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Functions</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">Writing reusable code blocks with parameters and return values.</p>
+          </div>
+
+          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Collections</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">Working with lists, tuples, sets, and dictionaries efficiently.</p>
+          </div>
+
+          <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Input Validation</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">Ensuring robust programs through proper error handling and validation.</p>
+          </div>
+
+          <div class="border-l-4 border-orange-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Algorithm Design</h4>
+            <p class="text-base text-slate-700 dark:text-slate-300">Problem-solving through logical thinking and code organization.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-10 md:mb-14">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📖 Resources</h2>
+        
+        <div class="space-y-4">
+          <div class="border-l-4 border-blue-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Official Python Documentation</h4>
+            <ul class="space-y-1 ml-4">
+              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.python.org/doc/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Python Official Documentation</a></li>
+              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://docs.python.org/3/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Python 3 Documentation</a></li>
+              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.python.org/about/gettingstarted/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Getting Started with Python</a></li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Learning Platforms</h4>
+            <ul class="space-y-1 ml-4">
+              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.codecademy.com/learn/learn-python-3" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Codecademy Python Course</a></li>
+              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.freecodecamp.org/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">freeCodeCamp</a> - Free Python tutorials</li>
+              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.w3schools.com/python/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">W3Schools Python Tutorial</a></li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Reference Materials</h4>
+            <ul class="space-y-1 ml-4">
+              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.geeksforgeeks.org/python-programming-language/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">GeeksforGeeks Python Tutorials</a></li>
+              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://peps.python.org/pep-0008/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">PEP 8 - Style Guide</a></li>
+              <li class="text-base text-slate-700 dark:text-slate-300">• <a href="https://www.real-python.com/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Real Python</a> - In-depth articles and tutorials</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <script>
+    </script>
+  </body>
+</html>
