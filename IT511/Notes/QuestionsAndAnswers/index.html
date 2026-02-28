@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IT 511 – Detailed Q&A Study Guide</title>
+    <link rel="stylesheet" href="./style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -11,16 +12,42 @@
       };
     </script>
     <style>
-      .math { font-family: "Cambria Math", "Times New Roman", serif; font-style: italic; }
-      table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1rem; }
-      th, td { border: 1px solid #e2e8f0; padding: 0.75rem; text-align: left; }
-      .dark th, .dark td { border-color: #374151; }
-      th { background-color: #f8fafc; font-weight: 700; font-size: 0.875rem; }
-      .dark th { background-color: #1f2937; }
-      td { font-size: 0.875rem; }
-      pre { white-space: pre-wrap; word-wrap: break-word; }
-      
-      /* Blockquote Styling */
+      .math {
+        font-family: "Cambria Math", "Times New Roman", serif;
+        font-style: italic;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+      th,
+      td {
+        border: 1px solid #e2e8f0;
+        padding: 0.75rem;
+        text-align: left;
+      }
+      .dark th,
+      .dark td {
+        border-color: #374151;
+      }
+      th {
+        background-color: #f8fafc;
+        font-weight: 700;
+        font-size: 0.875rem;
+      }
+      .dark th {
+        background-color: #1f2937;
+      }
+      td {
+        font-size: 0.875rem;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
       blockquote {
         border-left: 4px solid #94a3b8;
         padding-left: 1rem;
@@ -35,55 +62,131 @@
       }
     </style>
   </head>
-  <body class="bg-slate-50 dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center min-h-screen">
-
+  <body
+    class="bg-slate-50 dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center min-h-screen"
+  >
     <button
       onclick="document.documentElement.classList.toggle('dark')"
       class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50"
       title="Toggle Dark Mode"
     >
-      <svg class="hidden dark:block w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+      <svg
+        class="hidden dark:block w-6 h-6 text-yellow-400"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"
+        ></path>
       </svg>
-      <svg class="dark:hidden w-6 h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+      <svg
+        class="dark:hidden w-6 h-6 text-slate-700"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+        ></path>
       </svg>
     </button>
 
     <main class="max-w-5xl w-full mx-auto p-4 sm:p-8 md:p-12 space-y-16">
-      
-      <header class="mb-12 border-b border-slate-200 dark:border-neutral-800 pb-8">
-        <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mb-4">
+      <header
+        class="mb-12 border-b border-slate-200 dark:border-neutral-800 pb-8"
+      >
+        <h1
+          class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mb-4"
+        >
           IT 511 – Questions & Answers
         </h1>
-        <p class="text-xl text-slate-600 dark:text-slate-400 italic font-medium">Complete Study Materials and Exercise Solutions</p>
+        <p
+          class="text-xl text-slate-600 dark:text-slate-400 italic font-medium"
+        >
+          Complete Study Materials and Exercise Solutions
+        </p>
       </header>
 
       <article class="space-y-6">
-        <div class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl shadow-sm">
-          <h2 class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4 tracking-tight"># Question 1</h2>
-          <p class="leading-relaxed mb-6">What are the source and destination port values in the segments flowing from the server back to the clients’ processes? What are the IP addresses in the network-layer datagrams carrying the transport-layer segments?</p>
-          <img src="question_1.png" alt="Question 1 Diagram" class="rounded shadow-sm border dark:border-neutral-800" style="max-width: 600px; width: 100%;">
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl shadow-sm"
+        >
+          <h2
+            class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4 tracking-tight"
+          >
+            # Question 1
+          </h2>
+          <p class="leading-relaxed mb-6">
+            What are the source and destination port values in the segments
+            flowing from the server back to the clients’ processes? What are the
+            IP addresses in the network-layer datagrams carrying the
+            transport-layer segments?
+          </p>
+          <img
+            src="assets/question_1.png"
+            alt="Question 1 Diagram"
+            class="rounded shadow-sm border dark:border-neutral-800"
+            style="max-width: 600px; width: 100%"
+          />
         </div>
-        
-        <div class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 sm:p-8 border border-slate-200 dark:border-neutral-800">
-          <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-6 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2">Answer 1</h3>
-          
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 sm:p-8 border border-slate-200 dark:border-neutral-800"
+        >
+          <h3
+            class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-6 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2"
+          >
+            Answer 1
+          </h3>
+
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div class="p-4 bg-slate-50 dark:bg-neutral-800/50 rounded-lg text-sm">
-              <p><strong>Host A Request:</strong><br>Source Port: 26145, Source IP: a, Destination Port: 80, Destination IP: b</p>
-              <p class="mt-2 text-blue-600 dark:text-blue-400"><strong>Server’s Response to Host A:</strong><br>Source Port: 80, Source IP: b, Destination Port: 26145, Destination IP: a</p>
+            <div
+              class="p-4 bg-slate-50 dark:bg-neutral-800/50 rounded-lg text-sm"
+            >
+              <p>
+                <strong>Host A Request:</strong><br />Source Port: 26145, Source
+                IP: a, Destination Port: 80, Destination IP: b
+              </p>
+              <p class="mt-2 text-blue-600 dark:text-blue-400">
+                <strong>Server’s Response to Host A:</strong><br />Source Port:
+                80, Source IP: b, Destination Port: 26145, Destination IP: a
+              </p>
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-neutral-800/50 rounded-lg text-sm">
-              <p><strong>Host C (Left) Request:</strong><br>Source Port: 7532, Source IP: c, Destination Port: 80, Destination IP: b</p>
-              <p class="mt-2 text-blue-600 dark:text-blue-400"><strong>Server’s Response to Host C (Left):</strong><br>Source Port: 80, Source IP: b, Destination Port: 7532, Destination IP: c</p>
+            <div
+              class="p-4 bg-slate-50 dark:bg-neutral-800/50 rounded-lg text-sm"
+            >
+              <p>
+                <strong>Host C (Left) Request:</strong><br />Source Port: 7532,
+                Source IP: c, Destination Port: 80, Destination IP: b
+              </p>
+              <p class="mt-2 text-blue-600 dark:text-blue-400">
+                <strong>Server’s Response to Host C (Left):</strong><br />Source
+                Port: 80, Source IP: b, Destination Port: 7532, Destination IP:
+                c
+              </p>
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-neutral-800/50 rounded-lg text-sm md:col-span-2">
-              <p><strong>Host C (Right) Request:</strong><br>Source Port: 26145, Source IP: c, Destination Port: 80, Destination IP: b</p>
-              <p class="mt-2 text-blue-600 dark:text-blue-400"><strong>Server’s Response to Host C (Right):</strong><br>Source Port: 80, Source IP: b, Destination Port: 26145, Destination IP: c</p>
+            <div
+              class="p-4 bg-slate-50 dark:bg-neutral-800/50 rounded-lg text-sm md:col-span-2"
+            >
+              <p>
+                <strong>Host C (Right) Request:</strong><br />Source Port:
+                26145, Source IP: c, Destination Port: 80, Destination IP: b
+              </p>
+              <p class="mt-2 text-blue-600 dark:text-blue-400">
+                <strong>Server’s Response to Host C (Right):</strong
+                ><br />Source Port: 80, Source IP: b, Destination Port: 26145,
+                Destination IP: c
+              </p>
             </div>
           </div>
-          
+
           <div class="overflow-x-auto">
             <table>
               <thead>
@@ -96,34 +199,101 @@
                 </tr>
               </thead>
               <tbody>
-                <tr><td><strong>Host A → Server</strong></td><td>26145</td><td>a</td><td>80</td><td>b</td></tr>
-                <tr class="bg-blue-50/30 dark:bg-blue-900/10"><td><strong>Server → Host A</strong></td><td>80</td><td>b</td><td>26145</td><td>a</td></tr>
-                <tr><td><strong>Host C (Left) → Server</strong></td><td>7532</td><td>c</td><td>80</td><td>b</td></tr>
-                <tr class="bg-blue-50/30 dark:bg-blue-900/10"><td><strong>Server → Host C (Left)</strong></td><td>80</td><td>b</td><td>7532</td><td>c</td></tr>
-                <tr><td><strong>Host C (Right) → Server</strong></td><td>26145</td><td>c</td><td>80</td><td>b</td></tr>
-                <tr class="bg-blue-50/30 dark:bg-blue-900/10"><td><strong>Server → Host C (Right)</strong></td><td>80</td><td>b</td><td>26145</td><td>c</td></tr>
+                <tr>
+                  <td><strong>Host A → Server</strong></td>
+                  <td>26145</td>
+                  <td>a</td>
+                  <td>80</td>
+                  <td>b</td>
+                </tr>
+                <tr class="bg-blue-50/30 dark:bg-blue-900/10">
+                  <td><strong>Server → Host A</strong></td>
+                  <td>80</td>
+                  <td>b</td>
+                  <td>26145</td>
+                  <td>a</td>
+                </tr>
+                <tr>
+                  <td><strong>Host C (Left) → Server</strong></td>
+                  <td>7532</td>
+                  <td>c</td>
+                  <td>80</td>
+                  <td>b</td>
+                </tr>
+                <tr class="bg-blue-50/30 dark:bg-blue-900/10">
+                  <td><strong>Server → Host C (Left)</strong></td>
+                  <td>80</td>
+                  <td>b</td>
+                  <td>7532</td>
+                  <td>c</td>
+                </tr>
+                <tr>
+                  <td><strong>Host C (Right) → Server</strong></td>
+                  <td>26145</td>
+                  <td>c</td>
+                  <td>80</td>
+                  <td>b</td>
+                </tr>
+                <tr class="bg-blue-50/30 dark:bg-blue-900/10">
+                  <td><strong>Server → Host C (Right)</strong></td>
+                  <td>80</td>
+                  <td>b</td>
+                  <td>26145</td>
+                  <td>c</td>
+                </tr>
               </tbody>
             </table>
           </div>
 
           <blockquote>
-            <strong>Importance of Demultiplexing:</strong><br>
-            On Host C, two different processes (left and right) are communicating with the same server (b), and both use the same server port (80). The operating system on Host C uses the destination port number (26145 vs. 7532) to correctly deliver incoming segments to the appropriate process. Since these port numbers are different, the segments are delivered to the correct sockets (and therefore to the correct processes).
+            <strong>Importance of Demultiplexing:</strong><br />
+            On Host C, two different processes (left and right) are
+            communicating with the same server (b), and both use the same server
+            port (80). The operating system on Host C uses the destination port
+            number (26145 vs. 7532) to correctly deliver incoming segments to
+            the appropriate process. Since these port numbers are different, the
+            segments are delivered to the correct sockets (and therefore to the
+            correct processes).
           </blockquote>
         </div>
       </article>
 
       <article class="space-y-6">
-        <div class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl">
-          <h2 class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"># Question 2</h2>
-          <p>UDP and TCP use 1s complement for their checksums. Suppose you have the following three 8-bit bytes: 01010011, 01100110, 01110100. What is the 1s complement of the sum of these 8-bit bytes? (Note that although UDP and TCP use 16-bit words in computing the checksum, for this problem you are being asked to consider 8-bit sums.) Show all work. Why is it that UDP takes the 1s complement of the sum; that is, why not just use the sum? With the 1s complement scheme, how does the receiver detect errors? Is it possible that a 1-bit error will go undetected? How about a 2-bit error?</p>
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl"
+        >
+          <h2
+            class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"
+          >
+            # Question 2
+          </h2>
+          <p>
+            UDP and TCP use 1s complement for their checksums. Suppose you have
+            the following three 8-bit bytes: 01010011, 01100110, 01110100. What
+            is the 1s complement of the sum of these 8-bit bytes? (Note that
+            although UDP and TCP use 16-bit words in computing the checksum, for
+            this problem you are being asked to consider 8-bit sums.) Show all
+            work. Why is it that UDP takes the 1s complement of the sum; that
+            is, why not just use the sum? With the 1s complement scheme, how
+            does the receiver detect errors? Is it possible that a 1-bit error
+            will go undetected? How about a 2-bit error?
+          </p>
         </div>
-        
-        <div class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800">
-          <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2">Answer 2</h3>
-          
-          <div class="bg-neutral-900 text-green-400 p-6 rounded-lg font-mono text-sm overflow-x-auto mb-6 shadow-inner">
-<pre>      0 1 0 1 0 0 1 1
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800"
+        >
+          <h3
+            class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2"
+          >
+            Answer 2
+          </h3>
+
+          <div
+            class="bg-neutral-900 text-green-400 p-6 rounded-lg font-mono text-sm overflow-x-auto mb-6 shadow-inner"
+          >
+            <pre>
+      0 1 0 1 0 0 1 1
     + 0 1 1 0 0 1 1 0
     -----------------
       1 0 1 1 1 0 0 1
@@ -133,148 +303,390 @@
     -----------------
       0 0 1 0 1 1 1 0
 
-One’s complement = 1 1 0 1 0 0 0 1</pre>
+One’s complement = 1 1 0 1 0 0 0 1</pre
+            >
           </div>
-          
-          <p class="text-slate-700 dark:text-slate-300">To detect errors, the receiver adds the four words (the three original words and the checksum). If the sum contains a zero, the receiver knows there has been an error. All one-bit errors will be detected, but two-bit errors can be undetected (e.g., if the last digit of the first word is converted to a 0 and the last digit of the second word is converted to a 1).</p>
-          
-          <blockquote class="bg-slate-50 dark:bg-neutral-800 p-4 rounded text-sm">
-            Hataları tespit etmek için alıcı, dört kelimeyi (üç orijinal kelime ve sağlama toplamını) toplar. Eğer toplamda bir sıfır varsa, alıcı bir hata olduğunu anlar. Tüm tek bitlik hatalar tespit edilir; ancak iki bitlik hatalar fark edilmeyebilir (örneğin, birinci kelimenin son biti 0’a ve ikinci kelimenin son biti 1’e dönüştürülürse).
+
+          <p class="text-slate-700 dark:text-slate-300">
+            To detect errors, the receiver adds the four words (the three
+            original words and the checksum). If the sum contains a zero, the
+            receiver knows there has been an error. All one-bit errors will be
+            detected, but two-bit errors can be undetected (e.g., if the last
+            digit of the first word is converted to a 0 and the last digit of
+            the second word is converted to a 1).
+          </p>
+
+          <blockquote
+            class="bg-slate-50 dark:bg-neutral-800 p-4 rounded text-sm"
+          >
+            Hataları tespit etmek için alıcı, dört kelimeyi (üç orijinal kelime
+            ve sağlama toplamını) toplar. Eğer toplamda bir sıfır varsa, alıcı
+            bir hata olduğunu anlar. Tüm tek bitlik hatalar tespit edilir; ancak
+            iki bitlik hatalar fark edilmeyebilir (örneğin, birinci kelimenin
+            son biti 0’a ve ikinci kelimenin son biti 1’e dönüştürülürse).
           </blockquote>
         </div>
       </article>
 
       <article class="space-y-6">
-        <div class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl">
-          <h2 class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"># Question 3</h2>
-          <p>In protocol rdt3.0, the ACK packets flowing from the receiver to the sender do not have sequence numbers (although they do have an ACK field that contains the sequence number of the packet they are acknowledging). Why is it that our ACK packets do not require sequence numbers?</p>
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl"
+        >
+          <h2
+            class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"
+          >
+            # Question 3
+          </h2>
+          <p>
+            In protocol rdt3.0, the ACK packets flowing from the receiver to the
+            sender do not have sequence numbers (although they do have an ACK
+            field that contains the sequence number of the packet they are
+            acknowledging). Why is it that our ACK packets do not require
+            sequence numbers?
+          </p>
         </div>
-        
-        <div class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800">
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800"
+        >
           <div class="mb-6">
-            <img src="answer_3.png" alt="RDT 3.0 Diagram" style="max-width: 700px; width: 100%;" class="rounded border dark:border-neutral-800 shadow-sm">
+            <img
+              src="assets/answer_3.png"
+              alt="RDT 3.0 Diagram"
+              style="max-width: 700px; width: 100%"
+              class="rounded border dark:border-neutral-800 shadow-sm"
+            />
           </div>
-          
-          <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2">Answer 3</h3>
-          
-          <p class="text-slate-700 dark:text-slate-300 leading-relaxed">To best answer this question, consider why we needed sequence numbers in the first place. We saw that the sender needs sequence numbers so that the receiver can tell if a data packet is a duplicate of an already received data packet. In the case of ACKs, the sender does not need this info (i.e., a sequence number on an ACK) to tell detect a duplicate ACK. A duplicate ACK is obvious to the rdt3.0 receiver, since when it has received the original ACK it transitioned to the next state. The duplicate ACK is not the ACK that the sender needs and hence is ignored by the rdt3.0 sender</p>
-          
-          <blockquote class="bg-slate-50 dark:bg-neutral-800 p-4 rounded text-sm mt-4">
-            Bu soruyu en iyi şekilde yanıtlamak için, neden başta sıra numaralarına (sequence numbers) ihtiyaç duyduğumuzu düşünmeliyiz. Gönderici, bir veri paketinin daha önce alınıp alınmadığını anlayabilmek için sıra numaralarına ihtiyaç duyar.<br><br>
-            Ancak ACK’ler (onay mesajları) söz konusu olduğunda, göndericinin bir ACK’nin kopya (duplicate) olup olmadığını anlamak için sıra numarasına ihtiyacı yoktur. Bunun nedeni, rdt3.0 alıcısının, orijinal ACK’yi aldıktan sonra zaten bir sonraki duruma (state) geçmiş olmasıdır.<br><br>
-            Bu yüzden, tekrar gelen (duplicate) bir ACK, rdt3.0 göndericisi için anlamlı değildir; çünkü beklenen ACK değildir ve bu nedenle gönderici tarafından yok sayılır.
+
+          <h3
+            class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2"
+          >
+            Answer 3
+          </h3>
+
+          <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+            To best answer this question, consider why we needed sequence
+            numbers in the first place. We saw that the sender needs sequence
+            numbers so that the receiver can tell if a data packet is a
+            duplicate of an already received data packet. In the case of ACKs,
+            the sender does not need this info (i.e., a sequence number on an
+            ACK) to tell detect a duplicate ACK. A duplicate ACK is obvious to
+            the rdt3.0 receiver, since when it has received the original ACK it
+            transitioned to the next state. The duplicate ACK is not the ACK
+            that the sender needs and hence is ignored by the rdt3.0 sender
+          </p>
+
+          <blockquote
+            class="bg-slate-50 dark:bg-neutral-800 p-4 rounded text-sm mt-4"
+          >
+            Bu soruyu en iyi şekilde yanıtlamak için, neden başta sıra
+            numaralarına (sequence numbers) ihtiyaç duyduğumuzu düşünmeliyiz.
+            Gönderici, bir veri paketinin daha önce alınıp alınmadığını
+            anlayabilmek için sıra numaralarına ihtiyaç duyar.<br /><br />
+            Ancak ACK’ler (onay mesajları) söz konusu olduğunda, göndericinin
+            bir ACK’nin kopya (duplicate) olup olmadığını anlamak için sıra
+            numarasına ihtiyacı yoktur. Bunun nedeni, rdt3.0 alıcısının,
+            orijinal ACK’yi aldıktan sonra zaten bir sonraki duruma (state)
+            geçmiş olmasıdır.<br /><br />
+            Bu yüzden, tekrar gelen (duplicate) bir ACK, rdt3.0 göndericisi için
+            anlamlı değildir; çünkü beklenen ACK değildir ve bu nedenle
+            gönderici tarafından yok sayılır.
           </blockquote>
         </div>
       </article>
 
       <article class="space-y-6">
-        <div class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl">
-          <h2 class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"># Question 4</h2>
-          <p>Consider a channel that can lose packets but has a maximum delay that is known. Modify protocol rdt2.1 to include sender timeout and retransmit. Informally argue why your protocol can communicate correctly over this channel.</p>
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl"
+        >
+          <h2
+            class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"
+          >
+            # Question 4
+          </h2>
+          <p>
+            Consider a channel that can lose packets but has a maximum delay
+            that is known. Modify protocol rdt2.1 to include sender timeout and
+            retransmit. Informally argue why your protocol can communicate
+            correctly over this channel.
+          </p>
         </div>
-        
-        <div class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800">
-          <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2">Answer 4</h3>
-          
-          <p class="text-slate-700 dark:text-slate-300 mb-4">If the sending of this message were removed, the sending and receiving sides would deadlock, waiting for an event that would never occur. Here’s a scenario:</p>
-          <ul class="list-disc ml-6 mb-4 text-slate-700 dark:text-slate-300 space-y-2">
-            <li>Sender sends pkt0, enters the “Wait for ACK0” state, and waits for a packet back from the receiver.</li>
-            <li>Receiver is in the “Wait for 0 from below” state, and receives a corrupted packet from the sender. Suppose it does not send anything back, and simply re-enters the “wait for 0 from below” state.</li>
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800"
+        >
+          <h3
+            class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2"
+          >
+            Answer 4
+          </h3>
+
+          <p class="text-slate-700 dark:text-slate-300 mb-4">
+            If the sending of this message were removed, the sending and
+            receiving sides would deadlock, waiting for an event that would
+            never occur. Here’s a scenario:
+          </p>
+          <ul
+            class="list-disc ml-6 mb-4 text-slate-700 dark:text-slate-300 space-y-2"
+          >
+            <li>
+              Sender sends pkt0, enters the “Wait for ACK0” state, and waits for
+              a packet back from the receiver.
+            </li>
+            <li>
+              Receiver is in the “Wait for 0 from below” state, and receives a
+              corrupted packet from the sender. Suppose it does not send
+              anything back, and simply re-enters the “wait for 0 from below”
+              state.
+            </li>
           </ul>
-          <p class="text-slate-700 dark:text-slate-300 font-semibold">Now, the sender is awaiting an ACK of some sort from the receiver, and the receiver is waiting for a data packet from the sender — a deadlock!</p>
-          
-          <blockquote class="bg-slate-50 dark:bg-neutral-800 p-4 rounded text-sm mt-4">
-            Eğer bu mesajın gönderilmesi kaldırılırsa, gönderici ve alıcı taraflar hiçbir zaman gerçekleşmeyecek bir olayı bekleyerek kilitlenir (deadlock). Aşağıdaki senaryoyu düşünelim:
+          <p class="text-slate-700 dark:text-slate-300 font-semibold">
+            Now, the sender is awaiting an ACK of some sort from the receiver,
+            and the receiver is waiting for a data packet from the sender — a
+            deadlock!
+          </p>
+
+          <blockquote
+            class="bg-slate-50 dark:bg-neutral-800 p-4 rounded text-sm mt-4"
+          >
+            Eğer bu mesajın gönderilmesi kaldırılırsa, gönderici ve alıcı
+            taraflar hiçbir zaman gerçekleşmeyecek bir olayı bekleyerek
+            kilitlenir (deadlock). Aşağıdaki senaryoyu düşünelim:
             <ul class="list-disc ml-6 mt-2 mb-2">
-              <li>Gönderici, pkt0 paketini gönderir, “ACK0 bekle” durumuna geçer ve alıcıdan bir yanıt bekler.</li>
-              <li>Alıcı, “aşağıdan 0 bekle” durumundadır ve göndericiden bozulmuş (hatalı) bir paket alır. Bu durumda hiçbir şey göndermediğini ve tekrar “aşağıdan 0 bekle” durumuna geçtiğini varsayalım.</li>
+              <li>
+                Gönderici, pkt0 paketini gönderir, “ACK0 bekle” durumuna geçer
+                ve alıcıdan bir yanıt bekler.
+              </li>
+              <li>
+                Alıcı, “aşağıdan 0 bekle” durumundadır ve göndericiden bozulmuş
+                (hatalı) bir paket alır. Bu durumda hiçbir şey göndermediğini ve
+                tekrar “aşağıdan 0 bekle” durumuna geçtiğini varsayalım.
+              </li>
             </ul>
-            Sonuç olarak, gönderici alıcıdan bir tür ACK beklemektedir; alıcı ise göndericiden yeni bir veri paketi beklemektedir. Böylece sistem deadlock olur.
+            Sonuç olarak, gönderici alıcıdan bir tür ACK beklemektedir; alıcı
+            ise göndericiden yeni bir veri paketi beklemektedir. Böylece sistem
+            deadlock olur.
           </blockquote>
         </div>
       </article>
 
       <article class="space-y-6">
-        <div class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl">
-          <h2 class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"># Question 5</h2>
-          <p>Suppose Host A and Host B use a GBN protocol with window size N = 3 and a long-enough range of sequence numbers. Assume Host A sends six application messages to Host B and that all messages are correctly received, except for the first acknowledgment and the fifth data segment. Draw a timing diagram, showing the data segments and the acknowledgments sent along with the corresponding sequence and acknowledge numbers, respectively.</p>
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl"
+        >
+          <h2
+            class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"
+          >
+            # Question 5
+          </h2>
+          <p>
+            Suppose Host A and Host B use a GBN protocol with window size N = 3
+            and a long-enough range of sequence numbers. Assume Host A sends six
+            application messages to Host B and that all messages are correctly
+            received, except for the first acknowledgment and the fifth data
+            segment. Draw a timing diagram, showing the data segments and the
+            acknowledgments sent along with the corresponding sequence and
+            acknowledge numbers, respectively.
+          </p>
         </div>
-        
-        <div class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800">
-          <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2">Answer 5</h3>
-          <img src="answer_5.png" alt="GBN Timing Diagram" style="max-width: 500px; width: 100%;" class="rounded border dark:border-neutral-800 shadow-sm">
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800"
+        >
+          <h3
+            class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2"
+          >
+            Answer 5
+          </h3>
+          <img
+            src="assets/answer_5.png"
+            alt="GBN Timing Diagram"
+            style="max-width: 500px; width: 100%"
+            class="rounded border dark:border-neutral-800 shadow-sm"
+          />
         </div>
       </article>
 
       <article class="space-y-6">
-        <div class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl">
-          <h2 class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"># Question 6</h2>
-          <p>Consider transferring an enormous file of L bytes from Host A to Host B. Assume an MSS of 536 bytes.</p>
-          <p class="mt-2 font-semibold">a. What is the maximum value of L such that TCP sequence numbers are not exhausted? Recall that the TCP sequence number field has 4 bytes.</p>
-          <p class="font-semibold">b. For the L you obtain in (a), find how long it takes to transmit the file. Assume that a total of 66 bytes of transport, network, and data-link header are added to each segment before the resulting packet is sent out over a 155 Mbps link. Ignore flow control and congestion control so A can pump out the segments back-to-back and continuously.</p>
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl"
+        >
+          <h2
+            class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"
+          >
+            # Question 6
+          </h2>
+          <p>
+            Consider transferring an enormous file of L bytes from Host A to
+            Host B. Assume an MSS of 536 bytes.
+          </p>
+          <p class="mt-2 font-semibold">
+            a. What is the maximum value of L such that TCP sequence numbers are
+            not exhausted? Recall that the TCP sequence number field has 4
+            bytes.
+          </p>
+          <p class="font-semibold">
+            b. For the L you obtain in (a), find how long it takes to transmit
+            the file. Assume that a total of 66 bytes of transport, network, and
+            data-link header are added to each segment before the resulting
+            packet is sent out over a 155 Mbps link. Ignore flow control and
+            congestion control so A can pump out the segments back-to-back and
+            continuously.
+          </p>
         </div>
-        
-        <div class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800">
-          <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2">Answer 6</h3>
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800"
+        >
+          <h3
+            class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2"
+          >
+            Answer 6
+          </h3>
           <div class="space-y-4 text-slate-700 dark:text-slate-300">
-            <p>There are 2<sup>32</sup> = 4,294,967,296 possible sequence numbers.</p>
-            <p><strong>a.</strong> The sequence number does not increment by one with each segment. Rather, it increments by the number of bytes of data sent. So the size of the MSS is irrelevant — the maximum size file that can be sent from A to B is simply the number of bytes representable by 2<sup>32</sup> ≈ <strong>4.19 Gbytes</strong></p>
-            <p><strong>b.</strong> The number of segments is 2<sup>32</sup> / 536 = 8,012,999. 66 bytes of header get added to each segment, giving a total of <strong>528,857,934 bytes</strong> of header.<br>
-            The total number of bytes transmitted is 2<sup>32</sup> + 528,857,934 = 4.824 x 10<sup>9</sup></p>
-            <p class="text-blue-600 dark:text-blue-400 font-bold p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg inline-block">Thus, it would take 249 seconds to transmit the file over a 155-Mbps link.</p>
+            <p>
+              There are 2<sup>32</sup> = 4,294,967,296 possible sequence
+              numbers.
+            </p>
+            <p>
+              <strong>a.</strong> The sequence number does not increment by one
+              with each segment. Rather, it increments by the number of bytes of
+              data sent. So the size of the MSS is irrelevant — the maximum size
+              file that can be sent from A to B is simply the number of bytes
+              representable by 2<sup>32</sup> ≈ <strong>4.19 Gbytes</strong>
+            </p>
+            <p>
+              <strong>b.</strong> The number of segments is 2<sup>32</sup> / 536
+              = 8,012,999. 66 bytes of header get added to each segment, giving
+              a total of <strong>528,857,934 bytes</strong> of header.<br />
+              The total number of bytes transmitted is 2<sup>32</sup> +
+              528,857,934 = 4.824 x 10<sup>9</sup>
+            </p>
+            <p
+              class="text-blue-600 dark:text-blue-400 font-bold p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg inline-block"
+            >
+              Thus, it would take 249 seconds to transmit the file over a
+              155-Mbps link.
+            </p>
           </div>
         </div>
       </article>
 
       <article class="space-y-6">
-        <div class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl">
-          <h2 class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"># Question 7</h2>
-          <p>Compare GBN, SR, and TCP (no delayed ACK). Assume that the timeout values for all three protocols are sufficiently long such that 5 consecutive data segments and their corresponding ACKs can be received (if not lost in the channel) by the receiving host (Host B) and the sending host (Host A) respectively. Suppose Host A sends 5 data segments to Host B, and the 2nd segment (sent from A) is lost. In the end, all 5 data segments have been correctly received by Host B.</p>
-          <p class="mt-2 font-semibold">a. How many segments has Host A sent in total and how many ACKs has Host B sent in total? What are their sequence numbers? Answer this question for all three protocols.</p>
-          <p class="font-semibold">b. If the timeout values for all three protocol are much longer than 5 RTT, then which protocol successfully delivers all five data segments in shortest time interval?</p>
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl"
+        >
+          <h2
+            class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"
+          >
+            # Question 7
+          </h2>
+          <p>
+            Compare GBN, SR, and TCP (no delayed ACK). Assume that the timeout
+            values for all three protocols are sufficiently long such that 5
+            consecutive data segments and their corresponding ACKs can be
+            received (if not lost in the channel) by the receiving host (Host B)
+            and the sending host (Host A) respectively. Suppose Host A sends 5
+            data segments to Host B, and the 2nd segment (sent from A) is lost.
+            In the end, all 5 data segments have been correctly received by Host
+            B.
+          </p>
+          <p class="mt-2 font-semibold">
+            a. How many segments has Host A sent in total and how many ACKs has
+            Host B sent in total? What are their sequence numbers? Answer this
+            question for all three protocols.
+          </p>
+          <p class="font-semibold">
+            b. If the timeout values for all three protocol are much longer than
+            5 RTT, then which protocol successfully delivers all five data
+            segments in shortest time interval?
+          </p>
         </div>
-        
-        <div class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800">
-          <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2">Answer 7</h3>
-          
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800"
+        >
+          <h3
+            class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2"
+          >
+            Answer 7
+          </h3>
+
           <div class="space-y-6 text-slate-700 dark:text-slate-300">
             <div>
               <p class="font-bold text-lg mb-2">a.</p>
-              
+
               <div class="mb-4">
-                <p class="font-bold text-indigo-600 dark:text-indigo-400">GoBackN:</p>
-                <p>A sends 9 segments in total. They are initially sent segments 1, 2, 3, 4, 5 and later re-sent segments 2, 3, 4, and 5.<br>
-                B sends 8 ACKs. They are 4 ACKs with sequence number 1, and 4 ACKs with sequence numbers 2, 3, 4, and 5.</p>
+                <p class="font-bold text-indigo-600 dark:text-indigo-400">
+                  GoBackN:
+                </p>
+                <p>
+                  A sends 9 segments in total. They are initially sent segments
+                  1, 2, 3, 4, 5 and later re-sent segments 2, 3, 4, and 5.<br />
+                  B sends 8 ACKs. They are 4 ACKs with sequence number 1, and 4
+                  ACKs with sequence numbers 2, 3, 4, and 5.
+                </p>
               </div>
-              
+
               <div class="mb-4">
-                <p class="font-bold text-indigo-600 dark:text-indigo-400">Selective Repeat:</p>
-                <p>A sends 6 segments in total. They are initially sent segments 1, 2, 3, 4, 5 and later re-sent segment 2.<br>
-                B sends 5 ACKs. They are 4 ACKs with sequence number 1, 3, 4, 5. And there is one ACK with sequence number 2.</p>
+                <p class="font-bold text-indigo-600 dark:text-indigo-400">
+                  Selective Repeat:
+                </p>
+                <p>
+                  A sends 6 segments in total. They are initially sent segments
+                  1, 2, 3, 4, 5 and later re-sent segment 2.<br />
+                  B sends 5 ACKs. They are 4 ACKs with sequence number 1, 3, 4,
+                  5. And there is one ACK with sequence number 2.
+                </p>
               </div>
-              
+
               <div class="mb-4">
-                <p class="font-bold text-indigo-600 dark:text-indigo-400">TCP:</p>
-                <p>A sends 6 segments in total. They are initially sent segments 1, 2, 3, 4, 5 and later re-sent segment 2.<br>
-                B sends 5 ACKs. They are 4 ACKs with sequence number 2. There is one ACK with sequence number 6.<br>
-                <em>Note that TCP always sends an ACK with the expected sequence number.</em></p>
+                <p class="font-bold text-indigo-600 dark:text-indigo-400">
+                  TCP:
+                </p>
+                <p>
+                  A sends 6 segments in total. They are initially sent segments
+                  1, 2, 3, 4, 5 and later re-sent segment 2.<br />
+                  B sends 5 ACKs. They are 4 ACKs with sequence number 2. There
+                  is one ACK with sequence number 6.<br />
+                  <em
+                    >Note that TCP always sends an ACK with the expected
+                    sequence number.</em
+                  >
+                </p>
               </div>
             </div>
-            
+
             <div class="pt-4 border-t dark:border-neutral-800">
               <p class="font-bold text-lg mb-2">b.</p>
-              <p><strong>TCP.</strong> This is because TCP uses fast retransmit without waiting until timeout.</p>
+              <p>
+                <strong>TCP.</strong> This is because TCP uses fast retransmit
+                without waiting until timeout.
+              </p>
             </div>
           </div>
         </div>
       </article>
 
       <article class="space-y-6">
-        <div class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl">
-          <h2 class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"># Question 8</h2>
-          <p>Consider a datagram network using 32-bit host addresses. Suppose a router has four links, numbered 0 through 3, and packets are to be forwarded to the link interfaces as follows:</p>
-          <div class="bg-slate-900 text-slate-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mt-4 mb-4">
-<pre>Destination Address Range                         Link Interface
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl"
+        >
+          <h2
+            class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"
+          >
+            # Question 8
+          </h2>
+          <p>
+            Consider a datagram network using 32-bit host addresses. Suppose a
+            router has four links, numbered 0 through 3, and packets are to be
+            forwarded to the link interfaces as follows:
+          </p>
+          <div
+            class="bg-slate-900 text-slate-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mt-4 mb-4"
+          >
+            <pre>
+Destination Address Range                         Link Interface
 
 11100000 00000000 00000000 00000000
 through                                                    0
@@ -288,20 +700,36 @@ through                                                    1
 through                                                    2
 11100001 11111111 11111111 11111111                    
 
-otherwise                                                  3</pre>
+otherwise                                                  3</pre
+            >
           </div>
-          <p class="font-semibold">a. Provide a forwarding table that has five entries, uses longest prefix matching, and forwards packets to the correct link interfaces.</p>
-          <p class="font-semibold">b. Describe how your forwarding table determines the appropriate link interface for datagrams with destination addresses:</p>
-          <div class="bg-slate-200 dark:bg-slate-800 p-4 rounded-lg font-mono text-sm mt-2">
-            11111000 10010001 01010001 01010101<br><br>
-            11100000 00000000 11000011 00111100<br><br>
+          <p class="font-semibold">
+            a. Provide a forwarding table that has five entries, uses longest
+            prefix matching, and forwards packets to the correct link
+            interfaces.
+          </p>
+          <p class="font-semibold">
+            b. Describe how your forwarding table determines the appropriate
+            link interface for datagrams with destination addresses:
+          </p>
+          <div
+            class="bg-slate-200 dark:bg-slate-800 p-4 rounded-lg font-mono text-sm mt-2"
+          >
+            11111000 10010001 01010001 01010101<br /><br />
+            11100000 00000000 11000011 00111100<br /><br />
             11100001 10000000 00010001 01110111
           </div>
         </div>
-        
-        <div class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800">
-          <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2">Answer 8</h3>
-          
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800"
+        >
+          <h3
+            class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2"
+          >
+            Answer 8
+          </h3>
+
           <div class="space-y-6 text-slate-700 dark:text-slate-300">
             <div>
               <p class="font-bold text-lg mb-2">a.</p>
@@ -314,22 +742,46 @@ otherwise                                                  3</pre>
                     </tr>
                   </thead>
                   <tbody class="font-mono text-sm">
-                    <tr><td>11100000 00000000</td><td>0</td></tr>
-                    <tr class="bg-slate-50 dark:bg-neutral-800/40"><td>11100000 00000001</td><td>1</td></tr>
-                    <tr><td>1110000</td><td>2</td></tr>
-                    <tr class="bg-slate-50 dark:bg-neutral-800/40"><td>11100010</td><td>3</td></tr>
-                    <tr><td>otherwise</td><td>3</td></tr>
+                    <tr>
+                      <td>11100000 00000000</td>
+                      <td>0</td>
+                    </tr>
+                    <tr class="bg-slate-50 dark:bg-neutral-800/40">
+                      <td>11100000 00000001</td>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <td>1110000</td>
+                      <td>2</td>
+                    </tr>
+                    <tr class="bg-slate-50 dark:bg-neutral-800/40">
+                      <td>11100010</td>
+                      <td>3</td>
+                    </tr>
+                    <tr>
+                      <td>otherwise</td>
+                      <td>3</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
             </div>
-            
+
             <div class="pt-4 border-t dark:border-neutral-800">
               <p class="font-bold text-lg mb-2">b.</p>
               <ul class="space-y-2">
-                <li>Prefix match for first address is <strong>5th entry</strong>: link interface <strong>3</strong></li>
-                <li>Prefix match for second address is <strong>1st entry</strong>: link interface <strong>0</strong></li>
-                <li>Prefix match for third address is <strong>4th entry</strong>: link interface <strong>2</strong></li>
+                <li>
+                  Prefix match for first address is <strong>5th entry</strong>:
+                  link interface <strong>3</strong>
+                </li>
+                <li>
+                  Prefix match for second address is <strong>1st entry</strong>:
+                  link interface <strong>0</strong>
+                </li>
+                <li>
+                  Prefix match for third address is <strong>4th entry</strong>:
+                  link interface <strong>2</strong>
+                </li>
               </ul>
             </div>
           </div>
@@ -337,74 +789,179 @@ otherwise                                                  3</pre>
       </article>
 
       <article class="space-y-6">
-        <div class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl">
-          <h2 class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"># Question 9</h2>
-          <p class="mb-4">Consider the topology shown in Figure. Denote the three subnets with hosts (starting clockwise at 12:00) as Networks A, B, and C. Denote the subnets without hosts as Networks D, E, and F.</p>
-          <img src="question_9.png" alt="Network Topology" style="max-width: 500px; width: 100%;" class="rounded border dark:border-neutral-800 shadow-sm mb-4">
-          <p class="font-semibold">a. Assign network addresses to each of these six subnets, with the following constraints: All addresses must be allocated from 214.97.254/23; Subnet A should have enough addresses to support 250 interfaces; Subnet B should have enough addresses to support 120 interfaces; and Subnet C should have enough addresses to support 120 interfaces. Of course, subnets D, E and F should each be able to support two interfaces. For each subnet, the assignment should take the form a.b.c.d/x or a.b.c.d/x – e.f.g.h/y.</p>
-          <p class="font-semibold mt-2">b. Using your answer to part (a), provide the forwarding tables (using longest prefix matching) for each of the three routers.</p>
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl"
+        >
+          <h2
+            class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4"
+          >
+            # Question 9
+          </h2>
+          <p class="mb-4">
+            Consider the topology shown in Figure. Denote the three subnets with
+            hosts (starting clockwise at 12:00) as Networks A, B, and C. Denote
+            the subnets without hosts as Networks D, E, and F.
+          </p>
+          <img
+            src="assets/question_9.png"
+            alt="Network Topology"
+            style="max-width: 500px; width: 100%"
+            class="rounded border dark:border-neutral-800 shadow-sm mb-4"
+          />
+          <p class="font-semibold">
+            a. Assign network addresses to each of these six subnets, with the
+            following constraints: All addresses must be allocated from
+            214.97.254/23; Subnet A should have enough addresses to support 250
+            interfaces; Subnet B should have enough addresses to support 120
+            interfaces; and Subnet C should have enough addresses to support 120
+            interfaces. Of course, subnets D, E and F should each be able to
+            support two interfaces. For each subnet, the assignment should take
+            the form a.b.c.d/x or a.b.c.d/x – e.f.g.h/y.
+          </p>
+          <p class="font-semibold mt-2">
+            b. Using your answer to part (a), provide the forwarding tables
+            (using longest prefix matching) for each of the three routers.
+          </p>
         </div>
-        
-        <div class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800">
-          <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2">Answer 9</h3>
-          
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800"
+        >
+          <h3
+            class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2"
+          >
+            Answer 9
+          </h3>
+
           <div class="space-y-6 text-slate-700 dark:text-slate-300">
             <p>From 214.97.254/23, possible assignments are:</p>
-            
+
             <div>
               <p class="font-bold text-lg mb-2">a.</p>
               <ul class="space-y-1">
-                <li><strong>Subnet A:</strong> 214.97.255/24 (256 addresses)</li>
-                <li><strong>Subnet B:</strong> 214.97.254.0/25 – 214.97.254.0/29 (128 − 8 = 120 addresses)</li>
-                <li><strong>Subnet C:</strong> 214.97.254.128/25 (128 addresses)</li>
-                <li class="pt-2"><strong>Subnet D:</strong> 214.97.254.0/31 (2 addresses)</li>
-                <li><strong>Subnet E:</strong> 214.97.254.2/31 (2 addresses)</li>
-                <li><strong>Subnet F:</strong> 214.97.254.4/30 (4 addresses)</li>
+                <li>
+                  <strong>Subnet A:</strong> 214.97.255/24 (256 addresses)
+                </li>
+                <li>
+                  <strong>Subnet B:</strong> 214.97.254.0/25 – 214.97.254.0/29
+                  (128 − 8 = 120 addresses)
+                </li>
+                <li>
+                  <strong>Subnet C:</strong> 214.97.254.128/25 (128 addresses)
+                </li>
+                <li class="pt-2">
+                  <strong>Subnet D:</strong> 214.97.254.0/31 (2 addresses)
+                </li>
+                <li>
+                  <strong>Subnet E:</strong> 214.97.254.2/31 (2 addresses)
+                </li>
+                <li>
+                  <strong>Subnet F:</strong> 214.97.254.4/30 (4 addresses)
+                </li>
               </ul>
             </div>
-            
+
             <div class="pt-4 border-t dark:border-neutral-800">
               <p class="font-bold text-lg mb-2">b.</p>
-              <p class="mb-4">To simplify the solution, assume that no datagrams have router interfaces as ultimate destinations. Also, label D, E, F for the upper-right, bottom, and upper-left interior subnets, respectively.</p>
-              
+              <p class="mb-4">
+                To simplify the solution, assume that no datagrams have router
+                interfaces as ultimate destinations. Also, label D, E, F for the
+                upper-right, bottom, and upper-left interior subnets,
+                respectively.
+              </p>
+
               <div class="grid grid-cols-1 gap-6">
                 <div>
-                  <h4 class="font-bold text-indigo-600 dark:text-indigo-400 mb-2">Router 1</h4>
+                  <h4
+                    class="font-bold text-indigo-600 dark:text-indigo-400 mb-2"
+                  >
+                    Router 1
+                  </h4>
                   <div class="overflow-x-auto">
                     <table>
-                      <thead><tr><th>Longest Prefix Match</th><th>Outgoing Interface</th></tr></thead>
+                      <thead>
+                        <tr>
+                          <th>Longest Prefix Match</th>
+                          <th>Outgoing Interface</th>
+                        </tr>
+                      </thead>
                       <tbody class="font-mono text-sm">
-                        <tr><td>11010110 01100001 11111111</td><td>Subnet A</td></tr>
-                        <tr class="bg-slate-50 dark:bg-neutral-800/40"><td>11010110 01100001 11111110 00000000</td><td>Subnet D</td></tr>
-                        <tr><td>11010110 01100001 11111110 00000001</td><td>Subnet F</td></tr>
+                        <tr>
+                          <td>11010110 01100001 11111111</td>
+                          <td>Subnet A</td>
+                        </tr>
+                        <tr class="bg-slate-50 dark:bg-neutral-800/40">
+                          <td>11010110 01100001 11111110 00000000</td>
+                          <td>Subnet D</td>
+                        </tr>
+                        <tr>
+                          <td>11010110 01100001 11111110 00000001</td>
+                          <td>Subnet F</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-                
+
                 <div>
-                  <h4 class="font-bold text-indigo-600 dark:text-indigo-400 mb-2">Router 2</h4>
+                  <h4
+                    class="font-bold text-indigo-600 dark:text-indigo-400 mb-2"
+                  >
+                    Router 2
+                  </h4>
                   <div class="overflow-x-auto">
                     <table>
-                      <thead><tr><th>Longest Prefix Match</th><th>Outgoing Interface</th></tr></thead>
+                      <thead>
+                        <tr>
+                          <th>Longest Prefix Match</th>
+                          <th>Outgoing Interface</th>
+                        </tr>
+                      </thead>
                       <tbody class="font-mono text-sm">
-                        <tr><td>11010110 01100001 11111111 000000</td><td>Subnet D</td></tr>
-                        <tr class="bg-slate-50 dark:bg-neutral-800/40"><td>11010110 01100001 11111110 0</td><td>Subnet B</td></tr>
-                        <tr><td>11010110 01100001 11111110 0000001</td><td>Subnet E</td></tr>
+                        <tr>
+                          <td>11010110 01100001 11111111 000000</td>
+                          <td>Subnet D</td>
+                        </tr>
+                        <tr class="bg-slate-50 dark:bg-neutral-800/40">
+                          <td>11010110 01100001 11111110 0</td>
+                          <td>Subnet B</td>
+                        </tr>
+                        <tr>
+                          <td>11010110 01100001 11111110 0000001</td>
+                          <td>Subnet E</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-                
+
                 <div>
-                  <h4 class="font-bold text-indigo-600 dark:text-indigo-400 mb-2">Router 3</h4>
+                  <h4
+                    class="font-bold text-indigo-600 dark:text-indigo-400 mb-2"
+                  >
+                    Router 3
+                  </h4>
                   <div class="overflow-x-auto">
                     <table>
-                      <thead><tr><th>Longest Prefix Match</th><th>Outgoing Interface</th></tr></thead>
+                      <thead>
+                        <tr>
+                          <th>Longest Prefix Match</th>
+                          <th>Outgoing Interface</th>
+                        </tr>
+                      </thead>
                       <tbody class="font-mono text-sm">
-                        <tr><td>11010110 01100001 11111111 000001</td><td>Subnet F</td></tr>
-                        <tr class="bg-slate-50 dark:bg-neutral-800/40"><td>11010110 01100001 11111110 000001</td><td>Subnet E</td></tr>
-                        <tr><td>11010110 01100001 11111110 1</td><td>Subnet C</td></tr>
+                        <tr>
+                          <td>11010110 01100001 11111111 000001</td>
+                          <td>Subnet F</td>
+                        </tr>
+                        <tr class="bg-slate-50 dark:bg-neutral-800/40">
+                          <td>11010110 01100001 11111110 000001</td>
+                          <td>Subnet E</td>
+                        </tr>
+                        <tr>
+                          <td>11010110 01100001 11111110 1</td>
+                          <td>Subnet C</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -416,16 +973,38 @@ otherwise                                                  3</pre>
       </article>
 
       <article class="space-y-6">
-        <div class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl">
-          <h2 class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4 tracking-tight"># Question 10</h2>
-          <p class="mb-6">Consider the following network. With the indicated link costs, use Dijkstra’s shortest-path algorithm to compute the shortest path from x to all network nodes. Show how the algorithm works by computing a table.</p>
+        <div
+          class="bg-indigo-50 dark:bg-indigo-900/10 border-l-4 border-indigo-500 p-6 rounded-r-xl"
+        >
+          <h2
+            class="text-2xl font-bold text-indigo-900 dark:text-indigo-300 mb-4 tracking-tight"
+          >
+            # Question 10
+          </h2>
+          <p class="mb-6">
+            Consider the following network. With the indicated link costs, use
+            Dijkstra’s shortest-path algorithm to compute the shortest path from
+            x to all network nodes. Show how the algorithm works by computing a
+            table.
+          </p>
           <div class="flex">
-            <img src="question_10.png" alt="Dijkstra Topology" style="max-width: 400px; width: 100%;" class="rounded shadow-sm">
+            <img
+              src="assets/question_10.png"
+              alt="Dijkstra Topology"
+              style="max-width: 400px; width: 100%"
+              class="rounded shadow-sm"
+            />
           </div>
         </div>
-        
-        <div class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800 overflow-x-auto">
-          <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2">Answer 10</h3>
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm rounded-xl p-6 border border-slate-200 dark:border-neutral-800 overflow-x-auto"
+        >
+          <h3
+            class="text-lg font-bold text-emerald-600 dark:text-emerald-400 mb-4 uppercase tracking-widest border-b border-emerald-100 dark:border-emerald-900/30 pb-2"
+          >
+            Answer 10
+          </h3>
           <table class="font-mono text-sm text-center">
             <thead>
               <tr>
@@ -440,23 +1019,86 @@ otherwise                                                  3</pre>
               </tr>
             </thead>
             <tbody>
-              <tr><td>0</td><td class="text-left">x</td><td>∞</td><td>∞</td><td>3, x</td><td>6, x</td><td>6, x</td><td>8, x</td></tr>
-              <tr class="bg-slate-50 dark:bg-neutral-800/40"><td>1</td><td class="text-left">xv</td><td>7, v</td><td>6, v</td><td>3, x</td><td>6, x</td><td>6, x</td><td>8, x</td></tr>
-              <tr><td>2</td><td class="text-left">xvu</td><td>7, v</td><td>6, v</td><td>3, x</td><td>6, x</td><td>6, x</td><td>8, x</td></tr>
-              <tr class="bg-slate-50 dark:bg-neutral-800/40"><td>3</td><td class="text-left">xvuw</td><td>7, v</td><td>6, v</td><td>3, x</td><td>6, x</td><td>6, x</td><td>8, x</td></tr>
-              <tr><td>4</td><td class="text-left">xvuwy</td><td>7, v</td><td>6, v</td><td>3, x</td><td>6, x</td><td>6, x</td><td>8, x</td></tr>
-              <tr class="bg-slate-50 dark:bg-neutral-800/40"><td>5</td><td class="text-left">xvuwyt</td><td>7, v</td><td>6, v</td><td>3, x</td><td>6, x</td><td>6, x</td><td>8, x</td></tr>
-              <tr><td>6</td><td class="text-left">xvuwytz</td><td>7, v</td><td>6, v</td><td>3, x</td><td>6, x</td><td>6, x</td><td>8, x</td></tr>
+              <tr>
+                <td>0</td>
+                <td class="text-left">x</td>
+                <td>∞</td>
+                <td>∞</td>
+                <td>3, x</td>
+                <td>6, x</td>
+                <td>6, x</td>
+                <td>8, x</td>
+              </tr>
+              <tr class="bg-slate-50 dark:bg-neutral-800/40">
+                <td>1</td>
+                <td class="text-left">xv</td>
+                <td>7, v</td>
+                <td>6, v</td>
+                <td>3, x</td>
+                <td>6, x</td>
+                <td>6, x</td>
+                <td>8, x</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td class="text-left">xvu</td>
+                <td>7, v</td>
+                <td>6, v</td>
+                <td>3, x</td>
+                <td>6, x</td>
+                <td>6, x</td>
+                <td>8, x</td>
+              </tr>
+              <tr class="bg-slate-50 dark:bg-neutral-800/40">
+                <td>3</td>
+                <td class="text-left">xvuw</td>
+                <td>7, v</td>
+                <td>6, v</td>
+                <td>3, x</td>
+                <td>6, x</td>
+                <td>6, x</td>
+                <td>8, x</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td class="text-left">xvuwy</td>
+                <td>7, v</td>
+                <td>6, v</td>
+                <td>3, x</td>
+                <td>6, x</td>
+                <td>6, x</td>
+                <td>8, x</td>
+              </tr>
+              <tr class="bg-slate-50 dark:bg-neutral-800/40">
+                <td>5</td>
+                <td class="text-left">xvuwyt</td>
+                <td>7, v</td>
+                <td>6, v</td>
+                <td>3, x</td>
+                <td>6, x</td>
+                <td>6, x</td>
+                <td>8, x</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td class="text-left">xvuwytz</td>
+                <td>7, v</td>
+                <td>6, v</td>
+                <td>3, x</td>
+                <td>6, x</td>
+                <td>6, x</td>
+                <td>8, x</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </article>
-
     </main>
 
-    <footer class="w-full mt-20 p-8 border-t border-slate-200 dark:border-neutral-800 text-center text-slate-400 text-sm">
+    <footer
+      class="w-full mt-20 p-8 border-t border-slate-200 dark:border-neutral-800 text-center text-slate-400 text-sm"
+    >
       IT 511 - Fundamentals of Data Communication &bull; Study Materials
     </footer>
-
   </body>
 </html>
