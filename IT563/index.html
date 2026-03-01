@@ -13,6 +13,13 @@
     </script>
     <style type="text/tailwindcss">
       @layer components {
+        main section ul > li:not(.flex) {
+          @apply relative pl-6;
+        }
+        main section ul > li:not(.flex)::before {
+          content: '•';
+          @apply absolute left-2 text-neutral-500 font-bold;
+        }
         table {
           @apply w-full;
         }

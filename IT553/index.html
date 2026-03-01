@@ -10,9 +10,64 @@
         darkMode: "class",
       };
     </script>
+    <style type="text/tailwindcss">
+      @layer components {
+        main section ul > li:not(.flex) {
+          @apply relative pl-6;
+        }
+        main section ul > li:not(.flex)::before {
+          content: "•";
+          @apply absolute left-2 text-neutral-500 font-bold;
+        }
+        table {
+          @apply w-full;
+        }
+        th,
+        td {
+          @apply p-3 align-top border-b border-slate-200 dark:border-slate-700;
+        }
+        th {
+          @apply font-bold;
+        }
+        @media (max-width: 767px) {
+          table,
+          thead,
+          tbody,
+          th,
+          td,
+          tr {
+            @apply block w-full;
+          }
+          thead {
+            @apply hidden;
+          }
+          tr {
+            @apply mb-4 border border-slate-200 dark:border-slate-700 rounded-lg p-4 bg-slate-50 dark:bg-neutral-800/40;
+          }
+          td {
+            @apply p-2 sm:p-3 border-none border-b border-slate-200 dark:border-slate-700;
+            position: relative;
+            padding-left: 50%;
+          }
+          td::before {
+            content: attr(data-label);
+            @apply absolute left-2 top-2 font-bold text-xs uppercase text-slate-500 dark:text-slate-400 sm:left-3 sm:top-3 pt-0.5;
+            width: 45%;
+            white-space: nowrap;
+          }
+          td:last-child {
+            @apply pb-2;
+          }
+          td:first-child {
+            @apply pt-2 font-bold text-lg text-blue-600 dark:text-blue-400;
+          }
+        }
+      }
+    </style>
   </head>
-  <body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center">
-
+  <body
+    class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center"
+  >
     <button
       onclick="document.documentElement.classList.toggle('dark')"
       class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
@@ -47,103 +102,278 @@
     </button>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 m-4 md:m-4 border border-slate-200 dark:border-neutral-800">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3">
+    <main
+      class="w-[calc(100%-2rem)] md:w-full max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 my-4 md:my-8 border border-slate-200 dark:border-neutral-800"
+    >
+      <h1
+        class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3"
+      >
         <span class="h-8 w-1.5 bg-neutral-500 rounded-full"></span>
         IT 553 – DATABASE DESIGN AND MANAGEMENT
       </h1>
 
       <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>MySQL Person Database with Docker Compose</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6 md:mb-8">
-          This project sets up a <strong>MySQL database</strong> with a predefined schema and sample tables using <strong>Docker Compose</strong>. It also includes <strong>phpMyAdmin</strong> for easy database exploration and running SQL queries.
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"
+        >
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>MySQL Person
+          Database with Docker Compose
+        </h2>
+        <p
+          class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6 md:mb-8"
+        >
+          This project sets up a <strong>MySQL database</strong> with a
+          predefined schema and sample tables using
+          <strong>Docker Compose</strong>. It also includes
+          <strong>phpMyAdmin</strong> for easy database exploration and running
+          SQL queries.
         </p>
       </section>
 
       <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🚀 Project Structure</h2>
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"
+        >
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🚀 Project
+          Structure
+        </h2>
         <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">docker-compose.yml</code>: Defines MySQL and phpMyAdmin services.</span>
+            <span
+              ><code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >docker-compose.yml</code
+              >: Defines MySQL and phpMyAdmin services.</span
+            >
           </li>
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">data/</code>: Contains <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">.sql</code> files to create database tables automatically.</span>
+            <span
+              ><code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >data/</code
+              >: Contains
+              <code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >.sql</code
+              >
+              files to create database tables automatically.</span
+            >
           </li>
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">README.md</code>: Project documentation.</span>
+            <span
+              ><code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >README.md</code
+              >: Project documentation.</span
+            >
           </li>
         </ul>
       </section>
 
       <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📦 Services</h2>
-        
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"
+        >
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📦 Services
+        </h2>
+
         <div class="space-y-6 md:space-y-8">
           <div class="border-l-4 border-blue-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">1. MySQL (mysql-container)</h3>
+            <h3
+              class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3"
+            >
+              1. MySQL (mysql-container)
+            </h3>
             <ul class="space-y-2 ml-4">
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Image: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">mysql:8.0</code></span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Image:
+                  <code
+                    class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                    >mysql:8.0</code
+                  ></span
+                >
               </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Port: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">3306</code></span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Port:
+                  <code
+                    class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                    >3306</code
+                  ></span
+                >
               </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Default database: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">person</code></span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Default database:
+                  <code
+                    class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                    >person</code
+                  ></span
+                >
               </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>User: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">dbeaver</code></span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >User:
+                  <code
+                    class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                    >dbeaver</code
+                  ></span
+                >
               </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Password: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">StrongPass!123</code></span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Password:
+                  <code
+                    class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                    >StrongPass!123</code
+                  ></span
+                >
               </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Root Password: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">güçlü_bir_parola</code></span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Root Password:
+                  <code
+                    class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                    >güçlü_bir_parola</code
+                  ></span
+                >
               </li>
             </ul>
           </div>
 
           <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">2. phpMyAdmin</h3>
+            <h3
+              class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3"
+            >
+              2. phpMyAdmin
+            </h3>
             <ul class="space-y-2 ml-4">
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Image: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">phpmyadmin</code></span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Image:
+                  <code
+                    class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                    >phpmyadmin</code
+                  ></span
+                >
               </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Port: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">8080</code></span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Port:
+                  <code
+                    class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                    >8080</code
+                  ></span
+                >
               </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Provides a web interface for managing MySQL databases.</span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Provides a web interface for managing MySQL databases.</span
+                >
               </li>
             </ul>
           </div>
 
           <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
-            <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3">3. CloudBeaver</h3>
+            <h3
+              class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3"
+            >
+              3. CloudBeaver
+            </h3>
             <ul class="space-y-2 ml-4">
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Image: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">dbeaver/cloudbeaver:latest</code></span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Image:
+                  <code
+                    class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                    >dbeaver/cloudbeaver:latest</code
+                  ></span
+                >
               </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Port: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">8978</code></span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Port:
+                  <code
+                    class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                    >8978</code
+                  ></span
+                >
               </li>
-              <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
-                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-                <span>Web-based database manager supporting multiple databases.</span>
+              <li
+                class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+              >
+                <span class="text-neutral-500 font-bold flex-shrink-0 mt-1"
+                  >•</span
+                >
+                <span
+                  >Web-based database manager supporting multiple
+                  databases.</span
+                >
               </li>
             </ul>
           </div>
@@ -151,136 +381,374 @@
       </section>
 
       <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ How to Run</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4">Start the project with:</p>
-        <div class="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-x-auto mb-6">
-          <code class="text-slate-900 dark:text-slate-100 font-mono text-sm md:text-base">docker-compose up -d</code>
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"
+        >
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ How to Run
+        </h2>
+        <p
+          class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4"
+        >
+          Start the project with:
+        </p>
+        <div
+          class="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-x-auto mb-6"
+        >
+          <code
+            class="text-slate-900 dark:text-slate-100 font-mono text-sm md:text-base"
+            >docker-compose up -d</code
+          >
         </div>
       </section>
 
       <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ Access phpMyAdmin</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4">Access phpMyAdmin at: <a href="http://localhost:8080" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">http://localhost:8080</a></p>
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"
+        >
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ Access
+          phpMyAdmin
+        </h2>
+        <p
+          class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4"
+        >
+          Access phpMyAdmin at:
+          <a
+            href="http://localhost:8080"
+            target="_blank"
+            class="text-blue-600 dark:text-blue-400 hover:underline font-semibold"
+            >http://localhost:8080</a
+          >
+        </p>
         <ul class="space-y-2 ml-4 md:ml-6">
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><strong>User</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">root</code></span>
+            <span
+              ><strong>User</strong>:
+              <code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >root</code
+              ></span
+            >
           </li>
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><strong>Password</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">güçlü_bir_parola</code></span>
+            <span
+              ><strong>Password</strong>:
+              <code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >güçlü_bir_parola</code
+              ></span
+            >
           </li>
         </ul>
       </section>
 
       <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ Access CloudBeaver</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4">Access CloudBeaver at: <a href="http://localhost:8978" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-semibold">http://localhost:8978</a></p>
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"
+        >
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ Access
+          CloudBeaver
+        </h2>
+        <p
+          class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4"
+        >
+          Access CloudBeaver at:
+          <a
+            href="http://localhost:8978"
+            target="_blank"
+            class="text-blue-600 dark:text-blue-400 hover:underline font-semibold"
+            >http://localhost:8978</a
+          >
+        </p>
         <ul class="space-y-2 ml-4 md:ml-6 mb-6">
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><strong>Server/Host</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">mysql</code></span>
+            <span
+              ><strong>Server/Host</strong>:
+              <code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >mysql</code
+              ></span
+            >
           </li>
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><strong>Port</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">3306</code></span>
+            <span
+              ><strong>Port</strong>:
+              <code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >3306</code
+              ></span
+            >
           </li>
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><strong>Database</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">person</code> (optional)</span>
+            <span
+              ><strong>Database</strong>:
+              <code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >person</code
+              >
+              (optional)</span
+            >
           </li>
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><strong>Username</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">dbeaver</code></span>
+            <span
+              ><strong>Username</strong>:
+              <code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >dbeaver</code
+              ></span
+            >
           </li>
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><strong>Password</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">StrongPass!123</code></span>
+            <span
+              ><strong>Password</strong>:
+              <code
+                class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                >StrongPass!123</code
+              ></span
+            >
           </li>
         </ul>
-        <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-4 rounded">
-          <p class="text-base text-slate-700 dark:text-slate-300 mb-2"><strong>🔧 Driver Properties</strong>:</p>
+        <div
+          class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-4 rounded"
+        >
+          <p class="text-base text-slate-700 dark:text-slate-300 mb-2">
+            <strong>🔧 Driver Properties</strong>:
+          </p>
           <ul class="space-y-1 ml-4">
             <li class="text-base text-slate-700 dark:text-slate-300 flex gap-2">
               <span class="text-neutral-500">▸</span>
-              <span><code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">allowPublicKeyRetrieval = true</code></span>
+              <span
+                ><code
+                  class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                  >allowPublicKeyRetrieval = true</code
+                ></span
+              >
             </li>
             <li class="text-base text-slate-700 dark:text-slate-300 flex gap-2">
               <span class="text-neutral-500">▸</span>
-              <span><code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">useSSL = false</code></span>
+              <span
+                ><code
+                  class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+                  >useSSL = false</code
+                ></span
+              >
             </li>
           </ul>
         </div>
       </section>
 
       <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ Apache + PHP</h2>
-        <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 mb-6 rounded">
-          <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4">
-            <strong>Build</strong>: from local <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">Dockerfile</code><br/>
-            <strong>Base image</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">php:8.2-apache</code><br/>
-            <strong>Port</strong>: <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">8000</code> (host) → <code class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm">80</code> (container)
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"
+        >
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>▶️ Apache +
+          PHP
+        </h2>
+        <div
+          class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 mb-6 rounded"
+        >
+          <p
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-4"
+          >
+            <strong>Build</strong>: from local
+            <code
+              class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+              >Dockerfile</code
+            ><br />
+            <strong>Base image</strong>:
+            <code
+              class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+              >php:8.2-apache</code
+            ><br />
+            <strong>Port</strong>:
+            <code
+              class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+              >8000</code
+            >
+            (host) →
+            <code
+              class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded text-sm"
+              >80</code
+            >
+            (container)
           </p>
         </div>
-        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4">Access the web app in your browser via:</p>
+        <p
+          class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4"
+        >
+          Access the web app in your browser via:
+        </p>
         <ul class="space-y-2 ml-4 md:ml-6 mb-6">
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><a href="http://localhost:8000" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">http://localhost:8000</a></span>
+            <span
+              ><a
+                href="http://localhost:8000"
+                target="_blank"
+                class="text-blue-600 dark:text-blue-400 hover:underline"
+                >http://localhost:8000</a
+              ></span
+            >
           </li>
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span>Example PHP endpoint: <a href="http://localhost:8000/query.php" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">http://localhost:8000/query.php</a></span>
+            <span
+              >Example PHP endpoint:
+              <a
+                href="http://localhost:8000/query.php"
+                target="_blank"
+                class="text-blue-600 dark:text-blue-400 hover:underline"
+                >http://localhost:8000/query.php</a
+              ></span
+            >
           </li>
         </ul>
       </section>
 
       <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📊 Database Schema</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6">
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"
+        >
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>📊 Database
+          Schema
+        </h2>
+        <p
+          class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6"
+        >
           This project contains two database schemas:
         </p>
         <ul class="space-y-3 ml-4 md:ml-6">
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><strong>person</strong>: Holds information about people, addresses, business entities, and related attributes.</span>
+            <span
+              ><strong>person</strong>: Holds information about people,
+              addresses, business entities, and related attributes.</span
+            >
           </li>
-          <li class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3">
+          <li
+            class="text-base sm:text-lg text-slate-700 dark:text-slate-300 flex gap-3"
+          >
             <span class="text-neutral-500 font-bold flex-shrink-0 mt-1">•</span>
-            <span><strong>reservations_system</strong>: Manages sailors, boats, and their reservation records.</span>
+            <span
+              ><strong>reservations_system</strong>: Manages sailors, boats, and
+              their reservation records.</span
+            >
           </li>
         </ul>
       </section>
 
       <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🗂️ Schema: person</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6">
-          The <strong>person</strong> schema contains 13 interconnected tables managing business entities, people, contact information, and address details.
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"
+        >
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🗂️ Schema:
+          person
+        </h2>
+        <p
+          class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6"
+        >
+          The <strong>person</strong> schema contains 13 interconnected tables
+          managing business entities, people, contact information, and address
+          details.
         </p>
-        
+
         <div class="space-y-6">
           <!-- Table 1 -->
           <div class="border-l-4 border-indigo-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">1. AddressType</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              1. AddressType
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">AddressTypeID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the address type (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      AddressTypeID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Unique identifier for the address type (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name of the address type</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(100)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name of the address type
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -289,26 +757,74 @@
 
           <!-- Table 2 -->
           <div class="border-l-4 border-cyan-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">2. CountryRegion</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              2. CountryRegion
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">CountryRegionCode</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(3)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Country code (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      CountryRegionCode
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(3)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Country code (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Country name</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(100)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Country name
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -317,26 +833,74 @@
 
           <!-- Table 3 -->
           <div class="border-l-4 border-pink-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">3. BusinessEntity</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              3. BusinessEntity
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT (AUTO_INCREMENT)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the entity (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      BusinessEntityID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT (AUTO_INCREMENT)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Unique identifier for the entity (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityCode</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">CHAR(36)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Business entity code</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      BusinessEntityCode
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >CHAR(36)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Business entity code
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -345,26 +909,74 @@
 
           <!-- Table 4: ContactType -->
           <div class="border-l-4 border-purple-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">4. ContactType</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              4. ContactType
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">ContactTypeID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT (AUTO_INCREMENT)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the contact type (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      ContactTypeID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT (AUTO_INCREMENT)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Unique identifier for the contact type (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name of the contact type</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(100)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name of the contact type
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -373,46 +985,162 @@
 
           <!-- Table 5: StateProvince -->
           <div class="border-l-4 border-violet-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">5. StateProvince</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              5. StateProvince
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">StateProvinceID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the state/province (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      StateProvinceID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Unique identifier for the state/province (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">StateProvinceCode</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">CHAR(3)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Code for the state/province</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      StateProvinceCode
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >CHAR(3)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Code for the state/province
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">CountryRegionCode</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(3)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Associated country code</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      CountryRegionCode
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(3)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Associated country code
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">IsOnlyStateProvinceFlag</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">CHAR(1)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Indicates if it is the only state/province</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      IsOnlyStateProvinceFlag
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >CHAR(1)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Indicates if it is the only state/province
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">State/province name</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(100)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      State/province name
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">TerritoryID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Territory identifier</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      TerritoryID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Territory identifier
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -421,46 +1149,162 @@
 
           <!-- Table 6 -->
           <div class="border-l-4 border-red-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">6. Address</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              6. Address
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">AddressID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the address (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      AddressID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Unique identifier for the address (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">AddressLine</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(60)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Street address</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      AddressLine
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(60)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Street address
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">City</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(30)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">City name</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      City
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(30)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      City name
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">StateProvinceID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Associated state/province ID</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      StateProvinceID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Associated state/province ID
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">PostalCode</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(15)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Postal code</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      PostalCode
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(15)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Postal code
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">ModifiedDate</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">DATETIME</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Last updated date</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      ModifiedDate
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >DATETIME</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Last updated date
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -469,61 +1313,228 @@
 
           <!-- Table 7: Person -->
           <div class="border-l-4 border-green-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">7. Person</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              7. Person
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the person (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      BusinessEntityID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Unique identifier for the person (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">PersonType</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">CHAR(2)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Type of person</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      PersonType
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >CHAR(2)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Type of person
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">NameStyle</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">CHAR(1)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name style indicator</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      NameStyle
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >CHAR(1)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name style indicator
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Title</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(8)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Title (e.g., Mr, Ms)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Title
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(8)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Title (e.g., Mr, Ms)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">FirstName</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">First name</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      FirstName
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(100)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      First name
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">LastName</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Last name</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      LastName
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(100)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Last name
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Suffix</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(10)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name suffix</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Suffix
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(10)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name suffix
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">EmailPromotion</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Email promotion preference</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      EmailPromotion
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Email promotion preference
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">ModifiedDate</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">DATETIME</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Last updated date</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      ModifiedDate
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >DATETIME</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Last updated date
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -532,36 +1543,118 @@
 
           <!-- Table 8: EmailAddress -->
           <div class="border-l-4 border-orange-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">8. EmailAddress</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              8. EmailAddress
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Person identifier (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      BusinessEntityID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Person identifier (PK, composite)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">EmailAddressID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Email address identifier (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      EmailAddressID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Email address identifier (PK, composite)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">EmailAddress</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(50)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Email address</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      EmailAddress
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(50)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Email address
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">ModifiedDate</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">DATETIME</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Last updated date</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      ModifiedDate
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >DATETIME</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Last updated date
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -570,36 +1663,118 @@
 
           <!-- Table 9: Password -->
           <div class="border-l-4 border-fuchsia-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">9. Password</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              9. Password
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Person identifier (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      BusinessEntityID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Person identifier (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">PasswordSalt</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(10)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Password salt</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      PasswordSalt
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(10)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Password salt
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">PasswordHash</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(128)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Encrypted password hash</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      PasswordHash
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(128)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Encrypted password hash
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">ModifiedDate</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">DATETIME</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Last updated date</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      ModifiedDate
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >DATETIME</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Last updated date
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -608,26 +1783,74 @@
 
           <!-- Table 10: PhoneNumberType -->
           <div class="border-l-4 border-rose-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">10. PhoneNumberType</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              10. PhoneNumberType
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">PhoneNumberTypeID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the phone type (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      PhoneNumberTypeID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Unique identifier for the phone type (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(100)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name of the phone type</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(100)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name of the phone type
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -636,36 +1859,118 @@
 
           <!-- Table 11: PersonPhone -->
           <div class="border-l-4 border-sky-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">11. PersonPhone</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              11. PersonPhone
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Person identifier (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      BusinessEntityID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Person identifier (PK, composite)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">PhoneNumber</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(50)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Phone number (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      PhoneNumber
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(50)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Phone number (PK, composite)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">PhoneNumberTypeID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Phone type identifier (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      PhoneNumberTypeID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Phone type identifier (PK, composite)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">ModifiedDate</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">DATETIME</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Last updated date</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      ModifiedDate
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >DATETIME</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Last updated date
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -674,31 +1979,96 @@
 
           <!-- Table 12: BusinessEntityAddress -->
           <div class="border-l-4 border-teal-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">12. BusinessEntityAddress</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              12. BusinessEntityAddress
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Business entity identifier (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      BusinessEntityID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Business entity identifier (PK, composite)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">AddressID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Address identifier (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      AddressID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Address identifier (PK, composite)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">AddressTypeID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Address type identifier (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      AddressTypeID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Address type identifier (PK, composite)
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -707,36 +2077,118 @@
 
           <!-- Table 13: BusinessEntityContact -->
           <div class="border-l-4 border-lime-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">13. BusinessEntityContact</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              13. BusinessEntityContact
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">BusinessEntityID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Business entity identifier (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      BusinessEntityID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Business entity identifier (PK, composite)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">PersonID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Person identifier (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      PersonID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Person identifier (PK, composite)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">ContactTypeID</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Contact type identifier (PK, composite)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      ContactTypeID
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Contact type identifier (PK, composite)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">ModifiedDate</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">DATETIME</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Last updated date</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      ModifiedDate
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >DATETIME</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Last updated date
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -746,44 +2198,134 @@
       </section>
 
       <section class="mb-10 md:mb-14">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🗂️ Schema: reservations_system</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6">
-          The <strong>reservations_system</strong> schema manages a simple reservation system with three main tables.
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3 mt-8"
+        >
+          <span class="h-7 w-1 bg-neutral-500 rounded-full"></span>🗂️ Schema:
+          reservations_system
+        </h2>
+        <p
+          class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-6"
+        >
+          The <strong>reservations_system</strong> schema manages a simple
+          reservation system with three main tables.
         </p>
-        
+
         <div class="space-y-6">
           <!-- Sailors Table -->
           <div class="border-l-4 border-amber-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">1. Sailors</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              1. Sailors
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">sid</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the sailor (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      sid
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Unique identifier for the sailor (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">sname</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(255)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name of the sailor</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      sname
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(255)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name of the sailor
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">rating</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Sailor's rating value</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      rating
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Sailor's rating value
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">age</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Age of the sailor</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      age
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Age of the sailor
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -792,31 +2334,96 @@
 
           <!-- Boats Table -->
           <div class="border-l-4 border-yellow-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">2. Boats</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              2. Boats
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">bid</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Unique identifier for the boat (PK)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      bid
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Unique identifier for the boat (PK)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">bname</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(255)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Name of the boat</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      bname
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(255)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Name of the boat
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">color</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">VARCHAR(255)</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Color of the boat</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      color
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >VARCHAR(255)</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Color of the boat
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -825,31 +2432,96 @@
 
           <!-- Reserves Table -->
           <div class="border-l-4 border-stone-500 pl-4 md:pl-6 py-2">
-            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">3. Reserves</h4>
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
+              3. Reserves
+            </h4>
             <div class="overflow-x-auto mb-4">
               <table class="w-full text-sm border-collapse">
                 <thead>
                   <tr class="bg-neutral-100 dark:bg-neutral-800">
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Column</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Type</th>
-                    <th class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white">Description</th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Column
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Type
+                    </th>
+                    <th
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-left font-bold text-slate-900 dark:text-white"
+                    >
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">sid</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Sailor identifier (FK → Sailors.sid)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      sid
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Sailor identifier (FK → Sailors.sid)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">bid</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">INT</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Boat identifier (FK → Boats.bid)</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      bid
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >INT</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Boat identifier (FK → Boats.bid)
+                    </td>
                   </tr>
-                  <tr class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">date</td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"><code class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded">DATE</code></td>
-                    <td class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300">Reservation date</td>
+                  <tr
+                    class="border-t border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  >
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      date
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <code
+                        class="text-xs bg-neutral-100 dark:bg-neutral-900 px-1 py-0.5 rounded"
+                        >DATE</code
+                      >
+                    </td>
+                    <td
+                      class="border border-neutral-300 dark:border-neutral-700 px-3 py-2 text-slate-700 dark:text-slate-300"
+                    >
+                      Reservation date
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -857,10 +2529,8 @@
           </div>
         </div>
       </section>
-
     </main>
 
-    <script>
-    </script>
+    <script></script>
   </body>
 </html>
