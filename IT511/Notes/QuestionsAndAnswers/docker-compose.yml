@@ -1,9 +1,0 @@
-version: '3.8'
-services:
-  questions-answers:
-    build: .
-    ports:
-      - "9513:80"
-    volumes:
-      - .:/usr/share/nginx/html
-    container_name: questions-answers
