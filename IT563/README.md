@@ -1,7 +1,7 @@
 # AGILE PROJECT MANAGEMENT METHODOLOGY
 
 > [!TIP]
-> 🌐 **View the Interactive Website**: Open [website/index.html](website/index.html) in your browser to explore the content with the dynamic menu system!
+> 🌐 **View the Interactive Website**: Open [index.html](index.html) in your browser to explore the content with the dynamic menu system!
 
 ## Introduction to Agile Software Development
 
@@ -72,7 +72,7 @@ Needs ---->|  Process  |----> |  Product  |
 
 This leads to a fundamental hypothesis or assumption in software engineering: By improving the development process, **we can improve the quality of the final software product**.
 
-<img src="website/assets/hypothesis_assumption.png" width="600">
+<img src="assets/hypothesis_assumption.png" width="600">
 
 ### Modeling and Improving the Process
 
@@ -81,7 +81,7 @@ To understand and improve a process, we first need to describe it.
 - A Process is the set of activities involved in software development.
 - Process Models are abstract representations of these processes. They help us visualize and understand the activities and the information flow between them. These models do not need to be overly formal or completely detailed to be useful.
 
-<img src="website/assets/process_models.png" width="600">
+<img src="assets/process_models.png" width="600">
 
 ### The Need for Customization and Continuous Improvement
 
@@ -201,7 +201,7 @@ Spiral Development addresses some Waterfall limitations by being incremental.
 
 ### Advantages and Disadvantages of Spiral Development
 
-<img src="website/assets/waterfall_and_spiral.png" width="600">
+<img src="assets/waterfall_and_spiral.png" width="600">
 
 +/ Well-suited for uncertain or changing requirements because feedback is gathered early from each prototype.
 –/ Requires a stable software architecture from early on to support the incremental builds.
@@ -222,7 +222,7 @@ The key motivation is the reality of incomplete, imprecise, uncertain, and chang
 
 The final slide, "Solution Approach," is left blank, serving as a conceptual bridge. The implied solution to the problems of rigid, plan-driven methods is Agile Software Development itself. Agile provides the framework for embracing change, delivering value frequently, and improving the process continuously through short cycles and tight feedback loops—directly addressing the motivations listed.
 
-<img src="website/assets/solution_approach.png" width="600">
+<img src="assets/solution_approach.png" width="600">
 
 ## Agile Software Development, Success, and the Manifesto
 
@@ -243,7 +243,7 @@ Success has multiple dimensions:
 
 A truly successful project delivers value across all these dimensions.
 
-<img src="website/assets/dimension_of_success.png" width="200">
+<img src="assets/dimension_of_success.png" width="200">
 
 ### Organizational Success
 
@@ -392,7 +392,7 @@ Distinction: The slides mention the classic "pigs and chickens" metaphor. The "p
 
 ### Scrum Ceremonies (Meetings)
 
-<img src="website/assets/scrum.png" width="600">
+<img src="assets/scrum.png" width="600">
 
 Scrum replaces extensive documentation with frequent, structured communication through meetings. These are the core empirical inspection and adaptation points:
 
@@ -414,11 +414,11 @@ The Product Backlog is the single, authoritative source for everything that migh
 - **Content**: Each item (often called a Product Backlog Item or PBI) should have a description and an initial estimate (often in relative units like story points) to aid in planning. The table in the slide shows a backlog with items like "Create product backlog worksheet" and their estimates.
 - **Visualization**: It is often maintained in a tool (like the worksheet shown) that allows for easy viewing and updating of priorities.
 
-<img src="website/assets/product_backlog.png" width="600">
+<img src="assets/product_backlog.png" width="600">
 
 ### The Sprint Backlog: The "How" for the Current Sprint
 
-<img src="website/assets/spring_backlog_1.png" width="600">
+<img src="assets/spring_backlog_1.png" width="600">
 
 The Sprint Backlog is the set of Product Backlog items selected for the current Sprint, plus a plan for delivering them. It is a real-time picture of the work the Team plans to accomplish during the Sprint.
 
@@ -427,7 +427,7 @@ The Sprint Backlog is the set of Product Backlog items selected for the current 
 - **Task Granularity**: A good rule is that each task should take 4 to 16 hours to finish. This makes progress easy to track daily.
 - **Ownership & Visibility**: The Sprint Backlog can be modified only by the Team as they learn more during the Sprint. It must be highly visible, typically displayed on a physical or digital task board.
 
-<img src="website/assets/spring_backlog_2.png" width="600">
+<img src="assets/spring_backlog_2.png" width="600">
 
 ### The Increment: The "Done" Result
 
@@ -438,7 +438,7 @@ The goal of each Sprint is to produce an Increment of potentially shippable prod
 
 ### The Burndown Chart: Tracking Progress Visually
 
-<img src="website/assets/burndown_chart_1.png" width="400">
+<img src="assets/burndown_chart_1.png" width="400">
 
 The Burndown Chart is a simple, powerful tool for visualizing progress vs. work to be done.
 
@@ -448,13 +448,13 @@ The Burndown Chart is a simple, powerful tool for visualizing progress vs. work 
   - The horizontal axis represents time (the days of the Sprint).
   - Each day, the team updates the chart by summing the remaining effort on all unfinished tasks. If they completed 4 hours of work, the line goes down by 4. If they discover new work, the line may go up.
 
-<img src="website/assets/burndown_chart_2.png" width="400">
+<img src="assets/burndown_chart_2.png" width="400">
 
 > **Example**: The text "2h 4h 2 days 4h 8h 4h Total Work Remaining: 38h 44h Day 2" suggests a scenario: perhaps on Day 2, the team finished 6 hours of work (2h+4h), but also added or discovered 12 new hours of work, causing the total remaining to increase from 38h to 44h. This makes impediments and scope change immediately visible.
 
-<img src="website/assets/burndown_chart_3.png" width="400">
+<img src="assets/burndown_chart_3.png" width="400">
 
-<img src="website/assets/burndown_chart_4.png" width="400">
+<img src="assets/burndown_chart_4.png" width="400">
 
 ## Advanced Scrum Concepts and Ceremonies
 
@@ -558,7 +558,7 @@ A 3-hour meeting for the Team, the ScrumMaster, and the Product Owner after the 
 
 The Scrum Lifecycle is a structured process designed to deliver value quickly and reliably. At the center of this cycle is the Iteration (also known as a Sprint), which is a time-boxed period of work typically lasting 2 to 4 weeks.
 
-<img src="website/assets/scrum_lifecycle.png" width="400">
+<img src="assets/scrum_lifecycle.png" width="400">
 
 Key components of this lifecycle include:
 
@@ -577,7 +577,7 @@ Key components of this lifecycle include:
 
 ### Understanding Backlogs, Stories, and Tasks
 
-<img src="website/assets/product_backlog_graph.png" width="400">
+<img src="assets/product_backlog_graph.png" width="400">
 
 Scrum organizes work through a clear hierarchy of items that represent different levels of detail and value:
 
@@ -593,11 +593,11 @@ The work in Scrum is often structured in a Typical Product Hierarchy. This hiera
 
 Two primary charts are used to visualize progress and ensure the team is on track:
 
-<img src="website/assets/project_burn_up.png" width="400">
+<img src="assets/project_burn_up.png" width="400">
 
 - **Project Burn-up:** This chart tracks the overall progress of the project in terms of story points. It visually depicts the accumulation of completed story points (the "Done" area, often in green) plotted against the total scope of the project over time. It shows how much work has been completed and how the total scope may change.
 
-<img src="website/assets/iteration_burndown.png" width="400">
+<img src="assets/iteration_burndown.png" width="400">
 
 - **Iteration Burn-down:** This chart tracks the progress of tasks within a single iteration (Sprint) as a function of time. It typically shows the amount of work remaining (often in hours) on the vertical axis against the days of the Sprint on the horizontal axis. The ideal trend is a downward slope to zero, showing the team "burning down" their remaining work.
 
@@ -672,7 +672,7 @@ The slides outline a general flow for estimation and planning, which can be summ
 3. Estimating in terms of story points.
 4. Finalizing the effort estimation.
 
-<img src="website/assets/dashboard.png" width="400">
+<img src="assets/dashboard.png" width="400">
 
 ### Jira Issue Categories and Hierarchy
 
@@ -683,7 +683,7 @@ In tools like Jira, work is categorized into a hierarchy that helps manage scope
 - **Initiatives:** Collections of related epics that drive toward a common, high-level goal.
 - **Themes:** Large focus areas that span across the organization, grouping multiple initiatives.
 
-<img src="website/assets/jira_isue_categories.png" width="400">
+<img src="assets/jira_isue_categories.png" width="400">
 
 ### Jira Examples of Agile Stories
 
@@ -833,7 +833,7 @@ A classic example illustrates the staggering amount of waste that can exist in a
 - Time where value is actually being added (e.g., shaping, filling, sealing): Only 3 hours.
 - This means value-adding activity constitutes just 0.04% of the total time. The rest (99.96%) is waste—inventory, transportation, waiting, etc.
 
-<img src="website/assets/cola_process_diagram.png" width="400">
+<img src="assets/cola_process_diagram.png" width="400">
 
 ### Value Stream Mapping in Traditional vs. Agile Software Development
 
@@ -846,11 +846,11 @@ The same analysis can be applied to software processes:
 - Coding delayed for 3 weeks due to resource conflicts with other projects.
 - 6 weeks allocated for testing and deployment.
 
-<img src="website/assets/value_stream_mapping_traditional.png" width="400">
+<img src="assets/value_stream_mapping_traditional.png" width="400">
 
 **Agile Software Development:** In contrast, an Agile value stream map would aim to show a much tighter, faster flow with minimal waiting between steps, emphasizing continuous movement of small batches of work from idea to deployment.
 
-<img src="website/assets/value_stream_mapping_agile.png" width="400">
+<img src="assets/value_stream_mapping_agile.png" width="400">
 
 ### A Critical Distinction: Development vs. Production
 
@@ -1237,7 +1237,7 @@ When beginning an XP project, the slides offer practical guidance:
 - Work on the first few **stories altogether as a team** to build shared understanding and momentum.
 - Fix **important bugs** and convert them into stories to ensure the backlog reflects all necessary work.
 
-<img src="website/assets/xp_chart.png" width="400">
+<img src="assets/xp_chart.png" width="400">
 
 ### The Eight Core Planning Practices
 
@@ -1300,7 +1300,7 @@ When planning releases, we need to think about how we slice functionality:
 - A **horizontal stripe** would implement one layer across many features (e.g., "all the database work" or "all the UI work")
 - **Vertical stripes** ensure each story is a complete, working slice of the product that could theoretically be released
 
-<img src="website/assets/vertical_vs_horizontal_stripes.png" width="400">
+<img src="assets/vertical_vs_horizontal_stripes.png" width="400">
 
 ### Scope-Boxed Versus Time-Boxed Planning
 
@@ -1326,7 +1326,7 @@ The release plan in XP is deliberately simple and visible:
 - Stories can be **easily rearranged** as priorities change
 - The plan becomes a **living document** rather than a static artifact locked in a document
 
-<img src="website/assets/reselase_plan.png" width="400">
+<img src="assets/reselase_plan.png" width="400">
 
 ### The Last Responsible Moment
 
@@ -1536,7 +1536,7 @@ The TDD cycle operates at a very fine-grained level:
 - You write up to **5 lines of code** each time—very small increments
 - **Tests run in under 10 seconds**—so you can run them constantly without slowing down
 
-<img src="website/assets/tdd_cycle.png" width="400">
+<img src="assets/tdd_cycle.png" width="400">
 
 ### Types of Tests
 
@@ -2045,7 +2045,7 @@ The FDD process operates within a clear timeboxed framework:
 - Each iteration has **features assigned to it** that the team commits to delivering
 - **Features are initially pre-planned** throughout iterations at the start of the project, providing an overall roadmap
 
-<img src="website/assets/fdd_process.png" width="600">
+<img src="assets/fdd_process.png" width="600">
 
 ### Feature-Centric Development
 
@@ -2146,7 +2146,7 @@ When planning an individual iteration in FDD, the team works through a structure
 
 ### Three-Point Estimation
 
-<img src="website/assets/three_point_estimation.png" width="600">
+<img src="assets/three_point_estimation.png" width="600">
 
 FDD uses three-point estimation to handle uncertainty in feature sizing:
 
@@ -2199,7 +2199,7 @@ A reference architecture provides a template for organizing systems in a particu
 - **Insurance System example**—policy management, claims, billing, etc.
 - **Starting point** rather than designing from scratch each time
 
-<img src="website/assets/domain_model.png" width="400">
+<img src="assets/domain_model.png" width="400">
 
 ### FDD Overview
 
@@ -2212,7 +2212,7 @@ The entire FDD process can be summarized in these key steps:
 
 This approach combines upfront modeling and planning with iterative delivery, giving both structure and flexibility throughout the project.
 
-<img src="website/assets/plan_by_feature.png" width="400">
+<img src="assets/plan_by_feature.png" width="400">
 
 ### Initial Phase: Developing the Overall Model
 
@@ -2287,9 +2287,9 @@ FDD uses parking lot charts as a visual reporting mechanism, particularly for se
   - Features that have been **completed** are shown in another color
   - Features that have **significant blockages** are highlighted to draw attention
 
-<img src="website/assets/parking_lot.png" width="600">
+<img src="assets/parking_lot.png" width="600">
 
-<img src="website/assets/parking_lot_chart.png" width="600">
+<img src="assets/parking_lot_chart.png" width="600">
 
 ### Example Iterations
 
@@ -2306,7 +2306,7 @@ The table shows a real project plan with multiple iterations, each focused on di
 
 This example shows how iterations can overlap when different teams work on different feature sets, and how the overall project is organized around delivering value in timeboxed chunks.
 
-<img src="website/assets/example_iteration.png" width="600">
+<img src="assets/example_iteration.png" width="600">
 
 ### Example Feature List
 
@@ -2429,7 +2429,7 @@ Assertions are the fundamental building blocks of unit tests—they are the stat
 
 ### The Arrange, Act, Assert Pattern
 
-<img src="website/assets/arrange_act_assert_pattern.png" width="400">
+<img src="assets/arrange_act_assert_pattern.png" width="400">
 
 Well-structured unit tests follow a consistent pattern that makes them easy to read and maintain. This pattern is known as Arrange, Act, Assert:
 
@@ -2743,7 +2743,7 @@ public class ReportGeneratorFactory
 
 This slide serves as a title introducing the topic of validation and verification in software development. Validation asks the question "are we building the right product?" while verification asks "are we building the product right?" Acceptance testing is a key validation activity that ensures the software meets customer expectations.
 
-<img src="website/assets/validation_and_verification_activities.png" width="600">
+<img src="assets/validation_and_verification_activities.png" width="600">
 
 ### Acceptance Tests
 
@@ -2811,7 +2811,7 @@ Behavior-Driven Development is a methodology that extends TDD with a focus on bu
 
 ### User Story
 
-<img src="website/assets/user_story.png" width="400">
+<img src="assets/user_story.png" width="400">
 
 ### Automated Testing with BDD Tools
 
