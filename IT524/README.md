@@ -1,6 +1,6 @@
 # IT524 — Object-Oriented Programming with Java
 
-This folder contains the coursework and projects completed for **IT524: Object-Oriented Programming with Java**, a core course in the **Master of Science in Information Technology** program at **Sabancı University**. The course emphasizes practical development using Java and object-oriented design principles. You can also learn more about the program here: https://fens.sabanciuniv.edu/en/msit :contentReference[oaicite:0]{index=0}
+This folder contains the coursework and projects completed for **IT524: Object-Oriented Programming with Java**, a core course in the **Master of Science in Information Technology** program at **Sabancı University**. The course emphasizes practical development using Java and object-oriented design principles.
 
 ---
 
