@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 ensureFiles();
 
+// Veritabanı dosyalarının (order.csv, user.csv, admin.csv) varlığını kontrol eder ve yoksa varsayılan içerikle oluşturur
 function ensureFiles() {
     if (!fs.existsSync(CSV_FILE) || fs.statSync(CSV_FILE).size === 0) {
         fs.writeFileSync(CSV_FILE, 'Order ID,Customer,Table,Total,Date,Status,Items\n');
@@ -58,6 +59,7 @@ function ensureFiles() {
     }
 }
 
+// Verilen dosyada kullanıcı adı ve şifreyi kontrol eder, eşleşirse kullanıcı bilgilerini döndürür
 function checkCredentials(filePath, username, password) {
     if (!fs.existsSync(filePath)) return null;
     const content = fs.readFileSync(filePath, 'utf8');
@@ -72,12 +74,16 @@ function checkCredentials(filePath, username, password) {
     return null;
 }
 
+// CSV formatındaki satırı tırnak işaretlerini dikkate alarak parse eder ve parçalara ayırır
 function parseCsvLine(line) {
     const matches = line.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g);
     if (!matches) return null;
     return matches.map(m => m.replace(/^"|"$/g, '').trim());
 }
 
+// ============ AUTH ENDPOINTS ============
+
+// POST /api/login - Kullanıcı giriş işlemi (admin veya customer)
 app.post('/api/login', (req, res) => {
     ensureFiles();
     const { username, password } = req.body;
@@ -91,7 +97,9 @@ app.post('/api/login', (req, res) => {
     res.status(401).json({ message: 'Invalid username or password' });
 });
 
-// Table Management
+// ============ TABLE MANAGEMENT ENDPOINTS ============
+
+// POST /api/tables/occupy - Müşterinin masa işgal etmesi
 app.post('/api/tables/occupy', (req, res) => {
     const { username, table } = req.body;
     ensureFiles();
@@ -125,6 +133,7 @@ app.post('/api/tables/occupy', (req, res) => {
     res.json({ success: true, activeTable: table });
 });
 
+// POST /api/tables/release - Müşterinin masayı boşaltması
 app.post('/api/tables/release', (req, res) => {
     const { username } = req.body;
     ensureFiles();
@@ -149,7 +158,9 @@ app.post('/api/tables/release', (req, res) => {
     res.json({ success: true });
 });
 
+// ============ ORDER ENDPOINTS ============
 
+// GET /api/orders - Tüm siparişleri getir
 app.get('/api/orders', (req, res) => {
     ensureFiles();
     const content = fs.readFileSync(CSV_FILE, 'utf8');
@@ -191,6 +202,7 @@ app.get('/api/orders', (req, res) => {
     res.json(orders);
 });
 
+// POST /api/orders - Yeni sipariş oluştur
 app.post('/api/orders', (req, res) => {
     ensureFiles();
     const order = req.body;
@@ -205,6 +217,7 @@ app.post('/api/orders', (req, res) => {
     res.status(201).json({ message: 'Order saved', order });
 });
 
+// PUT /api/orders/:id - Siparişin durumunu veya masasını güncelle
 app.put('/api/orders/:id', (req, res) => {
     const { id } = req.params;
     const { status, table } = req.body;
@@ -234,7 +247,9 @@ app.put('/api/orders/:id', (req, res) => {
     }
 });
 
-// Admin: list all customers with their active tables
+// ============ ADMIN ENDPOINTS ============
+
+// GET /api/customers - Tüm müşterileri ve aktif masalarını listele
 app.get('/api/customers', (req, res) => {
     ensureFiles();
     const content = fs.readFileSync(USER_FILE, 'utf8');
@@ -248,7 +263,7 @@ app.get('/api/customers', (req, res) => {
     res.json(customers);
 });
 
-// Admin: change a customer's active table
+// PUT /api/admin/change-table - Admin: Müşterinin masasını değiştir
 app.put('/api/admin/change-table', (req, res) => {
     const { username, newTable } = req.body;
     ensureFiles();
@@ -300,6 +315,9 @@ app.put('/api/admin/change-table', (req, res) => {
     res.json({ success: true, message: `Table changed to ${newTable || 'none'} for ${username}` });
 });
 
+// ============ DEFAULT ROUTE ============
+
+// GET / - API sunucusunun çalıştığını kontrol et
 app.get('/', (req, res) => {
     res.send('API Server is running. Frontend is served separately (e.g. port 5173 or 7070).');
 });
