@@ -45,6 +45,7 @@ services:
       - ./sprint3/database/order.csv:/app/database/order.csv
       - ./sprint3/database/user.csv:/app/database/user.csv
       - ./sprint3/database/admin.csv:/app/database/admin.csv
+      - ./sprint3/database/config.json:/app/database/config.json
 
   sprint3-frontend:
     build:
