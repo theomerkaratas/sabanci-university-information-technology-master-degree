@@ -1,23 +1,29 @@
-# Practice 16: Responsiveness Overview
+# Practice 4: Layout Method Comparison
 
-This practice provides an overview of different methods used to make web pages responsive across different devices.
+This practice provides a comprehensive comparison of all major HTML/CSS layout methods used historically and today.
 
 ## Topics Covered
 
-- **Media Queries:** Traditional CSS approach for different screen sizes.
-- **CSS Grid:** Two-dimensional layout system.
-- **Flexbox:** One-dimensional flexible box layout.
-- **Bootstrap:** A popular CSS framework for rapid responsive development.
+- **HTML Tables:** The legacy way of creating columns (not recommended for modern web).
+- **Inline-Block:** Using the `display` property for side-by-side elements.
+- **Absolute Positioning:** Precise coordinate-based placement.
+- **Floats:** Pushing elements to the left/right and wrapping text.
+- **Flexbox:** The modern standard for flexible, manageable layouts.
 
-## Responsiveness Methods Comparison
+## Layout Methods Comparison
 
-| Method            | Dimension       | Description                                   |
-| :---------------- | :-------------- | :-------------------------------------------- |
-| **Media Queries** | Screen Width    | Updates styles based on `@media` breakpoints. |
-| **Grid**          | 2D (Rows/Cols)  | Handles complex layout structures.            |
-| **Flexbox**       | 1D (Row or Col) | Aligns items within a container flexibly.     |
-| **Bootstrap**     | Grid System     | Uses pre-defined classes for layout.          |
+| Method           | Property                | Pros/Cons                                    |
+| :--------------- | :---------------------- | :------------------------------------------- |
+| **Table**        | `<table>`               | Easy for data, bad for flexibility.          |
+| **Inline-Block** | `display: inline-block` | Simple, but tricky white-space issues.       |
+| **Absolute**     | `position: absolute`    | Pixel perfect, but ignores surrounding flow. |
+| **Float**        | `float: left/right`     | Good for text wrapping, requires "clearing". |
+| **Flexbox**      | `display: flex`         | Extremely powerful and modern.               |
 
-## Files
+## Individual Lesson Files
 
-- `media-query.html`, `grid.html`, `flexbox.html`, `bootstrap.html`: Individual examples for each method.
+- `html-table.html`
+- `inline-block.html`
+- `absolute-position.html`
+- `float.html`
+- `flex.html`

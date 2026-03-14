@@ -3,52 +3,108 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agency</title>
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>Flexbox Learning Hub</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: black;
+        padding: 40px;
+      }
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .menu-section {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        margin: 10px 0;
+      }
+      li a {
+        color: #4834d4;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      li a:hover {
+        text-decoration: underline;
+      }
+    </style>
   </head>
-
   <body>
-    <div class="main">
-      <img class="logo" src="./assets/images/logo.png" alt="logo" />
+    <h1 style="text-align: center">Flexbox Visual Guide</h1>
 
-      <h1>We are a <span class="creative">Creative</span> </br> Design Agency</h1>
-
-      <div class="left card">
-        <img
-          class="tile-image"
-          src="./assets/images/beautiful.jpg"
-          alt="hand and flower in water"
-        />
-        <h2 class="card-title">Beauty</h2>
-        <p class="card-text">
-          We strive to create the most beautiful websites for all your needs.
-          Working closely with you to design and develop an amazing website for
-          your business.
-        </p>
+    <div class="menu-grid">
+      <div class="menu-section">
+        <h2>Flex Wrap</h2>
+        <ul>
+          <li><a href="pages/flex-wrap-no-wrap.html">No-Wrap</a></li>
+          <li><a href="pages/flex-wrap-wrap.html">Wrap</a></li>
+          <li><a href="pages/flex-wrap-wrap-reverse.html">Wrap-Reverse</a></li>
+        </ul>
       </div>
 
-      <div class="right card">
-        <img
-          class="tile-image"
-          src="./assets/images/construction.jpg"
-          alt="metal structure"
-        />
-        <h2 class="card-title">Construction</h2>
-        <p>
-          Built by our team of professional developers, we ensure the most
-          rigourous and modern websites. Built from scratch using HTML and CSS.
-          Only the best for you.
-        </p>
+      <div class="menu-section">
+        <h2>Align Items</h2>
+        <ul>
+          <li><a href="pages/align-items-flex-start.html">Flex Start</a></li>
+          <li><a href="pages/align-items-flex-end.html">Flex End</a></li>
+          <li><a href="pages/align-items-center.html">Center</a></li>
+          <li><a href="pages/align-items-baseline.html">Baseline</a></li>
+          <li><a href="pages/align-items-stretch.html">Stretch</a></li>
+        </ul>
+      </div>
+
+      <div class="menu-section">
+        <h2>Align Content</h2>
+        <ul>
+          <li><a href="pages/align-content-flex-start.html">Flex Start</a></li>
+          <li><a href="pages/align-content-flex-end.html">Flex End</a></li>
+          <li><a href="pages/align-content-center.html">Center</a></li>
+          <li>
+            <a href="pages/align-content-space-between.html">Space Between</a>
+          </li>
+          <li>
+            <a href="pages/align-content-space-around.html">Space Around</a>
+          </li>
+          <li>
+            <a href="pages/align-content-space-evenly.html">Space Evenly</a>
+          </li>
+          <li><a href="pages/align-content-stretch.html">Stretch</a></li>
+        </ul>
+      </div>
+
+      <div class="menu-section">
+        <h2>Justify Content</h2>
+        <ul>
+          <li>
+            <a href="pages/justify-content-flex-start.html">Flex Start</a>
+          </li>
+          <li><a href="pages/justify-content-flex-end.html">Flex End</a></li>
+          <li><a href="pages/justify-content-center.html">Center</a></li>
+          <li>
+            <a href="pages/justify-content-space-between.html">Space Between</a>
+          </li>
+          <li>
+            <a href="pages/justify-content-space-around.html">Space Around</a>
+          </li>
+          <li>
+            <a href="pages/justify-content-space-evenly.html">Space Evenly</a>
+          </li>
+        </ul>
       </div>
     </div>
-    <footer>
-      <p>Create. Develop. Design.</p>
-    </footer>
   </body>
 </html>

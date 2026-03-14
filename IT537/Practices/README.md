@@ -6,25 +6,14 @@ This directory contains various practice projects for the IT537 course. Each pro
 
 ## Content Overview
 
-| Practice                         | Description                            | Port |
-| :------------------------------- | :------------------------------------- | :--- |
-| [**Practice 1**](./practice-1)   | Personal CV / Resume of Omer Karatas   | 8001 |
-| [**Practice 2**](./practice-2)   | The Twelve-Factor App                  | 8002 |
-| [**Practice 3**](./practice-3)   | CSS Flag Project                       | 8003 |
-| [**Practice 4**](./practice-4)   | Responsiveness                         | 8004 |
-| [**Practice 5**](./practice-5)   | Agency                                 | 8005 |
-| [**Practice 6**](./practice-6)   | CSS Layout Techniques (Float, Flex...) | 8006 |
-| [**Practice 7**](./practice-7)   | Flexbox Layout Examples                | 8007 |
-| [**Practice 8**](./practice-8)   | Flexbox Pricing Table                  | 8008 |
-| [**Practice 9**](./practice-9)   | Grid Sizing Fundamentals               | 8009 |
-| [**Practice 10**](./practice-10) | Mondrian Project                       | 8010 |
-| [**Practice 11**](./practice-11) | Modern Resume with Tailwind CSS        | 8011 |
-| [**Practice 12**](./practice-12) | Project Template                       | 8012 |
-| [**Practice 13**](./practice-13) | Project Template                       | 8013 |
-| [**Practice 14**](./practice-14) | Project Template                       | 8014 |
-| [**Practice 15**](./practice-15) | Project Template                       | 8015 |
-| [**Practice 16**](./practice-16) | Project Template                       | 8016 |
-| [**Practice 17**](./practice-17) | Project Template                       | 8017 |
+| Practice                       | Description                            | Port |
+| :----------------------------- | :------------------------------------- | :--- |
+| [**Practice 1**](./practice-1) | The Twelve-Factor App                  | 8001 |
+| [**Practice 2**](./practice-2) | CSS Flag Project                       | 8002 |
+| [**Practice 3**](./practice-3) | Responsiveness                         | 8003 |
+| [**Practice 4**](./practice-4) | CSS Layout Techniques (Float, Flex...) | 8004 |
+| [**Practice 5**](./practice-5) | Flexbox Layout Examples                | 8005 |
+| [**Practice 6**](./practice-6) | Grid Sizing Fundamentals               | 8006 |
 
 ---
 

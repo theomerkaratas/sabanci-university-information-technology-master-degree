@@ -1,24 +1,23 @@
-# Practice 14: CSS Flag Project
+# Practice 3: Responsiveness Overview
 
-A complex layout project using absolute positioning, circles, and nested elements to create a flag.
+This practice provides an overview of different methods used to make web pages responsive across different devices.
 
 ## Topics Covered
 
-- **Absolute Placement:** Using absolute positions to overlap elements.
-- **Creating Shapes:** Using `border-radius: 200px` to turn a square into a circle.
-- **Z-Value Concept:** Understanding the stack order (background vs. foreground).
-- **Hierarchical Selectors:** Styling direct children specifically (e.g., `div.flag > p`).
+- **Media Queries:** Traditional CSS approach for different screen sizes.
+- **CSS Grid:** Two-dimensional layout system.
+- **Flexbox:** One-dimensional flexible box layout.
+- **Bootstrap:** A popular CSS framework for rapid responsive development.
 
-## Shape and Position Settings
+## Responsiveness Methods Comparison
 
-| Feature       | Property             | Result                            |
-| :------------ | :------------------- | :-------------------------------- |
-| **Circle**    | `border-radius: 50%` | Rounds corners completely.        |
-| **Layering**  | `position: absolute` | Allows overlaps.                  |
-| **Centering** | `left` / `top`       | Manual placement on the "canvas". |
+| Method            | Dimension       | Description                                   |
+| :---------------- | :-------------- | :-------------------------------------------- |
+| **Media Queries** | Screen Width    | Updates styles based on `@media` breakpoints. |
+| **Grid**          | 2D (Rows/Cols)  | Handles complex layout structures.            |
+| **Flexbox**       | 1D (Row or Col) | Aligns items within a container flexibly.     |
+| **Bootstrap**     | Grid System     | Uses pre-defined classes for layout.          |
 
-## Visual Structure
+## Files
 
-- Container (`.flag`): The overall canvas.
-- Stripe: An absolute div nested inside the flag.
-- Circle: A rounded div nested inside the stripe.
+- `media-query.html`, `grid.html`, `flexbox.html`, `bootstrap.html`: Individual examples for each method.

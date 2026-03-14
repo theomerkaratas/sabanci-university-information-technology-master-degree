@@ -1,68 +1,63 @@
 <!doctype html>
-<html land="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>The Twelve-Factor App</title>
-    <link rel="stylesheet" href="./style.css" />
+    <title>CSS Flag Project</title>
+    <style>
+      html {
+        background-color: black;
+        color: #e8e2db;
+      }
+
+      .flag {
+        background-color: #547792;
+        height: 600px;
+        width: 900px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-value: -1;
+      }
+
+      body {
+        text-align: center;
+      }
+
+      div.flag > p {
+        font-size: 75px;
+        margin-top: 0px;
+      }
+
+      .flag > div {
+        background-color: #fab95b;
+        position: absolute;
+        width: 900px;
+        height: 300px;
+        top: 150px;
+      }
+
+      div > div > p {
+        background-color: #e8e2db;
+        margin-top: 50px;
+        font-size: 75px;
+        color: #1a3263;
+        height: 200px;
+        width: 200px;
+        border-radius: 200px;
+        position: relative;
+        left: 350px;
+      }
+    </style>
   </head>
 
   <body>
-    <h1>The Twelve-Factor App</h1>
-
-    <h2>Introduction</h2>
-
-    <p>
-      The Twelve-Factor App is a methodology for building modern, scalable
-      Software-as-a-Service (SaaS) applications. It provides a shared vocabulary
-      and best practices to combat "software erosion" and streamline
-      development.
-    </p>
-
-    <h3>Core Objectives:</h3>
-
-    <ul>
-      <li>
-        Automation: Use declarative formats to simplify onboarding and setup.
-      </li>
-      <li>
-        Portability: Maintain a clean contract with the OS for seamless
-        transitions between environments.
-      </li>
-      <li>
-        Cloud-Ready: Design for modern platforms to eliminate manual server
-        administration.
-      </li>
-      <li>
-        Continuous Deployment: Minimize the gap between development and
-        production for maximum agility.
-      </li>
-      <li>Scalability: Enable easy scaling without re-architecting the app.</li>
-    </ul>
-
-    <h3>Who It's For</h3>
-
-    <p>
-      Any developer building applications which run as a service. Ops engineers
-      who deploy or manage such applications.
-    </p>
-
-    <hr />
-
-    <h2>The Twelve Factors</h2>
-
-    <ol>
-      <li><a href="public/codebase.html">Codebase</a></li>
-      <li><a href="public/dependencies.html">Dependencies</a></li>
-      <li><a href="public/config.html">Config</a></li>
-      <li><a href="public/backing-services.html">Backing Services</a></li>
-      <li><a href="public/build-release-run.html">Build, release, run</a></li>
-      <li><a href="public/processes.html">Processes</a></li>
-      <li><a href="public/port-binding.html">Port binding</a></li>
-      <li><a href="public/concurrency.html">Concurrency</a></li>
-      <li><a href="public/disposability.html">Disposability</a></li>
-      <li><a href="public/dev-prod-parity.html">Dev/prod parity</a></li>
-      <li><a href="public/logs.html">Logs</a></li>
-      <li><a href="public/admin-processes.html">Admin processes</a></li>
-    </ol>
+    <div class="flag">
+      <p>The Flag</p>
+      <div>
+        <div>
+          <p>of Laos</p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

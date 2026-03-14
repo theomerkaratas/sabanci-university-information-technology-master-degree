@@ -1,25 +1,91 @@
-# Practice 18: Creative Agency Project
+# Practice 5: Flexbox Visual Guide
 
-A project-based practice that combines multiple CSS techniques to build a structured Landing Page for an agency.
+This practice provides a comprehensive, interactive look at Flexbox layout properties. It includes a navigation hub to visualize how different properties affect element alignment and sizing.
+
+## Visual Learning Hub
+
+The project contains an interactive [Visual Guide (index.html)](./index.html) that allows you to swap between different Flexbox configurations:
+
+- **Flex Wrap:** Single-line vs multi-line content.
+- **Alignment:** Detailed examples for `justify-content`, `align-items`, and `align-content`.
 
 ## Topics Covered
 
-- **Card Layout:** Creating reusable design "cards" for features like "Beauty" and "Construction".
-- **Span Styling:** Using `<span>` for specific text highlights (e.g., the word "Creative").
-- **Google Fonts Integration:** Using "Poppins" for a modern professional look.
-- **Responsive Assets:** Placing images and logos in an organized folder structure.
+- **Main vs Cross Axis:** Understanding how alignment changes based on direction.
+- **Multi-line Alignment:** Using `flex-wrap` and `align-content` for complex layouts.
+- **Flex Sizing:** Interaction between `flex-grow`, `flex-shrink`, and `flex-basis`.
 
-## Layout Components
+## Flexbox Container Properties
 
-| Element     | Class/ID    | Usage                                        |
-| :---------- | :---------- | :------------------------------------------- |
-| **H1 Span** | `.creative` | Unique color/font for emphasis.              |
-| **Card**    | `.card`     | Container for image, title, and description. |
-| **Logo**    | `.logo`     | Branded image in the header.                 |
-| **Footer**  | `footer`    | Simple centered text for copyright.          |
+| Property         | Description         | Values                                           |
+| :--------------- | :------------------ | :----------------------------------------------- |
+| `display`        | Activates Flexbox.  | `flex`, `inline-flex`                            |
+| `flex-direction` | Set the main axis.  | `row`, `row-reverse`, `column`, `column-reverse` |
+| `flex-wrap`      | Multi-line control. | `nowrap`, `wrap`, `wrap-reverse`                 |
+| `flex-flow`      | Shorthand.          | `row wrap`                                       |
 
-## Files
+## Alignment - Main Axis (`justify-content`)
 
-- `index.html`: Main landing page structure.
-- `style.css`: Styles for fonts, card layouts, and padding.
-- `assets/images/`: Images for agency portfolio tiles.
+| Value             | Description                                     |
+| :---------------- | :---------------------------------------------- |
+| **flex-start**    | Items packed at the start (default).            |
+| **flex-end**      | Items packed at the end.                        |
+| **center**        | Items packed in the middle.                     |
+| **space-between** | Space only _between_ items.                     |
+| **space-around**  | Space _around_ items (equal sides).             |
+| **space-evenly**  | Space between all items and edges is identical. |
+
+## Alignment - Cross Axis (`align-items`)
+
+| Value          | Description                     |
+| :------------- | :------------------------------ |
+| **stretch**    | Fill the line height (default). |
+| **flex-start** | Top of the cross axis.          |
+| **flex-end**   | Bottom of the cross axis.       |
+| **center**     | Middle of the cross axis.       |
+| **baseline**   | Align based on text baselines.  |
+
+## Flexbox Item Properties
+
+| Property     | Description                             | Values                             |
+| :----------- | :-------------------------------------- | :--------------------------------- |
+| `order`      | Visual order of the item.               | `integer` (Default: 0)             |
+| `align-self` | Override container's `align-items`.     | `auto`, `center`, `flex-end`, etc. |
+| `flex`       | Shorthand for grow, shrink, basis.      | `1 1 200px`                        |
+| `flex-basis` | Initial size before space distribution. | `length` or `auto`                 |
+
+## Flex Sizing Table
+
+| Property        | Usage               | Effect                                          |
+| :-------------- | :------------------ | :---------------------------------------------- |
+| **flex-grow**   | `flex-grow: 1`      | Element will expand to fill available space.    |
+| **flex-shrink** | `flex-shrink: 0`    | Element will not shrink even if space is tight. |
+| **flex-basis**  | `flex-basis: 300px` | Initial "ideal" size of the element.            |
+
+## Flex Shorthand
+
+The `flex` property is a shorthand for `flex-grow`, `flex-shrink`, and `flex-basis` (in that order).
+
+| Shorthand          | Equivalent To                                      |
+| :----------------- | :------------------------------------------------- |
+| `flex: 1 0 300px;` | `flex-grow: 1; flex-shrink: 0; flex-basis: 300px;` |
+| `flex: 1;`         | `flex-grow: 1; flex-shrink: 1; flex-basis: 0%;`    |
+| `flex: 0 1 auto;`  | The default value.                                 |
+
+## Code Snippet Example
+
+```css
+.container {
+  display: flex;
+  flex-direction: column; /* Stacks items vertically */
+}
+
+div > div {
+  flex-basis: 100px; /* Each child starts with 100px height (in column mode) */
+}
+```
+
+## Further Reading
+
+- For more info, check out the [Complete Guide to CSS Flexbox Layout](https://css-tricks.com/snippets/css/complete-guide-to-css-flexbox-layout/) on CSS-Tricks.
+- You can also learn while playing a game: [Flexbox Froggy](https://appbrewery.github.io/flexboxfroggy/)

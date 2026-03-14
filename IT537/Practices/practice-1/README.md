@@ -1,28 +1,24 @@
-# Practice 1: Resume Page
+# Practice 1: Twelve-Factor App
 
-This practice covers the basic HTML structure and the use of external CSS.
+This practice focuses on modern software methodology and multi-page HTML structure.
 
 ## Topics Covered
 
-- **HTML Text Tags:** Used for content hierarchy.
-  - `h1` - `h6`: Headings.
-  - `p`: Paragraphs.
-  - `hr`: Horizontal rule (separator).
-- **Lists:**
-  - `ul` / `li`: Unordered (bullet point) lists.
-- **Links and Images:**
-  - `<a>`: Creating links.
-  - `<img>`: Adding images.
-- **External Resources:**
-  - `<link>`: Including CSS and Google Fonts.
+- **Twelve-Factor App:** 12 fundamental principles for SaaS applications.
+- **Relative Links:** Linking to other files in different folders (e.g., `public/`).
+- **Project Organization:** Structuring HTML files across multiple directories.
 
-## Important Parameters
+## File Linking Parameters
 
-| Tag      | Parameter | Description                                  |
-| :------- | :-------- | :------------------------------------------- |
-| `<a>`    | `href`    | Target URL or file path.                     |
-| `<img>`  | `src`     | Image file path.                             |
-| `<img>`  | `alt`     | Alternative text if the image fails to load. |
-| `<img>`  | `width`   | Image width (pixels).                        |
-| `<link>` | `rel`     | Relationship (e.g., `stylesheet`).           |
-| `<link>` | `href`    | Path to the style sheet.                     |
+| Scenario                     | Example Path       | Description                 |
+| :--------------------------- | :----------------- | :-------------------------- |
+| Same Directory               | `./file.html`      | File in the current folder. |
+| Navigate to Subdirectory     | `public/file.html` | File in a subfolder.        |
+| Navigate to Parent Directory | `../file.html`     | File in the parent folder.  |
+
+## Key Factors
+
+1.  **Codebase:** One codebase tracked in revision control, many deploys.
+2.  **Dependencies:** Explicitly declare and isolate dependencies.
+3.  **Config:** Store config in the environment.
+4.  **Dev/Prod Parity:** Keep development, staging, and production as similar as possible.

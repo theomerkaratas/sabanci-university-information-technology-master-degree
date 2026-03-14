@@ -1,9 +1,9 @@
 version: '3.8'
 services:
-  practice-6:
+  practice-9:
     build: .
     ports:
-      - "8006:80"
+      - "8009:80"
     volumes:
       - .:/usr/share/nginx/html
-    container_name: practice-6
+    container_name: practice-9

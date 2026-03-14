@@ -1,9 +1,9 @@
 version: '3.8'
 services:
-  practice-3:
+  practice-4:
     build: .
     ports:
-      - "8003:80"
+      - "8004:80"
     volumes:
       - .:/usr/share/nginx/html
-    container_name: practice-3
+    container_name: practice-4
