@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SEC 509 - Secure Coding & Software Security</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer components {
+        main section ul > li:not(.flex) {
+          @apply relative pl-6;
+        }
+        main section ul > li:not(.flex)::before {
+          content: "•";
+          @apply absolute left-2 text-neutral-500 font-bold;
+        }
+        table {
+          @apply w-full;
+        }
+        th,
+        td {
+          @apply p-3 align-top border-b border-slate-200 dark:border-slate-700;
+        }
+        th {
+          @apply font-bold;
+        }
+        @media (max-width: 767px) {
+          table,
+          thead,
+          tbody,
+          th,
+          td,
+          tr {
+            @apply block w-full;
+          }
+          thead {
+            @apply hidden;
+          }
+          tr {
+            @apply mb-4 border border-slate-200 dark:border-slate-700 rounded-lg p-4 bg-slate-50 dark:bg-neutral-800/40;
+          }
+          td {
+            @apply p-2 sm:p-3 border-none border-b border-slate-200 dark:border-slate-700;
+          }
+          td:last-child {
+            @apply border-none pb-0;
+          }
+          td:first-child {
+            @apply pt-0 font-bold text-lg text-blue-600 dark:text-blue-400;
+          }
+        }
+      }
+    </style>
+  </head>
+</html>
