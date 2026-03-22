@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEC 509 — 2.1 Personal and Corporate Cyber Hygiene</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f5f5f5; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 40px; }
+        h1 { color: #2c3e50; border-bottom: 4px solid #3498db; padding-bottom: 15px; margin-bottom: 30px; font-size: 2.2em; }
+        h2 { color: #34495e; margin-top: 35px; margin-bottom: 15px; font-size: 1.8em; border-left: 5px solid #3498db; padding-left: 15px; }
+        h3 { color: #555; margin-top: 20px; margin-bottom: 12px; font-size: 1.3em; }
+        p { margin-bottom: 15px; text-align: justify; }
+        strong { color: #2c3e50; }
+        .highlight { background-color: #ecf0f1; padding: 20px; border-left: 4px solid #3498db; margin: 20px 0; border-radius: 4px; }
+        ul { margin: 15px 0 15px 30px; }
+        li { margin-bottom: 8px; }
+        .success-box { background-color: #d1ecf1; border-left: 4px solid #17a2b8; padding: 15px; margin: 20px 0; border-radius: 4px; color: #0c5460; }
+        .section-divider { border-top: 2px solid #ecf0f1; margin: 40px 0; }
+        footer { text-align: center; color: #7f8c8d; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; }
+        
+        /* Dark Mode Support (Simple integration) */
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #0d1117; color: #c9d1d9; }
+            .container { background-color: #161b22; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+            h1 { color: #58a6ff; }
+            h2 { color: #58a6ff; }
+            h3 { color: #8b949e; }
+            .highlight { background-color: #0d1117; border-left-color: #58a6ff; }
+            .success-box { background-color: #112736; border-left-color: #388bfd; color: #58a6ff; }
+            strong { color: #58a6ff; }
+            .section-divider { border-top-color: #30363d; }
+            footer { border-top-color: #30363d; color: #8b949e; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>2.1 Personal and Corporate Cyber Hygiene</h1>
+
+        <section>
+            <h2>What is Cyber Hygiene?</h2>
+            <p><strong>Cyber hygiene</strong> is a reference to the practices and steps that users of computers and other devices take to maintain system health and improve online security. These practices are often part of a routine to ensure the safety of identity and other details that could be stolen or corrupted.</p>
+            <p>Much like physical hygiene, cyber hygiene is not a one-time event but a continuous process that requires regular attention and maintenance.</p>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Personal Cyber Hygiene</h2>
+            <p>On an individual level, cyber hygiene focuses on protecting personal data and preventing common attacks like phishing or identity theft.</p>
+            
+            <h3>Core Habits for Security</h3>
+            <ul>
+                <li><strong>Multi-Factor Authentication (MFA):</strong> Using at least two different methods of authentication whenever possible. This remains the single most effective defense against credential theft.</li>
+                <li><strong>Regular Software Updates:</strong> Promptly installing security patches for operating systems, browsers, and applications to close vulnerabilities.</li>
+                <li><strong>Robust Password Management:</strong> Moving away from predictable passwords to complex, unique passphrases stored in a secure password manager.</li>
+                <li><strong>Device Security:</strong> Utilizing disk encryption, screen locks, and remote wipe capabilities for mobile devices.</li>
+            </ul>
+
+            <div class="success-box">
+                <strong>Tip:</strong> Automate where possible. Setting your system to auto-update and using an authenticator app rather than SMS can significantly boost your personal security posture.
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Corporate Cyber Hygiene</h2>
+            <p>In a business context, cyber hygiene expands from individual habits to organizational policies and infrastructure management.</p>
+
+            <h3>The Corporate Framework</h3>
+            <ul>
+                <li><strong>Asset Management:</strong> Knowing every device and software service running on the corporate network. Shadow IT is a major risk factor.</li>
+                <li><strong>Privilege Management:</strong> Following the <em>Principle of Least Privilege</em>—granting users only the access they need to perform their jobs.</li>
+                <li><strong>Network Segmentation:</strong> Dividing the network into smaller segments to prevent "lateral movement" if an attacker gains entry.</li>
+                <li><strong>Regular Backups:</strong> Ensuring critical data is backed up frequently and stored in an immutable or offline state to defend against ransomware.</li>
+            </ul>
+
+            <div class="highlight">
+                <p><strong>Corporate Culture:</strong> Effective corporate hygiene is not just technical; it requires a culture where security is everyone's responsibility, from the CEO to the interns.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Conclusion</h2>
+            <p>Maintaining high standards of cyber hygiene significantly reduces the "attack surface" of both individuals and organizations. While it cannot prevent 100% of advanced threats, it eliminates the vast majority of low-effort, opportunistic attacks that cause the most common security breaches.</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Sabancı University — SEC 509 — Secure Coding & Software Security</p>
+        </footer>
+    </div>
+</body>
+</html>
