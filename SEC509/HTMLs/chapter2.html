@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Password Enforcement and Preventing Password Reuse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        strong {
+            color: #2c3e50;
+        }
+
+        code {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .terminal-output {
+            background-color: #1a1a1a;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+            border: 1px solid #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        ul {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .step-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #16a085;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .step-box strong {
+            color: #16a085;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #856404;
+        }
+
+        .example-box {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .example-box strong {
+            color: #155724;
+        }
+
+        .success-box {
+            background-color: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #0c5460;
+        }
+
+        .section-divider {
+            border-top: 2px solid #ecf0f1;
+            margin: 40px 0;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-item {
+            padding: 15px;
+            border-radius: 4px;
+            border: 2px solid #ecf0f1;
+        }
+
+        .comparison-item h4 {
+            margin-top: 0;
+        }
+
+        .bad {
+            background-color: #ffe6e6;
+            border-color: #ff6b6b;
+        }
+
+        .good {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+
+        footer {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Understanding PAM and Password Complexity Policy</h1>
+
+        <section>
+            <h2>What is PAM?</h2>
+            <p><strong>PAM</strong> stands for <strong>Pluggable Authentication Module</strong>. Think of it as a security system that controls how people log in and what they're allowed to do on Unix/Linux computers.</p>
+
+            <h3>How PAM Works</h3>
+            <p>PAM is flexible because it supports different ways of verifying who you are. For example, you could log in using:</p>
+            <ul>
+                <li>Your local computer's password (the simplest method)</li>
+                <li>Kerberos (a more advanced security system)</li>
+                <li>SSSD (another authentication method)</li>
+            </ul>
+            <p>For each of these login methods, there's a specific PAM module (a small program) that handles the verification.</p>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Enforcing Password Complexity Policy</h2>
+
+            <h3>What Does "Password Complexity" Mean?</h3>
+            <p>Instead of letting people set weak passwords like "password123," a password complexity policy forces users to create <strong>strong, harder-to-crack passwords</strong> by requiring certain types of characters.</p>
+
+            <h3>The Tool: pam_pwquality.so</h3>
+            <p><strong>pam_pwquality.so</strong> is a PAM module (a security tool) that checks if a new password is strong enough before allowing it to be set. It replaced an older tool called <code>pam_cracklib</code> in older Red Hat systems.</p>
+
+            <h3>How pam_pwquality.so Checks Your Password</h3>
+            <p>When you create a new password, the system performs <strong>two main checks</strong>:</p>
+
+            <div class="step-box">
+                <strong>Step 1: Check If It's a Dictionary Word</strong>
+                <p>First, it checks if your password is just a common word from the dictionary. If it is, it rejects it. If it passes this check, it moves to Step 2.</p>
+            </div>
+
+            <div class="step-box">
+                <strong>Step 2: Check Against Specific Rules</strong>
+                <p>The system checks your password against several rules to make sure it's not too similar to your old password or too simple:</p>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rule</th>
+                        <th>What It Checks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Palindrome</strong></td>
+                        <td>Is your new password spelled the same backwards and forwards? (Not allowed)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Case Change Only</strong></td>
+                        <td>Is the new password just the old one with UPPERCASE changed to lowercase? (Not allowed)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Similar</strong></td>
+                        <td>Is the new password too much like your old password? (Not allowed)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Simple</strong></td>
+                        <td>Is the new password too short? (Not allowed)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rotated</strong></td>
+                        <td>Is the new password just your old password shifted by one letter? (Not allowed)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Same Consecutive Characters</strong></td>
+                        <td>Does it have too many of the same letter in a row? (Configurable)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contains Username</strong></td>
+                        <td>Does the password contain your username? (Configurable - usually not allowed)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="step-box">
+                <strong>Step 3: Re-enter Password</strong>
+                <p>If your password passes all checks, the system asks you to type it again to make sure you didn't make a typo.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>How to Configure Password Complexity Rules</h2>
+            <p>You can customize these password rules in <strong>two ways</strong>:</p>
+
+            <h3>Method 1: Edit the Configuration File</h3>
+
+            <h4>Step 1: Back Up the Files (IMPORTANT!)</h4>
+            <p>Before making changes, always create backup copies of the files you're about to edit:</p>
+            <div class="code-block">
+sudo cp /etc/security/pwquality.conf /etc/security/pwquality.conf.original<br>
+sudo cp /etc/pam.d/system-auth /etc/pam.d/system-auth.original
+            </div>
+
+            <div class="warning">
+                <strong>Why?</strong> If something goes wrong, you can restore the original files. The <code>sudo</code> command is needed because these are system files that only administrators can modify.
+            </div>
+
+            <h4>Step 2: Open the PAM Configuration File</h4>
+            <div class="code-block">
+sudo vim /etc/pam.d/system-auth
+            </div>
+
+            <h4>Step 3: Find and Modify the pam_pwquality.so Line</h4>
+            <p>Look for this line:</p>
+            <div class="code-block">
+password requisite pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=.
+            </div>
+            <p>This is the line that controls password complexity. You'll add your rules here.</p>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Password Complexity Options (The Rules You Can Set)</h2>
+            <p>Here are the main settings you can configure:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Setting</th>
+                        <th>What It Does</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>minlen=N</strong></td>
+                        <td>Sets the minimum number of characters a password must have</td>
+                        <td><code>minlen=15</code> means at least 15 characters</td>
+                    </tr>
+                    <tr>
+                        <td><strong>lcredit=N</strong></td>
+                        <td>Requires lowercase letters (use <code>-1</code> to require at least one)</td>
+                        <td><code>lcredit=-1</code> means at least 1 lowercase letter required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ucredit=N</strong></td>
+                        <td>Requires uppercase letters (use <code>-1</code> to require at least one)</td>
+                        <td><code>ucredit=-1</code> means at least 1 uppercase letter required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>dcredit=N</strong></td>
+                        <td>Requires digits/numbers (use <code>-1</code> to require at least one)</td>
+                        <td><code>dcredit=-1</code> means at least 1 number required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ocredit=N</strong></td>
+                        <td>Requires special symbols like @, #, !, $, %, etc. (use <code>-1</code> to require at least one)</td>
+                        <td><code>ocredit=-1</code> means at least 1 symbol required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>maxrepeat=N</strong></td>
+                        <td>Limits how many times the same character can appear in a row</td>
+                        <td><code>maxrepeat=3</code> means you can't have "aaaa" (more than 3 a's in a row)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>enforce_for_root</strong></td>
+                        <td>Forces even the admin (root user) to follow these rules</td>
+                        <td>Ensures nobody gets special treatment</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Example: Creating a Strong Password Policy</h3>
+            <div class="example-box">
+                <p><strong>Let's say you want to require passwords to have:</strong></p>
+                <ul>
+                    <li>At least 15 characters</li>
+                    <li>At least 1 lowercase letter</li>
+                    <li>At least 1 uppercase letter</li>
+                    <li>At least 1 number</li>
+                    <li>At least 1 special symbol</li>
+                    <li>No more than 3 of the same character in a row</li>
+                </ul>
+                <p><strong>You would modify the line to look like this:</strong></p>
+                <div class="code-block">
+password requisite pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type= minlen=15 lcredit=-1 ucredit=-1 dcredit=-1 ocredit=-1 maxrepeat=3
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h3>Method 2: Edit the Configuration File Directly</h3>
+            <p>You can also edit the <code>/etc/security/pwquality.conf</code> file using a text editor:</p>
+            <div class="code-block">
+sudo vim /etc/security/pwquality.conf
+            </div>
+
+            <p>Find these lines in the file and uncomment them (remove the <code>#</code> symbol) and update the values:</p>
+            <div class="code-block">
+minlen = 15<br>
+maxrepeat = 3<br>
+lcredit = -1<br>
+ucredit = -1<br>
+dcredit = -1<br>
+ocredit = -1
+            </div>
+
+            <h4>What Each Setting Means:</h4>
+            <ul>
+                <li><strong>minlen</strong>: The shortest password allowed</li>
+                <li><strong>maxrepeat</strong>: Maximum times the same letter can repeat in a row</li>
+                <li><strong>lcredit</strong>: Minimum lowercase letters needed</li>
+                <li><strong>ucredit</strong>: Minimum uppercase letters needed</li>
+                <li><strong>dcredit</strong>: Minimum numbers needed</li>
+                <li><strong>ocredit</strong>: Minimum special symbols needed</li>
+            </ul>
+
+            <h4>How to Save Your Changes:</h4>
+            <p>After editing the file, press <code>Esc</code>, then type <code>:wq</code> and press <code>Enter</code> to save and exit.</p>
+        </section>
+
+
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Testing Password Enforcement and Preventing Password Reuse</h2>
+            <p>After configuring the policies, the next critical step is to verify that they work as intended. This involves testing both as a regular user and as a root user to understand how the system manages password changes under different circumstances.</p>
+        </section>
+
+        <section>
+            <h2>Testing Password Complexity for Regular Users</h2>
+            <p>Now that you've set up the password complexity rules, it's important to test them to make sure they're working correctly. The best way to do this is to try changing a password as a regular (non-root) user and test both weak and strong passwords.</p>
+
+            <h3>Step 1: Try to Change Your Password</h3>
+            <p>Use the <code>passwd</code> command to attempt to change your password. This is the command that regular users use to modify their own passwords:</p>
+            <div class="code-block">
+passwd
+            </div>
+
+            <h3>Step 2: Test with a Weak Password (That Will Fail)</h3>
+            <p>First, try entering a password that <strong>doesn't meet</strong> your complexity requirements. The system will reject it and tell you why. Here's an example of what happens:</p>
+
+            <div class="terminal-output">
+[amos@cent7 ~]$ passwd<br>
+Changing password for user amos.<br>
+Changing password for amos.<br>
+(current) UNIX password: <span style="color: #888;">[You enter your current password here]</span><br>
+New password: BAD PASSWORD: The password is too similar to the old one<br>
+New password: BAD PASSWORD: The password is too similar to the old one<br>
+New password: <span style="color: #888;">[System keeps rejecting it...]</span>
+            </div>
+
+            <div class="warning">
+                <strong>What's happening?</strong> The system is rejecting your password attempts because:
+                <ul>
+                    <li>The password is too similar to your previous password</li>
+                    <li>The system will keep asking until you provide a strong password that meets all the rules</li>
+                </ul>
+            </div>
+
+            <h3>Step 3: Try with a Strong Password (That Will Succeed)</h3>
+            <p>Now try a password that <strong>meets all</strong> your complexity requirements. In this example, the rules require:</p>
+            <ul>
+                <li>At least 15 characters</li>
+                <li>At least 1 lowercase letter</li>
+                <li>At least 1 uppercase letter</li>
+                <li>At least 1 number</li>
+                <li>At least 1 special symbol</li>
+            </ul>
+
+            <p>A password like <strong>MyP@ssw0rdNEwonE</strong> would work because it has all these elements. Here's what success looks like:</p>
+
+            <div class="terminal-output">
+[amos@cent7 ~]$ passwd<br>
+Changing password for user amos.<br>
+Changing password for amos.<br>
+(current) UNIX password: password<br>
+New password: MyP@ssw0rdNEwonE<br>
+Retype new password: MyP@ssw0rdNEwonE<br>
+passwd: all authentication tokens updated successfully.<br>
+[amos@cent7 ~]$
+            </div>
+
+            <div class="success-box">
+                <strong>✓ Success!</strong> The message "all authentication tokens updated successfully" means your new password has been accepted and set.
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Enforcing Password Complexity for Root Users</h2>
+
+            <h3>The Problem: Root Users Can Bypass the Rules</h3>
+            <p>By default, the password complexity rules we set up only apply to <strong>regular users</strong>. If an administrator (root user) or someone with <code>sudo</code> privileges tries to change a password, they can set <strong>any password they want</strong>, even weak ones.</p>
+
+            <div class="warning">
+                <strong>Why is this a problem?</strong>
+                <p>If your security policy requires complex passwords, it should apply to <strong>everyone</strong—including administrators. Without enforcing rules for root users, they could accidentally create weak passwords, which creates a security risk for the entire system.</p>
+            </div>
+
+            <h3>The Solution: Add enforce_for_root</h3>
+            <p>To force <strong>even root users</strong> to follow the password complexity rules, you need to add the <code>enforce_for_root</code> option to your PAM configuration file.</p>
+
+            <h4>How to Update the Configuration</h4>
+            <p>Open the system authentication file:</p>
+            <div class="code-block">
+sudo vim /etc/pam.d/system-auth
+            </div>
+
+            <p>Find the line with <code>pam_pwquality.so</code> and add <code>enforce_for_root</code> at the end. Here's what it should look like:</p>
+            <div class="code-block">
+password requisite pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type= minlen=8 lcredit=-1 ucredit=-1 dcredit=-1 ocredit=-1 maxrepeat=3 enforce_for_root
+            </div>
+
+            <h3>Step 1: Test Root with a Weak Password (Will Fail)</h3>
+            <p>As the root user, try to change another user's password using a weak password:</p>
+
+            <div class="terminal-output">
+[root@cent7 ~]# passwd amos<br>
+Changing password for user amos.<br>
+New password: simple123<br>
+BAD PASSWORD: The password contains less than 1 digits<br>
+New password: BAD PASSWORD: The password is shorter than 15 characters<br>
+New password: BAD PASSWORD: The password contains less than 1 uppercase letters<br>
+passwd: Have exhausted maximum number of retries for service<br>
+[root@cent7 ~]#
+            </div>
+
+            <div class="step-box">
+                <strong>What's happening here?</strong>
+                <p>Even though you're root (the most powerful user on the system), the system is still rejecting your password attempts because:</p>
+                <ul>
+                    <li>The password doesn't have enough digits</li>
+                    <li>The password is too short (less than 15 characters)</li>
+                    <li>The password doesn't have uppercase letters</li>
+                    <li>After 3 failed attempts, it stops allowing retries</li>
+                </ul>
+            </div>
+
+            <h3>Step 2: Test Root with a Strong Password (Will Succeed)</h3>
+            <p>Now, as root, try again using a password that meets all requirements, like <strong>MyP@ssw0rdNEwonE</strong>:</p>
+
+            <div class="terminal-output">
+[root@cent7 ~]# passwd amos<br>
+Changing password for user amos.<br>
+New password: MyP@ssw0rdNEwonE<br>
+Retype new password: MyP@ssw0rdNEwonE<br>
+passwd: all authentication tokens updated successfully.<br>
+[root@cent7 ~]#
+            </div>
+
+            <div class="success-box">
+                <strong>✓ Success!</strong> Now the root user can also only set passwords that meet the complexity requirements.
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Preventing Users from Reusing Old Passwords</h2>
+
+            <h3>What is Password History?</h3>
+            <p>Imagine if a user had to change their password every month. Without password history protection, they could do this:</p>
+            <ul>
+                <li>Month 1: Password = <strong>SecurePass123!</strong></li>
+                <li>Month 2: Change to <strong>NewPass456!</strong></li>
+                <li>Month 3: Change back to <strong>SecurePass123!</strong> (same old password!)</li>
+            </ul>
+
+            <p>This defeats the purpose of forcing regular password changes! To prevent this, we use <strong>password history</strong>—the system remembers old passwords and won't let users reuse them.</p>
+
+            <h3>The Tool: pam_pwhistory.so</h3>
+            <p><strong>pam_pwhistory.so</strong> is a security module that keeps a record of a user's previous passwords. If a user tries to set a new password that matches one of their recent old passwords, the system rejects it.</p>
+
+            <h4>How It Works</h4>
+            <p>The module:</p>
+            <ul>
+                <li>Saves the last X passwords for each user (default is 10)</li>
+                <li>Compares any new password against the saved old passwords</li>
+                <li>Rejects the new password if it matches any of the saved old ones</li>
+                <li>Forces the user to pick a completely new password</li>
+            </ul>
+
+            <h3>Step 1: Set Up Password History</h3>
+            <p>Open the system authentication configuration file:</p>
+            <div class="code-block">
+sudo vim /etc/pam.d/system-auth
+            </div>
+
+            <p>Add this line <strong>just after</strong> the first <code>password requisite</code> line:</p>
+            <div class="code-block">
+password requisite pam_pwhistory.so debug use_authtok remember=12 retry=3 enforce_for_root
+            </div>
+
+            <h3>Understanding the Options</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>What It Does</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>debug</strong></td>
+                        <td>Turns on detailed logging to help troubleshoot problems. Records what's happening in the system logs.</td>
+                        <td>Helpful for testing and finding issues</td>
+                    </tr>
+                    <tr>
+                        <td><strong>use_authtok</strong></td>
+                        <td>Tells the module to accept the password that passed the complexity checks (from pam_pwquality) and use it for the history check.</td>
+                        <td>Prevents asking the user to enter their password twice</td>
+                    </tr>
+                    <tr>
+                        <td><strong>remember=N</strong></td>
+                        <td>Sets how many <strong>previous passwords</strong> the system should remember and block. Default is 10.</td>
+                        <td><code>remember=12</code> means "don't let users reuse any of their last 12 passwords"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>retry=N</strong></td>
+                        <td>The number of times a user can try to enter a new password before getting an error.</td>
+                        <td><code>retry=3</code> means they get 3 attempts before the system stops</td>
+                    </tr>
+                    <tr>
+                        <td><strong>enforce_for_root</strong></td>
+                        <td>Forces even root users to follow the password history rules.</td>
+                        <td>Ensures administrators also can't reuse old passwords</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Step 2: Test Password History - First Password Change</h3>
+            <p>As root, change a user's password to a new, strong password:</p>
+
+            <div class="terminal-output">
+[root@cent7 ~]# passwd amos<br>
+Changing password for user amos.<br>
+New password: ruIcWocFufPhij#1<br>
+Retype new password: ruIcWocFufPhij#1<br>
+passwd: all authentication tokens updated successfully.<br>
+[root@cent7 ~]#
+            </div>
+
+            <div class="success-box">
+                <strong>✓ Password set successfully.</strong> The system has saved this password in the history.
+            </div>
+
+            <h3>Step 3: Test Password History - Second Password Change</h3>
+            <p>Now, try to change the password again immediately, and try to reuse the <strong>same password we just set</strong>:</p>
+
+            <div class="terminal-output">
+[root@cent7 ~]# passwd amos<br>
+Changing password for user amos.<br>
+New password: ruIcWocFufPhij#1<br>
+Retype new password: ruIcWocFufPhij#1<br>
+Password has been already used. Choose another.<br>
+passwd: Authentication token manipulation error<br>
+[root@cent7 ~]#
+            </div>
+
+            <div class="warning">
+                <strong>✗ Password rejected!</strong> The message "Password has been already used. Choose another" appears because:
+                <ul>
+                    <li>The system remembers the password you just set</li>
+                    <li>It refuses to let you reuse it</li>
+                    <li>You must pick a completely different password</li>
+                </ul>
+            </div>
+
+            <h3>How This Protects Your System</h3>
+            <p>By preventing password reuse, you ensure:</p>
+            <ul>
+                <li><strong>Forced password rotation actually works</strong> — Users can't just change their password back to the old one</li>
+                <li><strong>Reduced security risk</strong> — Old passwords (that might have been compromised) can't be reused</li>
+                <li><strong>Better compliance</strong> — Many security standards require that old passwords can't be reused</li>
+            </ul>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Summary: Complete Password Security</h2>
+            <div class="highlight">
+                <p>Password complexity policies ensure users create strong passwords by using tools like <strong>pam_pwquality.so</strong>. By building a complete security system, you now have:</p>
+                <ul>
+                    <li><strong>Password Complexity (pam_pwquality)</strong> — Forces passwords to be strong with a mix of uppercase, lowercase, numbers, and symbols.</li>
+                    <li><strong>Root Enforcement (enforce_for_root)</strong> — Ensures even administrators follow the security rules.</li>
+                    <li><strong>Password History (pam_pwhistory)</strong> — Prevents users from reusing old, potentially compromised passwords.</li>
+                </ul>
+                <p>Together, these tools create a robust security policy that makes passwords much harder to crack and forces all users to maintain strong, unique credentials over time!</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>Generated for CyberSecurity Education</p>
+        </footer>
+    </div>
+</body>
+</html>
