@@ -1,16 +1,16 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SEC 509 — 2.4 Cybersecurity Culture & Human Behaviour</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SEC509 - Cybersecurity Culture &amp; Human Behaviour</title>
+<link href="./style.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
       tailwind.config = {
         darkMode: "class",
       };
     </script>
-    <style type="text/tailwindcss">
+<style type="text/tailwindcss">
       @layer components {
         main section ul > li:not(.flex) {
           @apply relative pl-6;
@@ -56,276 +56,229 @@
         }
       }
     </style>
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: #333;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f5f5f5;
+    <script>
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
       }
-      .module-title {
-        background-color: #2c3e50;
-        color: white;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 30px;
-      }
-      .section-title {
-        background-color: #34495e;
-        color: white;
-        padding: 15px;
-        border-radius: 8px;
-        margin-top: 30px;
-        margin-bottom: 20px;
-      }
-      .section {
-        background-color: white;
-        padding: 20px;
-        margin-bottom: 20px;
-        border-left: 5px solid #3498db;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      .section h3 {
-        color: #2c3e50;
-        margin-top: 0;
-        margin-bottom: 10px;
-      }
-      .section p {
-        margin: 10px 0;
-        color: #555;
-      }
-      .section ul {
-        margin: 10px 0;
-      }
-      .section li {
-        margin: 8px 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="module-title">
-      <h1>Cybersecurity Culture & Human Behaviour</h1>
-      <p>
+    </script>
+  </head><body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center"><button class="fixed bottom-6 left-6 md:bottom-auto md:top-6 md:left-8 p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50" onclick="toggleMenu(event)" title="Toggle Menu">
+<svg class="w-6 h-6 text-slate-700 dark:text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button><button class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');" title="Toggle Dark Mode">
+<svg class="hidden dark:block w-6 h-6 text-yellow-400 font-bold" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<svg class="dark:hidden w-6 h-6 text-slate-700 font-bold" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button><nav class="fixed left-0 top-auto bottom-20 md:bottom-auto md:top-24 w-64 bg-white dark:bg-neutral-900 shadow-lg rounded-r-lg border-r border-slate-200 dark:border-neutral-800 transition-transform duration-300 z-40 overflow-y-auto max-h-96 md:max-h-[calc(100vh-120px)] md:origin-top -translate-x-full" id="sidebar"><div class="p-6"><h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">
+          Topics
+        </h3><ul class="space-y-2"><li>
+<a class="font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition" href="#" onclick="showAllTopics(event)">
+              All Topics
+            </a>
+</li><li><a class="menu-link text-slate-700 dark:text-slate-300 hover:text-neutral-400 dark:hover:text-neutral-200 transition" href="#topic-1" onclick="closeMenu()">Introduction</a></li></ul></div></nav><main class="w-[calc(100%-2rem)] md:w-full max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 my-4 md:my-8 border border-slate-200 dark:border-neutral-800"><h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3"><span class="h-8 w-1.5 bg-neutral-500 rounded-full"></span> Cybersecurity Culture &amp; Human Behaviour</h1><div class="mb-8 md:mb-12 flex gap-3">
+<input class="flex-1 px-4 py-3 rounded-lg bg-slate-100 dark:bg-neutral-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-neutral-500 transition" id="searchInput" onkeyup="handleSearch(event)" placeholder="Search topics..." type="text"/>
+<button class="px-6 py-3 bg-neutral-600 hover:bg-neutral-700 text-white font-semibold rounded-lg transition-all active:scale-95 hover:shadow-lg" onclick="performSearch()" title="Search">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div><div class="mb-6 text-slate-700 dark:text-slate-300 hidden" id="searchResults"></div><section class="mb-10 md:mb-14" data-topic="topic-1" id="topic-1"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="introduction"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Introduction</h2><div class="module-title">
+<h1>Cybersecurity Culture &amp; Human Behaviour</h1>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
         Understanding the human elements that shape organizational and personal
         cybersecurity
       </p>
-    </div>
-
-    <div class="section-title">
-      <h2>Human Factors in Cybersecurity</h2>
-    </div>
-
-    <div class="section">
-      <h3>Introduction to Human Factors in Cybersecurity</h3>
-      <p>
+</div><div class="section-title">
+<h2>Human Factors in Cybersecurity</h2>
+</div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="introduction-to-human-factors-in-cybersecurity">Introduction to Human Factors in Cybersecurity</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
         While much of cybersecurity focuses on technology—firewalls, encryption,
         software patches—the human element is equally, if not more, critical to
         security. "Human factors in cybersecurity" refers to how human behavior,
         psychology, and organizational culture influence security outcomes.
-      </p>
-      <p>
-        <strong>Why human factors matter:</strong> Studies consistently show
+      </p><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Why human factors matter:</strong> Studies consistently show
         that the majority of security breaches involve human error or deliberate
         human actions. No amount of advanced technology can compensate for poor
         security practices, lack of awareness, or a culture where security is
         treated as an inconvenience rather than a responsibility.
-      </p>
-      <p><strong>Key aspects of human factors include:</strong></p>
-      <ul>
-        <li>
-          <strong>Security awareness:</strong> How well individuals understand
+      </p><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Key aspects of human factors include:</strong></p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Security awareness:</strong> How well individuals understand
           security risks and best practices. Many people don't realize they're
           vulnerable until they experience a breach.
         </li>
-        <li>
-          <strong>Decision-making under pressure:</strong> When faced with time
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Decision-making under pressure:</strong> When faced with time
           pressure or competing priorities, people often make poor security
           choices (reusing passwords, sharing credentials, skipping verification
           steps).
         </li>
-        <li>
-          <strong>Risk perception:</strong> People often underestimate security
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Risk perception:</strong> People often underestimate security
           risks that seem unlikely or distant. "It won't happen to me" is a
           common attitude that leads to dangerous behavior.
         </li>
-        <li>
-          <strong>Compliance vs. security:</strong> There's a difference between
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Compliance vs. security:</strong> There's a difference between
           following security policies because you must and genuinely
           understanding why policies exist. Forced compliance without
           understanding creates resentment.
         </li>
-        <li>
-          <strong>Social dynamics:</strong> Trust, authority, and group pressure
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Social dynamics:</strong> Trust, authority, and group pressure
           influence behavior. People are more likely to fall for social
           engineering if it comes from someone in authority or a trusted peer.
         </li>
-        <li>
-          <strong>Motivation:</strong> People are more likely to follow security
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Motivation:</strong> People are more likely to follow security
           practices if they understand the "why" and see security as their
           responsibility, not something imposed on them.
         </li>
-      </ul>
-      <p>
-        <strong>The paradox of cybersecurity:</strong> Effective security often
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The paradox of cybersecurity:</strong> Effective security often
         requires friction—multi-factor authentication adds a step, strong
         passwords are hard to remember, checking email links takes time. People
         naturally resist friction, creating a constant tension between usability
         and security. Organizations must find the right balance.
-      </p>
-      <p>
-        <strong>Building human-centered security:</strong> Rather than assuming
+      </p><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Building human-centered security:</strong> Rather than assuming
         people will follow perfect practices, effective security acknowledges
         human limitations and designs systems and cultures that support secure
         behavior. This includes training, clear policies, technology that makes
         security easier, and leadership that models secure practices.
-      </p>
-    </div>
-
-    <div class="section">
-      <h3>Human Failures, Errors, and Violations</h3>
-      <p>
+      </p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="human-failures-errors-and-violations">Human Failures, Errors, and Violations</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
         Not all human security breaches are the same. Understanding the
         differences between failures, errors, and violations helps organizations
         and individuals address root causes more effectively.
-      </p>
-
-      <p><strong>Errors (Unintentional mistakes):</strong></p>
-      <ul>
-        <li>
-          <strong>What they are:</strong> Mistakes made despite good intentions
+      </p><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Errors (Unintentional mistakes):</strong></p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">What they are:</strong> Mistakes made despite good intentions
           and genuine effort to follow security practices. The person knows what
           they should do but accidentally does something different.
         </li>
-        <li>
-          <strong>Examples:</strong>
-          <ul>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Examples:</strong>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Sending a confidential email to the wrong recipient (typing
               "john.smith@company.com" instead of "john.smith@partner.com")
             </li>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Accidentally opening a phishing email attachment because the
               sender name looked familiar
             </li>
-            <li>Leaving a computer unlocked and walking away</li>
-            <li>Misconfiguring security settings</li>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Leaving a computer unlocked and walking away</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Misconfiguring security settings</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Forgetting to verify a sender's email address before responding to
               a request
             </li>
-          </ul>
-        </li>
-        <li>
-          <strong>Root causes:</strong> Fatigue, distraction, confusion, lack of
+</ul>
+</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Root causes:</strong> Fatigue, distraction, confusion, lack of
           clear procedures, or inadequate training.
         </li>
-        <li>
-          <strong>How to address errors:</strong> Improve training clarity,
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">How to address errors:</strong> Improve training clarity,
           reduce cognitive load, add safeguards (confirmation dialogs,
           double-check requirements), improve interface design, and address
           fatigue through reasonable workloads.
         </li>
-      </ul>
-
-      <p><strong>Failures (Lack of knowledge or capability):</strong></p>
-      <ul>
-        <li>
-          <strong>What they are:</strong> Breaches that occur because a person
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Failures (Lack of knowledge or capability):</strong></p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">What they are:</strong> Breaches that occur because a person
           doesn't know what the correct procedure is or doesn't have the
           capability to perform it. They aren't doing anything intentionally
           wrong—they simply don't know better.
         </li>
-        <li>
-          <strong>Examples:</strong>
-          <ul>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Examples:</strong>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Using weak passwords because they don't understand why strong
               passwords matter
             </li>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Sharing credentials with a colleague because they don't know how
               credential sharing violates policy
             </li>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Clicking suspicious links because they can't recognize phishing
               attempts
             </li>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Downloading files from untrusted sources because they don't
               understand malware risks
             </li>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Connecting personal devices to work networks without understanding
               the security implications
             </li>
-          </ul>
-        </li>
-        <li>
-          <strong>Root causes:</strong> Inadequate training, unclear policies,
+</ul>
+</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Root causes:</strong> Inadequate training, unclear policies,
           lack of security awareness, or insufficient experience.
         </li>
-        <li>
-          <strong>How to address failures:</strong> Comprehensive security
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">How to address failures:</strong> Comprehensive security
           training and awareness programs, clear documentation of policies and
           procedures, mentoring, hands-on workshops, and regular refreshers as
           threats evolve.
         </li>
-      </ul>
-
-      <p><strong>Violations (Intentional non-compliance):</strong></p>
-      <ul>
-        <li>
-          <strong>What they are:</strong> Deliberate decisions to ignore
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Violations (Intentional non-compliance):</strong></p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">What they are:</strong> Deliberate decisions to ignore
           security policies or best practices. The person knows what they should
           do but chooses not to do it.
         </li>
-        <li>
-          <strong>Examples:</strong>
-          <ul>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Examples:</strong>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Deliberately using a weak, memorable password instead of following
               the strong password policy
             </li>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Sharing login credentials because it's faster than going through
               access request procedures
             </li>
-            <li>Disabling antivirus software because it slows down work</li>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Disabling antivirus software because it slows down work</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Writing down passwords on sticky notes despite knowing it's
               against policy
             </li>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Using personal USB drives to copy work files, violating data
               protection policies
             </li>
-            <li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
               Accessing files or systems outside of job responsibilities out of
               curiosity
             </li>
-          </ul>
-        </li>
-        <li>
-          <strong>Root causes:</strong> Competing priorities and time pressure,
+</ul>
+</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Root causes:</strong> Competing priorities and time pressure,
           perceived unnecessary restrictions, inconvenience of security
           measures, lack of accountability, low risk perception, or even
           intentional malice (insider threats).
         </li>
-        <li>
-          <strong>How to address violations:</strong> Make policies realistic
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">How to address violations:</strong> Make policies realistic
           and not overly burdensome, clearly explain the "why" behind policies,
           provide feedback about security incidents, establish consistent
           accountability, lead by example from management, and create a culture
           where security is valued, not resented.
         </li>
-      </ul>
-
-      <p>
-        <strong>Important distinction:</strong> Errors and failures deserve
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Important distinction:</strong> Errors and failures deserve
         training and support—punishing someone for accidentally clicking a
         phishing link is counterproductive. However, intentional violations may
         require different approaches, including clear consequences.
@@ -333,227 +286,188 @@
         errors, failures, or violations) often create a culture where people
         hide incidents rather than reporting them, making security worse
         overall.
-      </p>
-    </div>
-
-    <div class="section">
-      <h3>The Role of Security Culture in Organizations</h3>
-      <p>
+      </p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="the-role-of-security-culture-in-organizations">The Role of Security Culture in Organizations</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
         Security culture is the collective attitude, beliefs, and practices of
         an organization toward security. It's the difference between a workplace
         where security is everyone's responsibility and one where it's seen as
         someone else's job.
-      </p>
-      <p><strong>Characteristics of strong security cultures:</strong></p>
-      <ul>
-        <li>
-          <strong>Leadership commitment:</strong> Security is visibly
+      </p><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Characteristics of strong security cultures:</strong></p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Leadership commitment:</strong> Security is visibly
           prioritized by senior leadership, not just delegated to the IT
           department.
         </li>
-        <li>
-          <strong>Shared responsibility:</strong> Everyone understands they have
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Shared responsibility:</strong> Everyone understands they have
           a role in security, not just IT specialists.
         </li>
-        <li>
-          <strong>Psychological safety:</strong> People feel safe reporting
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Psychological safety:</strong> People feel safe reporting
           security incidents and near-misses without fear of punishment for
           honest mistakes.
         </li>
-        <li>
-          <strong>Continuous learning:</strong> Regular training, awareness
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Continuous learning:</strong> Regular training, awareness
           campaigns, and discussions about threats keep security top-of-mind.
         </li>
-        <li>
-          <strong>Incentives aligned with security:</strong> Performance
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Incentives aligned with security:</strong> Performance
           evaluations and rewards consider security practices, not just
           productivity.
         </li>
-        <li>
-          <strong>Transparency about incidents:</strong> Organizations
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Transparency about incidents:</strong> Organizations
           communicate about security events and lessons learned to improve
           collectively.
         </li>
-        <li>
-          <strong>User-centered security:</strong> Policies and tools are
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">User-centered security:</strong> Policies and tools are
           designed with usability in mind, not as obstacles to work.
         </li>
-      </ul>
-      <p>
-        <strong>Weak security cultures:</strong> In contrast, organizations with
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Weak security cultures:</strong> In contrast, organizations with
         poor security culture often have widespread policy violations, little
         reporting of incidents (because people fear consequences), outdated
         training, policies that contradict actual work practices, and a view of
         security as a burden rather than an asset.
-      </p>
-    </div>
-
-    <div class="section">
-      <h3>Social Engineering and Manipulation</h3>
-      <p>
+      </p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="social-engineering-and-manipulation">Social Engineering and Manipulation</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
         Social engineering exploits human psychology and trust rather than
         technical vulnerabilities. It's often the easiest path to breaching
         security because people are fundamentally cooperative and want to help.
-      </p>
-      <p><strong>Common social engineering tactics:</strong></p>
-      <ul>
-        <li>
-          <strong>Pretext:</strong> Creating a fabricated scenario to manipulate
+      </p><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Common social engineering tactics:</strong></p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Pretext:</strong> Creating a fabricated scenario to manipulate
           someone into revealing information. "I'm from IT, I need to verify
           your password to troubleshoot your account."
         </li>
-        <li>
-          <strong>Authority:</strong> Impersonating someone with authority to
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Authority:</strong> Impersonating someone with authority to
           bypass normal procedures. "This is the CEO; I need access to the
           quarterly reports immediately."
         </li>
-        <li>
-          <strong>Urgency:</strong> Creating time pressure that prevents careful
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Urgency:</strong> Creating time pressure that prevents careful
           thinking. "Your account has been compromised; click this link
           immediately to verify."
         </li>
-        <li>
-          <strong>Scarcity:</strong> Suggesting limited opportunity. "This offer
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Scarcity:</strong> Suggesting limited opportunity. "This offer
           expires today; you must act now."
         </li>
-        <li>
-          <strong>Reciprocity:</strong> Building a sense of obligation. "I
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Reciprocity:</strong> Building a sense of obligation. "I
           helped you last week; can you do me a favor and access these files for
           me?"
         </li>
-        <li>
-          <strong>Trust and likeability:</strong> Building rapport and appearing
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Trust and likeability:</strong> Building rapport and appearing
           trustworthy before making the ask. Attackers research targets to find
           commonalities and shared contacts.
         </li>
-        <li>
-          <strong>Fear:</strong> Threatening consequences for non-compliance.
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Fear:</strong> Threatening consequences for non-compliance.
           "If you don't provide access, your department will be audited."
         </li>
-      </ul>
-      <p>
-        <strong>Why social engineering works:</strong> People are trained to be
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Why social engineering works:</strong> People are trained to be
         helpful and to trust colleagues. Security policies often feel arbitrary
         compared to the immediate human need being presented. Most people want
         to cooperate and feel uncomfortable refusing requests, especially from
         authority figures.
-      </p>
-      <p>
-        <strong>Defense against social engineering:</strong> Verification
+      </p><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Defense against social engineering:</strong> Verification
         procedures (always verify identity through known contact methods),
         training on common tactics, awareness of urgency and authority pressure
         as red flags, clear escalation paths for unusual requests, and a culture
         where it's acceptable to say "no" or "let me verify this."
-      </p>
-    </div>
-
-    <div class="section">
-      <h3>Motivation and Behavior Change in Security</h3>
-      <p>
+      </p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="motivation-and-behavior-change-in-security">Motivation and Behavior Change in Security</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
         Understanding what motivates people to follow security practices is
         crucial for designing effective security programs. Motivation research
         shows that compliance based on fear or punishment is often short-lived
         and superficial.
-      </p>
-      <p><strong>Types of motivation:</strong></p>
-      <ul>
-        <li>
-          <strong>Intrinsic motivation:</strong> People follow security
+      </p><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Types of motivation:</strong></p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Intrinsic motivation:</strong> People follow security
           practices because they genuinely understand why it matters and value
           the outcome. This is the most sustainable form of motivation.
         </li>
-        <li>
-          <strong>Extrinsic motivation:</strong> People follow practices because
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Extrinsic motivation:</strong> People follow practices because
           of external rewards or punishment (bonuses, penalties, surveillance).
           This motivation disappears when external rewards are removed.
         </li>
-      </ul>
-      <p><strong>Building intrinsic motivation for security:</strong></p>
-      <ul>
-        <li>
-          <strong>Explain the "why":</strong> Help people understand how
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Building intrinsic motivation for security:</strong></p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Explain the "why":</strong> Help people understand how
           security practices protect them personally, protect the organization's
           mission, and protect colleagues.
         </li>
-        <li>
-          <strong>Make it relatable:</strong> Use real stories of how breaches
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Make it relatable:</strong> Use real stories of how breaches
           affected people, not abstract statistics.
         </li>
-        <li>
-          <strong>Involve people in decision-making:</strong> When people help
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Involve people in decision-making:</strong> When people help
           create security policies, they're more likely to follow them.
         </li>
-        <li>
-          <strong>Celebrate successes:</strong> Recognize and reward good
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Celebrate successes:</strong> Recognize and reward good
           security practices, not just punish failures.
         </li>
-        <li>
-          <strong>Remove friction where possible:</strong> If security practices
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Remove friction where possible:</strong> If security practices
           are overly burdensome, people will find workarounds. Invest in
           user-friendly security tools.
         </li>
-        <li>
-          <strong>Create community:</strong> Make security a shared value and
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Create community:</strong> Make security a shared value and
           identity, not an imposed requirement.
         </li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h3>Risk Perception and Decision-Making</h3>
-      <p>
+</ul><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="risk-perception-and-decision-making">Risk Perception and Decision-Making</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
         How people perceive security risks significantly influences their
         behavior. Interestingly, risk perception often doesn't match actual
         risk.
-      </p>
-      <p><strong>Factors that influence risk perception:</strong></p>
-      <ul>
-        <li>
-          <strong>Familiarity:</strong> Risks that are familiar feel less
+      </p><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Factors that influence risk perception:</strong></p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Familiarity:</strong> Risks that are familiar feel less
           dangerous. Using the same weak password everywhere feels normal and
           therefore safe, even though it's actually risky.
         </li>
-        <li>
-          <strong>Personal experience:</strong> People who have experienced a
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Personal experience:</strong> People who have experienced a
           breach are much more likely to take security seriously than those who
           haven't. Hypothetical risks feel abstract and unlikely.
         </li>
-        <li>
-          <strong>Visibility:</strong> Invisible risks are underestimated.
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Visibility:</strong> Invisible risks are underestimated.
           Malware that silently steals data feels less real than a virus that
           crashes your computer.
         </li>
-        <li>
-          <strong>Dread:</strong> Risks that feel catastrophic are
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Dread:</strong> Risks that feel catastrophic are
           overestimated. Fear of dramatic breaches sometimes overshadows the
           more common, mundane risks.
         </li>
-        <li>
-          <strong>Optimism bias:</strong> "It won't happen to me" is a common
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Optimism bias:</strong> "It won't happen to me" is a common
           bias. People think security risks apply to others, not themselves.
         </li>
-        <li>
-          <strong>Status quo bias:</strong> People stick with current practices
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Status quo bias:</strong> People stick with current practices
           even when better alternatives exist, because change feels risky.
         </li>
-      </ul>
-      <p>
-        <strong>Implications for security programs:</strong> Simply telling
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Implications for security programs:</strong> Simply telling
         people "don't click suspicious links" isn't effective when they don't
         perceive the risk as real or relevant. Effective security education
         helps people understand risks in concrete, relevant terms and provides
         tools and processes that make secure behavior the path of least
         resistance.
+      </p><footer class="mt-12 text-center text-slate-500 dark:text-slate-500 pb-12 px-4">
+<p class="text-sm sm:text-base text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        © 2026 SEC Notes • Sabanci University IT563 Practice Project
       </p>
-    </div>
-    <footer
-      class="mt-12 text-center text-slate-500 dark:text-slate-500 pb-12 px-4"
-    >
-      <p class="text-sm sm:text-base">
-        &copy; 2026 SEC Notes &bull; Sabanci University IT563 Practice Project
-      </p>
-    </footer>
-    <script>
+</footer></section></main><script>
       // Menu state
       let menuOpen = true;
 
@@ -735,6 +649,4 @@
         }
       `;
       document.head.appendChild(style);
-    </script>
-  </body>
-</html>
+    </script></body></html>

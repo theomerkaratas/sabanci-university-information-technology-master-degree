@@ -36,7 +36,14 @@
   pre{background:#0d0e14;border:1px solid var(--border);border-radius:10px;padding:12px;white-space:pre-wrap}
   @media(max-width:900px){.row{grid-template-columns:1fr}}
 </style>
-</head>
+    <script>
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
 <body>
   <header>
     <div class="container">
