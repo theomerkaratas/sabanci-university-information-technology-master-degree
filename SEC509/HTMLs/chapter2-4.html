@@ -1,98 +1,498 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SEC 509 — 2.4 Cybersecurity Culture & Human Behaviour</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f5f5f5; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background-color: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); padding: 40px; }
-        h1 { color: #2c3e50; border-bottom: 4px solid #f39c12; padding-bottom: 15px; margin-bottom: 30px; font-size: 2.2em; }
-        h2 { color: #34495e; margin-top: 35px; margin-bottom: 15px; font-size: 1.8em; border-left: 5px solid #f39c12; padding-left: 15px; }
-        h3 { color: #555; margin-top: 20px; margin-bottom: 12px; font-size: 1.3em; }
-        p { margin-bottom: 15px; text-align: justify; }
-        strong { color: #2c3e50; }
-        .highlight { background-color: #fef5e7; padding: 20px; border-left: 4px solid #f39c12; margin: 20px 0; border-radius: 4px; }
-        ul { margin: 15px 0 15px 30px; }
-        li { margin-bottom: 8px; }
-        .success-box { background-color: #d1ecf1; border-left: 4px solid #17a2b8; padding: 15px; margin: 20px 0; border-radius: 4px; color: #0c5460; }
-        .section-divider { border-top: 2px solid #ecf0f1; margin: 40px 0; }
-        footer { text-align: center; color: #7f8c8d; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ecf0f1; }
-        
-        /* Dark Mode Support */
-        @media (prefers-color-scheme: dark) {
-            body { background-color: #0d1117; color: #c9d1d9; }
-            .container { background-color: #161b22; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-            h1 { color: #f2a154; }
-            h2 { color: #f2a154; }
-            h3 { color: #8b949e; }
-            .highlight { background-color: #0d1117; border-left-color: #f2a154; }
-            .success-box { background-color: #112736; border-left-color: #388bfd; color: #f2a154; }
-            strong { color: #f2a154; }
-            .section-divider { border-top-color: #30363d; }
-            footer { border-top-color: #30363d; color: #8b949e; }
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .module-title {
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+      .section-title {
+        background-color: #34495e;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+      }
+      .section {
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-left: 5px solid #3498db;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .section h3 {
+        color: #2c3e50;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .section p {
+        margin: 10px 0;
+        color: #555;
+      }
+      .section ul {
+        margin: 10px 0;
+      }
+      .section li {
+        margin: 8px 0;
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>2.4 Cybersecurity Culture & Human Behaviour</h1>
-
-        <section>
-            <h2>The Human Aspect of Security</h2>
-            <p><strong>Cybersecurity</strong> is often thought of as a purely technical field. However, technical controls are only one part of the equation. The human element—how people interact with technology—is arguably more critical. Most successful cyberattacks start with human error or social engineering.</p>
-            
-            <h3>The Weakest Link?</h3>
-            <p>It is common for cybersecurity professionals to describe humans as "the weakest link" in security. But a more modern and effective view is to see humans as a **potential critical protection layer**. With the right culture, employees can become the most effective "sensors" of security threats.</p>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section>
-            <h2>Social Engineering Patterns</h2>
-            <p><strong>Social engineering</strong> is the psychological manipulation of people into performing actions or divulging confidential information. Common patterns include:</p>
-            <ul>
-                <li><strong>Phishing:</strong> Using email to trick users into clicking malicious links or submitting credentials.</li>
-                <li><strong>Pretexting:</strong> Inventing a scenario to trick someone into providing data.</li>
-                <li><strong>Baiting:</strong> Leaving a malicious USB drive for someone to find and plug in.</li>
-                <li><strong>Quid Pro Quo:</strong> Offering a service (like technical support) in exchange for access.</li>
-            </ul>
-
-            <div class="highlight">
-                <p><strong>Common Triggers:</strong> Attackers often use <em>urgency</em>, <em>fear</em>, or <em>authority</em> to override a person's natural skepticism. Recognizing these emotional triggers is the first step in defending against them.</p>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section>
-            <h2>Building a Security-Aware Culture</h2>
-            <p>A <strong>security culture</strong> is the ideas, customs, and social behaviors of an organization that influence its security. In a strong security culture, workers don't just follow rules—they value security and take responsibility for it.</p>
-
-            <h3>Key Principles to Build Culture</h3>
-            <ul>
-                <li><strong>Continuous Training:</strong> Moving away from annual, boring PowerPoint slides to interactive, regular, and relevant training.</li>
-                <li><strong>Gamification:</strong> Using phishing simulations and "capture the flag" events to make security learning more engaging.</li>
-                <li><strong>Psychological Safety:</strong> Creating an environment where employees feel safe reporting mistakes (like clicking a link) immediately, knowing they won't be punished.</li>
-                <li><strong>Executive Support:</strong> Leadership must lead by example—if the CEO skips security training, others will too.</li>
-            </ul>
-
-            <div class="success-box">
-                <strong>Importance of Speed:</strong> Early reporting is the key to minimizing the impact of a breach. A healthy culture encourages fast reporting over fear.
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section>
-            <h2>Incident Response Culture</h2>
-            <p>When an incident happens, the culture of the organization is put to the test. A strong culture focuses on **blameless post-mortems**—analyzing what went wrong and how to fix the system, rather than identifying who to blame. This approach leads to more honest reporting and better long-term security.</p>
-        </section>
-
-        <footer>
-            <p>&copy; 2026 Sabancı University — SEC 509 — Secure Coding & Software Security</p>
-        </footer>
+  </head>
+  <body>
+    <div class="module-title">
+      <h1>Cybersecurity Culture & Human Behaviour</h1>
+      <p>
+        Understanding the human elements that shape organizational and personal
+        cybersecurity
+      </p>
     </div>
-</body>
+
+    <div class="section-title">
+      <h2>Human Factors in Cybersecurity</h2>
+    </div>
+
+    <div class="section">
+      <h3>Introduction to Human Factors in Cybersecurity</h3>
+      <p>
+        While much of cybersecurity focuses on technology—firewalls, encryption,
+        software patches—the human element is equally, if not more, critical to
+        security. "Human factors in cybersecurity" refers to how human behavior,
+        psychology, and organizational culture influence security outcomes.
+      </p>
+      <p>
+        <strong>Why human factors matter:</strong> Studies consistently show
+        that the majority of security breaches involve human error or deliberate
+        human actions. No amount of advanced technology can compensate for poor
+        security practices, lack of awareness, or a culture where security is
+        treated as an inconvenience rather than a responsibility.
+      </p>
+      <p><strong>Key aspects of human factors include:</strong></p>
+      <ul>
+        <li>
+          <strong>Security awareness:</strong> How well individuals understand
+          security risks and best practices. Many people don't realize they're
+          vulnerable until they experience a breach.
+        </li>
+        <li>
+          <strong>Decision-making under pressure:</strong> When faced with time
+          pressure or competing priorities, people often make poor security
+          choices (reusing passwords, sharing credentials, skipping verification
+          steps).
+        </li>
+        <li>
+          <strong>Risk perception:</strong> People often underestimate security
+          risks that seem unlikely or distant. "It won't happen to me" is a
+          common attitude that leads to dangerous behavior.
+        </li>
+        <li>
+          <strong>Compliance vs. security:</strong> There's a difference between
+          following security policies because you must and genuinely
+          understanding why policies exist. Forced compliance without
+          understanding creates resentment.
+        </li>
+        <li>
+          <strong>Social dynamics:</strong> Trust, authority, and group pressure
+          influence behavior. People are more likely to fall for social
+          engineering if it comes from someone in authority or a trusted peer.
+        </li>
+        <li>
+          <strong>Motivation:</strong> People are more likely to follow security
+          practices if they understand the "why" and see security as their
+          responsibility, not something imposed on them.
+        </li>
+      </ul>
+      <p>
+        <strong>The paradox of cybersecurity:</strong> Effective security often
+        requires friction—multi-factor authentication adds a step, strong
+        passwords are hard to remember, checking email links takes time. People
+        naturally resist friction, creating a constant tension between usability
+        and security. Organizations must find the right balance.
+      </p>
+      <p>
+        <strong>Building human-centered security:</strong> Rather than assuming
+        people will follow perfect practices, effective security acknowledges
+        human limitations and designs systems and cultures that support secure
+        behavior. This includes training, clear policies, technology that makes
+        security easier, and leadership that models secure practices.
+      </p>
+    </div>
+
+    <div class="section">
+      <h3>Human Failures, Errors, and Violations</h3>
+      <p>
+        Not all human security breaches are the same. Understanding the
+        differences between failures, errors, and violations helps organizations
+        and individuals address root causes more effectively.
+      </p>
+
+      <p><strong>Errors (Unintentional mistakes):</strong></p>
+      <ul>
+        <li>
+          <strong>What they are:</strong> Mistakes made despite good intentions
+          and genuine effort to follow security practices. The person knows what
+          they should do but accidentally does something different.
+        </li>
+        <li>
+          <strong>Examples:</strong>
+          <ul>
+            <li>
+              Sending a confidential email to the wrong recipient (typing
+              "john.smith@company.com" instead of "john.smith@partner.com")
+            </li>
+            <li>
+              Accidentally opening a phishing email attachment because the
+              sender name looked familiar
+            </li>
+            <li>Leaving a computer unlocked and walking away</li>
+            <li>Misconfiguring security settings</li>
+            <li>
+              Forgetting to verify a sender's email address before responding to
+              a request
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Root causes:</strong> Fatigue, distraction, confusion, lack of
+          clear procedures, or inadequate training.
+        </li>
+        <li>
+          <strong>How to address errors:</strong> Improve training clarity,
+          reduce cognitive load, add safeguards (confirmation dialogs,
+          double-check requirements), improve interface design, and address
+          fatigue through reasonable workloads.
+        </li>
+      </ul>
+
+      <p><strong>Failures (Lack of knowledge or capability):</strong></p>
+      <ul>
+        <li>
+          <strong>What they are:</strong> Breaches that occur because a person
+          doesn't know what the correct procedure is or doesn't have the
+          capability to perform it. They aren't doing anything intentionally
+          wrong—they simply don't know better.
+        </li>
+        <li>
+          <strong>Examples:</strong>
+          <ul>
+            <li>
+              Using weak passwords because they don't understand why strong
+              passwords matter
+            </li>
+            <li>
+              Sharing credentials with a colleague because they don't know how
+              credential sharing violates policy
+            </li>
+            <li>
+              Clicking suspicious links because they can't recognize phishing
+              attempts
+            </li>
+            <li>
+              Downloading files from untrusted sources because they don't
+              understand malware risks
+            </li>
+            <li>
+              Connecting personal devices to work networks without understanding
+              the security implications
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Root causes:</strong> Inadequate training, unclear policies,
+          lack of security awareness, or insufficient experience.
+        </li>
+        <li>
+          <strong>How to address failures:</strong> Comprehensive security
+          training and awareness programs, clear documentation of policies and
+          procedures, mentoring, hands-on workshops, and regular refreshers as
+          threats evolve.
+        </li>
+      </ul>
+
+      <p><strong>Violations (Intentional non-compliance):</strong></p>
+      <ul>
+        <li>
+          <strong>What they are:</strong> Deliberate decisions to ignore
+          security policies or best practices. The person knows what they should
+          do but chooses not to do it.
+        </li>
+        <li>
+          <strong>Examples:</strong>
+          <ul>
+            <li>
+              Deliberately using a weak, memorable password instead of following
+              the strong password policy
+            </li>
+            <li>
+              Sharing login credentials because it's faster than going through
+              access request procedures
+            </li>
+            <li>Disabling antivirus software because it slows down work</li>
+            <li>
+              Writing down passwords on sticky notes despite knowing it's
+              against policy
+            </li>
+            <li>
+              Using personal USB drives to copy work files, violating data
+              protection policies
+            </li>
+            <li>
+              Accessing files or systems outside of job responsibilities out of
+              curiosity
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Root causes:</strong> Competing priorities and time pressure,
+          perceived unnecessary restrictions, inconvenience of security
+          measures, lack of accountability, low risk perception, or even
+          intentional malice (insider threats).
+        </li>
+        <li>
+          <strong>How to address violations:</strong> Make policies realistic
+          and not overly burdensome, clearly explain the "why" behind policies,
+          provide feedback about security incidents, establish consistent
+          accountability, lead by example from management, and create a culture
+          where security is valued, not resented.
+        </li>
+      </ul>
+
+      <p>
+        <strong>Important distinction:</strong> Errors and failures deserve
+        training and support—punishing someone for accidentally clicking a
+        phishing link is counterproductive. However, intentional violations may
+        require different approaches, including clear consequences.
+        Organizations that punish all security incidents equally (whether
+        errors, failures, or violations) often create a culture where people
+        hide incidents rather than reporting them, making security worse
+        overall.
+      </p>
+    </div>
+
+    <div class="section">
+      <h3>The Role of Security Culture in Organizations</h3>
+      <p>
+        Security culture is the collective attitude, beliefs, and practices of
+        an organization toward security. It's the difference between a workplace
+        where security is everyone's responsibility and one where it's seen as
+        someone else's job.
+      </p>
+      <p><strong>Characteristics of strong security cultures:</strong></p>
+      <ul>
+        <li>
+          <strong>Leadership commitment:</strong> Security is visibly
+          prioritized by senior leadership, not just delegated to the IT
+          department.
+        </li>
+        <li>
+          <strong>Shared responsibility:</strong> Everyone understands they have
+          a role in security, not just IT specialists.
+        </li>
+        <li>
+          <strong>Psychological safety:</strong> People feel safe reporting
+          security incidents and near-misses without fear of punishment for
+          honest mistakes.
+        </li>
+        <li>
+          <strong>Continuous learning:</strong> Regular training, awareness
+          campaigns, and discussions about threats keep security top-of-mind.
+        </li>
+        <li>
+          <strong>Incentives aligned with security:</strong> Performance
+          evaluations and rewards consider security practices, not just
+          productivity.
+        </li>
+        <li>
+          <strong>Transparency about incidents:</strong> Organizations
+          communicate about security events and lessons learned to improve
+          collectively.
+        </li>
+        <li>
+          <strong>User-centered security:</strong> Policies and tools are
+          designed with usability in mind, not as obstacles to work.
+        </li>
+      </ul>
+      <p>
+        <strong>Weak security cultures:</strong> In contrast, organizations with
+        poor security culture often have widespread policy violations, little
+        reporting of incidents (because people fear consequences), outdated
+        training, policies that contradict actual work practices, and a view of
+        security as a burden rather than an asset.
+      </p>
+    </div>
+
+    <div class="section">
+      <h3>Social Engineering and Manipulation</h3>
+      <p>
+        Social engineering exploits human psychology and trust rather than
+        technical vulnerabilities. It's often the easiest path to breaching
+        security because people are fundamentally cooperative and want to help.
+      </p>
+      <p><strong>Common social engineering tactics:</strong></p>
+      <ul>
+        <li>
+          <strong>Pretext:</strong> Creating a fabricated scenario to manipulate
+          someone into revealing information. "I'm from IT, I need to verify
+          your password to troubleshoot your account."
+        </li>
+        <li>
+          <strong>Authority:</strong> Impersonating someone with authority to
+          bypass normal procedures. "This is the CEO; I need access to the
+          quarterly reports immediately."
+        </li>
+        <li>
+          <strong>Urgency:</strong> Creating time pressure that prevents careful
+          thinking. "Your account has been compromised; click this link
+          immediately to verify."
+        </li>
+        <li>
+          <strong>Scarcity:</strong> Suggesting limited opportunity. "This offer
+          expires today; you must act now."
+        </li>
+        <li>
+          <strong>Reciprocity:</strong> Building a sense of obligation. "I
+          helped you last week; can you do me a favor and access these files for
+          me?"
+        </li>
+        <li>
+          <strong>Trust and likeability:</strong> Building rapport and appearing
+          trustworthy before making the ask. Attackers research targets to find
+          commonalities and shared contacts.
+        </li>
+        <li>
+          <strong>Fear:</strong> Threatening consequences for non-compliance.
+          "If you don't provide access, your department will be audited."
+        </li>
+      </ul>
+      <p>
+        <strong>Why social engineering works:</strong> People are trained to be
+        helpful and to trust colleagues. Security policies often feel arbitrary
+        compared to the immediate human need being presented. Most people want
+        to cooperate and feel uncomfortable refusing requests, especially from
+        authority figures.
+      </p>
+      <p>
+        <strong>Defense against social engineering:</strong> Verification
+        procedures (always verify identity through known contact methods),
+        training on common tactics, awareness of urgency and authority pressure
+        as red flags, clear escalation paths for unusual requests, and a culture
+        where it's acceptable to say "no" or "let me verify this."
+      </p>
+    </div>
+
+    <div class="section">
+      <h3>Motivation and Behavior Change in Security</h3>
+      <p>
+        Understanding what motivates people to follow security practices is
+        crucial for designing effective security programs. Motivation research
+        shows that compliance based on fear or punishment is often short-lived
+        and superficial.
+      </p>
+      <p><strong>Types of motivation:</strong></p>
+      <ul>
+        <li>
+          <strong>Intrinsic motivation:</strong> People follow security
+          practices because they genuinely understand why it matters and value
+          the outcome. This is the most sustainable form of motivation.
+        </li>
+        <li>
+          <strong>Extrinsic motivation:</strong> People follow practices because
+          of external rewards or punishment (bonuses, penalties, surveillance).
+          This motivation disappears when external rewards are removed.
+        </li>
+      </ul>
+      <p><strong>Building intrinsic motivation for security:</strong></p>
+      <ul>
+        <li>
+          <strong>Explain the "why":</strong> Help people understand how
+          security practices protect them personally, protect the organization's
+          mission, and protect colleagues.
+        </li>
+        <li>
+          <strong>Make it relatable:</strong> Use real stories of how breaches
+          affected people, not abstract statistics.
+        </li>
+        <li>
+          <strong>Involve people in decision-making:</strong> When people help
+          create security policies, they're more likely to follow them.
+        </li>
+        <li>
+          <strong>Celebrate successes:</strong> Recognize and reward good
+          security practices, not just punish failures.
+        </li>
+        <li>
+          <strong>Remove friction where possible:</strong> If security practices
+          are overly burdensome, people will find workarounds. Invest in
+          user-friendly security tools.
+        </li>
+        <li>
+          <strong>Create community:</strong> Make security a shared value and
+          identity, not an imposed requirement.
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3>Risk Perception and Decision-Making</h3>
+      <p>
+        How people perceive security risks significantly influences their
+        behavior. Interestingly, risk perception often doesn't match actual
+        risk.
+      </p>
+      <p><strong>Factors that influence risk perception:</strong></p>
+      <ul>
+        <li>
+          <strong>Familiarity:</strong> Risks that are familiar feel less
+          dangerous. Using the same weak password everywhere feels normal and
+          therefore safe, even though it's actually risky.
+        </li>
+        <li>
+          <strong>Personal experience:</strong> People who have experienced a
+          breach are much more likely to take security seriously than those who
+          haven't. Hypothetical risks feel abstract and unlikely.
+        </li>
+        <li>
+          <strong>Visibility:</strong> Invisible risks are underestimated.
+          Malware that silently steals data feels less real than a virus that
+          crashes your computer.
+        </li>
+        <li>
+          <strong>Dread:</strong> Risks that feel catastrophic are
+          overestimated. Fear of dramatic breaches sometimes overshadows the
+          more common, mundane risks.
+        </li>
+        <li>
+          <strong>Optimism bias:</strong> "It won't happen to me" is a common
+          bias. People think security risks apply to others, not themselves.
+        </li>
+        <li>
+          <strong>Status quo bias:</strong> People stick with current practices
+          even when better alternatives exist, because change feels risky.
+        </li>
+      </ul>
+      <p>
+        <strong>Implications for security programs:</strong> Simply telling
+        people "don't click suspicious links" isn't effective when they don't
+        perceive the risk as real or relevant. Effective security education
+        helps people understand risks in concrete, relevant terms and provides
+        tools and processes that make secure behavior the path of least
+        resistance.
+      </p>
+    </div>
+  </body>
 </html>
