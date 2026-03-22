@@ -4,6 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SEC 509 — 2.2 Introduction to DevSecOps</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer components {
+        main section ul > li:not(.flex) {
+          @apply relative pl-6;
+        }
+        main section ul > li:not(.flex)::before {
+          content: "•";
+          @apply absolute left-2 text-neutral-500 font-bold;
+        }
+        table {
+          @apply w-full;
+        }
+        th,
+        td {
+          @apply p-3 align-top border-b border-slate-200 dark:border-slate-700;
+        }
+        th {
+          @apply font-bold;
+        }
+        @media (max-width: 767px) {
+          table,
+          thead,
+          tbody,
+          th,
+          td,
+          tr {
+            @apply block w-full;
+          }
+          thead {
+            @apply hidden;
+          }
+          tr {
+            @apply mb-4 border border-slate-200 dark:border-slate-700 rounded-lg p-4 bg-slate-50 dark:bg-neutral-800/40;
+          }
+          td {
+            @apply p-2 sm:p-3 border-none border-b border-slate-200 dark:border-slate-700;
+          }
+          td:last-child {
+            @apply border-none pb-0;
+          }
+          td:first-child {
+            @apply pt-0 font-bold text-lg text-blue-600 dark:text-blue-400;
+          }
+        }
+      }
+    </style>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -1260,5 +1312,195 @@
         Security becomes a competitive advantage, not a burden.
       </p>
     </div>
+    <footer
+      class="mt-12 text-center text-slate-500 dark:text-slate-500 pb-12 px-4"
+    >
+      <p class="text-sm sm:text-base">
+        &copy; 2026 SEC Notes &bull; Sabanci University IT563 Practice Project
+      </p>
+    </footer>
+    <script>
+      // Menu state
+      let menuOpen = true;
+
+      // Search functionality
+      function performSearch() {
+        const searchInput = document.getElementById("searchInput");
+        const query = searchInput.value.trim().toLowerCase();
+
+        if (!query) {
+          alert("Please enter a search term");
+          return;
+        }
+
+        searchTopics(query);
+      }
+
+      function handleSearch(event) {
+        if (event.key === "Enter") {
+          performSearch();
+        }
+      }
+
+      function searchTopics(query) {
+        const sections = document.querySelectorAll(
+          'main > section[id^="topic-"]',
+        );
+        const results = [];
+
+        sections.forEach((section) => {
+          const h2 = section.querySelector("h2");
+          if (h2) {
+            const title = h2.textContent.toLowerCase();
+            const content = section.textContent.toLowerCase();
+
+            if (title.includes(query) || content.includes(query)) {
+              results.push({
+                id: section.id,
+                title: h2.textContent.trim(),
+              });
+            }
+          }
+        });
+
+        displaySearchResults(results, query);
+      }
+
+      function displaySearchResults(results, query) {
+        const resultsDiv = document.getElementById("searchResults");
+
+        if (results.length === 0) {
+          resultsDiv.innerHTML = `<p class="text-base italic text-slate-600 dark:text-slate-400">No results found for "${query}"</p>`;
+          resultsDiv.classList.remove("hidden");
+          return;
+        }
+
+        let html = `<div class="mb-4"><p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Found ${results.length} result${results.length > 1 ? "s" : ""} for "${query}":</p><ul class="space-y-2 mt-3">`;
+
+        results.forEach((result) => {
+          html += `<li><button onclick="showTopic('${result.id}')" class="text-neutral-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline text-left text-base transition">→ ${result.title}</button></li>`;
+        });
+
+        html += "</ul></div>";
+        resultsDiv.innerHTML = html;
+        resultsDiv.classList.remove("hidden");
+      }
+
+      // Toggle sidebar menu
+      function toggleMenu(event) {
+        if (event) {
+          event.stopPropagation();
+        }
+        const sidebar = document.getElementById("sidebar");
+        menuOpen = !menuOpen;
+
+        if (menuOpen) {
+          sidebar.classList.remove("-translate-x-full");
+          sidebar.classList.add("translate-x-0");
+        } else {
+          sidebar.classList.remove("translate-x-0");
+          sidebar.classList.add("-translate-x-full");
+        }
+      }
+
+      // Show all topics at once
+      function showAllTopics(event) {
+        if (event) {
+          event.preventDefault();
+        }
+
+        // Show all sections
+        document.querySelectorAll("main > section").forEach((section) => {
+          section.style.display = "block";
+          section.style.animation = "none"; // Disable fade in for "All" to prevent massive simultaneous animations
+        });
+
+        // Scroll to top smoothly
+        document.querySelector("main").scrollIntoView({ behavior: "smooth" });
+
+        // Close mobile menu
+        closeMenu();
+      }
+
+      // Show/hide topics based on menu selection
+      function showTopic(topicId, event) {
+        if (event) {
+          event.preventDefault();
+        }
+
+        // Hide all sections
+        document.querySelectorAll("main > section").forEach((section) => {
+          section.style.display = "none";
+        });
+
+        // Show selected section with fade effect
+        const selectedSection = document.getElementById(topicId);
+        if (selectedSection) {
+          selectedSection.style.display = "block";
+          selectedSection.style.animation = "fadeIn 0.3s ease-in";
+
+          // Scroll to top smoothly
+          document.querySelector("main").scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Close mobile menu
+        closeMenu();
+      }
+
+      // Close sidebar menu on mobile
+      function closeMenu() {
+        const sidebar = document.getElementById("sidebar");
+        menuOpen = false;
+        sidebar.classList.remove("translate-x-0");
+        sidebar.classList.add("-translate-x-full");
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("sidebar");
+        menuOpen = false;
+        sidebar.classList.add("-translate-x-full");
+
+        showAllTopics();
+
+        document.querySelectorAll(".menu-link").forEach((link) => {
+          link.addEventListener("click", function (e) {
+            const topicId = this.getAttribute("href").substring(1);
+            showTopic(topicId, e);
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", function (event) {
+          const sidebar = document.getElementById("sidebar");
+          const toggleBtn = event.target.closest(
+            'button[onclick^="toggleMenu"]',
+          );
+          const isClickInsideSidebar = sidebar.contains(event.target);
+
+          if (menuOpen && !isClickInsideSidebar && !toggleBtn) {
+            closeMenu();
+          }
+        });
+      });
+
+      const style = document.createElement("style");
+      style.textContent = `
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        main > section {
+          animation: fadeIn 0.3s ease-in;
+        }
+      `;
+      document.head.appendChild(style);
+    </script>
   </body>
 </html>
