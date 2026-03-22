@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,11 +10,15 @@
         darkMode: "class",
       };
     </script>
-      <script>
-      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
+    <script>
+      if (
+        localStorage.getItem("theme") === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
       } else {
-        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.remove("dark");
       }
     </script>
   </head>
@@ -22,7 +26,15 @@
     class="bg-slate-50 dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center min-h-screen"
   >
     <button
-      onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');"
+      onclick="
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem(
+          'theme',
+          document.documentElement.classList.contains('dark')
+            ? 'dark'
+            : 'light',
+        );
+      "
       class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group"
       title="Toggle Dark Mode"
     >
@@ -60,10 +72,10 @@
       <header
         class="mb-10 pb-8 border-b border-slate-100 dark:border-neutral-800"
       >
-        <div class="flex items-center gap-4 mb-4">
+                <div class="flex items-center gap-4 mb-6">
           <a
             href="../index.html"
-            class="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 text-sm font-medium"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-800 text-slate-700 dark:text-slate-300 text-sm font-semibold rounded-xl border border-slate-200 dark:border-neutral-700 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-neutral-700 transition-all active:scale-95"
           >
             <svg
               class="w-4 h-4"
@@ -78,7 +90,7 @@
                 d="M15 19l-7-7 7-7"
               ></path>
             </svg>
-            Back to Course Overview
+            Back
           </a>
         </div>
         <h1
@@ -90,10 +102,15 @@
             <span class="h-1/2 w-full bg-blue-500"></span>
             <span class="h-1/2 w-full bg-indigo-600"></span>
           </div>
-          <span class="leading-tight">Chapter 2: Security Posture & DevSecOps</span>
+          <span class="leading-tight"
+            >Chapter 2: Security Posture & DevSecOps</span
+          >
         </h1>
         <p class="text-slate-700 dark:text-slate-300 text-lg leading-relaxed">
-          This chapter covers the essential foundations of personal and corporate security, the integration of security into the development lifecycle, and practical system hardening through authentication policies.
+          This chapter covers the essential foundations of personal and
+          corporate security, the integration of security into the development
+          lifecycle, and practical system hardening through authentication
+          policies.
         </p>
       </header>
 
@@ -124,7 +141,8 @@
             <p
               class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
             >
-              Essential habits and practices for maintaining security in personal and professional digital environments.
+              Essential habits and practices for maintaining security in
+              personal and professional digital environments.
             </p>
           </a>
 
@@ -147,7 +165,8 @@
             <p
               class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
             >
-              Integrating security into the DevOps culture, focusing on automation, shift-left, and shared responsibility.
+              Integrating security into the DevOps culture, focusing on
+              automation, shift-left, and shared responsibility.
             </p>
           </a>
 
@@ -170,7 +189,8 @@
             <p
               class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
             >
-              Practical guide to Pluggable Authentication Modules (PAM) and enforcing strict password policies.
+              Practical guide to Pluggable Authentication Modules (PAM) and
+              enforcing strict password policies.
             </p>
           </a>
 
@@ -193,7 +213,8 @@
             <p
               class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
             >
-              Understanding the psychological aspects of cybersecurity and building a security-first culture.
+              Understanding the psychological aspects of cybersecurity and
+              building a security-first culture.
             </p>
           </a>
         </div>
