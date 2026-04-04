@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SEC 509 – Secure Coding & Software Security</title>
+    <title>SEC 509 – Homeworks & Laboratory Works</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -100,27 +100,15 @@
           <div
             class="flex flex-col h-10 sm:h-12 w-2 rounded-full overflow-hidden flex-shrink-0"
           >
-            <span class="h-1/2 w-full bg-blue-500"></span>
-            <span class="h-1/2 w-full bg-indigo-600"></span>
+            <span class="h-1/2 w-full bg-amber-500"></span>
+            <span class="h-1/2 w-full bg-orange-600"></span>
           </div>
-          <span class="leading-tight"
-            >SEC 509 — Secure Coding & Software Security</span
-          >
+          <span class="leading-tight">Homeworks & Laboratory Works</span>
         </h1>
         <p class="text-slate-700 dark:text-slate-300 text-lg leading-relaxed">
-          This folder contains the materials and notes for
-          <strong>SEC 509: Secure Coding & Software Security</strong>, a core
-          course in the
-          <strong>Master of Science in Information Technology</strong> program
-          at <strong>Sabancı University</strong>. You can also learn more about
-          the program here:
-          <a
-            href="https://fens.sabanciuniv.edu/en/msit"
-            target="_blank"
-            class="text-blue-600 dark:text-blue-400 hover:underline font-medium break-all"
-          >
-            https://fens.sabanciuniv.edu/en/msit
-          </a>
+          This directory contains all the homework assignments and laboratory
+          works completed as part of the
+          <strong>SEC 509: Secure Coding & Software Security</strong> course.
         </p>
       </header>
 
@@ -128,91 +116,23 @@
         <h2
           class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2"
         >
-          📘 Course Overview
+          📘 Laboratory Works Overview
         </h2>
         <div
           class="bg-slate-50 dark:bg-neutral-800/40 border border-slate-200 dark:border-neutral-700 rounded-xl p-6 text-slate-700 dark:text-slate-300 text-lg leading-relaxed"
         >
           <p>
-            <strong>SEC 509</strong> explores the ubiquity of software, impact
-            of software failure, threat modeling concepts (STRIDE, D.R.E.A.D.),
-            and foundational security practices.
+            The coursework is structured into several laboratory sessions, each
+            focusing on different aspects of software security and secure coding
+            practices.
           </p>
         </div>
       </section>
 
       <section>
-        <h2
-          class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2"
-        >
-          📚 Course Chapters
-        </h2>
-
-        <div class="space-y-4">
-          <a
-            href="./HTMLs/chapter1.html"
-            class="group block p-6 bg-white dark:bg-neutral-800/50 border-l-4 border-blue-500 rounded-r-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border-y border-r border-slate-200 dark:border-neutral-700"
-          >
-            <h3
-              class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2"
-            >
-              Chapter 1
-            </h3>
-            <p
-              class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
-            >
-              Explores the ubiquity of software, impact of software failure,
-              threat modeling concepts (STRIDE, D.R.E.A.D.), and foundational
-              security practices.
-            </p>
-          </a>
-
-          <a
-            href="./HTMLs/chapter2.html"
-            class="group block p-6 bg-white dark:bg-neutral-800/50 border-l-4 border-blue-500 rounded-r-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border-y border-r border-slate-200 dark:border-neutral-700"
-          >
-            <h3
-              class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2"
-            >
-              Chapter 2
-            </h3>
-            <p
-              class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
-            >
-              Focuses on Pluggable Authentication Modules (PAM), configuring
-              password complexity policies with pam_pwquality, and enforcing
-              password history to prevent reuse.
-            </p>
-          </a>
-
-          <a
-            href="./HTMLs/chapter3.html"
-            class="group block p-6 bg-white dark:bg-neutral-800/50 border-l-4 border-slate-500 rounded-r-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 border-y border-r border-slate-200 dark:border-neutral-700"
-          >
-            <h3
-              class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2"
-            >
-              Chapter 3
-            </h3>
-            <p
-              class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
-            >
-              Coming soon...
-            </p>
-          </a>
-        </div>
-      </section>
-
-      <section class="mt-12 mb-12">
-        <h2
-          class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2"
-        >
-          📝 Homeworks & Labs
-        </h2>
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <a
-            href="./Homeworks/Lab1/README.md"
+            href="./Lab1/README.md"
             class="group block p-6 bg-white dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700 rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
           >
             <div class="flex items-center justify-between mb-2">
@@ -229,13 +149,14 @@
             <p
               class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
             >
-              Analysis of the OrcunCorp Document Sharing Tool using STRIDE
-              methodology and Microsoft Threat Modeling Tool.
+              Performed a comprehensive threat model for the OrcunCorp Document
+              Sharing Tool using the STRIDE methodology and Microsoft Threat
+              Modeling Tool.
             </p>
           </a>
 
           <a
-            href="./Homeworks/Lab2/README.md"
+            href="./Lab2/README.md"
             class="group block p-6 bg-white dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700 rounded-xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
           >
             <div class="flex items-center justify-between mb-2">
@@ -252,8 +173,9 @@
             <p
               class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
             >
-              Completion of CYRUS Project training modules on DevSecOps, Cyber
-              Hygiene, and Password Policies.
+              Earned several certifications from the EU-funded CYRUS Project,
+              covering DevSecOps, password policies, and human behavior in
+              cybersecurity.
             </p>
           </a>
 
