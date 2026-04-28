@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SEC509 - Understanding PAM and Password Complexity Policy</title>
+<link href="./style.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+<style type="text/tailwindcss">
+      @layer components {
+        main section ul > li:not(.flex) {
+          @apply relative pl-6;
+        }
+        main section ul > li:not(.flex)::before {
+          content: "•";
+          @apply absolute left-2 text-neutral-500 font-bold;
+        }
+        table {
+          @apply w-full;
+        }
+        th,
+        td {
+          @apply p-3 align-top border-b border-slate-200 dark:border-slate-700;
+        }
+        th {
+          @apply font-bold;
+        }
+        @media (max-width: 767px) {
+          table,
+          thead,
+          tbody,
+          th,
+          td,
+          tr {
+            @apply block w-full;
+          }
+          thead {
+            @apply hidden;
+          }
+          tr {
+            @apply mb-4 border border-slate-200 dark:border-slate-700 rounded-lg p-4 bg-slate-50 dark:bg-neutral-800/40;
+          }
+          td {
+            @apply p-2 sm:p-3 border-none border-b border-slate-200 dark:border-slate-700;
+          }
+          td:last-child {
+            @apply border-none pb-0;
+          }
+          td:first-child {
+            @apply pt-0 font-bold text-lg text-blue-600 dark:text-blue-400;
+          }
+        }
+      }
+    </style>
+    <script>
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head><body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center"><button class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');" title="Toggle Dark Mode">
+<svg class="hidden dark:block w-6 h-6 text-yellow-400 font-bold" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<svg class="dark:hidden w-6 h-6 text-slate-700 font-bold" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button><main class="w-[calc(100%-2rem)] md:w-full max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 my-4 md:my-8 border border-slate-200 dark:border-neutral-800">
+
+                <div class="flex items-center gap-4 mb-6">
+          <a
+            href="../index.html"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-800 text-slate-700 dark:text-slate-300 text-sm font-semibold rounded-xl border border-slate-200 dark:border-neutral-700 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-neutral-700 transition-all active:scale-95"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              ></path>
+            </svg>
+            Back
+          </a>
+        </div>
+<h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3"><span class="h-8 w-1.5 bg-neutral-500 rounded-full"></span> Understanding PAM and Password Complexity Policy</h1><div class="mb-8 md:mb-12 flex gap-3">
+<input class="flex-1 px-4 py-3 rounded-lg bg-slate-100 dark:bg-neutral-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-neutral-500 transition" id="searchInput" onkeyup="handleSearch(event)" placeholder="Search topics..." type="text"/>
+<button class="px-6 py-3 bg-neutral-600 hover:bg-neutral-700 text-white font-semibold rounded-lg transition-all active:scale-95 hover:shadow-lg" onclick="performSearch()" title="Search">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div><div class="mb-6 text-slate-700 dark:text-slate-300 hidden" id="searchResults"></div><section class="mb-10 md:mb-14" data-topic="topic-1" id="topic-1"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="introduction"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Introduction</h2></section><section class="mb-10 md:mb-14" data-topic="topic-2" id="topic-2"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="what-is-pam"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> What is PAM?</h2><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">PAM</strong> stands for <strong class="font-bold text-slate-900 dark:text-white">Pluggable Authentication Module</strong>. Think of it as a security system that controls how people log in and what they're allowed to do on Unix/Linux computers.</p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="how-pam-works">How PAM Works</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">PAM is flexible because it supports different ways of verifying who you are. For example, you could log in using:</p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Your local computer's password (the simplest method)</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Kerberos (a more advanced security system)</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">SSSD (another authentication method)</li>
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">For each of these login methods, there's a specific PAM module (a small program) that handles the verification.</p></section><section class="mb-10 md:mb-14" data-topic="topic-3" id="topic-3"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="enforcing-password-complexity-policy"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Enforcing Password Complexity Policy</h2><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="what-does-password-complexity-mean">What Does "Password Complexity" Mean?</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Instead of letting people set weak passwords like "password123," a password complexity policy forces users to create <strong class="font-bold text-slate-900 dark:text-white">strong, harder-to-crack passwords</strong> by requiring certain types of characters.</p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="the-tool-pam-pwquality-so">The Tool: pam_pwquality.so</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">pam_pwquality.so</strong> is a PAM module (a security tool) that checks if a new password is strong enough before allowing it to be set. It replaced an older tool called <code>pam_cracklib</code> in older Red Hat systems.</p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="how-pam-pwquality-so-checks-your-password">How pam_pwquality.so Checks Your Password</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">When you create a new password, the system performs <strong class="font-bold text-slate-900 dark:text-white">two main checks</strong>:</p><div class="step-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">Step 1: Check If It's a Dictionary Word</strong>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">First, it checks if your password is just a common word from the dictionary. If it is, it rejects it. If it passes this check, it moves to Step 2.</p>
+</div><div class="step-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">Step 2: Check Against Specific Rules</strong>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">The system checks your password against several rules to make sure it's not too similar to your old password or too simple:</p>
+</div><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>What It Checks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">Palindrome</strong></td>
+<td>Is your new password spelled the same backwards and forwards? (Not allowed)</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">Case Change Only</strong></td>
+<td>Is the new password just the old one with UPPERCASE changed to lowercase? (Not allowed)</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">Similar</strong></td>
+<td>Is the new password too much like your old password? (Not allowed)</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">Simple</strong></td>
+<td>Is the new password too short? (Not allowed)</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">Rotated</strong></td>
+<td>Is the new password just your old password shifted by one letter? (Not allowed)</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">Same Consecutive Characters</strong></td>
+<td>Does it have too many of the same letter in a row? (Configurable)</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">Contains Username</strong></td>
+<td>Does the password contain your username? (Configurable - usually not allowed)</td>
+</tr>
+</tbody>
+</table><div class="step-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">Step 3: Re-enter Password</strong>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">If your password passes all checks, the system asks you to type it again to make sure you didn't make a typo.</p>
+</div></section><section class="mb-10 md:mb-14" data-topic="topic-4" id="topic-4"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="how-to-configure-password-complexity-rules"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> How to Configure Password Complexity Rules</h2><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">You can customize these password rules in <strong class="font-bold text-slate-900 dark:text-white">two ways</strong>:</p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="method-1-edit-the-configuration-file">Method 1: Edit the Configuration File</h3><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-1-back-up-the-files-important">Step 1: Back Up the Files (IMPORTANT!)</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Before making changes, always create backup copies of the files you're about to edit:</p><div class="code-block">
+sudo cp /etc/security/pwquality.conf /etc/security/pwquality.conf.original<br/>
+sudo cp /etc/pam.d/system-auth /etc/pam.d/system-auth.original
+            </div><div class="warning">
+<strong class="font-bold text-slate-900 dark:text-white">Why?</strong> If something goes wrong, you can restore the original files. The <code>sudo</code> command is needed because these are system files that only administrators can modify.
+            </div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-2-open-the-pam-configuration-file">Step 2: Open the PAM Configuration File</h3><div class="code-block">
+sudo vim /etc/pam.d/system-auth
+            </div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-3-find-and-modify-the-pam-pwquality-so-line">Step 3: Find and Modify the pam_pwquality.so Line</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Look for this line:</p><div class="code-block">
+password requisite pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type=.
+            </div><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">This is the line that controls password complexity. You'll add your rules here.</p></section><section class="mb-10 md:mb-14" data-topic="topic-5" id="topic-5"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="password-complexity-options-the-rules-you-can-set"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Password Complexity Options (The Rules You Can Set)</h2><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Here are the main settings you can configure:</p><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>What It Does</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">minlen=N</strong></td>
+<td>Sets the minimum number of characters a password must have</td>
+<td><code>minlen=15</code> means at least 15 characters</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">lcredit=N</strong></td>
+<td>Requires lowercase letters (use <code>-1</code> to require at least one)</td>
+<td><code>lcredit=-1</code> means at least 1 lowercase letter required</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">ucredit=N</strong></td>
+<td>Requires uppercase letters (use <code>-1</code> to require at least one)</td>
+<td><code>ucredit=-1</code> means at least 1 uppercase letter required</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">dcredit=N</strong></td>
+<td>Requires digits/numbers (use <code>-1</code> to require at least one)</td>
+<td><code>dcredit=-1</code> means at least 1 number required</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">ocredit=N</strong></td>
+<td>Requires special symbols like @, #, !, $, %, etc. (use <code>-1</code> to require at least one)</td>
+<td><code>ocredit=-1</code> means at least 1 symbol required</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">maxrepeat=N</strong></td>
+<td>Limits how many times the same character can appear in a row</td>
+<td><code>maxrepeat=3</code> means you can't have "aaaa" (more than 3 a's in a row)</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">enforce_for_root</strong></td>
+<td>Forces even the admin (root user) to follow these rules</td>
+<td>Ensures nobody gets special treatment</td>
+</tr>
+</tbody>
+</table><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="example-creating-a-strong-password-policy">Example: Creating a Strong Password Policy</h3><div class="example-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Let's say you want to require passwords to have:</strong></p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">At least 15 characters</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">At least 1 lowercase letter</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">At least 1 uppercase letter</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">At least 1 number</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">At least 1 special symbol</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">No more than 3 of the same character in a row</li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">You would modify the line to look like this:</strong></p>
+<div class="code-block">
+password requisite pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type= minlen=15 lcredit=-1 ucredit=-1 dcredit=-1 ocredit=-1 maxrepeat=3
+                </div>
+</div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="method-2-edit-the-configuration-file-directly">Method 2: Edit the Configuration File Directly</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">You can also edit the <code>/etc/security/pwquality.conf</code> file using a text editor:</p><div class="code-block">
+sudo vim /etc/security/pwquality.conf
+            </div><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Find these lines in the file and uncomment them (remove the <code>#</code> symbol) and update the values:</p><div class="code-block">
+minlen = 15<br/>
+maxrepeat = 3<br/>
+lcredit = -1<br/>
+ucredit = -1<br/>
+dcredit = -1<br/>
+ocredit = -1
+            </div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="what-each-setting-means">What Each Setting Means:</h3><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">minlen</strong>: The shortest password allowed</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">maxrepeat</strong>: Maximum times the same letter can repeat in a row</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">lcredit</strong>: Minimum lowercase letters needed</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">ucredit</strong>: Minimum uppercase letters needed</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">dcredit</strong>: Minimum numbers needed</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">ocredit</strong>: Minimum special symbols needed</li>
+</ul><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="how-to-save-your-changes">How to Save Your Changes:</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">After editing the file, press <code>Esc</code>, then type <code>:wq</code> and press <code>Enter</code> to save and exit.</p></section><section class="mb-10 md:mb-14" data-topic="topic-6" id="topic-6"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="testing-password-enforcement-and-preventing-password-reuse"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Testing Password Enforcement and Preventing Password Reuse</h2><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">After configuring the policies, the next critical step is to verify that they work as intended. This involves testing both as a regular user and as a root user to understand how the system manages password changes under different circumstances.</p></section><section class="mb-10 md:mb-14" data-topic="topic-7" id="topic-7"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="testing-password-complexity-for-regular-users"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Testing Password Complexity for Regular Users</h2><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Now that you've set up the password complexity rules, it's important to test them to make sure they're working correctly. The best way to do this is to try changing a password as a regular (non-root) user and test both weak and strong passwords.</p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-1-try-to-change-your-password">Step 1: Try to Change Your Password</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Use the <code>passwd</code> command to attempt to change your password. This is the command that regular users use to modify their own passwords:</p><div class="code-block">
+passwd
+            </div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-2-test-with-a-weak-password-that-will-fail">Step 2: Test with a Weak Password (That Will Fail)</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">First, try entering a password that <strong class="font-bold text-slate-900 dark:text-white">doesn't meet</strong> your complexity requirements. The system will reject it and tell you why. Here's an example of what happens:</p><div class="terminal-output">
+[amos@cent7 ~]$ passwd<br/>
+Changing password for user amos.<br/>
+Changing password for amos.<br/>
+(current) UNIX password: <span style="color: #888;">[You enter your current password here]</span><br/>
+New password: BAD PASSWORD: The password is too similar to the old one<br/>
+New password: BAD PASSWORD: The password is too similar to the old one<br/>
+New password: <span style="color: #888;">[System keeps rejecting it...]</span>
+</div><div class="warning">
+<strong class="font-bold text-slate-900 dark:text-white">What's happening?</strong> The system is rejecting your password attempts because:
+                <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">The password is too similar to your previous password</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">The system will keep asking until you provide a strong password that meets all the rules</li>
+</ul>
+</div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-3-try-with-a-strong-password-that-will-succeed">Step 3: Try with a Strong Password (That Will Succeed)</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Now try a password that <strong class="font-bold text-slate-900 dark:text-white">meets all</strong> your complexity requirements. In this example, the rules require:</p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">At least 15 characters</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">At least 1 lowercase letter</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">At least 1 uppercase letter</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">At least 1 number</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">At least 1 special symbol</li>
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">A password like <strong class="font-bold text-slate-900 dark:text-white">MyP@ssw0rdNEwonE</strong> would work because it has all these elements. Here's what success looks like:</p><div class="terminal-output">
+[amos@cent7 ~]$ passwd<br/>
+Changing password for user amos.<br/>
+Changing password for amos.<br/>
+(current) UNIX password: password<br/>
+New password: MyP@ssw0rdNEwonE<br/>
+Retype new password: MyP@ssw0rdNEwonE<br/>
+passwd: all authentication tokens updated successfully.<br/>
+[amos@cent7 ~]$
+            </div><div class="success-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">✓ Success!</strong> The message "all authentication tokens updated successfully" means your new password has been accepted and set.
+            </div></section><section class="mb-10 md:mb-14" data-topic="topic-8" id="topic-8"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="enforcing-password-complexity-for-root-users"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Enforcing Password Complexity for Root Users</h2><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="the-problem-root-users-can-bypass-the-rules">The Problem: Root Users Can Bypass the Rules</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">By default, the password complexity rules we set up only apply to <strong class="font-bold text-slate-900 dark:text-white">regular users</strong>. If an administrator (root user) or someone with <code>sudo</code> privileges tries to change a password, they can set <strong class="font-bold text-slate-900 dark:text-white">any password they want</strong>, even weak ones.</p><div class="warning">
+<strong class="font-bold text-slate-900 dark:text-white">Why is this a problem?</strong>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">If your security policy requires complex passwords, it should apply to <strong class="font-bold text-slate-900 dark:text-white">everyone
+</strong></p></div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="the-solution-add-enforce-for-root">The Solution: Add enforce_for_root</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">To force <strong class="font-bold text-slate-900 dark:text-white">even root users</strong> to follow the password complexity rules, you need to add the <code>enforce_for_root</code> option to your PAM configuration file.</p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="how-to-update-the-configuration">How to Update the Configuration</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Open the system authentication file:</p><div class="code-block">
+sudo vim /etc/pam.d/system-auth
+            </div><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Find the line with <code>pam_pwquality.so</code> and add <code>enforce_for_root</code> at the end. Here's what it should look like:</p><div class="code-block">
+password requisite pam_pwquality.so try_first_pass local_users_only retry=3 authtok_type= minlen=8 lcredit=-1 ucredit=-1 dcredit=-1 ocredit=-1 maxrepeat=3 enforce_for_root
+            </div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-1-test-root-with-a-weak-password-will-fail">Step 1: Test Root with a Weak Password (Will Fail)</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">As the root user, try to change another user's password using a weak password:</p><div class="terminal-output">
+[root@cent7 ~]# passwd amos<br/>
+Changing password for user amos.<br/>
+New password: simple123<br/>
+BAD PASSWORD: The password contains less than 1 digits<br/>
+New password: BAD PASSWORD: The password is shorter than 15 characters<br/>
+New password: BAD PASSWORD: The password contains less than 1 uppercase letters<br/>
+passwd: Have exhausted maximum number of retries for service<br/>
+[root@cent7 ~]#
+            </div><div class="step-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">What's happening here?</strong>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Even though you're root (the most powerful user on the system), the system is still rejecting your password attempts because:</p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">The password doesn't have enough digits</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">The password is too short (less than 15 characters)</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">The password doesn't have uppercase letters</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">After 3 failed attempts, it stops allowing retries</li>
+</ul>
+</div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-2-test-root-with-a-strong-password-will-succeed">Step 2: Test Root with a Strong Password (Will Succeed)</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Now, as root, try again using a password that meets all requirements, like <strong class="font-bold text-slate-900 dark:text-white">MyP@ssw0rdNEwonE</strong>:</p><div class="terminal-output">
+[root@cent7 ~]# passwd amos<br/>
+Changing password for user amos.<br/>
+New password: MyP@ssw0rdNEwonE<br/>
+Retype new password: MyP@ssw0rdNEwonE<br/>
+passwd: all authentication tokens updated successfully.<br/>
+[root@cent7 ~]#
+            </div><div class="success-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">✓ Success!</strong> Now the root user can also only set passwords that meet the complexity requirements.
+            </div></section><section class="mb-10 md:mb-14" data-topic="topic-9" id="topic-9"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="preventing-users-from-reusing-old-passwords"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Preventing Users from Reusing Old Passwords</h2><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="what-is-password-history">What is Password History?</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Imagine if a user had to change their password every month. Without password history protection, they could do this:</p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Month 1: Password = <strong class="font-bold text-slate-900 dark:text-white">SecurePass123!</strong></li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Month 2: Change to <strong class="font-bold text-slate-900 dark:text-white">NewPass456!</strong></li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Month 3: Change back to <strong class="font-bold text-slate-900 dark:text-white">SecurePass123!</strong> (same old password!)</li>
+</ul><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">This defeats the purpose of forcing regular password changes! To prevent this, we use <strong class="font-bold text-slate-900 dark:text-white">password history</strong>—the system remembers old passwords and won't let users reuse them.</p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="the-tool-pam-pwhistory-so">The Tool: pam_pwhistory.so</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">pam_pwhistory.so</strong> is a security module that keeps a record of a user's previous passwords. If a user tries to set a new password that matches one of their recent old passwords, the system rejects it.</p><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="how-it-works">How It Works</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">The module:</p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Saves the last X passwords for each user (default is 10)</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Compares any new password against the saved old passwords</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Rejects the new password if it matches any of the saved old ones</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Forces the user to pick a completely new password</li>
+</ul><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-1-set-up-password-history">Step 1: Set Up Password History</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Open the system authentication configuration file:</p><div class="code-block">
+sudo vim /etc/pam.d/system-auth
+            </div><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Add this line <strong class="font-bold text-slate-900 dark:text-white">just after</strong> the first <code>password requisite</code> line:</p><div class="code-block">
+password requisite pam_pwhistory.so debug use_authtok remember=12 retry=3 enforce_for_root
+            </div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="understanding-the-options">Understanding the Options</h3><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What It Does</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">debug</strong></td>
+<td>Turns on detailed logging to help troubleshoot problems. Records what's happening in the system logs.</td>
+<td>Helpful for testing and finding issues</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">use_authtok</strong></td>
+<td>Tells the module to accept the password that passed the complexity checks (from pam_pwquality) and use it for the history check.</td>
+<td>Prevents asking the user to enter their password twice</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">remember=N</strong></td>
+<td>Sets how many <strong class="font-bold text-slate-900 dark:text-white">previous passwords</strong> the system should remember and block. Default is 10.</td>
+<td><code>remember=12</code> means "don't let users reuse any of their last 12 passwords"</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">retry=N</strong></td>
+<td>The number of times a user can try to enter a new password before getting an error.</td>
+<td><code>retry=3</code> means they get 3 attempts before the system stops</td>
+</tr>
+<tr>
+<td><strong class="font-bold text-slate-900 dark:text-white">enforce_for_root</strong></td>
+<td>Forces even root users to follow the password history rules.</td>
+<td>Ensures administrators also can't reuse old passwords</td>
+</tr>
+</tbody>
+</table><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-2-test-password-history-first-password-change">Step 2: Test Password History - First Password Change</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">As root, change a user's password to a new, strong password:</p><div class="terminal-output">
+[root@cent7 ~]# passwd amos<br/>
+Changing password for user amos.<br/>
+New password: ruIcWocFufPhij#1<br/>
+Retype new password: ruIcWocFufPhij#1<br/>
+passwd: all authentication tokens updated successfully.<br/>
+[root@cent7 ~]#
+            </div><div class="success-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">✓ Password set successfully.</strong> The system has saved this password in the history.
+            </div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="step-3-test-password-history-second-password-change">Step 3: Test Password History - Second Password Change</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Now, try to change the password again immediately, and try to reuse the <strong class="font-bold text-slate-900 dark:text-white">same password we just set</strong>:</p><div class="terminal-output">
+[root@cent7 ~]# passwd amos<br/>
+Changing password for user amos.<br/>
+New password: ruIcWocFufPhij#1<br/>
+Retype new password: ruIcWocFufPhij#1<br/>
+Password has been already used. Choose another.<br/>
+passwd: Authentication token manipulation error<br/>
+[root@cent7 ~]#
+            </div><div class="warning">
+<strong class="font-bold text-slate-900 dark:text-white">✗ Password rejected!</strong> The message "Password has been already used. Choose another" appears because:
+                <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">The system remembers the password you just set</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">It refuses to let you reuse it</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">You must pick a completely different password</li>
+</ul>
+</div><h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-3 md:mb-4 mt-6" id="how-this-protects-your-system">How This Protects Your System</h3><p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">By preventing password reuse, you ensure:</p><ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">Forced password rotation actually works</strong> — Users can't just change their password back to the old one</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">Reduced security risk</strong> — Old passwords (that might have been compromised) can't be reused</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">Better compliance</strong> — Many security standards require that old passwords can't be reused</li>
+</ul></section><section class="mb-10 md:mb-14" data-topic="topic-10" id="topic-10"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="summary-complete-password-security"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Summary: Complete Password Security</h2><div class="highlight">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Password complexity policies ensure users create strong passwords by using tools like <strong class="font-bold text-slate-900 dark:text-white">pam_pwquality.so</strong>. By building a complete security system, you now have:</p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">Password Complexity (pam_pwquality)</strong> — Forces passwords to be strong with a mix of uppercase, lowercase, numbers, and symbols.</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">Root Enforcement (enforce_for_root)</strong> — Ensures even administrators follow the security rules.</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">Password History (pam_pwhistory)</strong> — Prevents users from reusing old, potentially compromised passwords.</li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Together, these tools create a robust security policy that makes passwords much harder to crack and forces all users to maintain strong, unique credentials over time!</p>
+</div></section></main><script>
+            // Search functionality
+      function performSearch() {
+        const searchInput = document.getElementById("searchInput");
+        const query = searchInput.value.trim().toLowerCase();
+
+        if (!query) {
+          alert("Please enter a search term");
+          return;
+        }
+
+        searchTopics(query);
+      }
+
+      function handleSearch(event) {
+        if (event.key === "Enter") {
+          performSearch();
+        }
+      }
+
+      function searchTopics(query) {
+        const sections = document.querySelectorAll(
+          'main > section[id^="topic-"]',
+        );
+        const results = [];
+
+        sections.forEach((section) => {
+          const h2 = section.querySelector("h2");
+          if (h2) {
+            const title = h2.textContent.toLowerCase();
+            const content = section.textContent.toLowerCase();
+
+            if (title.includes(query) || content.includes(query)) {
+              results.push({
+                id: section.id,
+                title: h2.textContent.trim(),
+              });
+            }
+          }
+        });
+
+        displaySearchResults(results, query);
+      }
+
+      function displaySearchResults(results, query) {
+        const resultsDiv = document.getElementById("searchResults");
+
+        if (results.length === 0) {
+          resultsDiv.innerHTML = `<p class="text-base italic text-slate-600 dark:text-slate-400">No results found for "${query}"</p>`;
+          resultsDiv.classList.remove("hidden");
+          return;
+        }
+
+        let html = `<div class="mb-4"><p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Found ${results.length} result${results.length > 1 ? "s" : ""} for "${query}":</p><ul class="space-y-2 mt-3">`;
+
+        results.forEach((result) => {
+          html += `<li><button onclick="showTopic('${result.id}')" class="text-neutral-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline text-left text-base transition">→ ${result.title}</button></li>`;
+        });
+
+        html += "</ul></div>";
+        resultsDiv.innerHTML = html;
+        resultsDiv.classList.remove("hidden");
+      }
+
+      // Scroll to topic based on search selection
+      function showTopic(topicId) {
+        const selectedSection = document.getElementById(topicId);
+        if (selectedSection) {
+          selectedSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    </script></body></html>

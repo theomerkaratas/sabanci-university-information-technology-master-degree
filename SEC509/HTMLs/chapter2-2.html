@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SEC509 - Introduction to DevSecOps</title>
+<link href="./style.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+<style type="text/tailwindcss">
+      @layer components {
+        main section ul > li:not(.flex) {
+          @apply relative pl-6;
+        }
+        main section ul > li:not(.flex)::before {
+          content: "•";
+          @apply absolute left-2 text-neutral-500 font-bold;
+        }
+        table {
+          @apply w-full;
+        }
+        th,
+        td {
+          @apply p-3 align-top border-b border-slate-200 dark:border-slate-700;
+        }
+        th {
+          @apply font-bold;
+        }
+        @media (max-width: 767px) {
+          table,
+          thead,
+          tbody,
+          th,
+          td,
+          tr {
+            @apply block w-full;
+          }
+          thead {
+            @apply hidden;
+          }
+          tr {
+            @apply mb-4 border border-slate-200 dark:border-slate-700 rounded-lg p-4 bg-slate-50 dark:bg-neutral-800/40;
+          }
+          td {
+            @apply p-2 sm:p-3 border-none border-b border-slate-200 dark:border-slate-700;
+          }
+          td:last-child {
+            @apply border-none pb-0;
+          }
+          td:first-child {
+            @apply pt-0 font-bold text-lg text-blue-600 dark:text-blue-400;
+          }
+        }
+      }
+    </style>
+    <script>
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head><body class="bg-white dark:bg-neutral-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col items-center"><button class="fixed bottom-6 right-6 sm:top-6 sm:bottom-auto p-3 rounded-full bg-white dark:bg-neutral-900 shadow-lg border border-slate-200 dark:border-slate-700 transition-all active:scale-90 hover:scale-110 z-50 group" onclick="document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');" title="Toggle Dark Mode">
+<svg class="hidden dark:block w-6 h-6 text-yellow-400 font-bold" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<svg class="dark:hidden w-6 h-6 text-slate-700 font-bold" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button><main class="w-[calc(100%-2rem)] md:w-full max-w-7xl mx-auto bg-white dark:bg-neutral-900 shadow-lg rounded-lg md:rounded-xl overflow-hidden p-4 sm:p-6 md:p-8 my-4 md:my-8 border border-slate-200 dark:border-neutral-800">
+
+                <div class="flex items-center gap-4 mb-6">
+          <a
+            href="../index.html"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-800 text-slate-700 dark:text-slate-300 text-sm font-semibold rounded-xl border border-slate-200 dark:border-neutral-700 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-neutral-700 transition-all active:scale-95"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              ></path>
+            </svg>
+            Back
+          </a>
+        </div>
+<h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 md:mb-10 flex items-center gap-3"><span class="h-8 w-1.5 bg-neutral-500 rounded-full"></span> Introduction to DevSecOps</h1><div class="mb-8 md:mb-12 flex gap-3">
+<input class="flex-1 px-4 py-3 rounded-lg bg-slate-100 dark:bg-neutral-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-neutral-500 transition" id="searchInput" onkeyup="handleSearch(event)" placeholder="Search topics..." type="text"/>
+<button class="px-6 py-3 bg-neutral-600 hover:bg-neutral-700 text-white font-semibold rounded-lg transition-all active:scale-95 hover:shadow-lg" onclick="performSearch()" title="Search">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div><div class="mb-6 text-slate-700 dark:text-slate-300 hidden" id="searchResults"></div><section class="mb-10 md:mb-14" data-topic="topic-1" id="topic-1"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="introduction"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Introduction</h2></section><section class="mb-10 md:mb-14" data-topic="topic-2" id="topic-2"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="what-is-devsecops"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> What is DevSecOps?</h2><div class="explanation-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        Think of DevSecOps as a way of building software where
+        <strong class="font-bold text-slate-900 dark:text-white">security is woven into every step</strong> of the process, from
+        the very beginning to the end. It's not an afterthought—security is part
+        of the plan from day one.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">The name breaks down into three parts:</p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Dev</strong> = Developers (the people who write the code)
+        </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Sec</strong> = Security (protecting the software from threats)
+        </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Ops</strong> = Operations (running and maintaining the
+          software)
+        </li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        Normally, these three groups work separately. DevSecOps brings them
+        together to work as a team. The goal is to build software that is not
+        only fast and reliable, but also secure and protected from attackers.
+      </p>
+</div></section><section class="mb-10 md:mb-14" data-topic="topic-3" id="topic-3"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="what-is-devops"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> What is DevOps?</h2><div class="explanation-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        DevOps is a practice where
+        <strong class="font-bold text-slate-900 dark:text-white">development teams and operations teams work closely together</strong>
+        instead of separately. Traditionally, developers build the software and
+        then hand it off to operations, which can cause problems and delays.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        DevOps fixes this by making these two groups collaborate constantly.
+        This helps software get created faster and with fewer problems because
+        everyone is communicating and working together.
+      </p>
+<div class="key-point">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The DevOps Lifecycle (the stages software goes through):</strong>
+</p>
+<ol class="list-decimal space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6 text-slate-700 dark:text-slate-300">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">Planning</strong> - Deciding what to build</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">Coding</strong> - Writing the actual code</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Building</strong> - Putting the code together into something
+            that works
+          </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">Testing</strong> - Checking if it works correctly</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300"><strong class="font-bold text-slate-900 dark:text-white">Release</strong> - Getting it ready to go public</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Deploying</strong> - Putting it on servers so people can use
+            it
+          </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Operating</strong> - Running it and keeping it working
+          </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Monitoring</strong> - Watching to make sure nothing breaks
+          </li>
+</ol>
+</div>
+</div></section><section class="mb-10 md:mb-14" data-topic="topic-4" id="topic-4"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="devops-vs-devsecops-what-s-the-difference"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> DevOps vs. DevSecOps: What's the Difference?</h2><div class="explanation-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        DevOps and DevSecOps are similar, but they have different priorities.
+        Think of it this way:
+      </p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">DevOps</strong> focuses on speed and reliability—getting
+          software out quickly and keeping it running smoothly.
+        </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">DevSecOps</strong> does everything DevOps does, but
+          <strong class="font-bold text-slate-900 dark:text-white">adds a strong focus on security</strong>—making sure the
+          software is protected from hackers and threats.
+        </li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Here's a detailed comparison:</p>
+</div><table>
+<tr>
+<th>Category</th>
+<th>DevOps</th>
+<th>DevSecOps</th>
+</tr>
+<tr>
+<td class="comparison-heading">What It Focuses On</td>
+<td>
+          Getting development teams and operations teams to work together
+          smoothly. The main goal is to speed up software delivery and improve
+          the quality of the code.
+        </td>
+<td>
+          Taking everything DevOps does, but making sure security is part of
+          every single step. Security isn't an add-on at the end—it's built in
+          from the start.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">Main Goals</td>
+<td>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Make software development faster</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Improve the quality of the code</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Deploy software reliably and quickly</li>
+</ul>
+</td>
+<td>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Do all the DevOps goals</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Find security problems early (before hackers can find them)</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Fix security issues quickly</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+              Make security everyone's job, not just the security team's job
+            </li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="comparison-heading">
+          Key Practices (What They Actually Do)
+        </td>
+<td>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Continuous Integration (CI)</strong> - Constantly merging
+              code changes and testing them
+            </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Continuous Delivery (CD)</strong> - Automatically
+              preparing code to be released
+            </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Automation</strong> - Using tools to do repetitive tasks
+              automatically
+            </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Infrastructure as Code</strong> - Writing code to set up
+              servers and systems
+            </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Monitoring</strong> - Watching the software to spot
+              problems
+            </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Feedback loops</strong> - Learning from what happens and
+              improving
+            </li>
+</ul>
+</td>
+<td>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">All the DevOps practices, PLUS:</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Security testing</strong> - Running special tests to find
+              security holes
+            </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Vulnerability scanning</strong> - Automatically checking
+              for known security problems
+            </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Code reviews</strong> - Having people carefully examine
+              code for security issues
+            </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Threat modeling</strong> - Thinking through how hackers
+              might attack the software
+            </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Security-first mindset</strong> - Making security a
+              priority in everything
+            </li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="comparison-heading">How Security Is Handled</td>
+<td>
+          Security is considered (thought about), but it may be handled
+          separately from the main development process. Security checks might
+          happen at the end, not throughout the whole process.
+        </td>
+<td>
+          Security is tightly built into every stage. Automated tools constantly
+          scan for security problems, and security testing happens alongside
+          regular testing—so problems are caught early.
+        </td>
+</tr>
+</table></section><section class="mb-10 md:mb-14" data-topic="topic-5" id="topic-5"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="the-big-picture"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> The Big Picture</h2><div class="explanation-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        Imagine building a house. In <strong class="font-bold text-slate-900 dark:text-white">traditional development</strong>,
+        you build the entire house first, and then at the very end, a security
+        inspector checks it for problems. If major security issues are found,
+        you have to tear down walls and redo everything—which is expensive and
+        time-consuming.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        In <strong class="font-bold text-slate-900 dark:text-white">DevSecOps</strong>, the security inspector is there from the
+        beginning, checking every step as you build. Problems are caught and
+        fixed immediately, so nothing gets too expensive.
+      </p>
+<div class="warning-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Traditional Problem:</strong> Security checks happen too late,
+          after the software is mostly built. This means security issues can be
+          very expensive and difficult to fix.
+        </p>
+</div>
+<div class="key-point">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">DevSecOps Solution:</strong> Security is built in from the
+          start. Issues are found and fixed early, when they're quick and cheap
+          to fix.
+        </p>
+</div>
+</div></section><section class="mb-10 md:mb-14" data-topic="topic-6" id="topic-6"><h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 md:mb-8 flex items-center gap-3" id="detailed-comparison-table"><span class="h-7 w-1 bg-neutral-500 rounded-full"></span> Detailed Comparison Table</h2><table>
+<tr>
+<th>Category</th>
+<th>Traditional Development</th>
+<th>DevSecOps</th>
+</tr>
+<tr>
+<td class="comparison-heading">How Security is Handled</td>
+<td>
+          Security is thought about at the very end, after most of the work is
+          done. It's like locking the door after the house is already built.
+        </td>
+<td>
+          Security is part of the plan from day one. Everyone thinks about
+          security as they work, at every step.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">How Work Gets Done</td>
+<td>
+          Work follows a straight line—development, then testing, then
+          deployment. One phase ends before the next begins.
+        </td>
+<td>
+          Work is continuous and cyclical. Development, testing, and deployment
+          happen repeatedly in short cycles. It's more like spinning plates that
+          never stop—you keep improving the software over and over.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">Who Is Responsible for Security?</td>
+<td>
+          Only one security team is responsible. Everyone else (developers,
+          operations) doesn't worry about security—it's "not their job."
+        </td>
+<td>
+          Everyone shares responsibility. Developers, security teams, and
+          operations all work together on security. Security is everyone's job.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">Security Testing</td>
+<td>
+          Security testing is done separately, all at once, near the end of the
+          project. By then, many issues may have already been built into the
+          code.
+        </td>
+<td>
+          Security testing happens automatically and continuously, as part of
+          the normal work process. Problems are found and fixed as soon as they
+          appear.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">How Often Software Gets Released</td>
+<td>
+          Long waits between releases. It might take months to release a new
+          version. This means security problems take longer to fix and get to
+          users.
+        </td>
+<td>
+          Frequent releases—sometimes multiple times a day. If a security
+          problem is found, a fix can be released quickly.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">Tools and Automation</td>
+<td>
+          Most work is done manually by people. This is slow and people can make
+          mistakes. Automation is limited.
+        </td>
+<td>
+          Heavy use of automated tools and scripts. Computers do repetitive
+          tasks, freeing people to focus on harder problems. This is faster and
+          more reliable.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">How Teams Talk to Each Other</td>
+<td>
+          Teams don't talk much. Developers, security, and operations work
+          separately. Information doesn't flow well between them.
+        </td>
+<td>
+          Teams talk constantly. They work together, share information, and
+          solve problems as a group.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">The Culture</td>
+<td>
+          Security is seen as a burden that slows things down. Developers see
+          security checks as obstacles. Teams work in silos (separate sections)
+          and don't help each other.
+        </td>
+<td>
+          Security is seen as important for everyone. The attitude is "we all
+          protect our software together." Teams work closely and help each
+          other.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">Learning from Mistakes</td>
+<td>
+          When security problems happen, there's no real system to learn from
+          them and prevent future problems. The same mistakes might happen
+          again.
+        </td>
+<td>
+          When security issues occur, the team reviews what happened, learns
+          from it, and improves their processes. Mistakes become learning
+          opportunities.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">Cost of Fixing Problems</td>
+<td>
+          Expensive and time-consuming. Finding a security issue after the
+          software is deployed can require redoing lots of work.
+        </td>
+<td>
+          Cheap and quick. Finding problems early means less work to fix them.
+          Much more cost-effective.
+        </td>
+</tr>
+<tr>
+<td class="comparison-heading">Ability to Change and Adapt</td>
+<td>
+          Rigid. If security threats change or new requirements come up, it's
+          hard to adapt. The process is set in stone.
+        </td>
+<td>
+          Flexible. The process can quickly adjust to new security threats and
+          changing requirements. It's designed to change and improve.
+        </td>
+</tr>
+</table><div class="explanation-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        The principles of DevSecOps are like the foundation and rules of the
+        approach. They guide how organizations should think about and practice
+        DevSecOps. These principles help teams build a strong security culture
+        and work together effectively. Here are the main ones:
+      </p>
+</div><div class="principle-section">
+<div class="principle-title">1. Automation</div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it means:</strong> Using tools and scripts to automatically
+        do repetitive tasks, instead of having people do them manually.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Why it matters:</strong> In DevSecOps, automation is crucial
+        because security checks need to happen constantly—and computers can do
+        this faster and more reliably than people. Automated tools:
+      </p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Test code automatically to find bugs and security problems</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Scan code for known security vulnerabilities</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Automatically deploy software to servers</li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The benefit:</strong> Security checks happen consistently, every
+        time, without anyone having to remember to do them.
+      </p>
+</div><div class="principle-section">
+<div class="principle-title">2. Collaboration</div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it means:</strong> Different teams (developers, security
+        experts, and operations) working together closely instead of separately.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Why it matters:</strong> Security is too important for just one
+        team to handle. When teams collaborate:
+      </p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+          Developers learn about security best practices while they're writing
+          code
+        </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+          Security teams understand what developers are building and can help
+          make it secure
+        </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+          Operations teams help make the software secure when it's running
+        </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+          Everyone feels responsible for security—not just "the security team"
+        </li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The benefit:</strong> Better security because smart people from
+        different areas are working together and sharing their knowledge.
+      </p>
+</div><div class="principle-section">
+<div class="principle-title">3. Shift-Left Security</div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it means:</strong> Moving security to the early stages of
+        development (to the "left" on a timeline). Instead of checking security
+        at the end, you check it at the beginning and throughout.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Why it matters:</strong> Security problems are much cheaper and
+        faster to fix early. Once developers learn secure coding practices from
+        the start, they:
+      </p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Write more secure code in the first place</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Understand why security matters</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Take ownership of security themselves</li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The benefit:</strong> Fewer security problems are built into the
+        software in the first place, saving time and money.
+      </p>
+</div><div class="principle-section">
+<div class="principle-title">4. Continuous Testing</div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it means:</strong> Running security tests constantly
+        throughout the development process, not just once at the end.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Why it matters:</strong> As developers write new code and make
+        changes, security tests run automatically. If a security problem is
+        introduced, it's caught immediately—sometimes within minutes of being
+        added.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Types of security testing used:</strong></p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">SAST (Static Application Security Testing)</strong> - The tool
+          reads your code without running it, looking for security problems in
+          how the code is written
+        </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">DAST (Dynamic Application Security Testing)</strong> - The
+          tool actually runs the software and tries to attack it, like a hacker
+          would
+        </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">IAST (Interactive Application Security Testing)</strong> - A
+          combination that tests the code from inside while it's running
+        </li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The benefit:</strong> Security problems are found and fixed
+        quickly, before they can cause real damage.
+      </p>
+</div><div class="principle-section">
+<div class="principle-title">
+        5. Continuous Integration and Continuous Deployment (CI/CD)
+      </div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it means:</strong> This is about constantly merging code
+        changes, testing them automatically, and deploying them to servers.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Breaking it down:</strong></p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Continuous Integration (CI):</strong> Developers frequently
+          add their code changes to a shared place (a code repository).
+          Automated tests run immediately to make sure nothing is broken.
+        </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">Continuous Deployment (CD):</strong> Once code passes all
+          tests, it's automatically sent to the live servers where real users
+          can use it.
+        </li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">In DevSecOps:</strong> Security checks and tests are built into
+        the CI/CD pipeline. This means security testing happens automatically
+        every time new code is added. Speed and security go hand-in-hand—you
+        don't sacrifice security to go fast.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The benefit:</strong> Software gets released quickly, but
+        security isn't skipped. It's all automated and happens together.
+      </p>
+</div><div class="principle-section">
+<div class="principle-title">6. Monitoring and Feedback</div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it means:</strong> Constantly watching the software for
+        security problems and using what you learn to improve.
+      </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Why it matters:</strong> Security monitoring is like having
+        guards watching your building 24/7. Special tools watch the software as
+        it runs:
+      </p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+          They detect security attacks or suspicious activity in real-time
+        </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">They can respond to threats immediately</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">They collect information about what went wrong</li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The feedback part:</strong> When security incidents happen, the
+        team reviews what happened and learns from it. This information is used
+        to:
+      </p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Prevent the same problem from happening again</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Improve security practices and tools</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Update the development process</li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The benefit:</strong> The software gets safer over time because
+        every incident teaches the team something new.
+      </p>
+</div><div class="practice-section p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+        1. Automated Testing and Vulnerability Scanning
+      </div>
+<div class="explanation-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          One of the most important parts of DevSecOps is
+          <strong class="font-bold text-slate-900 dark:text-white">automated testing</strong>—using tools and scripts to
+          automatically check code for security problems. This happens
+          continuously as developers add new code, without anyone having to
+          manually run tests.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Think of it like a quality inspector who checks every piece as it
+          comes off the assembly line, every single time, without getting tired.
+        </p>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">What is Automated Testing?</div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Automated testing in DevSecOps means using special tools to examine
+          code and running applications to find security vulnerabilities. These
+          tests are built into the CI/CD pipeline, so they run automatically
+          every time code is added.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Three main types of automated security testing:</strong></p>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+          1. Static Application Security Testing (SAST)
+        </div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it does:</strong> SAST tools read your code without
+          actually running it. They look for security problems in how the code
+          is written, like dangerous coding practices that could let hackers in.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">What it finds:</strong></p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Insecure coding practices (bad ways of writing code)</li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+            Code injection vulnerabilities (holes where hackers could inject
+            malicious code)
+          </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">Insecure configurations (settings that aren't secure)</li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The benefit:</strong> SAST generates reports showing exactly
+          what's wrong and suggests how to fix it. Developers can see the
+          problem in their code right away.
+        </p>
+<div class="example-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">Example tool:</strong> Checkmarx - automatically checks code
+          in many programming languages and suggests solutions.
+        </div>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+          2. Dynamic Application Security Testing (DAST)
+        </div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it does:</strong> DAST tools actually run the application
+          and attack it like a hacker would. They send various inputs to the
+          application and observe how it responds to find vulnerabilities.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">What it finds:</strong></p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+            SQL injection attacks (hackers inserting malicious database
+            commands)
+          </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+            Cross-site scripting (XSS) attacks (injecting malicious scripts)
+          </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+            Other runtime vulnerabilities (problems that only show up when the
+            app is running)
+          </li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The benefit:</strong> DAST finds problems that only appear
+          when the software is actually running—things SAST might miss.
+        </p>
+<div class="example-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">Example tool:</strong> Invicti (formerly Netsparker) - scans
+          web applications for vulnerabilities by sending requests and analyzing
+          the responses.
+        </div>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+          3. Interactive Application Security Testing (IAST)
+        </div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it does:</strong> IAST combines the best of SAST and
+          DAST. It examines both the code and how the application runs, at the
+          same time.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Why it's powerful:</strong> IAST can tell you exactly where in
+          the code a vulnerability is and what could go wrong. This makes it
+          easier for developers to fix issues.
+        </p>
+<div class="example-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">Example tool:</strong> HCL AppScan - provides dynamic analysis
+          while the app is running, detecting and helping fix vulnerabilities.
+        </div>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">Vulnerability Scanning</div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it is:</strong> A focused type of automated testing that
+          hunts for known security problems in your code, libraries, and
+          infrastructure.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white">Four types of vulnerability scanning:</strong></p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white" style="color: #2c3e50">📌 Code and Application Scanning</strong>
+</p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Scanners examine your code looking for known vulnerabilities. They
+          compare your code against databases of known security problems and
+          create reports showing what's vulnerable.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white" style="color: #2c3e50">📌 Dependency Scanning</strong></p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Your application uses external libraries and frameworks. This scan
+          checks those dependencies for known vulnerabilities. Tools like OWASP
+          Dependency-Check automatically check all your libraries against the
+          National Vulnerability Database (a huge list of known security
+          problems).
+        </p>
+<div class="example-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">Why it matters:</strong> Even if your own code is perfect, a
+          vulnerable library you're using could give hackers a way in.
+        </div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white" style="color: #2c3e50">📌 Infrastructure Scanning</strong>
+</p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          This checks your servers, containers, and network settings for
+          vulnerabilities. It's not just about code—the environment where the
+          code runs matters too.
+        </p>
+<div class="example-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<strong class="font-bold text-slate-900 dark:text-white">Example tool:</strong> Nessus - checks servers, network
+          devices, and cloud services for security holes.
+        </div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6"><strong class="font-bold text-slate-900 dark:text-white" style="color: #2c3e50">📌 Continuous Monitoring</strong></p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Vulnerability scanning doesn't happen once. It's ongoing. Scanners run
+          regularly to find newly discovered vulnerabilities. Tools like Splunk,
+          IBM QRadar, and Elastic Security watch 24/7 for security problems.
+        </p>
+<div class="key-point">
+<strong class="font-bold text-slate-900 dark:text-white">Key insight:</strong> New vulnerabilities are discovered all
+          the time. That's why continuous scanning is essential—you need to know
+          about new threats as soon as they're discovered.
+        </div>
+</div>
+</div><div class="practice-section p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+        2. Security Integration in CI/CD Pipelines
+      </div>
+<div class="explanation-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Remember CI/CD from earlier?
+          <strong class="font-bold text-slate-900 dark:text-white">Continuous Integration (CI)</strong> is when code changes are
+          automatically merged and tested.
+          <strong class="font-bold text-slate-900 dark:text-white">Continuous Deployment (CD)</strong> is when code is
+          automatically released to users.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          In DevSecOps, security is built directly into these pipelines. Every
+          step is secure.
+        </p>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+          Continuous Integration (CI) + Security
+        </div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          In DevSecOps, when developers add new code, security checks run
+          immediately:
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🔒 Security Integration:</strong> SAST and DAST tests run
+          automatically on every code change. This catches vulnerabilities
+          immediately.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">⬅️ Shift-Left Security:</strong> Security isn't an
+          afterthought. It's part of CI from the beginning. Vulnerabilities get
+          caught and fixed early, when they're cheap and quick to fix.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">⚡ Immediate Feedback:</strong> If a security issue is found,
+          the developer gets feedback right away. The code build can be stopped,
+          preventing bad code from going further down the pipeline. This makes
+          sure only secure code gets deployed.
+        </p>
+<div class="key-point">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Why this matters:</strong> Finding problems during CI is
+            infinitely faster and cheaper than finding them after deployment.
+          </p>
+</div>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+          Continuous Deployment (CD) + Security
+        </div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          CD focuses on automatically deploying code, and in DevSecOps, every
+          deployment is secure:
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🚪 Security Gates:</strong> Before code is deployed to
+          production (where real users use it), it passes through security
+          checkpoints. The code is scanned for vulnerabilities and checked for
+          compliance. If it doesn't meet security standards, deployment is
+          blocked.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🔄 Immutable Infrastructure:</strong> Each deployment starts
+          fresh with a completely new, clean environment. This ensures every
+          deployment starts from a known, secure state. Nothing is modified or
+          reused from before.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🤖 Orchestration and Automation:</strong> Tools like
+          Kubernetes automatically handle deployments securely and consistently.
+          Automation reduces human error, which is a major source of security
+          problems.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">👁️ Monitoring and Rollback:</strong> The deployed application
+          is constantly monitored. If a security problem is detected, the system
+          can automatically revert to the previous secure version. This is like
+          having a backup plan that executes instantly.
+        </p>
+<div class="key-point">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">The goal:</strong> Code moves from development to production
+            securely and automatically, with multiple security checks along the
+            way.
+          </p>
+</div>
+</div>
+</div><div class="practice-section p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">3. Container Security</div>
+<div class="explanation-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Containers are like lightweight boxes that hold all the code,
+          libraries, and tools needed to run an application. They're portable
+          and efficient, but they bring unique security challenges.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Container security means protecting:</strong> The container
+          images (the blueprints), the running containers, and the platforms
+          that manage them (like Kubernetes).
+        </p>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">Securing Container Images</div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Container security starts with the images used to create containers.
+          Best practices include:
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">📦 Base Images:</strong> Use trusted, minimal base images. The
+          smaller and simpler the image, the fewer potential security problems.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🔍 Image Scanning:</strong> Scan container images for known
+          vulnerabilities in the software components inside them. Fix problems
+          before the image is used.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🔐 Immutable Images:</strong> Once a container image is
+          created, don't change it. Any changes could introduce security
+          problems or hidden backdoors. If you need changes, create a new image.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">✍️ Image Signing:</strong> Digitally sign container images.
+          This proves the image is authentic and hasn't been tampered with—like
+          a security seal on a package.
+        </p>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+          Runtime Security (Containers That Are Running)
+        </div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">Once containers are running, security focuses on:</p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🛡️ Isolation:</strong> Containers are isolated from each other
+          and from the host system. If one container is compromised, it can't
+          spread to others.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🔑 Least Privilege:</strong> Containers get only the
+          permissions they absolutely need to work. Extra permissions are
+          dangerous—they give hackers more to exploit.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">👀 Monitoring:</strong> Watch container behavior and network
+          traffic for signs of attacks or unusual activity.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🚪 Access Control:</strong> Control who can access containers
+          and what they can do. Only authorized users and processes interact
+          with containers.
+        </p>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+          Orchestration Platform Security (Kubernetes)
+        </div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          When containers are managed by platforms like Kubernetes, the platform
+          itself must be secure:
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">👥 Role-Based Access Control (RBAC):</strong> Define roles and
+          permissions. Only specific people can perform specific actions in the
+          Kubernetes cluster. This prevents unauthorized access.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🌐 Network Policies:</strong> Control what traffic is allowed
+          between containers. This limits what a compromised container can
+          reach.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">📋 Audit Logging:</strong> Track all activities in the
+          Kubernetes cluster. If something goes wrong, you have a record of who
+          did what and when.
+        </p>
+</div>
+</div><div class="practice-section p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">4. Monitoring and Incident Response</div>
+<div class="explanation-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+          Even with all the prevention measures, security incidents can still
+          happen. That's why DevSecOps includes
+          <strong class="font-bold text-slate-900 dark:text-white">constant monitoring</strong> and a
+          <strong class="font-bold text-slate-900 dark:text-white">plan to respond quickly</strong> when something goes wrong.
+        </p>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">Continuous Monitoring</div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it is:</strong> Always watching your systems,
+          applications, and infrastructure for security problems.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">📊 Log Management:</strong> Collect and analyze logs from all
+          systems. Logs are like a detailed history of everything that happened.
+          They can reveal security incidents that are happening.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🎯 SIEM (Security Information and Event Management):</strong>
+          Special tools that collect data from many sources (firewalls, systems,
+          apps) and look for patterns that indicate attacks. Think of it as a
+          command center that watches everything and spots problems.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🚨 IDS/IPS (Intrusion Detection/Prevention Systems):</strong>
+</p>
+<ul class="space-y-2 md:space-y-3 mb-6 md:mb-8 ml-4 md:ml-6">
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">IDS (Detection):</strong> Watches network traffic and alerts
+            you when suspicious activity is detected
+          </li>
+<li class="text-base sm:text-lg text-slate-700 dark:text-slate-300">
+<strong class="font-bold text-slate-900 dark:text-white">IPS (Prevention):</strong> Not only detects attacks, but
+            automatically blocks or stops them
+          </li>
+</ul>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🧠 Behavioral Analysis:</strong> Look for unusual patterns.
+          For example, if a user suddenly accesses files they never access
+          before, or if data is being copied in unusual amounts, these might
+          indicate an attack.
+        </p>
+<div class="key-point">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Goal:</strong> Detect security problems in real-time so you
+            can respond immediately.
+          </p>
+</div>
+</div>
+<div class="sub-practice p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<div class="sub-practice-title p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">Incident Response</div>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">What it is:</strong> A structured plan for what to do when a
+          security incident happens. The goal is to minimize damage, fix the
+          problem, and learn from it.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🔔 Step 1: Incident Identification</strong><br/>
+          Confirm that a security incident actually occurred. This might come
+          from a SIEM alert, anomaly detection, or a report from someone who
+          noticed something wrong.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🛑 Step 2: Incident Containment</strong><br/>
+          Isolate affected systems to prevent further damage. You might take
+          systems offline, block network traffic, or quarantine devices. The
+          goal is to stop the bleeding.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🔎 Step 3: Investigation and Analysis</strong><br/>
+          Figure out what happened: What was the attack? How did they get in?
+          What did they access? This requires analyzing logs, examining affected
+          systems, and understanding the attacker's methods.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">🔧 Step 4: Mitigation</strong><br/>
+          Implement immediate fixes to stop the attack from continuing. This
+          might mean patching a vulnerability, changing passwords, or blocking
+          an attacker's access.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">✅ Step 5: Recovery and Remediation</strong><br/>
+          Restore systems to normal operation. Fix underlying security issues so
+          the same attack can't happen again.
+        </p>
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">📚 Step 6: Lessons Learned</strong><br/>
+          After the incident, review what happened. What could we have done
+          better? Update procedures and security measures based on what you
+          learned.
+        </p>
+<div class="key-point">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<strong class="font-bold text-slate-900 dark:text-white">Why this matters:</strong> Every incident is a learning
+            opportunity. Proper incident response turns a disaster into an
+            improvement.
+          </p>
+</div>
+</div>
+</div><div class="explanation-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        DevSecOps provides real, measurable benefits to organizations. Here are
+        the main ones:
+      </p>
+</div><div class="benefit-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<span class="benefit-number">1.</span><strong class="font-bold text-slate-900 dark:text-white">Faster Delivery</strong><br/>
+        When security is built into the pipeline, bugs are found and fixed
+        before they become problems. Developers can release features faster
+        because they're not delayed by security issues discovered late. Everyone
+        moves quicker.
+      </p>
+</div><div class="benefit-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<span class="benefit-number">2.</span><strong class="font-bold text-slate-900 dark:text-white">Improved Security Posture</strong><br/>
+        Security is woven into every step—from development to deployment to
+        production. This creates a more secure software overall. Security isn't
+        an afterthought; it's a core part of everything.
+      </p>
+</div><div class="benefit-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<span class="benefit-number">3.</span><strong class="font-bold text-slate-900 dark:text-white">Reduced Costs</strong><br/>
+        Finding and fixing vulnerabilities early is exponentially cheaper than
+        fixing them after deployment. A bug found during development might cost
+        minutes to fix. The same bug found in production could cost millions and
+        destroy trust.
+      </p>
+</div><div class="benefit-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<span class="benefit-number">4.</span><strong class="font-bold text-slate-900 dark:text-white">Enhancing DevOps Value</strong><br/>
+        DevOps makes development faster, but it can miss security. DevSecOps
+        improves DevOps by making sure speed doesn't come at the cost of
+        security. You get both.
+      </p>
+</div><div class="benefit-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<span class="benefit-number">5.</span><strong class="font-bold text-slate-900 dark:text-white">Improving Security Integration and Pace</strong><br/>
+        Without DevSecOps, organizations try to "bolt on" security after
+        development. This is slow and expensive. DevSecOps eliminates this by
+        making security part of development. Security and speed work together,
+        not against each other.
+      </p>
+</div><div class="benefit-box p-4 md:p-6 mb-6 rounded-lg bg-slate-50 dark:bg-neutral-800/50 border border-slate-200 dark:border-neutral-700">
+<p class="text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+<span class="benefit-number">6.</span><strong class="font-bold text-slate-900 dark:text-white">Enabling Greater Business Success</strong><br/>
+        When customers trust that software is secure, they're willing to buy it
+        and use it. Businesses can expand to new markets and offer new services.
+        Security becomes a competitive advantage, not a burden.
+      </p>
+</div><footer class="mt-12 text-center text-slate-500 dark:text-slate-500 pb-12 px-4">
+<p class="text-sm sm:text-base text-base sm:text-lg leading-relaxed text-slate-700 dark:text-slate-300 mb-4 md:mb-6">
+        © 2026 SEC Notes • Sabanci University IT563 Practice Project
+      </p>
+</footer></section></main><script>
+
+
+      // Search functionality
+      function performSearch() {
+        const searchInput = document.getElementById("searchInput");
+        const query = searchInput.value.trim().toLowerCase();
+
+        if (!query) {
+          alert("Please enter a search term");
+          return;
+        }
+
+        searchTopics(query);
+      }
+
+      function handleSearch(event) {
+        if (event.key === "Enter") {
+          performSearch();
+        }
+      }
+
+      function searchTopics(query) {
+        const sections = document.querySelectorAll(
+          'main > section[id^="topic-"]',
+        );
+        const results = [];
+
+        sections.forEach((section) => {
+          const h2 = section.querySelector("h2");
+          if (h2) {
+            const title = h2.textContent.toLowerCase();
+            const content = section.textContent.toLowerCase();
+
+            if (title.includes(query) || content.includes(query)) {
+              results.push({
+                id: section.id,
+                title: h2.textContent.trim(),
+              });
+            }
+          }
+        });
+
+        displaySearchResults(results, query);
+      }
+
+      function displaySearchResults(results, query) {
+        const resultsDiv = document.getElementById("searchResults");
+
+        if (results.length === 0) {
+          resultsDiv.innerHTML = `<p class="text-base italic text-slate-600 dark:text-slate-400">No results found for "${query}"</p>`;
+          resultsDiv.classList.remove("hidden");
+          return;
+        }
+
+        let html = `<div class="mb-4"><p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Found ${results.length} result${results.length > 1 ? "s" : ""} for "${query}":</p><ul class="space-y-2 mt-3">`;
+
+        results.forEach((result) => {
+          html += `<li><button onclick="showTopic('${result.id}')" class="text-neutral-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline text-left text-base transition">→ ${result.title}</button></li>`;
+        });
+
+        html += "</ul></div>";
+        resultsDiv.innerHTML = html;
+        resultsDiv.classList.remove("hidden");
+      }
+
+
+      // Scroll to topic based on search selection
+      function showTopic(topicId) {
+        const selectedSection = document.getElementById(topicId);
+        if (selectedSection) {
+          selectedSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    </script></body></html>
