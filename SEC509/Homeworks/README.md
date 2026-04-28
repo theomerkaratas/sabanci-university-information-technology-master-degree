@@ -16,15 +16,15 @@ The coursework is structured into several laboratory sessions, each focusing on 
 - **Topic:** Cyber hygiene and professional security certifications.
 - **Description:** Earned several certifications from the EU-funded _CYRUS Project_, covering DevSecOps, password policies, and human behavior in cybersecurity.
 
-### Lab 3: (Coming Soon)
+### [Lab 3: Elasticsearch Honeypots](./Lab3/README.md)
 
-- **Topic:** TBD
-- **Description:** Placeholder for future laboratory work.
+- **Topic:** Honeypot deployment and custom development.
+- **Description:** Deployed multiple Elasticsearch honeypots and developed a custom PHP-based honeypot (HoneyPHP) to capture and analyze malicious traffic.
 
-### Lab 4: (Coming Soon)
+### [Lab 4: Web Application Vulnerability Analysis](./Lab4/README.md)
 
-- **Topic:** TBD
-- **Description:** Placeholder for future laboratory work.
+- **Topic:** Vulnerability identification and exploitation.
+- **Description:** Performed a security assessment of a target application, identifying vulnerabilities like IDOR, information disclosure, and broken authentication.
 
 ---
 
