@@ -57,7 +57,7 @@
 .md-footer-meta,
 .md-footer__meta {
   border-top: 1px solid var(--md-section-border-color) !important;
-  background-color: #000000 !important;
+  background-color: #ffffff !important;
 }
 
 [data-md-color-scheme="slate"] .md-footer,
