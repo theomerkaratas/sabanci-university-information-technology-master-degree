@@ -78,28 +78,44 @@
   color: #ffffff !important;
 }
 
-/* Titles and Highlights to Yellow */
+/* Titles and Highlights to White/Black */
 :root {
-  --md-primary-fg-color: #ffd700 !important; /* Gold/Yellow */
-  --md-accent-fg-color: #ffd700 !important;
+  --md-primary-fg-color: #000000 !important;
+  --md-accent-fg-color: #000000 !important;
 }
 
 [data-md-color-scheme="slate"] {
-  --md-primary-fg-color: #ffd700 !important;
-  --md-accent-fg-color: #ffd700 !important;
+  --md-primary-fg-color: #ffffff !important;
+  --md-accent-fg-color: #ffffff !important;
 }
 
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
 .md-typeset h4 {
-  color: #ffd700 !important;
+  color: #000000 !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2,
+[data-md-color-scheme="slate"] .md-typeset h3,
+[data-md-color-scheme="slate"] .md-typeset h4 {
+  color: #ffffff !important;
 }
 
 .md-typeset a {
-  color: #ffd700;
+  color: #000000;
+  text-decoration: underline;
+}
+
+[data-md-color-scheme="slate"] .md-typeset a {
+  color: #ffffff;
 }
 
 .md-nav__link--active {
-  color: #ffd700 !important;
+  color: #000000 !important;
+}
+
+[data-md-color-scheme="slate"] .md-nav__link--active {
+  color: #ffffff !important;
 }

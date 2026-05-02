@@ -61,9 +61,12 @@
   color: #000000 !important;
 }
 
+.md-footer__meta,
+.md-footer__meta *,
 .md-footer__meta a,
 .md-footer__meta .md-copyright {
   color: #000000 !important;
+  opacity: 1 !important;
 }
 
 [data-md-color-scheme="slate"] .md-footer,
@@ -73,9 +76,12 @@
   color: #ffffff !important;
 }
 
+[data-md-color-scheme="slate"] .md-footer__meta,
+[data-md-color-scheme="slate"] .md-footer__meta *,
 [data-md-color-scheme="slate"] .md-footer__meta a,
 [data-md-color-scheme="slate"] .md-footer__meta .md-copyright {
   color: #ffffff !important;
+  opacity: 1 !important;
 }
 
 /* Titles and Highlights to White/Black */
