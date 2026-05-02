@@ -1,26 +1,15 @@
 site_name: Sabanci University Information Technology Master Degree
+site_url: https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/
+site_description: Sabancı University Master of Science in Information Technology Coursework and Projects
 repo_name: theomerkaratas/sabanci-university-information-technology-master-degree
 repo_url: https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree
 theme:
   name: material
   palette:
-    # Light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: blue
-      accent: blue
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-
-    # Dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: blue
-      accent: blue
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
+    # Sade ve sadece Dark Mode
+    scheme: slate
+    primary: black
+    accent: black
   features:
     - navigation.tabs
     - navigation.sections
