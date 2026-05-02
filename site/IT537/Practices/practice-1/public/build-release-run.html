@@ -1,0 +1,25 @@
+<h1>Build, Release, Run</h1>
+
+<p>
+  The transformation of a codebase into a running deployment happens in three
+  strictly separated stages.
+</p>
+
+<ul>
+  <li>
+    <strong>The Build Stage:</strong> This stage transforms the code into an
+    executable bundle known as a build. It fetches dependencies and compiles
+    binaries/assets.
+  </li>
+  <li>
+    <strong>The Release Stage:</strong> This takes the build and combines it
+    with the current deployment's configuration. The resulting release contains
+    both the executable and the settings, ready for immediate execution.
+  </li>
+  <li>
+    <strong>The Run Stage:</strong> This is where the app actually runs in the
+    execution environment. This stage should be kept as simple as possible, as
+    errors in the run stage cannot be easily fixed without creating a new
+    release.
+  </li>
+</ul>

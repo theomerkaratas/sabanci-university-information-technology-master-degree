@@ -1,0 +1,10 @@
+site_name: Sabanci University Information Technology Master Degree
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - toc.integrate

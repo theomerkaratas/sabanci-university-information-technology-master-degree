@@ -1,0 +1,61 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    environment:
+      MYSQL_ROOT_PASSWORD: güçlü_bir_parola
+      MYSQL_DATABASE: people
+      MYSQL_USER: dbeaver
+      MYSQL_PASSWORD: StrongPass!123
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_verileri:/var/lib/mysql
+      - ./data:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 70s
+      retries: 20
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      PMA_HOST: mysql
+      #PMA_USER: root
+      #PMA_PASSWORD: güçlü_bir_parola
+      #PMA_DATABASE: person 
+    ports:
+      - "8080:82"
+
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:latest
+    container_name: cloudbeaver
+    depends_on:
+      - mysql
+    ports:
+      - "8978:8978"
+    environment:
+      CB_SERVER_BIND_HOST: "0.0.0.0"
+    restart: unless-stopped
+
+  apache-php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apache-php
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - ./www:/var/www/html
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_verileri:

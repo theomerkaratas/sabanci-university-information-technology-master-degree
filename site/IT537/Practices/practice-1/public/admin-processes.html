@@ -1,0 +1,25 @@
+<h1>Admin Processes</h1>
+
+<p>
+  Run administrative or management tasks as one-off processes in the same
+  environment as the regular app.
+</p>
+
+<ul>
+  <li>
+    <strong>Environment Parity:</strong> One-off admin tasks (like database
+    migrations or running a console to inspect data) should run against the same
+    codebase and configuration as the long-running processes.
+  </li>
+  <li>
+    <strong>Tooling Integration:</strong> Use the same dependency isolation
+    techniques (Factor II) for admin scripts as you do for the main app. This
+    ensures that a migration script doesn't fail because of a missing library
+    that the app itself uses.
+  </li>
+  <li>
+    <strong>Process Bundling:</strong> Twelve-factor languages usually provide a
+    built-in REPL or a way to run scripts easily. These should be part of the
+    deployment bundle so they can be executed seamlessly in any environment.
+  </li>
+</ul>

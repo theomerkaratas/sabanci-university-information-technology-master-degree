@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  practice-1:
+    build: .
+    ports:
+      - "8001:80"
+    volumes:
+      - ./practice-1:/usr/share/nginx/html
+    container_name: practice-1
+
+  practice-2:
+    build: .
+    ports:
+      - "8002:80"
+    volumes:
+      - ./practice-2:/usr/share/nginx/html
+    container_name: practice-2
+
+  practice-3:
+    build: .
+    ports:
+      - "8003:80"
+    volumes:
+      - ./practice-3:/usr/share/nginx/html
+    container_name: practice-3
+
+  practice-4:
+    build: .
+    ports:
+      - "8004:80"
+    volumes:
+      - ./practice-4:/usr/share/nginx/html
+    container_name: practice-4
+
+  practice-5:
+    build: .
+    ports:
+      - "8005:80"
+    volumes:
+      - ./practice-5:/usr/share/nginx/html
+    container_name: practice-5
+
+  practice-6:
+    build: .
+    ports:
+      - "8006:80"
+    volumes:
+      - ./practice-6:/usr/share/nginx/html
+    container_name: practice-6

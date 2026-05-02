@@ -1,0 +1,9 @@
+Order ID,Customer,Table,Total,Date,Status,Items
+1771765304705,customer,1,95₺,2026-02-22T13:01:44.705Z,completed,"Mozzarella Sticks - 95₺"
+1771791918170,customer,3,215₺,2026-02-22T20:25:18.170Z,completed,"Mozzarella Sticks - 95₺; Buffalo Wings - 120₺"
+1772123429274,customer,1,215₺,2026-02-26T16:30:29.274Z,completed,"Buffalo Wings - 120₺; Mozzarella Sticks - 95₺"
+1772123464603,customer,1,335₺,2026-02-26T16:31:04.603Z,completed,"Mozzarella Sticks - 95₺; Buffalo Wings - 120₺; Buffalo Wings - 120₺"
+1772124946531,customer,1,665₺,2026-02-26T16:55:46.531Z,completed,"Mozzarella Sticks - 95₺; Mozzarella Sticks - 95₺; Mozzarella Sticks - 95₺; Mozzarella Sticks - 95₺; Mozzarella Sticks - 95₺; Mozzarella Sticks - 95₺; Mozzarella Sticks - 95₺"
+1772124950004,customer,1,360₺,2026-02-26T16:55:50.004Z,completed,"Buffalo Wings - 120₺; Buffalo Wings - 120₺; Buffalo Wings - 120₺"
+1772124979129,customer,3,360₺,2026-02-26T16:56:19.129Z,ready,"Buffalo Wings - 120₺; Buffalo Wings - 120₺; Buffalo Wings - 120₺"
+1772649193796,customer,9,860₺,2026-03-04T18:33:13.796Z,preparing,"Mozzarella Sticks - 95₺; Mozzarella Sticks - 95₺; Mozzarella Sticks - 95₺; Mozzarella Sticks - 95₺; Buffalo Wings - 120₺; Buffalo Wings - 120₺; Buffalo Wings - 120₺; Buffalo Wings - 120₺"

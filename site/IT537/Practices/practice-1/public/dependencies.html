@@ -1,0 +1,27 @@
+<h1>Dependencies</h1>
+
+<p>
+  A twelve-factor app never relies on the implicit existence of system-wide
+  packages or tools.
+</p>
+
+<ul>
+  <li>
+    <strong>Explicit Declaration:</strong> You must use a dependency declaration
+    manifest (such as a <code>package.json</code>,
+    <code>requirements.txt</code>, or <code>Gemfile</code>) to list every
+    library the app needs to function.
+  </li>
+  <li>
+    <strong>Isolation:</strong> Use a dependency isolation tool to ensure that
+    no implicit dependencies "leak" in from the surrounding system. This
+    guarantees that the app behaves the same way regardless of the machine it is
+    running on.
+  </li>
+  <li>
+    <strong>No System Tool Reliance:</strong> If the app needs to shell out to a
+    system tool (like <code>curl</code> or <code>imagemagick</code>), that tool
+    should be treated as a dependency and bundled into the app or installed via
+    a controlled setup script.
+  </li>
+</ul>
