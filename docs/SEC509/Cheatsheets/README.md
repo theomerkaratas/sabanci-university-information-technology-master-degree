@@ -17,3 +17,20 @@ How to use
 
 Notes
 - These are personal study notes intended to help prepare for the final exam. They are not an official course document.
+
+## Scanned Cheatsheets
+
+![Page 1](1.jpg)
+![Page 2](2.jpg)
+![Page 3](3.jpg)
+![Page 4](4.jpg)
+![Page 5](5.jpg)
+![Page 6](6.jpg)
+![Page 7](7.jpg)
+![Page 8](8.jpg)
+![Page 9](9.jpg)
+![Page 10](10.jpg)
+![Page 11](11.jpg)
+![Page 12](12.jpg)
+![Page 13](13.jpg)
+![Page 14](14.jpg)
