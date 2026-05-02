@@ -1,39 +1,18 @@
 site_name: Sabanci University Information Technology Master Degree
 site_url: https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/
-site_description: https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/ University Master of Science in Information Technology Coursework and Projects
+site_description: Sabanci University Master of Science in Information Technology Coursework and Projects
 repo_name: theomerkaratas/sabanci-university-information-technology-master-degree
 repo_url: https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree
 
 plugins:
-  - i18n:
-      default_language: en
-      languages:
-        en: 
-          name: English
-          link: /
-          build: true
-        tr:
-          name: Türkçe
-          link: /tr/
-          build: true
   - search:
       lang:
         - en
-        - tr
 
 copyright: Copyright &copy; 2026 Ömer Karataş
 
 extra_css:
   - stylesheets/extra.css
-
-extra:
-  alternate:
-    - name: English
-      link: /
-      lang: en
-    - name: Türkçe
-      link: /tr/
-      lang: tr
 
 theme:
   name: material
