@@ -4,19 +4,36 @@ site_description: Sabancı University Master of Science in Information Technolog
 repo_name: theomerkaratas/sabanci-university-information-technology-master-degree
 repo_url: https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree
 
-google_analytics:
-  - !!python/object/apply:os.getenv ["WORKFLOW_GOOGLE_ANALYTICS_KEY", "none"]
-  - auto
-
 plugins:
+  - i18n:
+      default_language: en
+      languages:
+        en: 
+          name: English
+          link: /
+          build: true
+        tr:
+          name: Türkçe
+          link: /tr/
+          build: true
   - search:
       lang:
         - en
+        - tr
 
 copyright: Copyright &copy; 2026 Ömer Karataş
 
 extra_css:
   - stylesheets/extra.css
+
+extra:
+  alternate:
+    - name: English
+      link: /
+      lang: en
+    - name: Türkçe
+      link: /tr/
+      lang: tr
 
 theme:
   name: material
