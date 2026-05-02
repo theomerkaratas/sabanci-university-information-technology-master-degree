@@ -36,8 +36,15 @@
 [data-md-color-scheme="default"] .md-search__output,
 [data-md-color-scheme="default"] .md-sidebar,
 [data-md-color-scheme="default"] .md-main__inner,
-[data-md-color-scheme="default"] .md-footer {
+[data-md-color-scheme="default"] .md-footer,
+[data-md-color-scheme="default"] .md-footer-meta,
+[data-md-color-scheme="default"] .md-footer__meta,
+[data-md-color-scheme="default"] .md-footer__meta *,
+[data-md-color-scheme="default"] .md-footer__meta a,
+[data-md-color-scheme="default"] .md-copyright {
   background-color: #ffffff !important;
+  color: #000000 !important;
+  opacity: 1 !important;
 }
 
 /* Horizontal Section Borders - Ensure full width */
