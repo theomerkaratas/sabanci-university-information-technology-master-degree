@@ -53,16 +53,15 @@
 }
 
 /* Footer and Copyright Section */
-.md-footer {
-  border-top: 1px solid var(--md-section-border-color) !important;
-  background-color: transparent !important;
-}
-
+.md-footer,
+.md-footer-meta,
 .md-footer__meta {
   border-top: 1px solid var(--md-section-border-color) !important;
+  background-color: #000000 !important;
 }
 
 [data-md-color-scheme="slate"] .md-footer,
+[data-md-color-scheme="slate"] .md-footer-meta,
 [data-md-color-scheme="slate"] .md-footer__meta {
   background-color: #000000 !important;
 }
