@@ -38,10 +38,6 @@
   border-right: 1px solid var(--md-section-border-color) !important;
 }
 
-/* Adjust grid to keep content centered if needed, but border stays full width */
-.md-grid {
-  max-width: 1220px; /* Or whatever your preferred content width is */
-}
 
 /* Sidebar inner adjustment */
 .md-sidebar--primary .md-sidebar__inner {
