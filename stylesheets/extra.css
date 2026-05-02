@@ -23,17 +23,25 @@
   --md-typeset-table-color: #050505;
 }
 
-/* Section Borders */
+/* Section Borders - Global */
 .md-header {
   border-bottom: 1px solid var(--md-section-border-color) !important;
+  box-shadow: none !important;
 }
 
 .md-tabs {
   border-bottom: 1px solid var(--md-section-border-color) !important;
 }
 
+/* Separate left sidebar from main content */
 .md-sidebar--primary {
-  border-right: 1px solid var(--md-section-border-color);
+  border-right: 1px solid var(--md-section-border-color) !important;
+}
+
+/* Adjust sidebar width/padding to ensure border visibility */
+.md-sidebar--primary .md-sidebar__inner {
+  margin-right: 0;
+  padding-right: 0.5rem;
 }
 
 /* Ensure header, tabs, and search are also pure black for dark mode */
