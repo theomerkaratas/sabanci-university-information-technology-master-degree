@@ -51,3 +51,16 @@
 [data-md-color-scheme="slate"] .md-main__inner {
   background-color: #000000;
 }
+
+/* Footer and Copyright Section */
+.md-footer {
+  border-top: 1px solid var(--md-section-border-color) !important;
+}
+
+.md-footer__meta {
+  border-top: 1px solid var(--md-section-border-color) !important;
+}
+
+[data-md-color-scheme="slate"] .md-footer__meta {
+  background-color: #000000 !important;
+}
