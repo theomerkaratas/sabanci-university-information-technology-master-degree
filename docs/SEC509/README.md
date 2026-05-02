@@ -31,12 +31,12 @@ Detailed study materials and summaries covering the core theoretical foundations
 
 | Chapter | Title | Key Topics |
 | :--- | :--- | :--- |
-| [**Chapter 1**](./READMEs/chapter1.md) | **Software Security Foundations** | Software ubiquity, McCumber Cube (CIA Triad), Non-Functional Requirements (NFRs), and root causes of vulnerabilities. |
-| [**Chapter 2**](./HTMLs/chapter2.html) | **Security Posture & DevSecOps** | Cyber hygiene, integration of security in SDLC, PAM/Password policies, and human behavior in security. |
-| ↳ [2.1](./HTMLs/chapter2-1.html) | Personal & Corporate Hygiene | Habits for maintaining security in professional digital environments. |
-| ↳ [2.2](./HTMLs/chapter2-2.html) | Introduction to DevSecOps | Shifting security left, automation, and shared responsibility in DevOps. |
-| ↳ [2.3](./HTMLs/chapter2-3.html) | Password Complexity Policy | Practical guide to PAM and enforcing strict authentication rules. |
-| ↳ [2.4](./HTMLs/chapter2-4.html) | Cybersecurity Culture | Psychological aspects of security and building a security-first mindset. |
+| **Chapter 1** | **Software Security Foundations** | Software ubiquity, McCumber Cube (CIA Triad), Non-Functional Requirements (NFRs), and root causes of vulnerabilities. |
+| **Chapter 2** | **Security Posture & DevSecOps** | Cyber hygiene, integration of security in SDLC, PAM/Password policies, and human behavior in security. |
+| ↳ 2.1 | Personal & Corporate Hygiene | Habits for maintaining security in professional digital environments. |
+| ↳ 2.2 | Introduction to DevSecOps | Shifting security left, automation, and shared responsibility in DevOps. |
+| ↳ 2.3 | Password Complexity Policy | Practical guide to PAM and enforcing strict authentication rules. |
+| ↳ 2.4 | Cybersecurity Culture | Psychological aspects of security and building a security-first mindset. |
 
 ---
 
@@ -48,7 +48,7 @@ Hands-on assignments focusing on practical security analysis, threat modeling, a
 - **Focus:** System analysis and threat identification.
 - **Project:** Performed a comprehensive threat model for the *OrcunCorp Document Sharing Tool* using the **STRIDE** methodology and Microsoft Threat Modeling Tool.
 
-### [Lab 2: Cybersecurity Awareness](./Homeworks/Lab2/)
+### [Lab 2: Cybersecurity Awareness](./Homeworks/Lab2/README.md)
 - **Focus:** Cyber hygiene and professional security certifications.
 - **Achievement:** Earned several certifications from the EU-funded **CYRUS Project**, covering DevSecOps, password policies, and human behavior in cybersecurity.
 
@@ -66,7 +66,7 @@ Hands-on assignments focusing on practical security analysis, threat modeling, a
 
 Detailed lecture notes and summaries for specific chapters. Note that only selected topics are documented here in accordance with course rules and academic integrity.
 
-### [View Documents](./Documents/)
+### View Documents
 - **Chapter 1**: Security Foundations & Principles.
 - **Chapter 2**: Personal & Corporate Cyber Hygiene, DevSecOps, PAM/Password Policies, and Security Culture.
 

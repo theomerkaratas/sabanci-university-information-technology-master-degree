@@ -28,4 +28,4 @@ The coursework is structured into several laboratory sessions, each focusing on 
 
 ---
 
-[⬅ Back to Course Index](../index.html)
+[⬅ Back to Course Index](../README.md)

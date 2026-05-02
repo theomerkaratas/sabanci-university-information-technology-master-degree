@@ -9,5 +9,5 @@ This directory contains materials, lab exercises, and notes for the **IT 511** c
 - [**Notes**](./Notes/README.md)  
   Contains course notes, lecture slides, and Q&A resources.
 
-- [**Lab Exercises**](./Lab/README.md)  
+- **Lab Exercises**  
   Directory for practical lab exercises and source code.

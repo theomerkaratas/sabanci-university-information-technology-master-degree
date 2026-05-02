@@ -4,7 +4,7 @@ This practice provides a comprehensive, interactive look at Flexbox layout prope
 
 ## Visual Learning Hub
 
-The project contains an interactive [Visual Guide (index.html)](./index.html) that allows you to swap between different Flexbox configurations:
+The project contains an interactive Visual Guide that allows you to swap between different Flexbox configurations:
 
 - **Flex Wrap:** Single-line vs multi-line content.
 - **Alignment:** Detailed examples for `justify-content`, `align-items`, and `align-content`.

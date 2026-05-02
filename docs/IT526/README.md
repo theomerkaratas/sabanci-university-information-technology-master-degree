@@ -12,7 +12,7 @@ The course covers:
 
 ## 📁 Repository Structure
 
-### [Cheatsheet](./Cheatsheet/README.md)
+### Cheatsheet
 Quick reference guides and visual summaries for various Java topics and design patterns. This section is designed for fast lookup of syntax and architectural diagrams.
 
 ### [Lecture Notes](./LectureNotes/README.md)
