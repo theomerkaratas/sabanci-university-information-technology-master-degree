@@ -1,5 +1,20 @@
 :root {
   --md-section-border-color: #000000;
+  
+  /* Main background */
+  --md-default-bg-color: #ffffff;
+  --md-default-bg-color--light: #ffffff;
+}
+
+/* Ensure pure white background for light mode components */
+.md-header,
+.md-tabs,
+.md-search__inner,
+.md-search__output,
+.md-footer,
+.md-sidebar,
+.md-main__inner {
+  background-color: #ffffff !important;
 }
 
 [data-md-color-scheme="slate"] {
