@@ -1,12 +1,14 @@
 site_name: Sabanci University Information Technology Master Degree
+repo_name: theomerkaratas/sabanci-university-information-technology-master-degree
+repo_url: https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree
 theme:
   name: material
   palette:
     # Light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: indigo
+      primary: blue
+      accent: blue
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
@@ -14,8 +16,8 @@ theme:
     # Dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: blue
+      accent: blue
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -25,5 +27,4 @@ theme:
     - navigation.top
     - search.suggest
     - search.highlight
-    - toc.integrate
     - content.code.copy
