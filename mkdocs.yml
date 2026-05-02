@@ -46,3 +46,14 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
+
+nav:
+  - Introduction: index.md
+  - IT501: IT501/README.md
+  - IT511: IT511/README.md
+  - IT524: IT524/README.md
+  - IT526: IT526/README.md
+  - IT537: IT537/README.md
+  - IT553: IT553/README.md
+  - IT563: IT563/README.md
+  - SEC509: SEC509/README.md
