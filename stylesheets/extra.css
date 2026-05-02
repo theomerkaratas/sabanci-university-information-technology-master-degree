@@ -1,4 +1,10 @@
+:root {
+  --md-section-border-color: #000000;
+}
+
 [data-md-color-scheme="slate"] {
+  --md-section-border-color: #ffffff;
+
   /* Main background */
   --md-default-bg-color: #000000;
   --md-default-bg-color--light: #000000;
@@ -17,7 +23,20 @@
   --md-typeset-table-color: #050505;
 }
 
-/* Ensure header, tabs, and search are also pure black */
+/* Section Borders */
+.md-header {
+  border-bottom: 1px solid var(--md-section-border-color) !important;
+}
+
+.md-tabs {
+  border-bottom: 1px solid var(--md-section-border-color) !important;
+}
+
+.md-sidebar--primary {
+  border-right: 1px solid var(--md-section-border-color);
+}
+
+/* Ensure header, tabs, and search are also pure black for dark mode */
 [data-md-color-scheme="slate"] .md-header,
 [data-md-color-scheme="slate"] .md-tabs,
 [data-md-color-scheme="slate"] .md-search__inner,
