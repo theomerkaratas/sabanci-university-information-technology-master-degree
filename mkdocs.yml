@@ -92,12 +92,12 @@ nav:
   - SEC509:
       - Main: SEC509/README.md
       - Chapters:
-          - Chapter 1: SEC509/Documents/chapter1.md
-          - Chapter 2: SEC509/Documents/chapter2.md
-          - Chapter 2.1: SEC509/Documents/chapter2-1.md
-          - Chapter 2.2: SEC509/Documents/chapter2-2.md
-          - Chapter 2.3: SEC509/Documents/chapter2-3.md
-          - Chapter 2.4: SEC509/Documents/chapter2-4.md
+          - Software Ubiquity and Modern Dependency: SEC509/Documents/chapter1.md
+          - Security Posture & DevSecOps: SEC509/Documents/chapter2.md
+          - Personal and Corporate Cyber Hygiene: SEC509/Documents/chapter2-1.md
+          - Introduction to DevSecOps: SEC509/Documents/chapter2-2.md
+          - Understanding PAM and Password Complexity Policy: SEC509/Documents/chapter2-3.md
+          - Cybersecurity Culture & Human Behaviour: SEC509/Documents/chapter2-4.md
       - Homeworks:
           - Overview: SEC509/Homeworks/README.md
           - Lab 1: SEC509/Homeworks/Lab1/README.md
