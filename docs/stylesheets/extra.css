@@ -23,31 +23,36 @@
   --md-typeset-table-color: #050505;
 }
 
-/* Horizontal Section Borders - Ensure full width */
-.md-header {
+/* Horizontal Section Borders - Full width across the viewport */
+.md-header, .md-tabs, .md-footer {
   border-bottom: 1px solid var(--md-section-border-color) !important;
   box-shadow: none !important;
 }
 
-.md-tabs {
-  border-bottom: 1px solid var(--md-section-border-color) !important;
+/* Vertical Section Borders - Spanning the content area from top to bottom */
+.md-main__inner, .md-footer-meta__inner {
+  border-left: 1px solid var(--md-section-border-color);
+  border-right: 1px solid var(--md-section-border-color);
 }
 
-/* Vertical Section Border - Ensure it spans full height */
-.md-sidebar--primary {
-  border-right: 1px solid var(--md-section-border-color) !important;
+.md-main__inner {
+  min-height: 85vh; /* Ensures vertical lines extend even on short pages */
 }
 
-/* Fix for horizontal line cutting off: ensure containers don't restrict the border */
-.md-header__inner, .md-tabs__inner {
+/* Remove vertical borders on mobile/tablet */
+@media screen and (max-width: 76.249em) {
+  .md-main__inner, .md-footer-meta__inner {
+    border-left: none;
+    border-right: none;
+  }
+}
+
+/* Ensure horizontal lines go edge-to-edge */
+.md-header__inner, .md-tabs__inner, .md-footer-meta__inner {
   max-width: none !important;
-  margin: 0 !important;
 }
 
-/* Adjust grid to keep content centered if needed, but border stays full width */
-.md-grid {
-  max-width: 1220px; /* Or whatever your preferred content width is */
-}
+
 
 /* Sidebar inner adjustment */
 .md-sidebar--primary .md-sidebar__inner {
