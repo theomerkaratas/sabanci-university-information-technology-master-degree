@@ -23,7 +23,7 @@
   --md-typeset-table-color: #050505;
 }
 
-/* Section Borders - Global */
+/* Horizontal Section Borders - Ensure full width */
 .md-header {
   border-bottom: 1px solid var(--md-section-border-color) !important;
   box-shadow: none !important;
@@ -33,33 +33,37 @@
   border-bottom: 1px solid var(--md-section-border-color) !important;
 }
 
-/* Separate left sidebar from main content */
+/* Vertical Section Border - Ensure it spans full height */
 .md-sidebar--primary {
   border-right: 1px solid var(--md-section-border-color) !important;
 }
 
-/* Adjust sidebar width/padding to ensure border visibility */
+/* Fix for horizontal line cutting off: ensure containers don't restrict the border */
+.md-header__inner, .md-tabs__inner {
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+/* Adjust grid to keep content centered if needed, but border stays full width */
+.md-grid {
+  max-width: 1220px; /* Or whatever your preferred content width is */
+}
+
+/* Sidebar inner adjustment */
 .md-sidebar--primary .md-sidebar__inner {
-  margin-right: 0;
   padding-right: 0.5rem;
 }
 
-/* Ensure header, tabs, and search are also pure black for dark mode */
+/* Ensure pure black background for dark mode components */
 [data-md-color-scheme="slate"] .md-header,
 [data-md-color-scheme="slate"] .md-tabs,
 [data-md-color-scheme="slate"] .md-search__inner,
-[data-md-color-scheme="slate"] .md-search__output {
+[data-md-color-scheme="slate"] .md-search__output,
+[data-md-color-scheme="slate"] .md-footer {
   background-color: #000000 !important;
 }
 
-[data-md-color-scheme="slate"] .md-sidebar {
-  background-color: #000000;
-}
-
+[data-md-color-scheme="slate"] .md-sidebar,
 [data-md-color-scheme="slate"] .md-main__inner {
-  background-color: #000000;
-}
-
-[data-md-color-scheme="slate"] .md-footer {
   background-color: #000000;
 }
