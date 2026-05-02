@@ -1,0 +1,363 @@
+    1  apt update && apt upgrade -y && apt install -y golang python3-pip python3-venv git screen php-cli curl wget python3 nodejs npm htop vim ufw net-tools jq unzip
+    2  cd /home && git clone https://github.com/jordan-wright/elastichoney.git && cd elastichoney
+    3  ls
+    4  vi config.json 
+    5  cat config.json 
+    6  grep -n ":9200" main.go
+    7  sed -i 's/:9200/:9300/g' main.go
+    8  grep -n ":9200" main.go
+    9  grep -n ":9300" main.go
+   10  go mod init elastichoney && go mod tidy && go build
+   11  ls -l
+   12  ./elastichoney -config config.json
+   13  ls
+   14  cat elastichoney.log 
+   15  cd ..
+   16  apt install -y python3-dev libmysqlclient-dev build-essential pkg-config && pip install -r requirements.txt
+   17  cd /home && git clone https://github.com/bontchev/elasticpot.git && cd elasticpot
+   18  ls
+   19  ls etc/
+   20  cd etc/
+   21  mv honeypot.cfg.base honeypot.cfg
+   22  vi honeypot.cfg 
+   23  python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+   24  cd ..
+   25  python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+   26  clear ; clear
+   27  python3 elasticpot.py
+   28  ls
+   29  cd log
+   30  ls
+   31  cat elasticpot.txt 
+   32  cd ..
+   33  cd /home
+   34  php -version
+   35  mkdir honeyphp
+   36  cd honeyphp
+   37  cat > index.php << 'HONEYPOT_EOF'
+   38  <?php
+   39  /**
+   40   * Enhanced Elasticsearch Honeypot v2.0
+   41   * honeyphp - Port 9500
+   42   * Combined features from Elastichoney and ElasticPot
+   43   */
+   44  
+   45  $CONFIG = [
+   46      'port' => 9500,
+   47      'version' => '7.17.0',
+   48      'cluster_name' => 'elasticsearch-prod',
+   49      'node_name' => 'node-1',
+   50      'node_id' => 'dXpvUEsyUXF6TjRSODEyN2Z2MFg=',
+   51      'log_file' => '/var/log/honeyphp/honeyphp.log',
+   52      'alert_file' => '/var/log/honeyphp/honeyphp_alerts.log',
+   53      'detailed_log' => '/var/log/honeyphp/honeyphp_detailed.log'
+   54  ];
+   55  
+   56  @mkdir(dirname($CONFIG['log_file']), 0777, true);
+   57  
+   58  function log_attack($type, $details) {
+   59      global $CONFIG;
+   60      $timestamp = date('Y-m-d H:i:s');
+   61      $client_ip = get_client_ip();
+   62      $log_entry = "[{$timestamp}] [{$type}] IP: {$client_ip} | Details: " . json_encode($details) . "\n";
+   63      file_put_contents($CONFIG['log_file'], $log_entry, FILE_APPEND);
+   64  }
+   65  
+   66  function get_client_ip() {
+   67      if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+   68          $ip = $_SERVER['HTTP_CLIENT_IP'];
+   69      } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+   70          $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
+   71      } else {
+   72          $ip = $_SERVER['REMOTE_ADDR'];
+   73      }
+   74      return $ip;
+   75  }
+   76  
+   77  header('Server: Apache');
+   78  header("X-elastic-product: Elasticsearch");
+   79  
+   80  $request_method = $_SERVER['REQUEST_METHOD'];
+   81  $request_uri = $_SERVER['REQUEST_URI'];
+   82  $request_path = parse_url($request_uri, PHP_URL_PATH);
+   83  $request_query = parse_url($request_uri, PHP_URL_QUERY);
+   84  $request_body = file_get_contents('php://input');
+   85  
+   86  if ($request_method === 'GET') {
+   87      handle_get_request($request_path, $request_query, $request_uri);
+   88  } elseif ($request_method === 'POST') {
+   89      handle_post_request($request_path, $request_body);
+   90  } else {
+   91      http_response_code(405);
+   92      echo json_encode(['error' => 'Method not allowed']);
+   93  }
+   94  
+   95  function handle_get_request($path, $query, $request_uri) {
+   96      global $CONFIG;
+   97      
+   98      if ($path === '/' || $path === '' || $path === '/index.php') {
+   99          header('Content-Type: application/json');
+  100          http_response_code(200);
+  101          log_attack('INFO_REQUEST', ['type' => 'root', 'path' => $path]);
+  102          echo json_encode([
+  103              'name' => $CONFIG['node_name'],
+  104              'cluster_name' => $CONFIG['cluster_name'],
+  105              'cluster_uuid' => 'xQv_8aSuQ6OU-bAW4y5Vxg',
+  106              'version' => [
+  107                  'number' => $CONFIG['version'],
+  108                  'build_flavor' => 'default',
+  109                  'build_type' => 'docker',
+  110                  'build_hash' => '7ec3a03',
+  111                  'build_date' => '2021-04-19T20:42:05.669758Z',
+  112                  'build_snapshot' => false,
+  113                  'lucene_version' => '9.5.0',
+  114                  'minimum_wire_compatibility_version' => '7.17.0',
+  115                  'minimum_index_compatibility_version' => '7.0.0'
+  116              ],
+  117              'tagline' => 'You Know, for Search'
+  118          ]);
+  119          return;
+  120      }
+  121      
+  122      if (preg_match('#^/_cluster/health#', $path)) {
+  123          header('Content-Type: application/json');
+  124          http_response_code(200);
+  125          log_attack('CLUSTER_HEALTH', ['path' => $path]);
+  126          echo json_encode([
+  127              'cluster_name' => $CONFIG['cluster_name'],
+  128              'status' => 'green',
+  129              'timed_out' => false,
+  130              'number_of_nodes' => 3,
+  131              'number_of_data_nodes' => 3,
+  132              'active_primary_shards' => 45,
+  133              'active_shards' => 135,
+  134              'relocating_shards' => 0,
+  135              'initializing_shards' => 0,
+  136              'unassigned_shards' => 0,
+  137              'delayed_unassigned_shards' => 0,
+  138              'number_of_pending_tasks' => 0,
+  139              'number_of_in_flight_fetch' => 0,
+  140              'task_max_waiting_in_queue_millis' => 0,
+  141              'active_shards_percent_as_number' => 100.0
+  142          ]);
+  143          return;
+  144      }
+  145      
+  146      if (preg_match('#^/_nodes#', $path)) {
+  147          header('Content-Type: application/json');
+  148          http_response_code(200);
+  149          log_attack('NODES_INFO', ['path' => $path]);
+  150          echo json_encode([
+  151              '_nodes' => ['total' => 3, 'successful' => 3, 'failed' => 0],
+  152              'cluster_name' => $CONFIG['cluster_name'],
+  153              'nodes' => [
+  154                  'dXpvUEsyUXF6TjRSODEyN2Z2MFg=' => [
+  155                      'name' => 'node-1',
+  156                      'transport_address' => '172.17.0.2:9300',
+  157                      'host' => '172.17.0.2',
+  158                      'ip' => '172.17.0.2',
+  159                      'version' => $CONFIG['version'],
+  160                      'build_hash' => '7ec3a03',
+  161                      'http_address' => '172.17.0.2:9200'
+  162                  ],
+  163                  'node2_id' => [
+  164                      'name' => 'node-2',
+  165                      'transport_address' => '172.17.0.3:9300',
+  166                      'host' => '172.17.0.3',
+  167                      'ip' => '172.17.0.3',
+  168                      'version' => $CONFIG['version'],
+  169                      'build_hash' => '7ec3a03',
+  170                      'http_address' => '172.17.0.3:9200'
+  171                  ],
+  172                  'node3_id' => [
+  173                      'name' => 'node-3',
+  174                      'transport_address' => '172.17.0.4:9300',
+  175                      'host' => '172.17.0.4',
+  176                      'ip' => '172.17.0.4',
+  177                      'version' => $CONFIG['version'],
+  178                      'build_hash' => '7ec3a03',
+  179                      'http_address' => '172.17.0.4:9200'
+  180                  ]
+  181              ]
+  182          ]);
+  183          return;
+  184      }
+  185      
+  186      if (preg_match('#/_search|/user/_search#', $path)) {
+  187          header('Content-Type: application/json');
+  188          http_response_code(200);
+  189          
+  190          if (stripos($request_uri, 'script') !== false || stripos($request_uri, 'eval') !== false || stripos($request_uri, 'painless') !== false) {
+  191              log_attack('RCE_ATTEMPT', ['path' => $path, 'query' => $query, 'type' => 'script_injection']);
+  192          } else {
+  193              log_attack('SEARCH_QUERY', ['path' => $path, 'query' => $query, 'type' => 'user_search']);
+  194          }
+  195          
+  196          echo json_encode([
+  197              'took' => 45,
+  198              'timed_out' => false,
+  199              '_shards' => ['total' => 5, 'successful' => 5, 'skipped' => 0, 'failed' => 0],
+  200              'hits' => [
+  201                  'total' => ['value' => 1234, 'relation' => 'eq'],
+  202                  'max_score' => 1.0,
+  203                  'hits' => [
+  204                      [
+  205                          '_index' => 'user',
+  206                          '_type' => '_doc',
+  207                          '_id' => '1',
+  208                          '_score' => 1.0,
+  209                          '_source' => [
+  210                              'id' => 1,
+  211                              'username' => 'admin',
+  212                              'email' => 'admin@example.com',
+  213                              'surname' => 'Administrator',
+  214                              'created_at' => '2021-01-01T00:00:00Z'
+  215                          ]
+  216                      ],
+  217                      [
+  218                          '_index' => 'user',
+  219                          '_type' => '_doc',
+  220                          '_id' => '2',
+  221                          '_score' => 0.9,
+  222                          '_source' => [
+  223                              'id' => 2,
+  224                              'username' => 'user123',
+  225                              'email' => 'user@example.com',
+  226                              'surname' => 'TestUser',
+  227                              'created_at' => '2021-01-02T00:00:00Z'
+  228                          ]
+  229                      ]
+  230                  ]
+  231              ]
+  232          ]);
+  233          return;
+  234      }
+  235      
+  236      if (preg_match('#^/([a-z0-9_-]+)/?$#i', $path, $matches)) {
+  237          header('Content-Type: application/json');
+  238          http_response_code(200);
+  239          $index = $matches[1];
+  240          log_attack('INDEX_INFO', ['index' => $index]);
+  241          
+  242          echo json_encode([
+  243              $index => [
+  244                  'aliases' => [],
+  245                  'mappings' => [
+  246                      'properties' => [
+  247                          'id' => ['type' => 'integer'],
+  248                          'username' => ['type' => 'keyword'],
+  249                          'email' => ['type' => 'keyword'],
+  250                          'surname' => ['type' => 'text'],
+  251                          'created_at' => ['type' => 'date']
+  252                      ]
+  253                  ],
+  254                  'settings' => [
+  255                      'index' => [
+  256                          'creation_date' => '1609459200000',
+  257                          'number_of_shards' => '5',
+  258                          'number_of_replicas' => '1',
+  259                          'uuid' => 'a1b2c3d4e5f6g7h8'
+  260                      ]
+  261                  ]
+  262              ]
+  263          ]);
+  264          return;
+  265      }
+  266      
+  267      if (preg_match('#^/([a-z0-9_-]+)/([a-z0-9_-]+)/?$#i', $path, $matches)) {
+  268          header('Content-Type: application/json');
+  269          http_response_code(404);
+  270          $index = $matches[1];
+  271          $field = $matches[2];
+  272          log_attack('CUSTOM_QUERY', ['index' => $index, 'field' => $field, 'path' => $path]);
+  273          
+  274          echo json_encode([
+  275              'error' => [
+  276                  'root_cause' => [
+  277                      [
+  278                          'type' => 'index_not_found_exception',
+  279                          'reason' => "no such index [{$index}]",
+  280                          'resource.id' => $index,
+  281                          'resource.type' => 'index_or_alias',
+  282                          'index' => $index
+  283                      ]
+  284                  ],
+  285                  'type' => 'index_not_found_exception',
+  286                  'reason' => "no such index [{$index}]",
+  287                  'index' => $index
+  288              ],
+  289              'status' => 404
+  290          ]);
+  291          return;
+  292      }
+  293      
+  294      header('Content-Type: application/json');
+  295      http_response_code(404);
+  296      echo json_encode(['error' => 'Not Found']);
+  297  }
+  298  
+  299  function handle_post_request($path, $body) {
+  300      global $CONFIG;
+  301      
+  302      log_attack('POST_REQUEST', [
+  303          'path' => $path,
+  304          'body_length' => strlen($body),
+  305          'body_preview' => substr($body, 0, 200)
+  306      ]);
+  307      
+  308      if (stripos($body, 'script') !== false || stripos($body, 'eval') !== false || stripos($body, 'painless') !== false) {
+  309          log_attack('RCE_ATTEMPT_POST', ['path' => $path, 'body_snippet' => substr($body, 0, 500)]);
+  310      }
+  311      
+  312      if (preg_match('#/_search|/([a-z0-9_-]+)/_search#', $path)) {
+  313          header('Content-Type: application/json');
+  314          http_response_code(200);
+  315          
+  316          echo json_encode([
+  317              'took' => 78,
+  318              'timed_out' => false,
+  319              '_shards' => ['total' => 5, 'successful' => 5],
+  320              'hits' => [
+  321                  'total' => ['value' => 2456, 'relation' => 'eq'],
+  322                  'max_score' => null,
+  323                  'hits' => []
+  324              ]
+  325          ]);
+  326          return;
+  327      }
+  328      
+  329      header('Content-Type: application/json');
+  330      http_response_code(200);
+  331      echo json_encode(['acknowledged' => true]);
+  332  }
+  333  ?>
+  334  HONEYPOT_EOF
+  335  cat index.php 
+  336  mkdir -p /var/log/honeyphp
+  337  chmod 777 /var/log/honeyphp
+  338  touch /var/log/honeyphp/honeyphp.log
+  339  touch /var/log/honeyphp/honeyphp_detailed.log
+  340  chmod 666 /var/log/honeyphp/*
+  341  sudo tee /etc/systemd/system/honeyphp.service > /dev/null <<'SERVICE_EOF'
+  342  [Unit]
+  343  Description=Honeyphp - Enhanced Elasticsearch Honeypot
+  344  After=network.target
+  345  StartLimitIntervalSec=0
+  346  
+  347  [Service]
+  348  Type=simple
+  349  User=root
+  350  WorkingDirectory=/home/honeyphp
+  351  ExecStart=/usr/bin/php -S 0.0.0.0:9500 -t /home/honeyphp
+  352  Restart=always
+  353  RestartSec=10
+  354  
+  355  [Install]
+  356  WantedBy=multi-user.target
+  357  SERVICE_EOF
+  358  systemctl daemon-reload && systemctl enable honeyphp && systemctl start honeyphp
+  359  systemctl status honeyphp
+  360  cat /var/log/honeyphp/honeyphp.log
+  361  screen -S elastichoney -d -m bash -c "cd /home && ./elastichoney/elastichoney -config ./elastichoney/config.json"
+  362  screen -S elasticpot -d -m bash -c "cd /home/elasticpot && source venv/bin/activate && python3 elasticpot.py"
+  363  history > history.txt

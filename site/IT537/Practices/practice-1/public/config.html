@@ -1,0 +1,27 @@
+<h1>Config</h1>
+
+<p>
+  An app's configuration is everything that is likely to vary between
+  deployments (staging, production, developer environments).
+</p>
+
+<ul>
+  <li>
+    <strong>The Environment Rule:</strong> Store configuration in environment
+    variables. Unlike config files, environment variables are unlikely to be
+    checked into code repos accidentally and are easy to change between
+    different deploys without changing code.
+  </li>
+  <li>
+    <strong>The Open Source Test:</strong> A great litmus test for whether your
+    config is handled correctly is asking: "Could the codebase be made open
+    source at this very moment without revealing any credentials?" If not, your
+    config is improperly hardcoded.
+  </li>
+  <li>
+    <strong>Strict Separation:</strong> Config must be strictly separated from
+    code. Code does not change between deploys, but config does. Grouping config
+    into "environments" (like "development" vs "production") does not scale as
+    well as managing individual environment variables.
+  </li>
+</ul>

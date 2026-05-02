@@ -1,5 +1,0 @@
-exclude:
-  - node_modules
-  - "**/node_modules"
-  - IT537/menuproject/node_modules
-  - vendor

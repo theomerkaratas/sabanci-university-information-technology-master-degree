@@ -1,0 +1,25 @@
+<h1>Backing Services</h1>
+
+<p>
+  Treat backing services—any service the app consumes over the network as part
+  of its normal operation—as attached resources.
+</p>
+
+<ul>
+  <li>
+    <strong>Resource Attachment:</strong> Whether it is a local MySQL database
+    or a third-party API (like SendGrid or S3), the app should treat them all as
+    "attached resources." They are accessed via a URL or credentials stored in
+    the Config (Factor III).
+  </li>
+  <li>
+    <strong>Interchangeability:</strong> You should be able to swap a local SMTP
+    server for a third-party service without making any changes to the app's
+    code. Only the configuration needs to change.
+  </li>
+  <li>
+    <strong>Loose Coupling:</strong> Resources can be attached to and detached
+    from deploys at will. If a database is misbehaving, you should be able to
+    spin up a new one from a backup and point the app to it seamlessly.
+  </li>
+</ul>

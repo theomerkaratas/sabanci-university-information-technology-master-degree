@@ -1,0 +1,25 @@
+<h1>Processes</h1>
+
+<p>
+  The app is executed in the execution environment as one or more stateless
+  processes.
+</p>
+
+<ul>
+  <li>
+    <strong>Statelessness:</strong> Twelve-factor processes are stateless and
+    share-nothing. Any data that needs to persist must be stored in a stateful
+    backing service, typically a database or a distributed cache like Redis.
+  </li>
+  <li>
+    <strong>No Sticky Sessions:</strong> You should never assume that anything
+    cached in memory or on disk will be available for a future request. Since
+    there are multiple processes, a second request might be handled by a
+    completely different instance.
+  </li>
+  <li>
+    <strong>Disposable Memory:</strong> The local file system should be treated
+    as a temporary, single-transaction scratchpad. This allows the app to be
+    highly scalable and easily recovered if a process crashes.
+  </li>
+</ul>

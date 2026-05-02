@@ -1,0 +1,24 @@
+# IT 537 - Interactive Front-End Programming
+
+This directory contains projects, assignments, and coursework for **IT 537: Interactive Front-End Programming**.
+
+The course covers essential web development technologies including:
+
+- 🌐 **HTML5 & Semantic Web**
+- 🎨 **CSS3 & Modern Layouts (Flexbox, Grid)**
+- 🦄 **JavaScript (ES6+)**
+- ⚡ **Tailwind & Utility Frameworks**
+- ⚛️ **React.js & Component-Based Design**
+
+---
+
+## 📂 Contents
+
+[**🚀 Practices**](./Practices/README.md)  
+ A collection of 20+ hands-on exercises and practice projects covering various front-end concepts.
+
+[**📄 Interactive Resume**](https://theomerkaratas.github.io/resume/)  
+ A professional, mobile-responsive interactive resume featuring dark mode, typing animations, and LinkedIn integration.
+
+[**🍽️ Fine Dining Menu**](./menuproject/README.md)  
+ A modern, Dockerized menu management system with real-time table tracking, CSV-based persistence, and dedicated customer/admin portals.
