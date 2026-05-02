@@ -8,6 +8,11 @@ google_analytics:
   - !!python/object/apply:os.getenv ["WORKFLOW_GOOGLE_ANALYTICS_KEY", "none"]
   - auto
 
+plugins:
+  - search:
+      lang:
+        - en
+
 copyright: Copyright &copy; 2026 Ömer Karataş
 
 theme:
@@ -16,8 +21,8 @@ theme:
     # Light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: blue
-      accent: blue
+      primary: black
+      accent: black
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
@@ -25,11 +30,12 @@ theme:
     # Dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: blue
-      accent: blue
+      primary: black
+      accent: black
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+
   features:
     - navigation.tabs
     - navigation.sections
