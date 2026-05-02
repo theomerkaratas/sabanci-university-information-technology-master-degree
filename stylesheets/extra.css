@@ -36,12 +36,3 @@
 [data-md-color-scheme="slate"] .md-footer {
   background-color: #000000;
 }
-
-/* Hide right-hand Table of Contents */
-.md-sidebar--secondary {
-  display: none;
-}
-
-.md-content {
-  margin-right: 0;
-}
