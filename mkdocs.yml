@@ -44,9 +44,6 @@ theme:
     - search.highlight
     - content.code.copy
 
-extra_css:
-  - stylesheets/extra.css
-
 nav:
   - Introduction: index.md
   - IT501: IT501/README.md
