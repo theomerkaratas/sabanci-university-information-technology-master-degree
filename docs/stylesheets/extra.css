@@ -38,12 +38,6 @@
   border-right: 1px solid var(--md-section-border-color) !important;
 }
 
-/* Fix for horizontal line cutting off: ensure containers don't restrict the border */
-.md-header__inner, .md-tabs__inner {
-  max-width: none !important;
-  margin: 0 !important;
-}
-
 /* Adjust grid to keep content centered if needed, but border stays full width */
 .md-grid {
   max-width: 1220px; /* Or whatever your preferred content width is */
