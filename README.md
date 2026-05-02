@@ -18,15 +18,15 @@ It aims to organize and share academic work from graduate-level IT courses so th
 
 | Course Code                   | Course Name                                            |
 | ----------------------------- | ------------------------------------------------------ |
-| [IT 501](./docs/IT501/README.md)   | Introduction to Computer Programming                   |
-| [IT 511](./docs/IT511/README.md)   | Fundamentals of Data Communication and TCP/IP Networks |
-| [IT 524](./docs/IT524/README.md)   | Object-Oriented Programming with Java                  |
-| [IT 553](./docs/IT553/README.md)   | Database Design and Management                         |
-| [IT 526](./docs/IT526/README.md)   | Enterprise Java Frameworks and Design Patterns         |
+| [IT 501](./docs/IT501/)            | Introduction to Computer Programming                   |
+| [IT 511](./docs/IT511/)            | Fundamentals of Data Communication and TCP/IP Networks |
+| [IT 524](./docs/IT524/)            | Object-Oriented Programming with Java                  |
+| [IT 553](./docs/IT553/)            | Database Design and Management                         |
+| [IT 526](./docs/IT526/)            | Enterprise Java Frameworks and Design Patterns         |
 | IT 535                        | Mobile Programming                                     |
-| [IT 537](./docs/IT537/README.md)   | Interactive Front-End Programming                      |
-| [SEC 509](./docs/SEC509/README.md) | Secure Coding & Software Security                      |
-| [IT 563](./docs/IT563/README.md)   | Agile Project Management Methodology                   |
+| [IT 537](./docs/IT537/)            | Interactive Front-End Programming                      |
+| [SEC 509](./docs/SEC509/)          | Secure Coding & Software Security                      |
+| [IT 563](./docs/IT563/)            | Agile Project Management Methodology                   |
 | IT 592                        | Project Course                                         |
 
 The folders and materials in this repository are grouped based on the courses listed above.
