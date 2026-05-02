@@ -33,11 +33,6 @@
   border-bottom: 1px solid var(--md-section-border-color) !important;
 }
 
-/* Vertical Section Border - Ensure it spans full height */
-.md-sidebar--primary {
-  border-right: 1px solid var(--md-section-border-color) !important;
-}
-
 /* Sidebar inner adjustment */
 .md-sidebar--primary .md-sidebar__inner {
   padding-right: 0.5rem;
