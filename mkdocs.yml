@@ -3,13 +3,33 @@ site_url: https://theomerkaratas.github.io/sabanci-university-information-techno
 site_description: Sabancı University Master of Science in Information Technology Coursework and Projects
 repo_name: theomerkaratas/sabanci-university-information-technology-master-degree
 repo_url: https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree
+
+google_analytics:
+  - !!python/object/apply:os.getenv ["WORKFLOW_GOOGLE_ANALYTICS_KEY", "none"]
+  - auto
+
+copyright: Copyright &copy; 2026 Ömer Karataş
+
 theme:
   name: material
   palette:
-    # Sade ve sadece Dark Mode
-    scheme: slate
-    primary: black
-    accent: black
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
   features:
     - navigation.tabs
     - navigation.sections
