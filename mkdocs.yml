@@ -60,11 +60,9 @@ nav:
           - Hangman: IT501/hangman/README.md
           - Higher Lower: IT501/higher-lower/README.md
   - IT511:
-      - Main: IT511/README.md
-      - Notes:
-          - Overview: IT511/Notes/README.md
-          - Lecture Notes: IT511/Notes/LectureNotes/README.md
-          - Q&A: IT511/Notes/QuestionsAndAnswers/README.md
+      - Overview: IT511/Notes/README.md
+      - Lecture Notes: IT511/Notes/LectureNotes/README.md
+      - Q&A: IT511/Notes/QuestionsAndAnswers/README.md
   - IT524:
       - Main: IT524/README.md
       - Lecture Notes: IT524/LectureNotes/README.md
