@@ -1,0 +1,335 @@
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 3002;
+
+const CSV_FILE = path.join(__dirname, 'database', 'order.csv');
+const USER_FILE = path.join(__dirname, 'database', 'user.csv');
+const ADMIN_FILE = path.join(__dirname, 'database', 'admin.csv');
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'dist')));
+
+ensureFiles();
+
+// Veritabanı dosyalarının (order.csv, user.csv, admin.csv) varlığını kontrol eder ve yoksa varsayılan içerikle oluşturur
+function ensureFiles() {
+    if (!fs.existsSync(CSV_FILE) || fs.statSync(CSV_FILE).size === 0) {
+        fs.writeFileSync(CSV_FILE, 'Order ID,Customer,Table,Total,Date,Status,Items\n');
+    }
+
+    if (!fs.existsSync(ADMIN_FILE) || fs.statSync(ADMIN_FILE).size === 0) {
+        fs.writeFileSync(ADMIN_FILE, 'Username,Password,Type\n');
+
+        let adminFound = false;
+        if (fs.existsSync(USER_FILE)) {
+            const userContent = fs.readFileSync(USER_FILE, 'utf8');
+            const lines = userContent.split('\n');
+            const adminLine = lines.find(l => l.startsWith('admin,'));
+            if (adminLine) {
+                fs.appendFileSync(ADMIN_FILE, adminLine + '\n');
+                adminFound = true;
+                const newUserContent = lines.filter(l => !l.startsWith('admin,')).join('\n');
+                fs.writeFileSync(USER_FILE, newUserContent);
+            }
+        }
+
+        if (!adminFound) {
+            fs.appendFileSync(ADMIN_FILE, 'admin,admin123,admin\n');
+        }
+    }
+
+    if (!fs.existsSync(USER_FILE) || fs.statSync(USER_FILE).size === 0) {
+        fs.writeFileSync(USER_FILE, 'Username,Password,Type,ActiveTable\n');
+        fs.appendFileSync(USER_FILE, 'customer,customer123,customer,\n');
+    } else {
+        // Ensure demo customer account exists
+        const content = fs.readFileSync(USER_FILE, 'utf8');
+        if (!content.includes('customer,customer123,customer')) {
+            fs.appendFileSync(USER_FILE, 'customer,customer123,customer,\n');
+        }
+    }
+}
+
+// Verilen dosyada kullanıcı adı ve şifreyi kontrol eder, eşleşirse kullanıcı bilgilerini döndürür
+function checkCredentials(filePath, username, password) {
+    if (!fs.existsSync(filePath)) return null;
+    const content = fs.readFileSync(filePath, 'utf8');
+    const lines = content.split('\n').filter(line => line.trim());
+    for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',').map(s => s.trim());
+        const [u, p, t, at] = parts;
+        if (u === username && p === password) {
+            return { username: u, type: t, activeTable: at || null };
+        }
+    }
+    return null;
+}
+
+// CSV formatındaki satırı tırnak işaretlerini dikkate alarak parse eder ve parçalara ayırır
+function parseCsvLine(line) {
+    const matches = line.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g);
+    if (!matches) return null;
+    return matches.map(m => m.replace(/^"|"$/g, '').trim());
+}
+
+// ============ AUTH ENDPOINTS ============
+
+// POST /api/login - Kullanıcı giriş işlemi (admin veya customer)
+app.post('/api/login', (req, res) => {
+    ensureFiles();
+    const { username, password } = req.body;
+
+    const admin = checkCredentials(ADMIN_FILE, username, password);
+    if (admin) return res.json(admin);
+
+    const customer = checkCredentials(USER_FILE, username, password);
+    if (customer) return res.json(customer);
+
+    res.status(401).json({ message: 'Invalid username or password' });
+});
+
+// ============ TABLE MANAGEMENT ENDPOINTS ============
+
+// POST /api/tables/occupy - Müşterinin masa işgal etmesi
+app.post('/api/tables/occupy', (req, res) => {
+    const { username, table } = req.body;
+    ensureFiles();
+
+    // Check if table is occupied by someone else
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+
+    for (let i = 1; i < lines.length; i++) {
+        const [u, p, t, at] = lines[i].split(',');
+        if (u !== username && at === String(table)) {
+            return res.status(400).json({ message: `Table ${table} is already occupied.` });
+        }
+    }
+
+    // Update user's active table
+    let found = false;
+    const newLines = lines.map((line, index) => {
+        if (index === 0) return line; // Header
+        const [u, p, t, at] = line.split(',');
+        if (u === username) {
+            found = true;
+            return `${u},${p},${t},${table}`;
+        }
+        return line;
+    });
+
+    if (!found) return res.status(404).json({ message: 'User not found' });
+
+    fs.writeFileSync(USER_FILE, newLines.join('\n') + '\n');
+    res.json({ success: true, activeTable: table });
+});
+
+// POST /api/tables/release - Müşterinin masayı boşaltması
+app.post('/api/tables/release', (req, res) => {
+    const { username } = req.body;
+    ensureFiles();
+
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+
+    let found = false;
+    const newLines = lines.map((line, index) => {
+        if (index === 0) return line;
+        const [u, p, t, at] = line.split(',');
+        if (u === username) {
+            found = true;
+            return `${u},${p},${t},`; // Clear active table
+        }
+        return line;
+    });
+
+    if (!found) return res.status(404).json({ message: 'User not found' });
+
+    fs.writeFileSync(USER_FILE, newLines.join('\n') + '\n');
+    res.json({ success: true });
+});
+
+// ============ ORDER ENDPOINTS ============
+
+// GET /api/orders - Tüm siparişleri getir
+app.get('/api/orders', (req, res) => {
+    ensureFiles();
+    const content = fs.readFileSync(CSV_FILE, 'utf8');
+    const lines = content.split('\n').filter(line => line.trim());
+    const orders = [];
+
+    for (let i = 1; i < lines.length; i++) {
+        const parts = parseCsvLine(lines[i]);
+        if (parts && parts.length >= 7) {
+            const [id, customer, table, total, date, status, itemsStr] = parts;
+
+            const items = itemsStr.split(';').map(item => {
+                const itemParts = item.trim().split(' - ');
+                const nameAndLevel = itemParts[0];
+                const priceMatch = itemParts[1]?.match(/(\d+)₺/);
+                const price = priceMatch ? parseFloat(priceMatch[1]) : 0;
+
+                let name = nameAndLevel;
+                let cookingLevel = null;
+                const levelMatch = nameAndLevel.match(/(.+?)\s*\((.+?)\)/);
+                if (levelMatch) {
+                    name = levelMatch[1].trim();
+                    cookingLevel = levelMatch[2].trim();
+                }
+                return { name, price, cookingLevel };
+            });
+
+            orders.push({
+                id,
+                customer,
+                table: table !== 'N/A' ? parseInt(table) : null,
+                total: parseFloat(total.replace('₺', '')),
+                date,
+                status,
+                items
+            });
+        }
+    }
+    res.json(orders);
+});
+
+// POST /api/orders - Yeni sipariş oluştur
+app.post('/api/orders', (req, res) => {
+    ensureFiles();
+    const order = req.body;
+
+    const itemsStr = order.items.map(item =>
+        `${item.name}${item.cookingLevel ? ` (${item.cookingLevel})` : ''} - ${item.price}₺`
+    ).join('; ');
+
+    const csvLine = `${order.id},${order.customer},${order.table || 'N/A'},${order.total}₺,${order.date},${order.status},"${itemsStr}"\n`;
+
+    fs.appendFileSync(CSV_FILE, csvLine);
+    res.status(201).json({ message: 'Order saved', order });
+});
+
+// PUT /api/orders/:id - Siparişin durumunu veya masasını güncelle
+app.put('/api/orders/:id', (req, res) => {
+    const { id } = req.params;
+    const { status, table } = req.body;
+
+    ensureFiles();
+    const content = fs.readFileSync(CSV_FILE, 'utf8');
+    const lines = content.split('\n');
+    let found = false;
+
+    const newLines = lines.map(line => {
+        const parts = parseCsvLine(line);
+        if (parts && parts[0] === id) {
+            if (status) parts[5] = status;
+            if (table !== undefined) parts[2] = table !== null ? String(table) : 'N/A';
+            found = true;
+            const items = parts[6].includes('"') ? parts[6] : `"${parts[6]}"`;
+            return `${parts[0]},${parts[1]},${parts[2]},${parts[3]},${parts[4]},${parts[5]},${items}`;
+        }
+        return line;
+    });
+
+    if (found) {
+        fs.writeFileSync(CSV_FILE, newLines.join('\n'));
+        res.json({ message: 'Order updated' });
+    } else {
+        res.status(404).json({ message: 'Order not found' });
+    }
+});
+
+// ============ ADMIN ENDPOINTS ============
+
+// GET /api/customers - Tüm müşterileri ve aktif masalarını listele
+app.get('/api/customers', (req, res) => {
+    ensureFiles();
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+    const customers = [];
+    for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',').map(s => s.trim());
+        const [u, p, t, at] = parts;
+        customers.push({ username: u, type: t, activeTable: at ? parseInt(at) : null });
+    }
+    res.json(customers);
+});
+
+// PUT /api/admin/change-table - Admin: Müşterinin masasını değiştir
+app.put('/api/admin/change-table', (req, res) => {
+    const { username, newTable } = req.body;
+    ensureFiles();
+
+    const content = fs.readFileSync(USER_FILE, 'utf8');
+    const lines = content.split('\n').filter(l => l.trim());
+
+    // Check if newTable is occupied by another user
+    if (newTable) {
+        for (let i = 1; i < lines.length; i++) {
+            const [u, p, t, at] = lines[i].split(',');
+            if (u !== username && at === String(newTable)) {
+                return res.status(400).json({ message: `Table ${newTable} is already occupied by ${u}.` });
+            }
+        }
+    }
+
+    let found = false;
+    const newLines = lines.map((line, index) => {
+        if (index === 0) return line;
+        const [u, p, t, at] = line.split(',');
+        if (u === username) {
+            found = true;
+            return `${u},${p},${t},${newTable || ''}`;
+        }
+        return line;
+    });
+
+    if (!found) return res.status(404).json({ message: 'Customer not found' });
+
+    fs.writeFileSync(USER_FILE, newLines.join('\n') + '\n');
+
+    // Also update all pending/preparing orders for this customer
+    if (newTable) {
+        const orderContent = fs.readFileSync(CSV_FILE, 'utf8');
+        const orderLines = orderContent.split('\n');
+        const updatedOrderLines = orderLines.map(line => {
+            const parts = parseCsvLine(line);
+            if (parts && parts[1] === username && (parts[5] === 'pending' || parts[5] === 'preparing')) {
+                parts[2] = String(newTable);
+                const items = parts[6].includes('"') ? parts[6] : `"${parts[6]}"`;
+                return `${parts[0]},${parts[1]},${parts[2]},${parts[3]},${parts[4]},${parts[5]},${items}`;
+            }
+            return line;
+        });
+        fs.writeFileSync(CSV_FILE, updatedOrderLines.join('\n'));
+    }
+
+    res.json({ success: true, message: `Table changed to ${newTable || 'none'} for ${username}` });
+});
+
+// ============ DEFAULT ROUTE ============
+
+// GET / - API sunucusunun çalıştığını kontrol et
+app.get('/', (req, res) => {
+    res.send('API Server is running. Frontend is served separately (e.g. port 5173 or 7070).');
+});
+
+// app.get('/main', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'main.html'));
+// });
+
+// app.get('/admin', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'admin.html'));
+// });
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
