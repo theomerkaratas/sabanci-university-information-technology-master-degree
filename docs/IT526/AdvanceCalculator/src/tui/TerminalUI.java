@@ -230,9 +230,9 @@ public class TerminalUI implements CalculatorObserver {
 
     private void printMenu() {
         println();
-        println(BOLD + WHITE + "┌────────────────────────────┐" + RESET);
-        println(BOLD + WHITE + "│          MENU              │" + RESET);
-        println(BOLD + WHITE + "├────────────────────────────┤" + RESET);
+        println(BOLD + WHITE + "┌────────────────────────┐" + RESET);
+        println(BOLD + WHITE + "│          MENU          │" + RESET);
+        println(BOLD + WHITE + "├────────────────────────┤" + RESET);
         println(BOLD + WHITE + "│  " + GREEN + "1" + RESET + "  Calculate          " + BOLD + WHITE + "│" + RESET);
         println(BOLD + WHITE + "│  " + YELLOW + "2" + RESET + "  Undo               " + BOLD + WHITE + "│" + RESET);
         println(BOLD + WHITE + "│  " + CYAN + "3" + RESET + "  Redo               " + BOLD + WHITE + "│" + RESET);
@@ -240,7 +240,7 @@ public class TerminalUI implements CalculatorObserver {
         println(BOLD + WHITE + "│  " + MAGENTA + "5" + RESET + "  Reset              " + BOLD + WHITE + "│" + RESET);
         println(BOLD + WHITE + "│  " + WHITE + "6" + RESET + "  Help               " + BOLD + WHITE + "│" + RESET);
         println(BOLD + WHITE + "│  " + RED + "0" + RESET + "  Exit               " + BOLD + WHITE + "│" + RESET);
-        println(BOLD + WHITE + "└────────────────────────────┘" + RESET);
+        println(BOLD + WHITE + "└────────────────────────┘" + RESET);
     }
 
     private void printStatus() {
