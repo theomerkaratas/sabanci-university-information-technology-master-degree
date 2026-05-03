@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT526/AdvanceCalculator/PATTERN_JUSTIFICATION/">
+        <link rel="canonical" href="https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT526/AdvanceCalculator/TODO/">
       
       
       
@@ -23,7 +23,7 @@
     
     
       
-        <title>Pattern Justification Report - Sabanci University Information Technology Master Degree</title>
+        <title>Term Project: Advanced Calculator System - Sabanci University Information Technology Master Degree</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pattern-justification-report" class="md-skip">
+        <a href="#term-project-advanced-calculator-system" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pattern Justification Report
+              Term Project: Advanced Calculator System
             
           </span>
         </div>
@@ -1037,6 +1037,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AdvanceCalculator Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1748,405 +1776,47 @@
   
 
 
-<h1 id="pattern-justification-report">Pattern Justification Report</h1>
-<h2 id="advanced-calculator-system-it526-term-project">Advanced Calculator System — IT526 Term Project</h2>
-<hr />
-<h2 id="table-of-contents">Table of Contents</h2>
-<ol>
-<li><a href="#1-patterns-chosen">Patterns Chosen</a></li>
-<li><a href="#2-strategy-pattern">Strategy Pattern</a></li>
-<li><a href="#3-command-pattern">Command Pattern</a></li>
-<li><a href="#4-factory-pattern">Factory Pattern</a></li>
-<li><a href="#5-observer-pattern">Observer Pattern</a></li>
-<li><a href="#6-decorator-pattern">Decorator Pattern</a></li>
-<li><a href="#7-extensibility-proof">Extensibility Proof</a></li>
-</ol>
-<hr />
-<h2 id="1-patterns-chosen">1. Patterns Chosen</h2>
-<p>Five design patterns were identified and implemented across three GoF categories:</p>
-<table>
-<thead>
-<tr>
-<th>#</th>
-<th>Pattern</th>
-<th>Category</th>
-<th>Primary Role</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><strong>Strategy</strong></td>
-<td>Behavioural</td>
-<td>Encapsulate each mathematical algorithm in its own interchangeable class</td>
-</tr>
-<tr>
-<td>2</td>
-<td><strong>Command</strong></td>
-<td>Behavioural</td>
-<td>Represent each calculation as a replayable, reversible object</td>
-</tr>
-<tr>
-<td>3</td>
-<td><strong>Factory</strong></td>
-<td>Creational</td>
-<td>Centralize and decouple Operation object creation from user input parsing</td>
-</tr>
-<tr>
-<td>4</td>
-<td><strong>Observer</strong></td>
-<td>Behavioural</td>
-<td>Automatically notify the History Log and TUI on every state change</td>
-</tr>
-<tr>
-<td>5</td>
-<td><strong>Decorator</strong></td>
-<td>Structural</td>
-<td>Dynamically wrap operations with cross-cutting concerns (input validation)</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="2-strategy-pattern">2. Strategy Pattern</h2>
-<h3 id="the-problem">The Problem</h3>
-<p>The most fundamental architectural challenge of a calculator is <strong>operation extensibility</strong>. A naïve implementation embeds all mathematical logic inside the engine using <code>if-else</code> or <code>switch</code> chains:</p>
-<pre><code class="language-java">// ❌ Naïve approach — violates OCP
-if (op.equals(&quot;+&quot;)) return a + b;
-else if (op.equals(&quot;sin&quot;)) return Math.sin(a);
-// ...every new operation requires modifying this block
-</code></pre>
-<p>This violates the <strong>Open/Closed Principle</strong>: adding <code>ModuloOperation</code> forces a modification to the <code>CalculatorEngine</code>. As the number of operations grows, the engine becomes a maintenance liability.</p>
-<h3 id="the-solution">The Solution</h3>
-<p>Every mathematical algorithm is encapsulated in its own class implementing the <code>Operation</code> interface (the <strong>Strategy</strong>):</p>
-<pre><code>src/strategy/
-├── Operation.java          ← Strategy interface
-├── AddOperation.java       ← Concrete Strategy
-├── SubtractOperation.java
-├── MultiplyOperation.java
-├── DivideOperation.java
-├── ModuloOperation.java
-├── SinOperation.java
-├── CosOperation.java
-├── LogOperation.java
-├── SqrtOperation.java
-└── PowerOperation.java
-</code></pre>
-<p><strong>Pattern roles:</strong></p>
-<table>
-<thead>
-<tr>
-<th>GoF Role</th>
-<th>Implementation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Strategy</td>
-<td><code>Operation</code> interface (<code>execute()</code>, <code>getSymbol()</code>, <code>getOperandCount()</code>)</td>
-</tr>
-<tr>
-<td>Concrete Strategy</td>
-<td><code>AddOperation</code>, <code>SinOperation</code>, <code>SqrtOperation</code>, … (one class per algorithm)</td>
-</tr>
-<tr>
-<td>Context</td>
-<td><code>CalculatorEngine</code> — calls <code>operation.execute(operands)</code> without knowing which algorithm runs</td>
-</tr>
-</tbody>
-</table>
-<p>The <code>CalculatorEngine</code> holds no operation-specific logic whatsoever. It delegates entirely through the <code>Operation</code> interface:</p>
-<pre><code class="language-java">// ✔ Engine is agnostic — it calls the same method regardless of which operation is active
-double result = operation.execute(operands);
-</code></pre>
-<h3 id="why-this-pattern-fits">Why This Pattern Fits</h3>
+<h1 id="term-project-advanced-calculator-system">Term Project: Advanced Calculator System</h1>
+<h2 id="1-project-overview">1. Project Overview</h2>
+<p>The objective of this term project is to move beyond functional programming and develop a robust, extensible calculator application using Object-Oriented Design principles. While the functional goal is a working calculator, the primary pedagogical goal is the successful application of software design patterns to solve architectural challenges such as operation extensibility, state management, and decoupling of logic from presentation.</p>
+<p>Students are expected to implement a system that is resilient to change. A successful project will demonstrate that adding a new mathematical operation (e.g., Modulo or a specific scientific function) requires zero modification to the core calculation engine, adhering strictly to the <strong>Open/Closed Principle</strong>.</p>
+<h2 id="2-functional-requirements">2. Functional Requirements</h2>
+<p>Your Java application must support the following features:</p>
 <ul>
-<li>Adding <code>TangentOperation</code> requires creating exactly <strong>one new class</strong> — the engine, TUI, and all other classes remain <strong>untouched</strong>.</li>
-<li>Operations with different arities (unary vs. binary) are handled uniformly via <code>getOperandCount()</code>, so the TUI knows how many values to prompt for without any special-casing.</li>
+<li><strong>Standard Operations:</strong> Addition, subtraction, multiplication, and division.</li>
+<li><strong>Scientific Suite:</strong> At least four scientific functions (e.g., Sin, Cos, Log, Square Root, or Power).</li>
+<li><strong>State Management:</strong> A robust "Undo" and "Redo" system allowing users to traverse their calculation history.</li>
+<li><strong>History Log:</strong> A session-based log that records all operations performed and their results.</li>
+<li><strong>Precision &amp; Error Handling:</strong> Proper management of floating-point arithmetic and edge cases (e.g., division by zero, negative square roots).</li>
+<li><strong>Terminal User Interface (TUI):</strong> The application must be controllable from the terminal, providing a clear text-based interactive interface.</li>
 </ul>
-<hr />
-<h2 id="3-command-pattern">3. Command Pattern</h2>
-<h3 id="the-problem_1">The Problem</h3>
-<p>The History Log and Undo/Redo requirements share a common root: they both need to treat a user's calculation as a <strong>first-class object</strong> that can be stored, replayed, and reversed. Without this abstraction, undoing an operation means the engine must manually track what it did and reverse it — logic that would be tangled into the engine itself, making it fragile and hard to extend.</p>
-<h3 id="the-solution_1">The Solution</h3>
-<p>Each user calculation is wrapped in a <code>CalculationCommand</code> object (the <strong>Concrete Command</strong>), which bundles:</p>
+<h2 id="3-architectural-requirements-pattern-hints">3. Architectural Requirements &amp; Pattern Hints</h2>
+<p>The core of your grade rests on the identification and implementation of <strong>4 to 5 distinct software design patterns</strong>. You must analyze the requirements and decide which patterns from the Creational, Structural, and Behavioral categories best fit the problem.</p>
+<h3 id="architectural-hints">Architectural Hints</h3>
+<p>To guide your selection, consider the following design challenges you will encounter:</p>
 <ul>
-<li>The <code>Operation</code> strategy to execute</li>
-<li>The user's operands</li>
-<li>A snapshot of the engine's state <strong>before</strong> execution (for undo)</li>
-<li>A reference to the engine's mutable result holder (so undo can write back the snapshot)</li>
+<li><strong>Encapsulating Algorithms:</strong> Consider how you might wrap different mathematical operations into their own classes so they can be interchanged at runtime without the main calculator logic knowing which specific operation is being executed.</li>
+<li><strong>Request Management:</strong> Think about how to represent a user’s request for a calculation as a standalone object. This is often the key to enabling features like history tracking and reversible actions (Undo/Redo).</li>
+<li><strong>Object Instantiation:</strong> Reflect on how the system should decide which operation object to create based on user input. Providing a centralized interface for this creation can prevent your code from becoming a mess of "if-else" or "switch" statements.</li>
+<li><strong>Dynamic Behavior Tracking:</strong> Consider how the display or history log can be automatically notified and updated whenever the calculator’s internal state changes, without the calculator needing to hold a hard reference to every UI component.</li>
+<li><strong>Feature Wrapping:</strong> If you find you need to add extra responsibilities to your operations—such as logging every calculation to a file or validating inputs—think about how to "wrap" existing objects with this new functionality dynamically.</li>
 </ul>
-<pre><code>src/command/
-├── Command.java              ← Command interface (execute, undo, getDescription)
-└── CalculationCommand.java   ← Concrete Command
-</code></pre>
-<p><strong>Pattern roles:</strong></p>
-<table>
-<thead>
-<tr>
-<th>GoF Role</th>
-<th>Implementation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Command</td>
-<td><code>Command</code> interface</td>
-</tr>
-<tr>
-<td>Concrete Command</td>
-<td><code>CalculationCommand</code> — stores operation, operands, result, and prior state</td>
-</tr>
-<tr>
-<td>Invoker</td>
-<td><code>CalculatorEngine.executeCommand()</code> — calls <code>cmd.execute()</code>, pushes to undo stack</td>
-</tr>
-<tr>
-<td>Receiver</td>
-<td><code>CalculatorEngine</code> — its internal <code>currentResult[]</code> state is modified by the command</td>
-</tr>
-<tr>
-<td>Client</td>
-<td><code>TerminalUI</code> — constructs the command context via <code>engine.compute()</code></td>
-</tr>
-</tbody>
-</table>
-<p>The engine maintains two stacks — <code>undoStack</code> and <code>redoStack</code>:</p>
-<pre><code>On execute:  push cmd → undoStack;  clear redoStack
-On undo:     pop from undoStack → cmd.undo() → push to redoStack
-On redo:     pop from redoStack → cmd.execute() → push to undoStack
-</code></pre>
-<h3 id="why-this-pattern-fits_1">Why This Pattern Fits</h3>
+<h2 id="4-deliverables">4. Deliverables</h2>
+<p>Students must submit a professional package containing:</p>
+<h3 id="41-source-code">4.1. Source Code</h3>
 <ul>
-<li>Every Command is a <strong>complete, self-describing record</strong> — <code>getDescription()</code> returns a human-readable string (<code>"42.0000 + 8.0000 = 50.0000"</code>) consumed by the History Log without any formatting logic in the engine.</li>
-<li>Undo is O(1) and requires no reverse-engineering of the computation — the snapshot is already stored.</li>
-<li>Adding a new operation type (e.g., <code>CurrencyConverterOperation</code>) produces a new <code>CalculationCommand</code> automatically — no changes to the undo/redo or history infrastructure.</li>
+<li>A clean, modular Java project (Maven or no build tools are preferred).</li>
+<li>Strict adherence to Java naming conventions (camelCase, PascalCase).</li>
+<li>In-code documentation explaining how the logic flows through your chosen patterns.</li>
 </ul>
-<hr />
-<h2 id="4-factory-pattern">4. Factory Pattern</h2>
-<h3 id="the-problem_2">The Problem</h3>
-<p>When the user types <code>"+"</code> or <code>"sin"</code>, something must map that string to the correct <code>Operation</code> object. Without a dedicated solution, this mapping logic leaks into multiple places — the TUI must parse the input, decide which class to instantiate, and pass it to the engine. This creates tight coupling between the presentation layer and the strategy layer, and duplicates the same <code>if-else</code> tree everywhere the mapping is needed.</p>
-<h3 id="the-solution_2">The Solution</h3>
-<p><code>OperationFactory</code> provides a <strong>single, centralized method</strong> that maps any user-input token to its corresponding <code>Operation</code> instance:</p>
-<pre><code class="language-java">// Factory call — the TUI never mentions AddOperation by name
-// OperationFactory is resolved via import factory.OperationFactory;
-Operation op = OperationFactory.create(&quot;+&quot;);
-</code></pre>
-<pre><code>src/factory/
-└── OperationFactory.java   ← Static Factory Method
-</code></pre>
-<p><strong>Pattern roles:</strong></p>
-<table>
-<thead>
-<tr>
-<th>GoF Role</th>
-<th>Implementation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Creator</td>
-<td><code>OperationFactory.create(String token)</code></td>
-</tr>
-<tr>
-<td>Product</td>
-<td><code>Operation</code> interface</td>
-</tr>
-<tr>
-<td>Concrete Product</td>
-<td>All <code>*Operation</code> classes</td>
-</tr>
-<tr>
-<td>Client</td>
-<td><code>CalculatorEngine.compute()</code> — delegates token resolution to the factory</td>
-</tr>
-</tbody>
-</table>
-<p>The factory uses a <code>switch</code> expression (Java 14+) that maps both symbolic and textual aliases:</p>
-<pre><code class="language-java">case &quot;+&quot;, &quot;add&quot; -&gt; new AddOperation();
-case &quot;sin&quot;      -&gt; new SinOperation();
-// ...
-</code></pre>
-<h3 id="why-this-pattern-fits_2">Why This Pattern Fits</h3>
+<h3 id="42-pattern-justification-report">4.2. Pattern Justification Report</h3>
+<p>In lieu of a UML diagram, you must provide a detailed report (in Markdown format) that explicitly defines:</p>
 <ul>
-<li><strong>Zero coupling</strong> between the TUI and concrete operation classes — the TUI never imports <code>AddOperation</code> or <code>SinOperation</code>.</li>
-<li><strong>Single point of change</strong> — adding a new operation only requires one new <code>case</code> line in <code>OperationFactory</code>. No other file changes.</li>
-<li><code>getSupportedOperations()</code> exposes a formatted string for the TUI's help and prompt screens, keeping operation metadata co-located with the factory.</li>
+<li><strong>The Patterns Chosen:</strong> List the patterns you identified. Each pattern should have its own section.</li>
+<li><strong>The Problem:</strong> Describe the specific architectural bottleneck each pattern addressed.</li>
+<li><strong>The Solution:</strong> Explain how your Java implementation utilizes the pattern's roles (e.g., which class acts as the "Receiver," "Concrete Strategy," etc.).</li>
+<li><strong>Extensibility Proof:</strong> Describe how your architecture would allow a developer to add a "Currency Converter" operation without changing your existing <code>CalculatorEngine</code> class.</li>
 </ul>
-<hr />
-<h2 id="5-observer-pattern">5. Observer Pattern</h2>
-<h3 id="the-problem_3">The Problem</h3>
-<p>The calculator engine needs to inform two distinct components whenever its state changes:</p>
-<ol>
-<li><strong>The History Log</strong> — must record a persistent entry for every event.</li>
-<li><strong>The Terminal UI</strong> — must display live feedback to the user.</li>
-</ol>
-<p>A direct coupling approach would require the engine to hold references to both objects and call their methods explicitly. This means the engine's <code>executeCommand()</code>, <code>undo()</code>, and <code>redo()</code> methods would need to be rewritten every time a new observer is added (e.g., a file logger, or a future graphical display).</p>
-<h3 id="the-solution_3">The Solution</h3>
-<p>The engine acts as the <strong>Subject</strong>, maintaining a list of <code>CalculatorObserver</code> objects. Any component that wants to receive updates registers itself:</p>
-<pre><code>src/observer/
-├── CalculatorObserver.java   ← Observer interface (onStateChanged)
-└── HistoryLog.java           ← Concrete Observer (persists entries)
-</code></pre>
-<pre><code>src/tui/
-└── TerminalUI.java           ← Concrete Observer (displays live feedback)
-</code></pre>
-<p><strong>Pattern roles:</strong></p>
-<table>
-<thead>
-<tr>
-<th>GoF Role</th>
-<th>Implementation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Subject</td>
-<td><code>CalculatorEngine</code> — maintains <code>List&lt;CalculatorObserver&gt;</code>, calls <code>notifyObservers()</code></td>
-</tr>
-<tr>
-<td>Observer</td>
-<td><code>CalculatorObserver</code> interface (<code>onStateChanged(event, description, result)</code>)</td>
-</tr>
-<tr>
-<td>Concrete Observer</td>
-<td><code>HistoryLog</code> — appends <code>HistoryEntry</code> records</td>
-</tr>
-<tr>
-<td>Concrete Observer</td>
-<td><code>TerminalUI</code> — caches the latest event for status-bar display</td>
-</tr>
-</tbody>
-</table>
-<p>Every state-changing method (<code>executeCommand</code>, <code>undo</code>, <code>redo</code>, <code>reset</code>) ends with a single call to <code>notifyObservers()</code>. The engine remains completely ignorant of how many observers exist or what they do with the notification.</p>
-<h3 id="why-this-pattern-fits_3">Why This Pattern Fits</h3>
-<ul>
-<li><strong>Complete decoupling</strong> — the engine has no import of <code>TerminalUI</code> or <code>HistoryLog</code>. It only knows <code>CalculatorObserver</code>.</li>
-<li>Adding a <code>FileLogger</code> observer (which writes every result to a <code>.log</code> file) requires implementing <code>CalculatorObserver</code> and calling <code>engine.addObserver(fileLogger)</code> in <code>Main.java</code> — <strong>zero changes</strong> to the engine.</li>
-<li>Both <code>HistoryLog</code> and <code>TerminalUI</code> receive the same notification independently, with each reacting according to its own responsibility.</li>
-</ul>
-<hr />
-<h2 id="6-decorator-pattern">6. Decorator Pattern</h2>
-<h3 id="the-problem_4">The Problem</h3>
-<p>Input validation (guarding against <code>NaN</code>, <code>Infinity</code>, division by zero, negative square roots, etc.) is a <strong>cross-cutting concern</strong> that applies to all operations. Embedding it inside each <code>*Operation</code> class would violate DRY — the same null/NaN check would be duplicated in every <code>execute()</code> method. Embedding it in the engine would re-introduce a <code>switch</code>-style structure and make the engine aware of per-operation edge cases.</p>
-<h3 id="the-solution_4">The Solution</h3>
-<p>The <code>ValidationDecorator</code> wraps any <code>Operation</code> and performs pre-flight checks before delegating to the wrapped operation's <code>execute()</code> method:</p>
-<pre><code>src/decorator/
-├── OperationDecorator.java   ← Abstract Decorator (extends Operation, wraps Operation)
-└── ValidationDecorator.java  ← Concrete Decorator (NaN / Infinity guard)
-</code></pre>
-<p><strong>Pattern roles:</strong></p>
-<table>
-<thead>
-<tr>
-<th>GoF Role</th>
-<th>Implementation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Component</td>
-<td><code>Operation</code> interface</td>
-</tr>
-<tr>
-<td>Concrete Component</td>
-<td>Any <code>*Operation</code> class (e.g., <code>DivideOperation</code>)</td>
-</tr>
-<tr>
-<td>Decorator</td>
-<td><code>OperationDecorator</code> — abstract base that wraps an <code>Operation</code></td>
-</tr>
-<tr>
-<td>Concrete Decorator</td>
-<td><code>ValidationDecorator</code> — validates operands, then delegates to <code>wrappedOperation</code></td>
-</tr>
-</tbody>
-</table>
-<p>In <code>CalculatorEngine.compute()</code>, every operation is silently wrapped before execution:</p>
-<pre><code class="language-java">Operation raw       = OperationFactory.create(token);   // Factory resolves the Strategy
-Operation validated = new ValidationDecorator(raw);      // Decorator adds validation
-</code></pre>
-<p>Domain-specific errors (divide by zero, log of a negative) are still raised inside the concrete <code>*Operation</code> classes themselves — the decorator handles only generic pre-conditions (NaN, Infinity).</p>
-<h3 id="why-this-pattern-fits_4">Why This Pattern Fits</h3>
-<ul>
-<li>Validation is applied <strong>uniformly to every operation</strong> in one place, with no duplication.</li>
-<li>Decorators can be <strong>stacked at runtime</strong>: a future <code>LoggingDecorator</code> could be wrapped around <code>ValidationDecorator</code> to log every call to a file, with no changes to any existing class.</li>
-<li>Each <code>*Operation</code> class remains <strong>pure and focused</strong> — it only knows its own mathematical algorithm.</li>
-</ul>
-<hr />
-<h2 id="7-extensibility-proof">7. Extensibility Proof</h2>
-<blockquote>
-<p><em>"Describe how your architecture would allow a developer to add a 'Currency Converter' operation without changing your existing <code>CalculatorEngine</code> class."</em></p>
-</blockquote>
-<p>Adding a <strong>Currency Converter</strong> operation to this system requires exactly <strong>three steps</strong>, none of which touch <code>CalculatorEngine</code>:</p>
-<h3 id="step-1-create-the-concrete-strategy">Step 1 — Create the Concrete Strategy</h3>
-<pre><code class="language-java">// src/strategy/CurrencyConverterOperation.java
-package strategy;
-
-public class CurrencyConverterOperation implements Operation {
-
-    private static final double USD_TO_EUR = 0.92;  // example rate
-
-    @Override
-    public double execute(double... operands) {
-        // operands[0] = amount in USD
-        return operands[0] * USD_TO_EUR;
-    }
-
-    @Override public String getSymbol()      { return &quot;usd→eur&quot;; }
-    @Override public int    getOperandCount() { return 1; }
-}
-</code></pre>
-<h3 id="step-2-register-the-token-in-the-factory">Step 2 — Register the Token in the Factory</h3>
-<pre><code class="language-java">// In OperationFactory.java — add ONE case:
-case &quot;cc&quot;, &quot;usd2eur&quot; -&gt; new CurrencyConverterOperation();
-</code></pre>
-<h3 id="step-3-update-the-supported-operations-string-optional-cosmetic">Step 3 — Update the Supported Operations String <em>(optional, cosmetic)</em></h3>
-<pre><code class="language-java">// In OperationFactory.getSupportedOperations() — add to the display string:
-&quot;  Currency  : cc  (usd2eur)\n&quot;
-</code></pre>
-<h3 id="what-does-not-change">What Does NOT Change</h3>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Changed?</th>
-<th>Reason</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>CalculatorEngine.java</code></td>
-<td><strong>No</strong></td>
-<td>Delegates execution through <code>Operation</code> interface</td>
-</tr>
-<tr>
-<td><code>CalculationCommand.java</code></td>
-<td><strong>No</strong></td>
-<td>Works with any <code>Operation</code> generically</td>
-</tr>
-<tr>
-<td><code>TerminalUI.java</code></td>
-<td><strong>No</strong></td>
-<td>Reads <code>getOperandCount()</code> dynamically at runtime</td>
-</tr>
-<tr>
-<td><code>HistoryLog.java</code></td>
-<td><strong>No</strong></td>
-<td>Reads <code>getDescription()</code> from the command</td>
-</tr>
-<tr>
-<td><code>ValidationDecorator.java</code></td>
-<td><strong>No</strong></td>
-<td>Applied generically before any operation</td>
-</tr>
-<tr>
-<td>Any existing <code>*Operation.java</code></td>
-<td><strong>No</strong></td>
-<td>Each is self-contained</td>
-</tr>
-</tbody>
-</table>
-<p>This is the <strong>Open/Closed Principle</strong> in action: the system is <strong>open for extension</strong> (add <code>CurrencyConverterOperation</code>) and <strong>closed for modification</strong> (no existing class is touched).</p>
 
 
 
