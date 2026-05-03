@@ -2,12 +2,11 @@ package tui;
 
 import engine.CalculatorEngine;
 import factory.OperationFactory;
+import java.util.List;
+import java.util.Scanner;
 import observer.CalculatorObserver;
 import observer.HistoryLog;
 import strategy.Operation;
-
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * TerminalUI — Text User Interface for the Advanced Calculator.
@@ -98,8 +97,7 @@ public class TerminalUI implements CalculatorObserver {
         printSectionHeader("  NEW CALCULATION  ");
 
         // Step 1 — choose operation
-        println(DIM + "Supported operations:" + RESET);
-        println(OperationFactory.getSupportedOperations());
+        printSupportedOperations();
         String token = prompt("Operation").trim();
 
         Operation op;
@@ -197,7 +195,7 @@ public class TerminalUI implements CalculatorObserver {
         println();
         printSectionHeader("  HELP  ");
         println(BOLD + "  Operations" + RESET);
-        println(OperationFactory.getSupportedOperations());
+        printSupportedOperations();
         println(BOLD + "  Menu Options" + RESET);
         println("  1  →  Perform a calculation");
         println("  2  →  Undo the last calculation");
@@ -222,33 +220,27 @@ public class TerminalUI implements CalculatorObserver {
 
     private void printBanner() {
         println();
-        println(CYAN + BOLD + "╔══════════════════════════════════════════════════════════╗" + RESET);
-        println(CYAN + BOLD + "║          Advanced Calculator — IT526 Term Project        ║" + RESET);
-        println(CYAN + BOLD + "║     Strategy · Command · Factory · Observer · Decorator  ║" + RESET);
-        println(CYAN + BOLD + "╚══════════════════════════════════════════════════════════╝" + RESET);
+        println(CYAN + BOLD + "╔══════════════════════════════════════╗" + RESET);
+        println(CYAN + BOLD + "║                                      ║" + RESET);
+        println(CYAN + BOLD + "║" + RESET + "      " + CYAN + "✦" + RESET + "  " + BOLD + GREEN + "Advanced Calculator" + RESET + "  " + CYAN + "✦" + RESET + CYAN + BOLD + "       ║" + RESET);
+        println(CYAN + BOLD + "║                                      ║" + RESET);
+        println(CYAN + BOLD + "╚══════════════════════════════════════╝" + RESET);
         println();
     }
 
     private void printMenu() {
         println();
-        println(BOLD + WHITE + "┌─────────────────────────────────────────────┐" + RESET);
-        println(BOLD + WHITE + "│                    MENU                     │" + RESET);
-        println(BOLD + WHITE + "├─────────────────────────────────────────────┤" + RESET);
-        println(BOLD + WHITE + "│  " + GREEN + "1" + RESET + "  Calculate                              " + BOLD + WHITE
-                + "│" + RESET);
-        println(BOLD + WHITE + "│  " + YELLOW + "2" + RESET + "  Undo                                   " + BOLD + WHITE
-                + "│" + RESET);
-        println(BOLD + WHITE + "│  " + CYAN + "3" + RESET + "  Redo                                   " + BOLD + WHITE
-                + "│" + RESET);
-        println(BOLD + WHITE + "│  " + BLUE + "4" + RESET + "  View History                           " + BOLD + WHITE
-                + "│" + RESET);
-        println(BOLD + WHITE + "│  " + MAGENTA + "5" + RESET + "  Reset                                  " + BOLD
-                + WHITE + "│" + RESET);
-        println(BOLD + WHITE + "│  " + WHITE + "6" + RESET + "  Help                                   " + BOLD + WHITE
-                + "│" + RESET);
-        println(BOLD + WHITE + "│  " + RED + "0" + RESET + "  Exit                                   " + BOLD + WHITE
-                + "│" + RESET);
-        println(BOLD + WHITE + "└─────────────────────────────────────────────┘" + RESET);
+        println(BOLD + WHITE + "┌────────────────────────────┐" + RESET);
+        println(BOLD + WHITE + "│          MENU              │" + RESET);
+        println(BOLD + WHITE + "├────────────────────────────┤" + RESET);
+        println(BOLD + WHITE + "│  " + GREEN + "1" + RESET + "  Calculate          " + BOLD + WHITE + "│" + RESET);
+        println(BOLD + WHITE + "│  " + YELLOW + "2" + RESET + "  Undo               " + BOLD + WHITE + "│" + RESET);
+        println(BOLD + WHITE + "│  " + CYAN + "3" + RESET + "  Redo               " + BOLD + WHITE + "│" + RESET);
+        println(BOLD + WHITE + "│  " + BLUE + "4" + RESET + "  View History       " + BOLD + WHITE + "│" + RESET);
+        println(BOLD + WHITE + "│  " + MAGENTA + "5" + RESET + "  Reset              " + BOLD + WHITE + "│" + RESET);
+        println(BOLD + WHITE + "│  " + WHITE + "6" + RESET + "  Help               " + BOLD + WHITE + "│" + RESET);
+        println(BOLD + WHITE + "│  " + RED + "0" + RESET + "  Exit               " + BOLD + WHITE + "│" + RESET);
+        println(BOLD + WHITE + "└────────────────────────────┘" + RESET);
     }
 
     private void printStatus() {
@@ -275,6 +267,29 @@ public class TerminalUI implements CalculatorObserver {
         println(CYAN + line + RESET);
         println(CYAN + " ".repeat(padding) + BOLD + title + RESET + CYAN + RESET);
         println(CYAN + line + RESET);
+    }
+
+    private void printSupportedOperations() {
+        println(DIM + "  Available Operations:" + RESET);
+        String topBorder = CYAN + "  ┌────────────┬─────────────────────────────────────────────┐" + RESET;
+        String midBorder = CYAN + "  ├────────────┼─────────────────────────────────────────────┤" + RESET;
+        String botBorder = CYAN + "  └────────────┴─────────────────────────────────────────────┘" + RESET;
+
+        println(topBorder);
+
+        // Standard Row
+        println("  " + CYAN + "│" + RESET + WHITE + BOLD + "  Standard  " + RESET + CYAN + "│" + RESET
+                + "  " + GREEN + "+" + RESET + "  " + GREEN + "-" + RESET + "  " + GREEN + "*" + RESET + "  " + GREEN
+                + "/" + RESET + "  " + GREEN + "%" + RESET
+                + DIM + "  (add, sub, mul, div, mod)" + RESET + "   " + CYAN + "│" + RESET);
+
+        println(midBorder);
+
+        // Scientific Row
+        println("  " + CYAN + "│" + RESET + WHITE + BOLD + "  Scientific" + RESET + CYAN + "│" + RESET
+                + "  " + MAGENTA + "sin    cos    log    sqrt    pow" + RESET + "           " + CYAN + "│" + RESET);
+
+        println(botBorder);
     }
 
     private void printSuccess(String message) {
