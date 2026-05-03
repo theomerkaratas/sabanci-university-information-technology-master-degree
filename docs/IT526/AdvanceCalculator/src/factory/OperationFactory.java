@@ -48,13 +48,10 @@ public class OperationFactory {
     }
 
     /**
-     * Returns a formatted list of all supported operation tokens for display in the
-     * TUI.
+     * Returns a plain list of supported operation tokens.
      */
-    public static String getSupportedOperations() {
-        return """
-                  Standard : +  (add)  |  -  (sub)  |  *  (mul)  |  /  (div)  |  %  (mod)
-                  Scientific: sin  |  cos  |  log  |  sqrt  |  pow
-                """;
+    public static String[] getSupportedTokens() {
+        return new String[] { "+", "add", "-", "sub", "*", "mul", "/", "div", "%", "mod", "sin", "cos", "log", "sqrt",
+                "pow" };
     }
 }

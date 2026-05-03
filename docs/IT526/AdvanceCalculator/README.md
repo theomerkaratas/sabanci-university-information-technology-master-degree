@@ -14,6 +14,7 @@
 6. [Decorator Pattern](#6-decorator-pattern)
 7. [Extensibility Proof](#7-extensibility-proof)
 8. [How to Use](#8-how-to-use)
+9. [Testing](#9-testing)
 
 ---
 
@@ -561,3 +562,111 @@ Your JDK is older than 16. Install a newer JDK and ensure `java -version` report
 
 **`error: cannot find symbol`**  
 The `src/` directory structure may be incorrect. Ensure each `.java` file's `package` declaration matches its folder path directly under `src/` (e.g., `src/strategy/AddOperation.java` declares `package strategy;`).
+
+---
+
+## 9. Testing
+
+> A standalone, zero-dependency test suite that verifies every functional requirement defined in `TODO.md §2`.
+
+The test class lives alongside the other source files:
+
+```
+src/
+└── CalculatorTest.java   ← 87 tests, no external libraries required
+```
+
+---
+
+### 9.1. Prerequisites
+
+The same JDK used to run the calculator is sufficient — no Maven, JUnit, or build tool is needed.
+
+| Requirement | Minimum Version | Check Command   |
+| ----------- | --------------- | --------------- |
+| JDK         | 16              | `java -version` |
+
+---
+
+### 9.2. Compiling the Tests
+
+From the `AdvanceCalculator` directory, compile all sources **including the test file** in a single pass:
+
+```bash
+javac -d bin src/CalculatorTest.java src/strategy/*.java src/command/*.java \
+      src/decorator/*.java src/engine/*.java src/factory/*.java \
+      src/observer/*.java src/tui/*.java src/Main.java
+```
+
+On success, no output is printed.
+
+> **Tip:** If you already compiled the project with `find src -name "*.java" | xargs javac -d bin`, the test class is picked up automatically because `CalculatorTest.java` lives in `src/`.
+
+---
+
+### 9.3. Running the Tests
+
+```bash
+java -cp bin CalculatorTest
+```
+
+Expected output (abbreviated):
+
+```
+╔══════════════════════════════════════════════════════╗
+║   Advanced Calculator — Test Suite (TODO.md §2)      ║
+╚══════════════════════════════════════════════════════╝
+
+────────────────────────────────────────────────────────
+  FR-1 · Standard Operations
+────────────────────────────────────────────────────────
+  ✔  PASS  Addition:    4 + 6 = 10
+  ✔  PASS  Subtraction: 10 - 3 = 7
+  ...
+
+════════════════════════════════════════════════════════
+  Results:  87 passed  |  0 failed  |  87 total
+════════════════════════════════════════════════════════
+```
+
+The process exits with **code 0** on full success, or **code 1** if any test fails — making it compatible with CI pipelines.
+
+---
+
+### 9.4. Test Coverage Map
+
+Each test group maps directly to a functional requirement from `TODO.md §2`:
+
+| Test Section                        | TODO.md Requirement        | Tests | What Is Verified                                                                                                |
+| ----------------------------------- | -------------------------- | ----- | --------------------------------------------------------------------------------------------------------------- |
+| **FR-1 · Standard Operations**      | Standard Operations        | 12    | `+`, `-`, `*`, `/`, `%` correct results; symbolic and word aliases; floating-point; negatives                   |
+| **FR-2 · Scientific Suite**         | Scientific Suite           | 16    | `sin`, `cos`, `log`, `sqrt`, `pow` accuracy; degree→radian conversion; boundary values                          |
+| **FR-3 · State Management**         | Undo / Redo                | 18    | Single and multi-level undo/redo; redo stack cleared by new operation; empty-stack exceptions; reset            |
+| **FR-4 · History Log**              | History Log                | 9     | EXECUTE / UNDO / REDO / RESET entries recorded; `getEntries()` returns unmodifiable copy; `clear()`             |
+| **FR-5 · Precision & Errors**       | Precision & Error Handling | 8     | `ArithmeticException` for div/0, sqrt(−n), log(0), log(−n), mod/0; `IllegalArgumentException` for unknown token |
+| **FR-6 · Factory Routing**          | Object Instantiation       | 13    | Every token maps to correct concrete class; case-insensitive; whitespace-tolerant                               |
+| **Decorator · ValidationDecorator** | Feature Wrapping           | 4     | `NaN` and `Infinity` rejected before execution; `getSymbol()` delegates correctly                               |
+| **Observer · Multi-Observer**       | Dynamic Behaviour Tracking | 7     | Multiple observers notified independently; `removeObserver` stops further notifications                         |
+
+---
+
+### 9.5. Adding New Tests
+
+Because `CalculatorTest` is plain Java, extending it requires no framework knowledge:
+
+1. Add a new `static void testMyFeature()` method.
+2. Use `expect("description", booleanCondition)` for value assertions.
+3. Use `expectThrows("description", ExceptionClass.class, () -> ...)` for exception assertions.
+4. Call your method from `main()`.
+
+To add a test for a hypothetical `TangentOperation`:
+
+```java
+static void testTangentOperation() {
+    section("FR-X · Tangent Operation");
+    CalculatorEngine engine = new CalculatorEngine();
+    expect("tan(45°) = 1", near(engine.compute("tan", 45), 1.0));
+    expectThrows("tan(90°) throws ArithmeticException",
+            ArithmeticException.class, () -> engine.compute("tan", 90));
+}
+```
