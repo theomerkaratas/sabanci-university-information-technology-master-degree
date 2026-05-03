@@ -193,24 +193,48 @@ public class TerminalUI implements CalculatorObserver {
 
     private void handleHelp() {
         println();
-        printSectionHeader("  HELP  ");
-        println(BOLD + "  Operations" + RESET);
-        printSupportedOperations();
-        println(BOLD + "  Menu Options" + RESET);
-        println("  1  →  Perform a calculation");
-        println("  2  →  Undo the last calculation");
-        println("  3  →  Redo the last undone calculation");
-        println("  4  →  View full session history");
-        println("  5  →  Reset calculator to 0");
-        println("  6  →  Show this help screen");
-        println("  0  →  Exit the calculator");
+        printSectionHeader("  ADVANCED CALCULATOR HELP  ");
+
+        // 1. Navigation
+        println(BOLD + WHITE + "  1. Navigation & Menu" + RESET);
+        println("  1  →  " + GREEN + "Calculate" + RESET + "      Perform a new math operation");
+        println("  2  →  " + YELLOW + "Undo" + RESET + "           Reverse the last calculation");
+        println("  3  →  " + CYAN + "Redo" + RESET + "           Re-apply the most recently undone action");
+        println("  4  →  " + BLUE + "History" + RESET + "        View the full session log");
+        println("  5  →  " + MAGENTA + "Reset" + RESET + "          Clear result and all history (requires 'y' confirmation)");
+        println("  6  →  " + WHITE + "Help" + RESET + "           Show this screen");
+        println("  0  →  " + RED + "Exit" + RESET + "           Close the application (aliases: q, quit, exit)");
         println();
-        println(BOLD + "  Usage Notes" + RESET);
-        println("  • Binary ops (+, -, *, /, %, pow) require two numbers.");
-        println("  • Unary ops (sin, cos, log, sqrt) require one number.");
-        println("  • sin / cos input is in degrees.");
-        println("  • log is the natural logarithm (base e).");
-        println("  • Type the symbol or the name — both work (e.g. + or add).");
+
+        // 2. Performing Calculations
+        println(BOLD + WHITE + "  2. Performing a Calculation" + RESET);
+        println("  Step 1: Choose an operation (e.g., '+', 'sin', 'sqrt').");
+        println("  Step 2: Enter the required number of values.");
+        println("  • " + DIM + "The TUI automatically detects if an op is Unary (1 value) or Binary (2)." + RESET);
+        println("  • " + DIM + "You have 3 attempts for numeric input before the operation cancels." + RESET);
+        println();
+
+        // 3. Supported Operations
+        println(BOLD + WHITE + "  3. Supported Operations" + RESET);
+        printSupportedOperations();
+        println("  • " + DIM + "Scientific angles (sin, cos) must be entered in DEGREES." + RESET);
+        println("  • " + DIM + "Natural Logarithm (log) uses base e." + RESET);
+        println("  • " + DIM + "Exponents (pow) take Base then Power." + RESET);
+        println();
+
+        // 4. Undo/Redo & History
+        println(BOLD + WHITE + "  4. State & History" + RESET);
+        println("  • " + YELLOW + "Undo" + RESET + " can be called multiple times to walk back through your session.");
+        println("  • " + CYAN + "Redo" + RESET + " is only available immediately after an Undo.");
+        println("  • " + RED + "CRITICAL:" + RESET + " Performing a " + GREEN + "NEW" + RESET + " calculation clears the Redo stack.");
+        println("  • History colors: " + GREEN + "EXECUTE" + RESET + ", " + YELLOW + "UNDO" + RESET + ", " + CYAN + "REDO" + RESET + ", " + MAGENTA + "RESET" + RESET + ".");
+        println();
+
+        // 5. Common Errors
+        println(BOLD + WHITE + "  5. Troubleshooting" + RESET);
+        println("  • " + RED + "Unknown operation" + RESET + "  → Check the symbols in section 3 above.");
+        println("  • " + RED + "Arithmetic errors" + RESET + "  → Division by zero, log(0), or sqrt(-1) are restricted.");
+        println("  • " + RED + "Invalid number" + RESET + "     → Ensure you use decimals (e.g. 3.14) or integers.");
         println();
     }
 
