@@ -1697,6 +1697,78 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#9-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-compiling-the-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. Compiling the Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-running-the-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. Running the Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-test-coverage-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. Test Coverage Map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-adding-new-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5. Adding New Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2430,6 +2502,7 @@
 <li><a href="#6-decorator-pattern">Decorator Pattern</a></li>
 <li><a href="#7-extensibility-proof">Extensibility Proof</a></li>
 <li><a href="#8-how-to-use">How to Use</a></li>
+<li><a href="#9-testing">Testing</a></li>
 </ol>
 <hr />
 <h2 id="1-patterns-chosen">1. Patterns Chosen</h2>
@@ -3163,6 +3236,147 @@ case &quot;cc&quot;, &quot;usd2eur&quot; -&gt; new CurrencyConverterOperation();
 Your JDK is older than 16. Install a newer JDK and ensure <code>java -version</code> reports 16+.</p>
 <p><strong><code>error: cannot find symbol</code></strong><br />
 The <code>src/</code> directory structure may be incorrect. Ensure each <code>.java</code> file's <code>package</code> declaration matches its folder path directly under <code>src/</code> (e.g., <code>src/strategy/AddOperation.java</code> declares <code>package strategy;</code>).</p>
+<hr />
+<h2 id="9-testing">9. Testing</h2>
+<blockquote>
+<p>A standalone, zero-dependency test suite that verifies every functional requirement defined in <code>TODO.md §2</code>.</p>
+</blockquote>
+<p>The test class lives alongside the other source files:</p>
+<pre><code>src/
+└── CalculatorTest.java   ← 87 tests, no external libraries required
+</code></pre>
+<hr />
+<h3 id="91-prerequisites">9.1. Prerequisites</h3>
+<p>The same JDK used to run the calculator is sufficient — no Maven, JUnit, or build tool is needed.</p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Minimum Version</th>
+<th>Check Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JDK</td>
+<td>16</td>
+<td><code>java -version</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="92-compiling-the-tests">9.2. Compiling the Tests</h3>
+<p>From the <code>AdvanceCalculator</code> directory, compile all sources <strong>including the test file</strong> in a single pass:</p>
+<pre><code class="language-bash">javac -d bin src/CalculatorTest.java src/strategy/*.java src/command/*.java \
+      src/decorator/*.java src/engine/*.java src/factory/*.java \
+      src/observer/*.java src/tui/*.java src/Main.java
+</code></pre>
+<p>On success, no output is printed.</p>
+<blockquote>
+<p><strong>Tip:</strong> If you already compiled the project with <code>find src -name "*.java" | xargs javac -d bin</code>, the test class is picked up automatically because <code>CalculatorTest.java</code> lives in <code>src/</code>.</p>
+</blockquote>
+<hr />
+<h3 id="93-running-the-tests">9.3. Running the Tests</h3>
+<pre><code class="language-bash">java -cp bin CalculatorTest
+</code></pre>
+<p>Expected output (abbreviated):</p>
+<pre><code>╔══════════════════════════════════════════════════════╗
+║   Advanced Calculator — Test Suite (TODO.md §2)      ║
+╚══════════════════════════════════════════════════════╝
+
+────────────────────────────────────────────────────────
+  FR-1 · Standard Operations
+────────────────────────────────────────────────────────
+  ✔  PASS  Addition:    4 + 6 = 10
+  ✔  PASS  Subtraction: 10 - 3 = 7
+  ...
+
+════════════════════════════════════════════════════════
+  Results:  87 passed  |  0 failed  |  87 total
+════════════════════════════════════════════════════════
+</code></pre>
+<p>The process exits with <strong>code 0</strong> on full success, or <strong>code 1</strong> if any test fails — making it compatible with CI pipelines.</p>
+<hr />
+<h3 id="94-test-coverage-map">9.4. Test Coverage Map</h3>
+<p>Each test group maps directly to a functional requirement from <code>TODO.md §2</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Test Section</th>
+<th>TODO.md Requirement</th>
+<th>Tests</th>
+<th>What Is Verified</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FR-1 · Standard Operations</strong></td>
+<td>Standard Operations</td>
+<td>12</td>
+<td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code> correct results; symbolic and word aliases; floating-point; negatives</td>
+</tr>
+<tr>
+<td><strong>FR-2 · Scientific Suite</strong></td>
+<td>Scientific Suite</td>
+<td>16</td>
+<td><code>sin</code>, <code>cos</code>, <code>log</code>, <code>sqrt</code>, <code>pow</code> accuracy; degree→radian conversion; boundary values</td>
+</tr>
+<tr>
+<td><strong>FR-3 · State Management</strong></td>
+<td>Undo / Redo</td>
+<td>18</td>
+<td>Single and multi-level undo/redo; redo stack cleared by new operation; empty-stack exceptions; reset</td>
+</tr>
+<tr>
+<td><strong>FR-4 · History Log</strong></td>
+<td>History Log</td>
+<td>9</td>
+<td>EXECUTE / UNDO / REDO / RESET entries recorded; <code>getEntries()</code> returns unmodifiable copy; <code>clear()</code></td>
+</tr>
+<tr>
+<td><strong>FR-5 · Precision &amp; Errors</strong></td>
+<td>Precision &amp; Error Handling</td>
+<td>8</td>
+<td><code>ArithmeticException</code> for div/0, sqrt(−n), log(0), log(−n), mod/0; <code>IllegalArgumentException</code> for unknown token</td>
+</tr>
+<tr>
+<td><strong>FR-6 · Factory Routing</strong></td>
+<td>Object Instantiation</td>
+<td>13</td>
+<td>Every token maps to correct concrete class; case-insensitive; whitespace-tolerant</td>
+</tr>
+<tr>
+<td><strong>Decorator · ValidationDecorator</strong></td>
+<td>Feature Wrapping</td>
+<td>4</td>
+<td><code>NaN</code> and <code>Infinity</code> rejected before execution; <code>getSymbol()</code> delegates correctly</td>
+</tr>
+<tr>
+<td><strong>Observer · Multi-Observer</strong></td>
+<td>Dynamic Behaviour Tracking</td>
+<td>7</td>
+<td>Multiple observers notified independently; <code>removeObserver</code> stops further notifications</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="95-adding-new-tests">9.5. Adding New Tests</h3>
+<p>Because <code>CalculatorTest</code> is plain Java, extending it requires no framework knowledge:</p>
+<ol>
+<li>Add a new <code>static void testMyFeature()</code> method.</li>
+<li>Use <code>expect("description", booleanCondition)</code> for value assertions.</li>
+<li>Use <code>expectThrows("description", ExceptionClass.class, () -&gt; ...)</code> for exception assertions.</li>
+<li>Call your method from <code>main()</code>.</li>
+</ol>
+<p>To add a test for a hypothetical <code>TangentOperation</code>:</p>
+<pre><code class="language-java">static void testTangentOperation() {
+    section(&quot;FR-X · Tangent Operation&quot;);
+    CalculatorEngine engine = new CalculatorEngine();
+    expect(&quot;tan(45°) = 1&quot;, near(engine.compute(&quot;tan&quot;, 45), 1.0));
+    expectThrows(&quot;tan(90°) throws ArithmeticException&quot;,
+            ArithmeticException.class, () -&gt; engine.compute(&quot;tan&quot;, 90));
+}
+</code></pre>
 
 
 
