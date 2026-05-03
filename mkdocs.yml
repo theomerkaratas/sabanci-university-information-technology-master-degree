@@ -48,20 +48,13 @@ nav:
   - Introduction: index.md
   - IT501:
       - Main: IT501/README.md
-      - Projects:
-          - Blackjack: IT501/blackjack/README.md
-          - Calculator: IT501/calculator/README.md
-          - Caesar Cipher: IT501/ceaser-cipher/README.md
-          - Coffee Machine: IT501/coffee-machine/README.md
-          - Hangman: IT501/hangman/README.md
-          - Higher Lower: IT501/higher-lower/README.md
   - IT511:
       - Lecture Notes: IT511/Notes/LectureNotes/README.md
       - Q&A: IT511/Notes/QuestionsAndAnswers/README.md
   - IT524:
       - Main: IT524/README.md
-      - Lecture Notes: IT524/LectureNotes/README.md
       - Projects:
+          - Lecture Notes: IT524/LectureNotes/README.md
           - Bank Account: IT524/BankAccountProject/README.md
           - FootJoy: IT524/FootJoy/README.md
   - IT526:
@@ -70,30 +63,17 @@ nav:
       - Cheatsheet: IT526/Cheatsheet/README.md
   - IT537:
       - Main: IT537/README.md
-      - Menu Project:
-          - Main: IT537/menuproject/README.md
-          - Sprint 1: IT537/menuproject/sprint1/README.md
-          - Sprint 2: IT537/menuproject/sprint2/README.md
-          - Sprint 3: IT537/menuproject/sprint3/README.md
-      - Practices:
-          - Overview: IT537/Practices/README.md
-          - Practice 1: IT537/Practices/practice-1/README.md
-          - Practice 2: IT537/Practices/practice-2/README.md
-          - Practice 3: IT537/Practices/practice-3/README.md
-          - Practice 4: IT537/Practices/practice-4/README.md
-          - Practice 5: IT537/Practices/practice-5/README.md
-          - Practice 6: IT537/Practices/practice-6/README.md
   - IT553: IT553/README.md
   - IT563: IT563/README.md
   - SEC509:
       - Main: SEC509/README.md
       - Chapters:
-          - Software Ubiquity and Modern Dependency: SEC509/Documents/chapter1.md
-          - Security Posture & DevSecOps: SEC509/Documents/chapter2.md
-          - Personal and Corporate Cyber Hygiene: SEC509/Documents/chapter2-1.md
-          - Introduction to DevSecOps: SEC509/Documents/chapter2-2.md
-          - Understanding PAM and Password Complexity Policy: SEC509/Documents/chapter2-3.md
-          - Cybersecurity Culture & Human Behaviour: SEC509/Documents/chapter2-4.md
+          - 1. Software Ubiquity and Modern Dependency: SEC509/Documents/chapter1.md
+          - 2. Security Posture & DevSecOps: SEC509/Documents/chapter2.md
+          - 2.1. Personal and Corporate Cyber Hygiene: SEC509/Documents/chapter2-1.md
+          - 2.2. Introduction to DevSecOps: SEC509/Documents/chapter2-2.md
+          - 2.3. Understanding PAM and Password Complexity Policy: SEC509/Documents/chapter2-3.md
+          - 2.4. Cybersecurity Culture & Human Behaviour: SEC509/Documents/chapter2-4.md
       - Homeworks:
           - Overview: SEC509/Homeworks/README.md
           - Lab 1: SEC509/Homeworks/Lab1/README.md

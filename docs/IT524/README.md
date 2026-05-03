@@ -10,7 +10,7 @@ This folder contains the coursework and projects completed for **IT524: Object-O
 
 ---
 
-## 📂 Projects in This Folder
+## 📂 Projects and Notes in This Folder
 
 This directory contains **two separate Java projects** developed as part of this course. Each project helps you practice key object-oriented programming techniques.
 
