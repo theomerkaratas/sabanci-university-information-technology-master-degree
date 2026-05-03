@@ -13,7 +13,7 @@ The course covers:
 
 ## 📁 Repository Structure
 
-### Cheatsheet (./Cheatsheet/README.md)
+### [Cheatsheet] (./Cheatsheet/README.md)
 
 Quick reference guides and visual summaries for various Java topics and design patterns. This section is designed for fast lookup of syntax and architectural diagrams.
 
@@ -21,6 +21,6 @@ Quick reference guides and visual summaries for various Java topics and design p
 
 Comprehensive documentation and notes taken during the semester, covering all lecture topics in detail, including code snippets and theoretical explanations.
 
-### [Advance Calculator](./AdvanceCalculator/README.md)
+### [Advance Calculator](./AdvanceCalculator)
 
 A Java-based term project focusing on Object-Oriented Design and the implementation of software design patterns. It features an extensible calculation engine supporting standard and scientific operations, undo/redo functionality, and a terminal-based interactive interface.
