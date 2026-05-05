@@ -2,17 +2,6 @@ package decorator;
 
 import strategy.Operation;
 
-/**
- * DECORATOR PATTERN — Concrete Decorator: ValidationDecorator
- *
- * Wraps any Operation and performs pre-execution input validation.
- * If operands contain NaN or Infinity values — which could silently corrupt
- * subsequent calculations — it rejects the request with a clear error message.
- *
- * This extra responsibility is added dynamically at runtime:
- * the concrete Operation classes (AddOperation, SinOperation, etc.)
- * remain completely unaware of this validation layer.
- */
 public class ValidationDecorator extends OperationDecorator {
 
     public ValidationDecorator(Operation wrappedOperation) {

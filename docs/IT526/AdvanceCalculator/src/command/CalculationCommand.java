@@ -2,46 +2,14 @@ package command;
 
 import strategy.Operation;
 
-/**
- * COMMAND PATTERN — Concrete Command: CalculationCommand
- *
- * Encapsulates a single user calculation: the operation (Strategy) to perform,
- * the operands, and both the result and the prior state required to undo it.
- *
- * Roles:
- * - Strategy (Operation): the algorithm to execute
- * - Command: the object that wraps the call and its inverse
- *
- * The CalculatorEngine acts as the Receiver whose internal state
- * (currentResult)
- * is modified by execute() and restored by undo().
- */
 public class CalculationCommand implements Command {
 
-    /** The concrete Strategy (e.g., AddOperation, SqrtOperation). */
     private final Operation operation;
-
-    /** Input values supplied by the user. */
     private final double[] operands;
-
-    /**
-     * Result stored after execute() is called — used to rebuild the description.
-     */
+    private final double previousResult;
+    private final double[] engineState;
     private double result;
 
-    /** The engine's state BEFORE this command ran — used for undo(). */
-    private final double previousResult;
-
-    /** Reference to the engine's mutable result holder so undo() can revert it. */
-    private final double[] engineState;
-
-    /**
-     * @param operation      the Strategy that defines the algorithm
-     * @param operands       the user-supplied input values
-     * @param previousResult the engine's current result before this command
-     * @param engineState    a single-element array wrapping the engine's mutable
-     *                       currentResult
-     */
     public CalculationCommand(Operation operation, double[] operands,
             double previousResult, double[] engineState) {
         this.operation = operation;
