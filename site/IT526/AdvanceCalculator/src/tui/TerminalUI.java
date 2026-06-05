@@ -8,20 +8,8 @@ import observer.CalculatorObserver;
 import observer.HistoryLog;
 import strategy.Operation;
 
-/**
- * TerminalUI — Text User Interface for the Advanced Calculator.
- *
- * Implements CalculatorObserver (OBSERVER PATTERN) so it can display
- * live feedback whenever the engine's state changes.
- *
- * Responsibilities:
- * - Render the interactive menu and prompts
- * - Parse user input and delegate to the CalculatorEngine
- * - Display results, errors, and history in a clear, structured format
- */
 public class TerminalUI implements CalculatorObserver {
 
-    // ── ANSI color codes ─────────────────────────────────────────────────────
     private static final String RESET = "\u001B[0m";
     private static final String BOLD = "\u001B[1m";
     private static final String DIM = "\u001B[2m";
@@ -37,7 +25,6 @@ public class TerminalUI implements CalculatorObserver {
     private final HistoryLog historyLog;
     private final Scanner scanner;
 
-    /** Tracks the last observer notification for inline display. */
     private String lastEvent = "";
     private String lastDescription = "";
 
@@ -47,11 +34,6 @@ public class TerminalUI implements CalculatorObserver {
         this.scanner = new Scanner(System.in);
     }
 
-    // ═══════════════════════════════════════════════════════════════════════
-    // Public entry point
-    // ═══════════════════════════════════════════════════════════════════════
-
-    /** Starts the interactive TUI loop. Blocks until the user exits. */
     public void start() {
         printBanner();
         boolean running = true;
@@ -77,10 +59,6 @@ public class TerminalUI implements CalculatorObserver {
         }
     }
 
-    // ═══════════════════════════════════════════════════════════════════════
-    // OBSERVER PATTERN — onStateChanged
-    // ═══════════════════════════════════════════════════════════════════════
-
     @Override
     public void onStateChanged(String event, String description, double result) {
         // Store for inline display in printStatus(); HistoryLog handles persistence.
@@ -88,15 +66,10 @@ public class TerminalUI implements CalculatorObserver {
         lastDescription = description;
     }
 
-    // ═══════════════════════════════════════════════════════════════════════
-    // Menu handlers
-    // ═══════════════════════════════════════════════════════════════════════
-
     private void handleCalculate() {
         println();
         printSectionHeader("  NEW CALCULATION  ");
 
-        // Step 1 — choose operation
         printSupportedOperations();
         String token = prompt("Operation").trim();
 
@@ -108,25 +81,22 @@ public class TerminalUI implements CalculatorObserver {
             return;
         }
 
-        // Step 2 — gather operands
         double[] operands = new double[op.getOperandCount()];
         for (int i = 0; i < op.getOperandCount(); i++) {
             String label = op.getOperandCount() == 1
                     ? "Value"
                     : (i == 0 ? "Operand A" : "Operand B");
 
-            // Hint: for unary scientific ops, clarify units
             if (op.getOperandCount() == 1 && (token.equalsIgnoreCase("sin") || token.equalsIgnoreCase("cos"))) {
                 label += " (degrees)";
             }
 
             Double parsed = promptDouble(label);
             if (parsed == null)
-                return; // user entered invalid input; already printed error
+                return;
             operands[i] = parsed;
         }
 
-        // Step 3 — execute via engine
         try {
             double result = engine.compute(token, operands);
             printSuccess(String.format("Result: %s%s%.6f%s", BOLD, GREEN, result, RESET));
@@ -193,36 +163,61 @@ public class TerminalUI implements CalculatorObserver {
 
     private void handleHelp() {
         println();
-        printSectionHeader("  HELP  ");
-        println(BOLD + "  Operations" + RESET);
-        printSupportedOperations();
-        println(BOLD + "  Menu Options" + RESET);
-        println("  1  →  Perform a calculation");
-        println("  2  →  Undo the last calculation");
-        println("  3  →  Redo the last undone calculation");
-        println("  4  →  View full session history");
-        println("  5  →  Reset calculator to 0");
-        println("  6  →  Show this help screen");
-        println("  0  →  Exit the calculator");
+        printSectionHeader("  ADVANCED CALCULATOR HELP  ");
+
+        // 1. Navigation
+        println(BOLD + WHITE + "  1. Navigation & Menu" + RESET);
+        println("  1  →  " + GREEN + "Calculate" + RESET + "      Perform a new math operation");
+        println("  2  →  " + YELLOW + "Undo" + RESET + "           Reverse the last calculation");
+        println("  3  →  " + CYAN + "Redo" + RESET + "           Re-apply the most recently undone action");
+        println("  4  →  " + BLUE + "History" + RESET + "        View the full session log");
+        println("  5  →  " + MAGENTA + "Reset" + RESET
+                + "          Clear result and all history (requires 'y' confirmation)");
+        println("  6  →  " + WHITE + "Help" + RESET + "           Show this screen");
+        println("  0  →  " + RED + "Exit" + RESET + "           Close the application (aliases: q, quit, exit)");
         println();
-        println(BOLD + "  Usage Notes" + RESET);
-        println("  • Binary ops (+, -, *, /, %, pow) require two numbers.");
-        println("  • Unary ops (sin, cos, log, sqrt) require one number.");
-        println("  • sin / cos input is in degrees.");
-        println("  • log is the natural logarithm (base e).");
-        println("  • Type the symbol or the name — both work (e.g. + or add).");
+
+        // 2. Performing Calculations
+        println(BOLD + WHITE + "  2. Performing a Calculation" + RESET);
+        println("  Step 1: Choose an operation (e.g., '+', 'sin', 'sqrt').");
+        println("  Step 2: Enter the required number of values.");
+        println("  • " + DIM + "The TUI automatically detects if an op is Unary (1 value) or Binary (2)." + RESET);
+        println("  • " + DIM + "You have 3 attempts for numeric input before the operation cancels." + RESET);
+        println();
+
+        // 3. Supported Operations
+        println(BOLD + WHITE + "  3. Supported Operations" + RESET);
+        printSupportedOperations();
+        println("  • " + DIM + "Scientific angles (sin, cos) must be entered in DEGREES." + RESET);
+        println("  • " + DIM + "Natural Logarithm (log) uses base e." + RESET);
+        println("  • " + DIM + "Exponents (pow) take Base then Power." + RESET);
+        println();
+
+        // 4. Undo/Redo & History
+        println(BOLD + WHITE + "  4. State & History" + RESET);
+        println("  • " + YELLOW + "Undo" + RESET + " can be called multiple times to walk back through your session.");
+        println("  • " + CYAN + "Redo" + RESET + " is only available immediately after an Undo.");
+        println("  • " + RED + "CRITICAL:" + RESET + " Performing a " + GREEN + "NEW" + RESET
+                + " calculation clears the Redo stack.");
+        println("  • History colors: " + GREEN + "EXECUTE" + RESET + ", " + YELLOW + "UNDO" + RESET + ", " + CYAN
+                + "REDO" + RESET + ", " + MAGENTA + "RESET" + RESET + ".");
+        println();
+
+        // 5. Common Errors
+        println(BOLD + WHITE + "  5. Troubleshooting" + RESET);
+        println("  • " + RED + "Unknown operation" + RESET + "  → Check the symbols in section 3 above.");
+        println("  • " + RED + "Arithmetic errors" + RESET
+                + "  → Division by zero, log(0), or sqrt(-1) are restricted.");
+        println("  • " + RED + "Invalid number" + RESET + "     → Ensure you use decimals (e.g. 3.14) or integers.");
         println();
     }
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // Rendering helpers
-    // ═══════════════════════════════════════════════════════════════════════
 
     private void printBanner() {
         println();
         println(CYAN + BOLD + "╔══════════════════════════════════════╗" + RESET);
         println(CYAN + BOLD + "║                                      ║" + RESET);
-        println(CYAN + BOLD + "║" + RESET + "      " + CYAN + "✦" + RESET + "  " + BOLD + GREEN + "Advanced Calculator" + RESET + "  " + CYAN + "✦" + RESET + CYAN + BOLD + "       ║" + RESET);
+        println(CYAN + BOLD + "║" + RESET + "      " + CYAN + "✦" + RESET + "  " + BOLD + GREEN + "Advanced Calculator"
+                + RESET + "  " + CYAN + "✦" + RESET + CYAN + BOLD + "       ║" + RESET);
         println(CYAN + BOLD + "║                                      ║" + RESET);
         println(CYAN + BOLD + "╚══════════════════════════════════════╝" + RESET);
         println();
@@ -230,9 +225,9 @@ public class TerminalUI implements CalculatorObserver {
 
     private void printMenu() {
         println();
-        println(BOLD + WHITE + "┌────────────────────────────┐" + RESET);
-        println(BOLD + WHITE + "│          MENU              │" + RESET);
-        println(BOLD + WHITE + "├────────────────────────────┤" + RESET);
+        println(BOLD + WHITE + "┌────────────────────────┐" + RESET);
+        println(BOLD + WHITE + "│          MENU          │" + RESET);
+        println(BOLD + WHITE + "├────────────────────────┤" + RESET);
         println(BOLD + WHITE + "│  " + GREEN + "1" + RESET + "  Calculate          " + BOLD + WHITE + "│" + RESET);
         println(BOLD + WHITE + "│  " + YELLOW + "2" + RESET + "  Undo               " + BOLD + WHITE + "│" + RESET);
         println(BOLD + WHITE + "│  " + CYAN + "3" + RESET + "  Redo               " + BOLD + WHITE + "│" + RESET);
@@ -240,7 +235,7 @@ public class TerminalUI implements CalculatorObserver {
         println(BOLD + WHITE + "│  " + MAGENTA + "5" + RESET + "  Reset              " + BOLD + WHITE + "│" + RESET);
         println(BOLD + WHITE + "│  " + WHITE + "6" + RESET + "  Help               " + BOLD + WHITE + "│" + RESET);
         println(BOLD + WHITE + "│  " + RED + "0" + RESET + "  Exit               " + BOLD + WHITE + "│" + RESET);
-        println(BOLD + WHITE + "└────────────────────────────┘" + RESET);
+        println(BOLD + WHITE + "└────────────────────────┘" + RESET);
     }
 
     private void printStatus() {
@@ -277,7 +272,6 @@ public class TerminalUI implements CalculatorObserver {
 
         println(topBorder);
 
-        // Standard Row
         println("  " + CYAN + "│" + RESET + WHITE + BOLD + "  Standard  " + RESET + CYAN + "│" + RESET
                 + "  " + GREEN + "+" + RESET + "  " + GREEN + "-" + RESET + "  " + GREEN + "*" + RESET + "  " + GREEN
                 + "/" + RESET + "  " + GREEN + "%" + RESET
@@ -285,7 +279,6 @@ public class TerminalUI implements CalculatorObserver {
 
         println(midBorder);
 
-        // Scientific Row
         println("  " + CYAN + "│" + RESET + WHITE + BOLD + "  Scientific" + RESET + CYAN + "│" + RESET
                 + "  " + MAGENTA + "sin    cos    log    sqrt    pow" + RESET + "           " + CYAN + "│" + RESET);
 
@@ -305,10 +298,6 @@ public class TerminalUI implements CalculatorObserver {
         return scanner.nextLine();
     }
 
-    /**
-     * Prompts for a numeric input, repeating up to 3 times on bad input.
-     * Returns null if the user fails all attempts, signalling the caller to abort.
-     */
     private Double promptDouble(String label) {
         for (int attempt = 1; attempt <= 3; attempt++) {
             String raw = prompt(label).trim();
@@ -323,7 +312,6 @@ public class TerminalUI implements CalculatorObserver {
     }
 
     private String formatResult(double value) {
-        // Avoid trailing zeros for whole numbers; keep precision otherwise
         if (value == Math.floor(value) && !Double.isInfinite(value)) {
             return String.format("%.0f", value);
         }

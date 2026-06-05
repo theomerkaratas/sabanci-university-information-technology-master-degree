@@ -1,11 +1,5 @@
 package strategy;
 
-/**
- * STRATEGY PATTERN — Concrete Strategy: Division
- *
- * Precision & Error Handling: throws ArithmeticException on division by zero,
- * satisfying the project's edge-case requirement without polluting the engine.
- */
 public class DivideOperation implements Operation {
 
     @Override

@@ -1,11 +1,5 @@
 package strategy;
 
-/**
- * STRATEGY PATTERN — Concrete Strategy: Addition
- *
- * Encapsulates the addition algorithm. The CalculatorEngine treats this
- * identically to any other Operation, with no switch-case or if-else required.
- */
 public class AddOperation implements Operation {
 
     @Override

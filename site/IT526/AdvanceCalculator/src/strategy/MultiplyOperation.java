@@ -1,8 +1,5 @@
 package strategy;
 
-/**
- * STRATEGY PATTERN — Concrete Strategy: Multiplication
- */
 public class MultiplyOperation implements Operation {
 
     @Override

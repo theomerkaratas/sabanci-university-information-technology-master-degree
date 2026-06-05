@@ -1,11 +1,5 @@
 package strategy;
 
-/**
- * STRATEGY PATTERN — Concrete Strategy: Square Root (Scientific Suite)
- *
- * Error Handling: throws ArithmeticException for negative inputs,
- * as sqrt(x) is undefined in the real number domain for x < 0.
- */
 public class SqrtOperation implements Operation {
 
     @Override

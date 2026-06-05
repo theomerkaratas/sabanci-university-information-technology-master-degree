@@ -1,11 +1,5 @@
 package strategy;
 
-/**
- * STRATEGY PATTERN — Concrete Strategy: Sine (Scientific Suite)
- *
- * Operates on a single operand (angle in degrees).
- * Internally converts to radians for Math.sin().
- */
 public class SinOperation implements Operation {
 
     @Override

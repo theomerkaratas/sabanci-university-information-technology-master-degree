@@ -1,10 +1,5 @@
 package strategy;
 
-/**
- * STRATEGY PATTERN — Concrete Strategy: Cosine (Scientific Suite)
- *
- * Operates on a single operand (angle in degrees).
- */
 public class CosOperation implements Operation {
 
     @Override
