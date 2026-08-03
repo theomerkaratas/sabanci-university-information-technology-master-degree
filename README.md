@@ -23,7 +23,7 @@ It aims to organize and share academic work from graduate-level IT courses so th
 | [IT 524](./docs/IT524/)   | Object-Oriented Programming with Java                  |
 | [IT 553](./docs/IT553/)   | Database Design and Management                         |
 | [IT 526](./docs/IT526/)   | Enterprise Java Frameworks and Design Patterns         |
-| IT 535                    | Mobile Programming                                     |
+| [IT 535](./docs/IT535/)   | Mobile Programming                                     |
 | IT 580                    | Special Topics in Information Technology I                                          |
 | [IT 537](./docs/IT537/)   | Interactive Front-End Programming                      |
 | [SEC 509](./docs/SEC509/) | Secure Coding & Software Security                      |
