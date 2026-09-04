@@ -11,6 +11,7 @@ This directory contains the documentation, overview, and report for the master's
 - **GitHub Organization**: [github.com/freecloudinitiative](https://github.com/freecloudinitiative)
 - **Author**: Ömer Faruk Karataş
 - **Full Report**: [📄 Read the Graduation Project Report](./graduation_report.md)
+- **Official Report (PDF)**: [📥 Download Signed Report (PDF)](./omer_karatas_report.pdf)
 
 **Free Cloud Initiative (FCI)** is an open-source, self-hosted cloud platform built on a bare-metal Kubernetes cluster composed of seven ARM64 Raspberry Pi 5 single-board computers. The project breaks down commercial cloud primitives into lightweight, container-native abstractions designed for education, developer community experimentation, and platform engineering demonstrations.
 
@@ -33,4 +34,6 @@ This directory contains the documentation, overview, and report for the master's
 
 For the complete in-depth academic and technical details, including requirement specifications, schema designs, microservice implementations, and performance analysis, refer to:
 
-👉 **[Graduation Project Report: Free Cloud Initiative](./graduation_report.md)**
+👉 **[Graduation Project Report: Free Cloud Initiative (Web / Markdown)](./graduation_report.md)**  
+👉 **[Official Graduation Project Report (Signed PDF)](./omer_karatas_report.pdf)**
+
