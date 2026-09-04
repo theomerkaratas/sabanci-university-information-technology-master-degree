@@ -8,6 +8,9 @@ _A Non-Thesis Master's Graduation Project Report Submitted in Partial Fulfillmen
 
 **Prepared by:** Ömer Faruk Karataş (Student ID: 38160)
 
+> [!TIP]
+> **Official Signed Document**: You can also download or view the official signed copy: [📄 omer_karatas_report.pdf](./omer_karatas_report.pdf).
+
 ## Abstract
 
 Commercial cloud providers such as AWS, Google Cloud, Microsoft Azure, DigitalOcean, Linode, and Civo
