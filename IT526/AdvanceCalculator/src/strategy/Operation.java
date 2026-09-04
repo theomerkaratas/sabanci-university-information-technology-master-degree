@@ -1,17 +1,5 @@
 package strategy;
 
-/**
- * STRATEGY PATTERN — Interface (Strategy)
- *
- * Defines the contract for all mathematical operations.
- * Each concrete operation (Add, Subtract, Sin, etc.) implements this interface,
- * allowing the CalculatorEngine to execute any operation uniformly without
- * knowing the specific algorithm being applied.
- *
- * Open/Closed Principle: adding a new operation (e.g., Modulo) only requires
- * creating a new class that implements this interface — zero changes to the
- * engine.
- */
 public interface Operation {
 
     /**

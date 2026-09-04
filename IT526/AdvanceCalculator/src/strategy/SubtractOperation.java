@@ -1,8 +1,5 @@
 package strategy;
 
-/**
- * STRATEGY PATTERN — Concrete Strategy: Subtraction
- */
 public class SubtractOperation implements Operation {
 
     @Override

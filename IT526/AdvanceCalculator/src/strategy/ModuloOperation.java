@@ -1,11 +1,5 @@
 package strategy;
 
-/**
- * STRATEGY PATTERN — Concrete Strategy: Modulo
- *
- * Binary operation: operands[0] % operands[1].
- * Demonstrates extensibility — added without modifying the CalculatorEngine.
- */
 public class ModuloOperation implements Operation {
 
     @Override
