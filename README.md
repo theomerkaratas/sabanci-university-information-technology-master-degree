@@ -28,7 +28,7 @@ It aims to organize and share academic work from graduate-level IT courses so th
 | [IT 537](./docs/IT537/)   | Interactive Front-End Programming                      |
 | [SEC 509](./docs/SEC509/) | Secure Coding & Software Security                      |
 | [IT 563](./docs/IT563/)   | Agile Project Management Methodology                   |
-| IT 592                    | Project Course                                         |
+| [IT 592](./docs/IT592/)   | Project Course                                         |
 
 The folders and materials in this repository are grouped based on the courses listed above.
 
