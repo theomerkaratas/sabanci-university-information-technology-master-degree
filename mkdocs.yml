@@ -83,3 +83,6 @@ nav:
           - Lab 3: SEC509/Homeworks/Lab3/README.md
           - Lab 4: SEC509/Homeworks/Lab4/README.md
       - Cheatsheets: SEC509/Cheatsheets/README.md
+  - IT592:
+      - Overview: IT592/README.md
+      - Graduation Report: IT592/graduation_report.md
