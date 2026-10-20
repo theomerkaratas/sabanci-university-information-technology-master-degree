@@ -54,6 +54,8 @@ extra_css:
 
 theme:
   name: material
+  icon:
+    alternate: material/web
   palette:
     # Light mode
     - media: "(prefers-color-scheme: light)"
