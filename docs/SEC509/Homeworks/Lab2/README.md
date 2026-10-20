@@ -1,21 +1,66 @@
-# SEC509 - Lab 2: Cybersecurity Training & Certifications
+# SEC 509 - Lab 2: Cybersecurity Training & Certifications 🛡️📜
 
-This directory contains the certificates of completion and excellence awarded for participating in the **CYRUS** (CYbersecurity awareness tRaining for Small and medium-sized enterprises) project training modules.
+Welcome to the **SEC 509: Secure Coding & Software Security** Lab 2 documentation. This module showcases the official certificates awarded for completing advanced cybersecurity and DevSecOps training under the **CYRUS** (CYbersecurity awareness tRaining for Small and medium-sized enterprises) project, co-funded by the European Union.
 
-## Overview
+---
 
-The CYRUS project is a personalized, work-based training framework co-funded by the European Union, designed to enhance cybersecurity skills across various sectors.
+## 🏆 Certificates of Excellence
 
-## Certificates Included
+Awarded for top-tier performance and achieving excellence in the rigorous post-course knowledge assessments.
 
-The following modules were successfully completed:
+### 1. Post-Course Knowledge Assessment
+Comprehensive evaluation testing threat modeling, DevSecOps principles, identity governance, and cyber hygiene.
 
-- **Introduction to DevSecOps**: Focuses on integrating security practices into the DevOps lifecycle to ensure continuous security.
-- **Cybersecurity Culture & Human Behaviour**: Explores the psychological and social aspects of cybersecurity and how human behavior impacts organizational security.
-- **Password Complexity Policy**: Covers best practices for creating, managing, and enforcing strong password policies.
-- **Personal and Corporate Cyber Hygiene**: Provides fundamental guidelines for maintaining digital health and security in both personal and professional contexts.
-- **Knowledge Assessments**: Includes "Certificates of Excellence" for achieving top scores in the post-course knowledge evaluations.
+[![Post-Course Knowledge Assessment Certificate of Excellence](./assets/post_course_excellence_cert.png)](./assets/omerkaratas-Post-Course-Knowledge-Assessment-Certificate-of-excellence-CYRUS.pdf)  
+👉 [📥 View / Download Official PDF](./assets/omerkaratas-Post-Course-Knowledge-Assessment-Certificate-of-excellence-CYRUS.pdf)
 
-## Platform Details
-- **Provider:** [CYRUS Project](https://cyrus-project.eu/)
-- **Focus:** Practical cybersecurity awareness and skills development.
+---
+
+### 2. Post-Knowledge Assessment
+Advanced knowledge verification evaluating practical vulnerability mitigation, authentication enforcement, and organizational security posture.
+
+[![Post-Knowledge Assessment Certificate of Excellence](./assets/post_knowledge_excellence_cert.png)](./assets/omerkaratas-Post-Knowledge-Assessment-Certificate-of-excellence-CYRUS.pdf)  
+👉 [📥 View / Download Official PDF](./assets/omerkaratas-Post-Knowledge-Assessment-Certificate-of-excellence-CYRUS.pdf)
+
+---
+
+## 🎓 Certificates of Attendance & Module Completion
+
+### 3. Introduction to DevSecOps
+Focuses on integrating security into continuous delivery (CI/CD) pipelines, shifting left, automated compliance checks, and shared responsibility culture.
+
+[![Introduction to DevSecOps Certificate](./assets/devsecops_cert.png)](./assets/omerkaratas-Introduction-to-DevSecOps-Certificate-of-attendance-CYRUS.pdf)  
+👉 [📥 View / Download Official PDF](./assets/omerkaratas-Introduction-to-DevSecOps-Certificate-of-attendance-CYRUS.pdf)
+
+---
+
+### 4. Cybersecurity Culture & Human Behaviour
+Explores psychological factors in digital defense, social engineering vulnerabilities, phishing defense mechanisms, and establishing security-first organizational cultures.
+
+[![Cybersecurity Culture & Human Behaviour Certificate](./assets/cyber_culture_cert.png)](./assets/omerkaratas-Cybersecurity-culture-amp-human-behaviour-Introduction-Certificate-of-attendance-CYRUS.pdf)  
+👉 [📥 View / Download Official PDF](./assets/omerkaratas-Cybersecurity-culture-amp-human-behaviour-Introduction-Certificate-of-attendance-CYRUS.pdf)
+
+---
+
+### 5. Password Complexity Policy
+Hands-on mastery of Pluggable Authentication Modules (PAM), password entropy requirements, rotation policies, and preventing credential-stuffing attacks.
+
+[![Password Complexity Policy Certificate](./assets/password_policy_cert.png)](./assets/omerkaratas-Password-complexity-policy-Certificate-of-attendance-CYRUS.pdf)  
+👉 [📥 View / Download Official PDF](./assets/omerkaratas-Password-complexity-policy-Certificate-of-attendance-CYRUS.pdf)
+
+---
+
+### 6. Personal and Corporate Cyber Hygiene
+Foundational defense strategies for digital workspaces: patch management, network segmentation, multi-factor authentication (MFA), and secure remote access.
+
+[![Personal and Corporate Cyber Hygiene Certificate](./assets/cyber_hygiene_cert.png)](./assets/omerkaratas-Personal-and-corporate-cyber-hygiene-Certificate-of-attendance-CYRUS.pdf)  
+👉 [📥 View / Download Official PDF](./assets/omerkaratas-Personal-and-corporate-cyber-hygiene-Certificate-of-attendance-CYRUS.pdf)
+
+---
+
+## 🏛️ Training Platform Details
+* **Provider:** [CYRUS Project (cyrus-project.eu)](https://cyrus-project.eu/)
+* **Initiative:** European Union Digital Europe Programme
+* **Participant:** Ömer Karataş
+* **Course Context:** Applied Cybersecurity & Software Security (SEC 509)
+

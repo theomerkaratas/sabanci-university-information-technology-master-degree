@@ -1,3 +1,27 @@
+# Environment files
 .env
 *.env
+
+# Dependencies
 node_modules/
+
+# MkDocs build outputs
+site/
+website/site/
+
+# OS and IDE files
+.DS_Store
+.vscode/
+.idea/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.venv
+venv/
+
+# Java compile outputs
+*.class
+bin/
+

@@ -4,6 +4,10 @@
 
 This project is a Java-based **3x3 Football Simulator**. It simulates a match between two teams (Home and Away) for a specified duration (in seconds). During the match, players perform actions such as winning the ball, passing, dribbling, and shooting. At the end of the match, it reports statistics like total touches and possession time for each player and team.
 
+> [!TIP]
+> **Source Code & Simulation Classes:**  
+> The multi-threaded Java implementation files and class sources are available in the [FootJoy Project Directory on GitHub](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT524/FootJoy).
+
 ## Implementation Details (Technical Structure)
 
 The project is built using Object-Oriented Programming (OOP) and Multi-threading principles:

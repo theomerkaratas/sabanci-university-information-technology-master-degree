@@ -13,7 +13,7 @@
 5. [Observer Pattern](#5-observer-pattern)
 6. [Decorator Pattern](#6-decorator-pattern)
 7. [Extensibility Proof](#7-extensibility-proof)
-8. [How to Use](#8-how-to-use)
+8. [Runtime & Terminal User Interface (TUI)](#8-runtime-terminal-user-interface-tui)
 9. [Testing](#9-testing)
 
 ---
@@ -324,52 +324,28 @@ This is the **Open/Closed Principle** in action: the system is **open for extens
 
 ---
 
-## 8. How to Use
+## 8. Runtime & Terminal User Interface (TUI)
 
-> A step-by-step guide to compiling, running, and interacting with the Advanced Calculator TUI.
+> [!TIP]
+> **Source Code & Local Execution:**  
+> The complete Java source tree (`src/`), build targets, and unit test suites are hosted in the [AdvanceCalculator GitHub Directory](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT526/AdvanceCalculator).
 
-### 8.1. Prerequisites
+### 8.1. Runtime Environment Requirements
 
-| Requirement                | Minimum Version | Check Command    |
-| -------------------------- | --------------- | ---------------- |
-| Java Development Kit (JDK) | 16              | `java -version`  |
-| Java Compiler              | 16              | `javac -version` |
-
-> **Note:** The project uses Java Records (`HistoryLog.HistoryEntry`) and switch expressions, both of which require **JDK 16 or later**.
-
----
-
-### 8.2. Compiling the Project
-
-Open a terminal and navigate to the `AdvanceCalculator` directory:
-
-```bash
-cd path/to/AdvanceCalculator
-```
-
-Compile all Java source files into the `bin/` directory:
-
-```bash
-find src -name "*.java" | xargs javac -d bin --release 16
-```
-
-On success, no output is printed. You can verify the compiled classes exist:
-
-```bash
-find bin -name "*.class"
-```
-
-You should see 22 `.class` files listed (21 classes + 1 inner class for `HistoryEntry`).
+| Requirement                | Minimum Version | Role in Project |
+| -------------------------- | --------------- | --------------- |
+| Java Development Kit (JDK) | 16+             | Java Records (`HistoryLog.HistoryEntry`) & Pattern Matching switch expressions |
+| Java Compiler (`javac`)    | 16+             | Bytecode generation with modern language syntax support |
 
 ---
 
-### 8.3. Running the Calculator
+### 8.2. Interactive CLI Architecture
 
-From the `AdvanceCalculator` directory, run:
+The calculator features an interactive Terminal User Interface (TUI) operating on top of the `CalculatorEngine`. State updates, undo/redo operations, and calculations trigger live updates via the Observer pattern:
 
-```bash
-java -cp bin Main
-```
+* **Entry Point:** `Main.java` initializes the TUI loop, binds the `CalculatorEngine`, and attaches the `HistoryLog` observer.
+* **Standard & Scientific Operations:** Input tokens are mapped dynamically via `OperationFactory` to interchangeable `Operation` strategies.
+* **Validation Pipeline:** Arithmetic operands pass through `ValidationDecorator` before reaching the execution engine, guarding against division-by-zero, `NaN`, and `Infinity`.
 
 ---
 

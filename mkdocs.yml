@@ -49,6 +49,7 @@ nav:
   - IT501:
       - Main: IT501/README.md
   - IT511:
+      - Main: IT511/README.md
       - Lecture Notes: IT511/Notes/LectureNotes/README.md
       - Q&A: IT511/Notes/QuestionsAndAnswers/README.md
   - IT524:

@@ -1,3 +1,0 @@
-enum Team {
-    HOME, AWAY
-}
