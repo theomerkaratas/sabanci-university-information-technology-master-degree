@@ -1,6 +1,9 @@
 site_name: Sabanci University Information Technology Master Degree
 site_url: https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/
 site_description: Sabanci University Master of Science in Information Technology Coursework and Projects
+exclude_docs: |
+  IT537/menuproject/**
+  IT537/Practices/**
 repo_name: theomerkaratas/sabanci-university-information-technology-master-degree
 repo_url: https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree
 
@@ -8,6 +11,41 @@ plugins:
   - search:
       lang:
         - en
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: tr
+          name: Türkçe
+          build: true
+          nav_translations:
+            Introduction: Giriş
+            Main: Ana Sayfa
+            Lecture Notes: Ders Notları
+            Q&A: Soru-Cevap
+            Projects: Projeler
+            Bank Account: Banka Hesabı
+            Cheatsheet: Özet Notlar
+            AdvanceCalculator Project: Gelişmiş Hesap Makinesi Projesi
+            Overview: Genel Bakış
+            Graduation Report: Mezuniyet Raporu
+            Chapters: Bölümler
+            Homeworks: Ödevler
+            Lab 1: Laboratuvar 1
+            Lab 2: Laboratuvar 2
+            Lab 3: Laboratuvar 3
+            Lab 4: Laboratuvar 4
+            Cheatsheets: Özet Notlar
+            1. Software Ubiquity and Modern Dependency: Yazılımın Yaygınlığı ve Modern Bağımlılık
+            2. Security Posture & DevSecOps: Güvenlik Duruşu ve DevSecOps
+            2.1. Personal and Corporate Cyber Hygiene: Kişisel ve Kurumsal Siber Hijyen
+            2.2. Introduction to DevSecOps: DevSecOps'a Giriş
+            2.3. Understanding PAM and Password Complexity Policy: PAM ve Parola Karmaşıklığı Politikası
+            2.4. Cybersecurity Culture & Human Behaviour: Siber Güvenlik Kültürü ve İnsan Davranışı
 
 copyright: Copyright &copy; 2026 Ömer Karataş
 

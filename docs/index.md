@@ -1,52 +1,46 @@
 # Sabancı University – Information Technology Master’s Degree 🎓
 
-Welcome to my **Sabancı University Master’s Degree** repository!
+Welcome to the **Sabancı University Master of Science in Information Technology (MSIT)** documentation portal and academic knowledge base.
 
-This repository contains the projects, assignments, course materials, and practical exercises completed during my **Master of Science in Information Technology** at **Sabancı University**.
+This website serves as a centralized, interactive knowledge repository documenting the coursework, system architectures, lecture notes, graduation projects, and technical research completed throughout the graduate program.
 
-📘 Program information:
-https://fens.sabanciuniv.edu/en/msit
+> [!TIP]
+> **Looking for the Executable Source Code?**  
+> All implementation files, runnable application codebases, Docker configurations, and project repositories are hosted on [GitHub: theomerkaratas/sabanci-university-information-technology-master-degree](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree).
 
-It aims to organize and share academic work from graduate-level IT courses so that you can explore the topics, assignments, and practical work I’ve completed throughout the program.
-
----
-
-## 📘 Course List
-
-| Course Code | Course Name                                            |
-| ----------- | ------------------------------------------------------ |
-| IT 501      | Introduction to Computer Programming                   |
-| IT 511      | Fundamentals of Data Communication and TCP/IP Networks |
-| IT 524      | Object-Oriented Programming with Java                  |
-| IT 553      | Database Design and Management                         |
-| IT 526      | Enterprise Java Frameworks and Design Patterns         |
-| IT 535      | Mobile Programming                                     |
-| IT 580      | Special Topics in Information Technology I             |
-| IT 537      | Interactive Front-End Programming                      |
-| SEC 509     | Secure Coding & Software Security                      |
-| IT 563      | Agile Project Management Methodology                   |
-| IT 592      | Project Course                                         |
-
-The folders and materials in this repository are grouped based on the courses listed above.
+📘 **Program Details:** [Sabancı University M.S. in Information Technology](https://fens.sabanciuniv.edu/en/msit)
 
 ---
 
-## 🧠 What’s Inside?
+## 📘 Coursework & Documentation Index
 
-This repository includes:
-
-- Projects and assignments from graduate IT courses
-- Notes and documentation related to coursework
-- Code samples and practical exercises
-- Database schemas, reports, and development artifacts
-
-Each course folder may contain documentation (PDF/Markdown), source code, and instructions for running or reviewing the project.
+| Course Code | Course Name | Documentation Section | Source Code |
+| :--- | :--- | :---: | :---: |
+| **IT 501** | Introduction to Computer Programming | [Explore Section ↗](IT501/README.md) | [GitHub Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT501) |
+| **IT 511** | Fundamentals of Data Communication & TCP/IP | [Explore Section ↗](IT511/README.md) | [GitHub Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT511) |
+| **IT 524** | Object-Oriented Programming with Java | [Explore Section ↗](IT524/README.md) | [GitHub Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT524) |
+| **IT 553** | Database Design and Management | [Explore Section ↗](IT553/README.md) | [GitHub Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT553) |
+| **IT 526** | Enterprise Java Frameworks & Design Patterns | [Explore Section ↗](IT526/README.md) | [GitHub Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT526) |
+| **IT 535** | Mobile Programming | [Explore Section ↗](IT535/README.md) | [GitHub Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT535) |
+| **IT 580** | Special Topics in Information Technology I | Special Topics | — |
+| **IT 537** | Interactive Front-End Programming | [Explore Section ↗](IT537/README.md) | [GitHub Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT537) |
+| **SEC 509** | Secure Coding & Software Security | [Explore Section ↗](SEC509/README.md) | [GitHub Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/SEC509) |
+| **IT 563** | Agile Project Management Methodology | [Explore Section ↗](IT563/README.md) | [GitHub Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT563) |
+| **IT 592** | Graduation Project (Free Cloud Initiative) | [Explore Section ↗](IT592/README.md) | [GitHub Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT592) |
 
 ---
 
-## 🎯 Purpose of This Repository
+## 🧠 What You Will Find on This Website
 
-- **Learning archive** – track progress and outcomes from courses
-- **Hands-on practice** – apply theory in real projects
-- **Reusability** – provide templates and solutions for future work
-- **Showcase** – highlight my technical skills and academic journey
+* **Academic Lecture Notes:** Chapter-by-chapter theoretical breakdowns covering networking protocols, object-oriented principles, software security, and agile methodologies.
+* **Architectural & Design Reports:** In-depth technical reports justifying design patterns (GoF), database normalizations (3NF), relational schemas, and multi-tier systems.
+* **Official Certifications:** Verified European Union training certificates in DevSecOps, cyber hygiene, and security posture.
+* **Master’s Graduation Project:** The full, comprehensive thesis report and architecture specifications for the **Free Cloud Initiative (FCI)** bare-metal Kubernetes cloud platform.
+
+---
+
+## 🎯 Purpose of This Knowledge Base
+
+* **Academic Portfolio:** Showcase rigorous graduate-level research, theoretical competence, and software architecture expertise.
+* **Knowledge Retention & Searchability:** An interactive, searchable documentation hub for referencing patterns, network algorithms, and security guidelines.
+* **Engineering Best Practices:** Provide reference implementations and structural design patterns for scalable software engineering.
