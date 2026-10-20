@@ -1,19 +1,27 @@
-# IT524 — Object-Oriented Programming with Java
+# IT 524: Object-Oriented Programming with Java ☕
 
-This folder contains the coursework and projects completed for **IT524: Object-Oriented Programming with Java**, a core course in the **Master of Science in Information Technology** program at **Sabancı University**. The course emphasizes practical development using Java and object-oriented design principles.
+Welcome to the **IT 524: Object-Oriented Programming with Java** documentation section. This core graduate course in the **Master of Science in Information Technology** program at **Sabancı University** delivers comprehensive training in advanced Java engineering, software design principles, concurrency, and object-oriented design patterns.
 
----
-
-## 📘 Course Overview
-
-**IT524** focuses on software development using Java and object-oriented programming (OOP). Topics include classes and objects, inheritance, polymorphism, exception handling, collections, file I/O, and design patterns. Projects demonstrate applied OOP concepts through real application development. :contentReference[oaicite:1]{index=1}
+> [!TIP]
+> **Source Code & Project Repositories:**  
+> All Java source code, compiled binaries, and project architectures are located in the [IT524 GitHub Directory](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT524).
 
 ---
 
-## 📂 Projects and Notes in This Folder
+## 📘 Course Core Competencies
 
-This directory contains **two separate Java projects** developed as part of this course. Each project helps you practice key object-oriented programming techniques.
+* **Object-Oriented Design (OOD):** Encapsulation, inheritance hierarchies, abstract contracts, and runtime polymorphism.
+* **Concurrency & Synchronization:** Multi-threaded programming using Java concurrency primitives (`ReentrantLock`, `Condition`, `volatile`, thread-safe state synchronization).
+* **Defensive Engineering & Robustness:** Custom exception architectures, fail-safe state validation, and clean resource management.
+* **Software Architecture:** SOLID principles, architectural layering, UML modeling, and design trade-offs.
 
-1. [🏦 BankAccountProject](./BankAccountProject/README.md)
-2. [⚽ FootJoy](./FootJoy/README.md)
-3. [📓 Lecture Notes](./LectureNotes/README.md)
+---
+
+## 📂 Term Projects & Study Modules
+
+| Module / Project | Architecture & Concepts | Documentation | Source Code |
+| :--- | :--- | :---: | :---: |
+| **TrueBank Application** | Account domain modeling, currency conversion, transaction auditing | [View Details](./BankAccountProject/README.md) | [GitHub Source ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT524/BankAccountProject) |
+| **FootJoy Simulator** | 3x3 match simulation, multi-threading, `ReentrantLock` shared resource control | [View Details](./FootJoy/README.md) | [GitHub Source ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT524/FootJoy) |
+| **Comprehensive Lecture Notes** | Software crisis, software evolution, OOP paradigms, SOLID, and UML design | [Read Notes](./LectureNotes/README.md) | — |
+

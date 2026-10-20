@@ -1,3 +1,0 @@
-enum Action {
-    SHOOT, PASS, DEFEND, STEAL, DRIBBLE
-}

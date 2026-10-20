@@ -1,13 +1,14 @@
-# IT 511 - Course Notes
+# IT 511 - Course Notes & Study Resources 📖
 
-This folder contains lecture notes and Q&A resources for the course.
+This section contains curated study notes, lecture slide breakdowns, and examination review materials for **IT 511: Fundamentals of Data Communication and TCP/IP Networks**.
 
 ---
 
-## 📚 Resources
+## 📚 Study Sections
 
-- [**📓 Lecture Notes**](./LectureNotes/README.md)  
-  Slides and notes from the lectures.
+* [**📓 Lecture Notes**](./LectureNotes/README.md)  
+  Comprehensive chapter-by-chapter breakdowns covering Transport Layer protocols, Network Layer architectures, addressing schemas, and protocol diagrams.
 
-- [**❓ Questions and Answers**](./QuestionsAndAnswers/README.md)  
-  Review questions and answers for exam preparation.
+* [**❓ Questions and Answers**](./QuestionsAndAnswers/README.md)  
+  Structured examination review questions, numerical calculations, and step-by-step problem solutions.
+

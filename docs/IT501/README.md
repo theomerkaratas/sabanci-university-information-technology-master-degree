@@ -1,20 +1,31 @@
-# IT501 Python Projects
+# IT 501: Introduction to Computer Programming 🐍
 
-This repository contains various Python projects developed and optimized as part of the IT501 course. All projects have undergone debugging, have been made resilient to invalid user inputs, and are compatible with local development environments.
+Welcome to the **IT 501: Introduction to Computer Programming** documentation section. This course forms the foundational programming curriculum of the **Master of Science in Information Technology** at **Sabancı University**, focusing on algorithmic problem-solving, modular software design, and core programming paradigms using Python.
 
-## Project List
+> [!TIP]
+> **Source Code & Executable Scripts:**  
+> All implementation files, ASCII art assets, and runnable terminal applications are located in the [IT501 GitHub Directory](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT501).
 
-| Project Name                           | Description                                                                                  |
-| :------------------------------------- | :------------------------------------------------------------------------------------------- |
-| **[Blackjack](./blackjack/README.md)**           | A card game following standard Blackjack rules with an intelligent scoring system.           |
-| **[Calculator](./calculator/README.md)**         | A basic arithmetic calculator with invalid input protection and division-by-zero prevention. |
-| **[Caesar Cipher](./ceaser-cipher/README.md)**   | A security tool that encrypts and decrypts text using the alphabet shift method.             |
-| **[Coffee Machine](./coffee-machine/README.md)** | A simulated coffee machine application with resource management and coin validation.         |
-| **[Hangman](./hangman/README.md)**               | The classic hangman game with its own word list and visual progression stages.               |
-| **[Higher-Lower](./higher-lower/README.md)**     | A trivia game based on comparing follower counts of famous accounts with score tracking.     |
+---
 
-## General Features
+## 🚀 Projects Overview
 
-- **Error Handling:** Invalid inputs (letters instead of numbers, etc.) do not crash the programs.
-- **Modular Structure:** Data, ASCII art, and core logic are organized into separate files for clarity.
-- **Local Compatibility:** Platform-specific dependencies (like `replit`) have been replaced to ensure functionality across all systems.
+During the course, several terminal-based applications and algorithmic simulations were engineered with a strong emphasis on input validation, defensive programming, and code modularity.
+
+| Project | Key Concepts | Description | Source Code |
+| :--- | :--- | :--- | :---: |
+| **Blackjack** | Game loops, conditionals, dynamic score calculation | A card game following standard Blackjack rules with intelligent Ace evaluation (1 or 11). | [View Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT501/blackjack) |
+| **Calculator** | Arithmetic operations, recursion, input guards | A robust arithmetic calculator with division-by-zero protection and continuous operation chaining. | [View Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT501/calculator) |
+| **Caesar Cipher** | String manipulation, modular arithmetic, cryptography | A classic encryption and decryption tool utilizing alphabet shift transformations. | [View Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT501/ceaser-cipher) |
+| **Coffee Machine** | State management, resource tracking, monetary transactions | A simulated coffee vending system managing water/milk/coffee bean inventories and coin change validation. | [View Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT501/coffee-machine) |
+| **Hangman** | String parsing, state tracking, visual feedback | The classic word-guessing game featuring dynamic ASCII stages and comprehensive word libraries. | [View Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT501/hangman) |
+| **Higher-Lower** | Dictionary parsing, random generation, score keeping | A data comparison trivia game evaluating social media follower metrics with real-time scoring. | [View Code ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT501/higher-lower) |
+
+---
+
+## 🛠️ Architectural & Code Quality Standards
+
+* **Defensive Input Handling:** Every CLI application handles invalid inputs (non-numeric characters, empty strings, out-of-range commands) gracefully without runtime crashes.
+* **Separation of Concerns:** Business logic, ASCII visual assets, and data structures are decoupled into separate modular files (`main.py`, `art.py`, `game_data.py`).
+* **Cross-Platform Compatibility:** Free of platform-specific or cloud-only libraries, ensuring standard Python 3.x compatibility across all operating systems.
+

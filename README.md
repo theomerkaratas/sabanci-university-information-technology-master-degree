@@ -2,54 +2,50 @@
 
 Welcome to my **Sabancı University Master’s Degree** repository!
 
-> [!TIP]
-> You can also access this project via your browser at: [theomerkaratas.github.io/sabanci-university-information-technology-master-degree](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/)
-
-This repository contains the projects, assignments, course materials, and practical exercises completed during my **Master of Science in Information Technology** at **Sabancı University**.
-
-📘 Program information:
-https://fens.sabanciuniv.edu/en/msit
-
-It aims to organize and share academic work from graduate-level IT courses so that you can explore the topics, assignments, and practical work I’ve completed throughout the program.
+> [!IMPORTANT]
+> ### 🌐 Live Documentation & Knowledge Base Website
+> For the best reading experience with full lecture notes, interactive search, dark mode, high-res diagrams, and certificates:  
+> 👉 **[Visit the Official Documentation Website ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/)**  
+>  
+> *Note: The [`docs/`](./docs/) directory in this repository contains the raw markdown and assets used to build the static website. Rather than browsing raw files in `docs/`, we recommend using the live website link above.*
 
 ---
 
-## 📘 Course List
+## 🏛️ Repository Architecture (Two Channels)
 
-| Course Code               | Course Name                                            |
-| ------------------------- | ------------------------------------------------------ |
-| [IT 501](./docs/IT501/)   | Introduction to Computer Programming                   |
-| [IT 511](./docs/IT511/)   | Fundamentals of Data Communication and TCP/IP Networks |
-| [IT 524](./docs/IT524/)   | Object-Oriented Programming with Java                  |
-| [IT 553](./docs/IT553/)   | Database Design and Management                         |
-| [IT 526](./docs/IT526/)   | Enterprise Java Frameworks and Design Patterns         |
-| [IT 535](./docs/IT535/)   | Mobile Programming                                     |
-| IT 580                    | Special Topics in Information Technology I                                          |
-| [IT 537](./docs/IT537/)   | Interactive Front-End Programming                      |
-| [SEC 509](./docs/SEC509/) | Secure Coding & Software Security                      |
-| [IT 563](./docs/IT563/)   | Agile Project Management Methodology                   |
-| [IT 592](./docs/IT592/)   | Project Course                                         |
+This repository is intentionally structured into two clear channels:
 
-The folders and materials in this repository are grouped based on the courses listed above.
+1. **💻 Source Code & Coursework (`ITxxx/`, `SECxxx/`):**  
+   All executable source code, Python/Java applications, Dockerfiles, and database schemas live in their respective course folders at the root. Each contains its own local technical instructions.
+2. **📖 Documentation Website (`docs/`):**  
+   Powers the **[MkDocs Material documentation website](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/)**. It houses comprehensive theoretical notes, graduation reports, cheatsheets, and architecture diagrams.
+
+📘 **Program Information:**  
+[Sabancı University M.S. in Information Technology (MSIT)](https://fens.sabanciuniv.edu/en/msit)
 
 ---
 
-## 🧠 What’s Inside?
+## 📘 Course List & Quick Navigation
 
-This repository includes:
-
-- Projects and assignments from graduate IT courses
-- Notes and documentation related to coursework
-- Code samples and practical exercises
-- Database schemas, reports, and development artifacts
-
-Each course folder may contain documentation (PDF/Markdown), source code, and instructions for running or reviewing the project.
+| Course Code | Course Name | 💻 Source Code | 📖 Web Documentation |
+| :--- | :--- | :---: | :---: |
+| **IT 501** | Introduction to Computer Programming | [View Code ↗](./IT501/) | [Read Docs ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT501/) |
+| **IT 511** | Fundamentals of Data Communication & TCP/IP | [View Code ↗](./IT511/) | [Read Docs ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT511/) |
+| **IT 524** | Object-Oriented Programming with Java | [View Code ↗](./IT524/) | [Read Docs ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT524/) |
+| **IT 553** | Database Design and Management | [View Code ↗](./IT553/) | [Read Docs ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT553/) |
+| **IT 526** | Enterprise Java Frameworks & Design Patterns | [View Code ↗](./IT526/) | [Read Docs ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT526/) |
+| **IT 535** | Mobile Programming | [View Code ↗](./IT535/) | [Read Docs ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT535/) |
+| **IT 580** | Special Topics in Information Technology I | — | — |
+| **IT 537** | Interactive Front-End Programming | [View Code ↗](./IT537/) | [Read Docs ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT537/) |
+| **SEC 509** | Secure Coding & Software Security | [View Code ↗](./SEC509/) | [Read Docs ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/SEC509/) |
+| **IT 563** | Agile Project Management Methodology | [View Code ↗](./IT563/) | [Read Docs ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT563/) |
+| **IT 592** | Graduation Project (Free Cloud Initiative) | [View Code ↗](./IT592/) | [Read Docs ↗](https://theomerkaratas.github.io/sabanci-university-information-technology-master-degree/IT592/) |
 
 ---
 
 ## 🎯 Purpose of This Repository
 
-- **Learning archive** – track progress and outcomes from courses
-- **Hands-on practice** – apply theory in real projects
-- **Reusability** – provide templates and solutions for future work
-- **Showcase** – highlight my technical skills and academic journey
+- **Academic Archive:** Track progress, deliverables, and knowledge acquired across graduate IT coursework.
+- **Hands-on Practice:** Real-world implementations spanning enterprise Java, concurrency, network protocols, containerized databases, and cloud platforms.
+- **Portfolio & Knowledge Sharing:** Present clean, production-grade code alongside peer-reviewed architectural reports.
+

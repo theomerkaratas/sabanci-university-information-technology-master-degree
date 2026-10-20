@@ -1,26 +1,30 @@
-# IT 526: Enterprise Java Frameworks and Design Patterns
+# IT 526: Enterprise Java Frameworks and Design Patterns ☕🏛️
 
-This course focuses on advanced Java technologies, enterprise-grade frameworks, and software design patterns used to build scalable, maintainable, and robust enterprise applications.
+Welcome to the **IT 526: Enterprise Java Frameworks and Design Patterns** documentation section. This course addresses the engineering challenges of designing and building enterprise-grade software systems using advanced Java idioms, GoF design patterns, and modern framework architectures.
 
-## 📚 Course Content
+> [!TIP]
+> **Source Code & Term Project:**  
+> The complete Java term project implementation and source packages are located in the [IT526 GitHub Directory](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT526).
 
-The course covers:
+---
 
-- Core and Advanced Java features for enterprise development.
-- Popular frameworks such as Spring and Spring Boot.
-- Implementation and best practices of Creational, Structural, and Behavioral Design Patterns.
-- Principles of software architecture and clean code.
+## 📚 Core Topics & Knowledge Areas
 
-## 📁 Repository Structure
+* **Design Patterns in Practice:** Systematic implementation of Creational (Factory), Structural (Decorator), and Behavioral (Strategy, Command, Observer) design patterns.
+* **Modern Java Idioms:** Utilizing modern Java (JDK 16+) features such as Records, enhanced switch expressions, lambdas, and streams.
+* **Software Architecture Principles:** Open/Closed Principle (OCP), Single Responsibility Principle (SRP), and clean separation between domain logic and user interface layers.
 
-### [Cheatsheet] (./Cheatsheet/README.md)
+---
 
-Quick reference guides and visual summaries for various Java topics and design patterns. This section is designed for fast lookup of syntax and architectural diagrams.
+## 📁 Course Modules & Documentation
 
-### [Lecture Notes](./LectureNotes/README.md)
+### [📓 Lecture Notes](./LectureNotes/README.md)
+Comprehensive semester lecture notes detailing design pattern categorizations, motivation problems, UML class relationships, and implementation examples.
 
-Comprehensive documentation and notes taken during the semester, covering all lecture topics in detail, including code snippets and theoretical explanations.
+### [📑 Java Design Patterns Cheatsheet](./Cheatsheet/README.md)
+Visual cheat sheets and fast-lookup syntax diagrams for Creational, Structural, and Behavioral patterns.
 
-### [Advance Calculator](./AdvanceCalculator)
+### [🧮 Advance Calculator — Pattern Justification Report](./AdvanceCalculator/README.md)
+An in-depth 450+ line architectural analysis and design report justifying the five design patterns used in the terminal-based Advanced Calculator engine.  
+👉 [Explore Source Code on GitHub ↗](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT526/AdvanceCalculator)
 
-A Java-based term project focusing on Object-Oriented Design and the implementation of software design patterns. It features an extensible calculation engine supporting standard and scientific operations, undo/redo functionality, and a terminal-based interactive interface.

@@ -7,44 +7,26 @@ This project is a basic bank account management application written in Java. It 
 ![Code Diagram](./code_diagram.png)
 
 
-## Folders
+> [!TIP]
+> **Source Code & Implementation:**  
+> The Java source code, compiled classes, and test data are available in the [TrueBank Project Directory on GitHub](https://github.com/theomerkaratas/sabanci-university-information-technology-master-degree/tree/main/IT524/BankAccountProject).
 
-- `src/` : Contains all Java source code.
-- `bin/` : Stores the compiled `.class` files.
+---
 
-## Running the Java Code from the Terminal
+## 🏛️ System Architecture & Class Hierarchy
 
-### 1. Navigate to the Accounts Folder
+The application models a multi-currency retail banking domain. Account state encapsulation, transaction invariants, and persistence handling are structured cleanly across dedicated service and model boundaries:
 
-From the project root directory, enter the `TrueBank` folder with the following command:
+![Code Diagram](./code_diagram.png)
 
-```
-cd ./TrueBank
-```
+---
 
-### 2. Compile the Java Files
+## ⚡ Key Capabilities & Features
 
-To compile all Java source files:
-
-```
-javac -d bin src/*.java
-```
-
-### 3. Run the Application
-
-To run the main class (for example, `Main`), **type the following command into the terminal**:
-
-```sh
-java -cp bin Main
-```
-
-## Features
-
-- Open and close accounts
-- Deposit and withdraw money
-- Inter-account transfers (with currency conversion)
-- Change account status
-- View transaction history
+* **Account Lifecycle Management:** Opening, closing, freezing, and status transition workflows with unique account identifiers.
+* **Transaction Engine:** Real-time deposits, withdrawals, and multi-currency transfers with dynamic exchange rate evaluation.
+* **Auditability & History:** Complete logging and chronological retrieval of all financial movements per account.
+* **Defensive Validation:** Comprehensive balance sufficiency checks, negative amount guards, and format verification.
 
 ## Developers
 
